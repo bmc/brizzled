@@ -20,7 +20,6 @@ body
     padding: 0 0 0 0;
     font-size: 10pt;
     font-family: Verdana, Arial, Helvetica, sans-serif;
-    background-color: #eeeeee ! important;
     width: 100%;
     height: 100%;
 }
@@ -494,17 +493,6 @@ div.article-title a:visited
     text-align: left;
 }
 
-a.toc-backref
-{
-    text-decoration: none;
-    color: black;
-}
-
-.url
-{
-    font-style: italic;
-}
-
 .text-button
 {
     margin-top: 1em;
@@ -578,194 +566,14 @@ div.note p.last
     text-align: left;
 }
 
-pre.literal-block
-{
-    margin-left: 2em;
-    margin-right: 2em;
-    font-family: Andale Mono, Lucidatypewriter, Lucida Typewriter, monospace;
-    font-size: 10pt;
-    padding: 3px;
-    background-color: #eeeeee;
-}
-
 ul li
 {
     list-style-type: disc;
 }
 
 /* -------------------------------------------------------------------------- *\
-                                 Admin Screens
-\* -------------------------------------------------------------------------- */
-
-h1.admin-page-title
-{
-    font-size: 150%;
-    font-weight: bold;
-    font-family: Arial, Helvetica, sans-serif;
-    margin-bottom: 2em;
-    background-color: #999999;
-    color: white;
-
-    padding-left: 1em;
-    padding-right: 1em;
-    padding-top: 10px;
-    padding-bottom: 10px;
-
-    /* centering */
-    width: 900px;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-}
-
-div.admin-page-body
-{
-    height: 100%;
-
-    /* centering */
-    width: 900px;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-
-    border: 1px solid #999999;
-    padding-top: 1em;
-    padding-bottom: 3em;
-}
-
-div.admin-articles
-{
-    text-align: left;
-}
-
-div.admin-published
-{
-    clear: both;
-    color: black;
-    border: 0;
-}
-
-div.admin-published a
-{
-    color: #444444;
-    text-decoration: none;
-    border: 0;
-}
-
-div.admin-draft
-{
-    clear: both;
-    color: red;
-    border: 0;
-}
-
-div.admin-draft a
-{
-    color: red;
-    text-decoration: none;
-    border: 0;
-}
-
-a.admin-timestamp
-{
-    float: left;
-    width: 15em;
-    text-align: right;
-    padding-right: 1em;
-    border: 0;
-}
-
-a.admin-article-link
-{
-    float: left;
-    text-align: left;
-    padding-right: 1em;
-    border: 0;
-}
-
-div.admin-edit-field
-{
-    clear: both;
-    padding-bottom: 1em;
-}
-
-div.admin-edit-label
-{
-    width: 20%;
-    text-align: right;
-    padding-right: 1em;
-    font-weight: bold;
-    float: left;
-    padding: 0;
-    margin: 0;
-}
-
-div.admin-edit-input
-{
-    width: 80%;
-    float: right;
-    padding-bottom: 1em;
-}
-
-div.admin-edit-checkbox-label
-{
-    width: 80%;
-    text-align: left;
-    font-weight: bold;
-    float: right;
-}
-
-div.admin-edit-checkbox
-{
-    width: 2%;
-    float: right;
-    padding-bottom: 1em;
-}
-
-div.admin-edit-button-bar
-{
-    padding-top: 1em;
-    /* centering */
-    width: 900px;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-}
-
-input.admin-edit-button
-{
-    padding: 0;
-    margin: 0;
-    width: 200px;
-}
-
-/* -------------------------------------------------------------------------- *\
                                     Pygments
 \* -------------------------------------------------------------------------- */
-
-div.code-block
-{
-    margin-left: 2em;
-    margin-right: 2em;
-    background-color: #eeeeee;
-    font-family: Andale Mono, Lucidatypewriter, Lucida Typewriter, monospace;
-    font-size: 10pt;
-    padding: 3px;
-}
-
-pre.code-block
-{
-    margin-left: 2em;
-    margin-right: 2em;
-    font-family: Andale Mono, Lucidatypewriter, Lucida Typewriter, monospace;
-    font-size: 10pt;
-    padding: 3px;
-    background-color: #eeeeee;
-    width: 95%;
-    overflow: auto;
-    overflow-y: hidden; /* for IE */
-    -ms-overflow-y: hidden; /* for IE8 */
-}
 
 .highlight .c /* Comment */
 {

@@ -3,7 +3,8 @@
 
 <html>
 <head>
-<link href="$page.relativeRoot$/cssjs/style.css" media="screen" rel="stylesheet" type="tex/css"/>
+<link href="$page.relativeRoot$/cssjs/style.css" media="screen" rel="stylesheet" type="text/css"/>
+<link href="$page.relativeRoot$/cssjs/common.css" media="screen" rel="stylesheet" type="text/css"/>
 <link href="$page.relativeRoot$/cssjs/lytebox/lytebox.css" media="screen" rel="stylesheet" type="text/css"/>
 <script src="$page.relativeRoot$/cssjs/lytebox/lytebox.js" language="javascript" type="text/javascript"/>
 <title>$custom.blogname$: $if (page.title)$$page.title$$endif$</title>

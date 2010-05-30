@@ -1,0 +1,86 @@
+pre
+{
+    margin-left: 2em;
+    margin-right: 2em;
+    font-family: Andale Mono, Lucidatypewriter, Lucida Typewriter, monospace;
+    font-size: 10pt;
+    padding: 3px;
+    background-color: #eeeeee;
+    width: 95%;
+    overflow: auto;
+    overflow-y: hidden; /* for IE */
+    -ms-overflow-y: hidden; /* for IE8 */
+}
+
+.url
+{
+    font-style: italic;
+}
+
+/* -------------------------------------------------------------------------- *\
+                         Table of Contents Styling
+\* -------------------------------------------------------------------------- */
+
+div#toc
+{
+    width: auto;
+    font-size: 9pt;
+}
+
+span#tocHeading
+{
+    background-color: #f0f0f0;
+    width: auto;
+    font-weight: bold;
+    font-size: larger;
+}
+
+div#tocBlock
+{
+    border-left: 2px solid black;
+    border-bottom: 2px solid black;
+    border-right: 2px solid #bbbbbb;
+    border-top: 2px solid #bbbbbb;
+    margin-right: 0em;
+    margin-left: 10px;
+    background-color: #f0f0f0;
+    padding: 10px;
+    width: 40%;
+    float: right;
+}
+
+ul.toc
+{
+}
+
+li.tocH1
+{
+    margin-left: 0em
+}
+
+li.tocH2
+{ 
+    margin-left: 1em
+}
+
+li.tocH3
+{ 
+    margin-left: 2em
+}
+
+li.tocH4
+{ 
+    margin-left: 3em
+}
+
+li.tocH5
+{
+    margin-left: 4em
+}
+
+li.tocH6
+{
+    margin-left: 5em
+}
+
+/* --- END table of contents styles */

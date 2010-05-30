@@ -60,11 +60,10 @@
   <div class="gutter-item">
     $if (page.recentArticles)$$recent(page=page)$$endif$
   </div>
-<!--
   <div class="gutter-item">
-    {% block date_list %}{% endblock %}
+    $if (page.recentDates)$$bydate(page=page)$$endif$
   </div>
--->
+
 </div>
 
 <div id="content-box"> <!-- closed in footer.st -->

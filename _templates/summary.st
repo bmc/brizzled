@@ -22,7 +22,7 @@ $page.articles:{ a | <li>$articlelink(article=a)$$\n$</li>}$
 <p>By tag:</p>
 
 <ul>
-$page.tags:{ tag | <li>$tag.name$ ($tag.total$)$\n$<ul>$\n$$tag.articles:{ a | <li>$a.title$</li>$\n$}$</ul>$\n$</li>$\n$}$
+$page.tags:{ tag | <li>$tag.tagName$ ($tag.total$)$\n$<ul>$\n$$tag.articles:{ a | <li>$a.title$</li>$\n$}$</ul>$\n$</li>$\n$}$
 </ul>
 
 
@@ -31,6 +31,6 @@ $page.tags:{ tag | <li>$tag.name$ ($tag.total$)$\n$<ul>$\n$$tag.articles:{ a | <
 
 <div id="date">Last modified: $page.date; format="yyyy-MM-dd"$</div>
 <div id="date">Another way to say it: $page.date$</div>
-<div id="permalink">Permalink: <a href="$page.permalink$">$page.permalink$</a></div>
+<div id="permalink">Permalink: <a href="$page.relativeRoot$/$page.fileName$">$page.permalink$</a></div>
 </body>
 </html>
