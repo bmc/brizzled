@@ -151,9 +151,80 @@ div.note p.last
 {
     text-align: left;
 }
+pre
+{
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: 2em;
+    margin-right: 2em;
+    font-size: 10pt;
+    padding: 3px;
+    font-family: Andale Mono, Lucidatypewriter, Lucida Typewriter, monospace;
+    /* font-family: Courier New, Courier, monospace; */
+    width: 95%;
+}
 
-/* -------------------------------------------------------------------------- */
-/* The following are all for Pygments */
+/* -------------------------------------------------------------------------- *\
+                         Table of Contents Styling
+\* -------------------------------------------------------------------------- */
+
+div#toc
+{
+    width: auto;
+    border-bottom: 1px solid black;
+    border-top: 1px solid black;
+}
+
+span#tocHeading
+{
+    width: auto;
+    font-weight: bold;
+}
+
+div#tocBlock
+{
+    padding: 10px;
+}
+
+ul.toc
+{
+}
+
+li.tocH1
+{
+    margin-left: 0em
+}
+
+li.tocH2
+{ 
+    margin-left: 1em
+}
+
+li.tocH3
+{ 
+    margin-left: 2em
+}
+
+li.tocH4
+{ 
+    margin-left: 3em
+}
+
+li.tocH5
+{
+    margin-left: 4em
+}
+
+li.tocH6
+{
+    margin-left: 5em
+}
+
+/* --- END table of contents styles */
+
+/* -------------------------------------------------------------------------- *\
+                                 Pygments
+\* -------------------------------------------------------------------------- */
 
 div.code-block
 {
