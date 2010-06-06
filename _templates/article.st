@@ -12,7 +12,7 @@ $bodystart(page=page, custom=custom, tags=tags)$
 <div class="article-header">
 
 <div class="article-title">
-<a href="$page.relativeRoot$/$page.fileName$" class="reference">$page.title$</a></div>
+<a href="$page.fileName$" class="reference">$page.title$</a></div>
 
 <div class="article-timestamp">$page.date; format="dd MMM, yyyy 'at' hh:mm a"$</div>
 </div>
@@ -36,17 +36,9 @@ $page.content$
 <br/><br/>
 
 <div class="article-footer">
-<a href="$page.relativeRoot$/$page.fileName$" class="reference">Permalink</a> |
+<a href="$page.fileName$" class="reference">Permalink</a> |
 <a href="$page.baseFileName$pr.html" class="reference">Printer-friendly</a> | 
 <span class="tags">Tags: $page.tags; separator=", "$</span>
-</div>
-
-<!--
-  .. disqus ..
--->
-</div>
-
-</div>
 </div>
 
 $if (!custom.noTOC)$
@@ -55,5 +47,13 @@ createTOC();
 </script>
 $endif$
 
+$disqus1(page=page)$
+
+</div>
+
+</div>
+</div>
+
+$disqus2(page=page)$
 $bodyend(page=page, custom=custom, tags=tags)$
 $htmlend(page=page, custom=custom, tags=tags)$

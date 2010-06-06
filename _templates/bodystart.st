@@ -58,4 +58,4 @@ $! -*- mode: html-helper; -*- !$
 
 </div>
 
-<div id="content-box"> <!-- closed in bodyend.st -->
+<div id="content-box"> $! closed in bodyend.st !$
