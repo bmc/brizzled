@@ -139,6 +139,14 @@ div#articles-box
     padding: 1em;
 }
 
+.article-description
+{
+    clear: both;
+    padding-top: 5px;
+    background-color: white;
+    margin-left: 0.5in;
+}
+
 .article-body
 {
     clear: both;
@@ -236,6 +244,10 @@ div#tags-box
     background-color: #eeeeee;
     margin-right: 1em;
     margin-left: 1em;
+    margin-top: 0.5in;
+    margin-bottom: 0.5in;
+    text-align: center;
+    width: 70%;
 }
 /*
 * html #tags-box

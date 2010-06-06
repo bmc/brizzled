@@ -23,10 +23,12 @@ $bodystart(page=page, custom=custom, tags=tags)$
 
 <div class="article-body" id="content">
 
+$if (!custom.noTOC)$
 <div id="tocBlock">
 <span id="tocHeading">Table of Contents</span>
 <div id="toc"></div>
 </div>
+$endif$
 
 $page.content$
 </div>
@@ -47,9 +49,11 @@ $page.content$
 </div>
 </div>
 
+$if (!custom.noTOC)$
 <script type="text/javascript">
 createTOC();
 </script>
+$endif$
 
 $bodyend(page=page, custom=custom, tags=tags)$
 $htmlend(page=page, custom=custom, tags=tags)$

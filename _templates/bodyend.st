@@ -2,7 +2,7 @@
 </div> <!-- content-box -->
 
 <div id="tags-box">
-$page.allTags:{ a | $tagcloudlink(byTag=a)$}; separator=", "$
+$page.allTags:tagcloudlink(); separator=", "$
 </div>
 
 </body>

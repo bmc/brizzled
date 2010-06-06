@@ -6,13 +6,13 @@ $bodystart(page=page, custom=custom, tags=tags)$
 <div id="articles-container">
 
 <div class="article-title">
-$byTag.total$ articles tagged with "$byTag.tagName$"
+$byTag.total$ article(s) tagged with "$byTag.tagName$"
 </div>
 
 <div class="article-body">
-<div id="tag-cloud">
+<div>
 <ul>
-$byTag.articles:{ a | <li>$articlelink(article=a)$</li>$\n$}$
+$byTag.articles:{ a | <li>$articledatelink(article=a)$</li>$\n$}$
 </ul>
 </div>
 </div>

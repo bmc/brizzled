@@ -12,7 +12,7 @@ $byDate.total$ articles from date $byDate.date$
 <div class="article-body">
 <div id="by-date">
 <ul>
-$byDate.articles:{ a | <li>$articlelink(article=a)$</li>$\n$}$
+$byDate.articles:{ a | <li>$articledatelink(article=a)$</li>$\n$}$
 </ul>
 </div>
 </div>

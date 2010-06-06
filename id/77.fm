@@ -1,6 +1,0 @@
-page.extension: html
-page.title: Writing Blogging Software for Google App Engine
-page.tags: App Engine, blogging, programming, python
-page.date: 2008-08-07 00:11:31
----
-%include "77.desc.md"

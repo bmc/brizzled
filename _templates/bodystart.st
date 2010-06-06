@@ -13,8 +13,8 @@
     <div class="banner-tagline">It'll only sting a little</div>
 
     <div class="banner-nav">
-      <div class="text-button" style="width: 7em"><a href="$custom.blogPath$">top</a></div>
-      <div class="text-button" style="width: 7em"><a href="$tags.dir$/everything.html">everything</a></div>
+      <div class="text-button" style="width: 7em"><a href="$page.relativeRoot$">top</a></div>
+      <div class="text-button" style="width: 7em"><a href="$page.relativeRoot$/everything.html">everything</a></div>
     </div>
   </div>
 </div>
@@ -66,4 +66,4 @@
 
 </div>
 
-<div id="content-box"> <!-- closed in footer.st -->
+<div id="content-box"> <!-- closed in bodyend.st -->

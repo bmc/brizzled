@@ -28,10 +28,12 @@
 
   <div id="content">
 
+$if (!custom.noTOC)$
     <div id="tocBlock">
       <span id="tocHeading">Table of Contents</span>
       <div id="toc"></div>
     </div>
+$endif$
 
 $page.content$
   </div>
