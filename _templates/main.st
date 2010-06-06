@@ -1,4 +1,4 @@
-<!-- -*- mode: html-helper; -*- -->
+$! -*- mode: html-helper; -*- !$
 $htmlstart(page=page, custom=custom, tags=tags)$
 $bodystart(page=page, custom=custom, tags=tags)$
 

@@ -1,4 +1,4 @@
-<!-- -*- mode: html-helper; -*- -->
+$! -*- mode: html-helper; -*- !$
 </div> <!-- content-box -->
 
 <div id="tags-box">

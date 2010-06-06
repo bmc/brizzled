@@ -1,2 +1,2 @@
-<!-- -*- mode: html-helper; -*- -->
+$! -*- mode: html-helper; -*- !$
 </html>

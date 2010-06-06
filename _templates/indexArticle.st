@@ -1,4 +1,4 @@
-<!-- -*- mode: html-helper; -*- -->
+$! -*- mode: html-helper; -*- !$
 <div class="article">
   <div class="article-header">
     <div class="article-title">

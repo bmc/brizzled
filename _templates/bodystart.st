@@ -1,4 +1,4 @@
-<!-- -*- mode: html-helper; -*- -->
+$! -*- mode: html-helper; -*- !$
 <body>
 
 <!-- BANNER -->
@@ -42,19 +42,11 @@
   </div>
 
   <div class="gutter-item">
-    <a title="Summary Atom feed" href="$page.relativeRoot$/atom-summary.xml" class="button"><img src="$page.relativeRoot$/images/atom-small.gif" width="32" height="15" border="0" align="left">&nbsp;(summary)</a>
+    <a title="Full-content Atom feed" href="$page.relativeRoot$/atom.xml" class="button"><img src="$page.relativeRoot$/images/atom-small.gif" width="32" height="15" border="0" align="left"></a>
   </div>
 
   <div class="gutter-item">
-    <a title="Full-content Atom feed" href="$page.relativeRoot$/atom-full.xml" class="button"><img src="$page.relativeRoot$/images/atom-small.gif" width="32" height="15" border="0" align="left">&nbsp;(full)</a>
-  </div>
-
-  <div class="gutter-item">
-    <a title="Summary RSS-2 feed" href="$page.relativeRoot$/rss-summary.xml" class="button"><img src="$page.relativeRoot$/images/rss2-small.gif" width="49" height="15" border="0">&nbsp;(summary)</a>
-  </div>
-
-  <div class="gutter-item">
-    <a title="Full-content RSS-2 feed" href="$page.relativeRoot$/rss-full.xml" class="button"><img src="$page.relativeRoot$/images/rss2-small.gif" width="49" height="15" border="0">&nbsp;(full)</a>
+    <a title="Full-content RSS-2 feed" href="$page.relativeRoot$/rss2.xml" class="button"><img src="$page.relativeRoot$/images/rss2-small.gif" width="49" height="15" border="0"></a>
   </div>
 
   <div class="gutter-item">
