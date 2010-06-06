@@ -2,8 +2,23 @@ import csv
 import os
 import subprocess
 import re
+from StringIO import StringIO
+import itertools
 
 LINK = re.compile('^([^[]*)\[([^\]]+)\]\(([^)]+)\)')
+
+def trim_blank_lines(lines):
+    def lreverse(lines):
+        l = []
+        for i in range(len(lines) - 1, -1, -1):
+            l.append(lines[i])
+        return l
+    def blank(line):
+        return len(line.strip()) == 0
+    def do_drop(lines):
+        return [x for x in itertools.dropwhile(blank, lines)]
+
+    return lreverse(do_drop(lreverse(do_drop(lines))))
 
 def to_markdown(content):
     out = open("/tmp/foo.rst", "w")
@@ -15,7 +30,9 @@ def to_markdown(content):
                          stdout=subprocess.PIPE, close_fds=True)
     md = []
     links=[]
-    for line in p.stdout.readlines():
+    lines = p.stdout.readlines()
+
+    for line in trim_blank_lines(lines):
         while True:
             m = LINK.search(line)
             if m == None:
@@ -24,9 +41,10 @@ def to_markdown(content):
             links.append((m.group(2), m.group(3)))
         md.append(line)
 
-    md.append("\n")
-    for (name, url) in links:
-        md.append("[" + name + "]: " + url + "\n")
+    if len(links) > 0:
+        md.append("\n")
+        for (name, url) in links:
+            md.append("[" + name + "]: " + url + "\n")
 
     return "".join(md)
 
@@ -53,7 +71,7 @@ page.templates: article=%s.html, printable-article=%spr.html
         out.write("page.tags: " + ", ".join(tags) + "\n")
         out.write("page.date: " + datetime + "\n")
         out.write("---\n")
-        out.write(desc + "\n}}\n\n")
+        out.write(desc + "}}\n\n")
 
         out.write(to_markdown(content))
         out.close()
