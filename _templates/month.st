@@ -6,13 +6,13 @@ $bodystart(page=page, custom=custom, tags=tags)$
 <div id="articles-container">
 
 <div class="article-title">
-$byDate.total$ articles from date $byDate.date$
+$byMonth.total$ articles from date $byMonth.monthYear$
 </div>
 
 <div class="article-body">
 <div id="by-date">
 <ul>
-$byDate.articles:{ a | <li>$articledatelink(article=a)$</li>$\n$}$
+$byMonth.articles:{ a | <li>$articledatelink(article=a)$</li>$\n$}$
 </ul>
 </div>
 </div>

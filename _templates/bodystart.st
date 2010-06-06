@@ -61,7 +61,7 @@
     $if (page.recentArticles)$$recent(page=page)$$endif$
   </div>
   <div class="gutter-item">
-    $if (page.recentDates)$$bydate(page=page)$$endif$
+    $if (page.recentMonths)$$bymonth(page=page)$$endif$
   </div>
 
 </div>
