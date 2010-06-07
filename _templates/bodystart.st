@@ -7,7 +7,7 @@ $! -*- mode: html-helper; -*- !$
   <div class="banner">
 
     <div class="banner-image">
-    <a href="$page.relativeRoot$/id/4"><img src="$page.relativeRoot$/images/brizzled.png" width="341" height="56" border="0" align="left"/></a>
+    <a href="$page.relativeRoot$/id/4.html"><img src="$page.relativeRoot$/images/brizzled.png" width="341" height="56" border="0" align="left"/></a>
     </div>
 
     <div class="banner-tagline">It'll only sting a little</div>

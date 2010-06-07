@@ -151,6 +151,13 @@ div.note p.last
 {
     text-align: left;
 }
+
+div.condensed-paragraphs p
+{
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
 pre
 {
     margin-top: 0;
