@@ -3,7 +3,7 @@ $! -*- mode: nxml; -*- !$
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title>$custom.blogname$: Brian Clapper's Blog</title>
-  <link href="$custom.blogURL$"/>
+  <link href="$custom.blogurl$"/>
   <updated>$page.lastUpdated; format="yyyy-MM-d'T'HH:mm:ssZ"$</updated>
   <author>
     <name>Brian M. Clapper</name>

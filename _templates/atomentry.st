@@ -2,7 +2,7 @@ $! -*- mode: nxml; -*- !$
 
   <entry>
     <title>$article.title$</title>
-    <link href="$page.baseURL$/id/$article.fileName$"/>
+    <link href="$page.baseURL$id/$article.fileName$"/>
     <id>"$page.baseURL$/id/$article.fileName$"></id>
     <updated>$article.date; format="yyyy-MM-d'T'HH:mm:ssZ"$</updated>
     <content type="xhtml">

@@ -3,9 +3,9 @@ $! -*- mode: html-helper; -*- !$
 
 <html>
 <head>
-<link href="$page.relativeRoot$/cssjs/style.css" media="screen" rel="stylesheet" type="text/css"/>
-<link href="$page.relativeRoot$/cssjs/common.css" media="screen" rel="stylesheet" type="text/css"/>
-<link href="$page.relativeRoot$/cssjs/lytebox/lytebox.css" media="screen" rel="stylesheet" type="text/css"/>
-<script src="$page.relativeRoot$/cssjs/lytebox/lytebox.js" language="javascript" type="text/javascript"/>
+<link href="$page.relativeRoot$/cssjs/style.css" media="screen" rel="stylesheet" type="text/css"></link>
+<link href="$page.relativeRoot$/cssjs/common.css" media="screen" rel="stylesheet" type="text/css"></link>
+<link href="$page.relativeRoot$/cssjs/lytebox/lytebox.css" media="screen" rel="stylesheet" type="text/css"></link>
+<script src="$page.relativeRoot$/cssjs/lytebox/lytebox.js" language="javascript" type="text/javascript"></script>
 <title>$custom.blogname$: $if (page.title)$$page.title$$endif$</title>
 </head>
