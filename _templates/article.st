@@ -1,6 +1,7 @@
 $! -*- mode: html-helper; -*- !$
 $htmlstart(page=page, custom=custom, tags=tags)$
 $bodystart(page=page, custom=custom, tags=tags)$
+$contentstart(page=page, custom=custom, tags=tags)$
 
 <!-- ARTICLE AREA -->
 
@@ -54,6 +55,7 @@ $disqus1(page=page)$
 </div>
 </div>
 
+$contentend(page=page, custom=custom, tags=tags)$
 $disqus2(page=page)$
 $bodyend(page=page, custom=custom, tags=tags)$
 $htmlend(page=page, custom=custom, tags=tags)$
