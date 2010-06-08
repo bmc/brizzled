@@ -13,6 +13,6 @@ $! -*- mode: html-helper; -*- !$
 
   <div class="article-footer">
     <a href="$article.permalink$" class="reference">Read the entire article.</a>
-    <span class="tags">Tags: $article.tags; separator=", "$</span>
+    <span class="tags">Tags:</span>&nbsp;$article.tags:{ tag | $taglink(article=article, tag=tag)$}; separator=", "$
   </div>
 </div>

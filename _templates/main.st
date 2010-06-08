@@ -10,8 +10,8 @@ $contentstart(page=page, custom=custom, tags=tags)$
  
 <div id="content" class="article-body">
 
-$trunc(page.indexArticles):{ a | $indexArticle(article=a)$$\n$<hr/>}$
-$last(page.indexArticles):{ a | $indexArticle(article=a)$$\n$}$
+$trunc(page.indexArticles):{ a | $indexarticle(article=a)$$\n$<hr/>}$
+$last(page.indexArticles):{ a | $indexarticle(article=a)$$\n$}$
 
 </div>
 </div>
