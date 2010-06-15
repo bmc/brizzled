@@ -6,6 +6,6 @@ $! -*- mode: nxml; -*- !$
     <link href="$custom.blogurl$"/>
     <description>Brian Clapper's blog</description>
     <pubDate>$page.lastUpdated; format="MMM, d MM yyy HH:mm:ss Z"$</pubDate>
-    $page.articles:{ a | $rss2item(article=a, page=page)$}$
+    $page.allArticles:{ a | $rss2item(article=a, page=page)$}$
   </channel>
 </rss>

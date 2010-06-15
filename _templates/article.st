@@ -38,8 +38,8 @@ $page.content$
 
 <div class="article-footer">
 <a href="$page.fileName$" class="reference">Permalink</a> |
-<a href="$page.baseFileName$pr.html" class="reference">Printer-friendly</a> | 
-<span class="tags">Tags: $page.tags; separator=", "$</span>
+<a href="pr-$page.fileName$" class="reference">Printer-friendly</a> | 
+<span class="tags">Tags: $page.tagNames; separator=", "$</span>
 </div>
 
 $if (!custom.noTOC)$

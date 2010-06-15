@@ -2,8 +2,8 @@ $! -*- mode: nxml; -*- !$
 
   <item>
     <title>$article.title$</title>
-    <link>$page.baseURL$/id/$article.fileName$</link>
-    <guid>"$page.baseURL$/id/$article.fileName$"></guid>
+    <link>$custom.blogurl$id/$article.fileName$</link>
+    <guid>"$custom.blogurl$id/$article.fileName$"></guid>
     <pubDate>$article.date; format="yyyy-MM-d'T'HH:mm:ssZ"$</pubDate>
     <description>
 <![CDATA[

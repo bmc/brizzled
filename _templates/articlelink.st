@@ -1,1 +1,1 @@
-<a href="$article.permalink$">$article.title$</a>
+<a href="$page.relativeRoot$/id/$article.fileName$">$article.title$</a>

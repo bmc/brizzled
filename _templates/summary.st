@@ -15,7 +15,7 @@
 $page.content$
 
 <ul>
-$page.articles:{ a | <li>$articlelink(article=a)$$\n$</li>}$
+$page.allArticles:{ a | <li>$articlelink(page=page, article=a)$$\n$</li>}$
 </ul>
 </div>
 
@@ -27,7 +27,7 @@ $page.tags:{ tag | <li>$tag.tagName$ ($tag.total$)$\n$<ul>$\n$$tag.articles:{ a 
 
 
 
-<div id="tags">Tags: $page.tags; separator=", "$</div>
+<div id="tags">Tags: $page.tagNames; separator=", "$</div>
 
 <div id="date">Last modified: $page.date; format="yyyy-MM-dd"$</div>
 <div id="date">Another way to say it: $page.date$</div>

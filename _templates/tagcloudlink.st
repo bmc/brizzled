@@ -1,1 +1,1 @@
-<a href="$it.relativeRoot$/$it.relativeTagDir$/$it.fileName$" class="tag-cloud-$it.tagGroup$">$it.tagName$($it.total$)</a>
+<a href="$page.relativeRoot$/$tag.tagsDirName$/$tag.fileName$" class="tag-cloud-$tag.tagGroup$">$tag.tagName$($tag.total$)</a>

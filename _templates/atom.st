@@ -10,5 +10,5 @@ $! -*- mode: nxml; -*- !$
     <email>bmc@clapper.org</email>
   </author>
   <id>$custom.blogURL$</id>
-  $page.articles:{ a | $atomentry(article=a, page=page)$}$
+  $page.allArticles:{ a | $atomentry(article=a, page=page)$}$
 </feed>

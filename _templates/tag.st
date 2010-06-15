@@ -7,13 +7,13 @@ $contentstart(page=page, custom=custom, tags=tags)$
 <div id="articles-container">
 
 <div class="article-title">
-$byTag.total$ article(s) tagged with "$byTag.tagName$"
+$page.tags.total$ article(s) tagged with "$page.tags.tagName$"
 </div>
 
 <div class="article-body">
 <div>
 <ul>
-$byTag.articles:{ a | <li>$articledatelink(article=a)$</li>$\n$}$
+$page.tags.articles:{ a | <li>$articledatelink(article=a)$</li>$\n$}$
 </ul>
 </div>
 </div>

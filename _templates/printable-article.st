@@ -20,7 +20,7 @@ $! -*- mode: html-helper; -*- !$
   <p>Brian M. Clapper, <i>bmc@clapper.org</i></p>
 
   <p><b>Published on</b>: $page.date; format="dd MMM, yyyy 'at' hh:mm a"$<br/>
-  <b>Tags</b>: $page.tags; separator=", "$</p>
+  <b>Tags</b>: $page.tagNames; separator=", "$</p>
 
   <script type="text/javascript" src="$page.relativeRoot$/cssjs/toc.js">
   <!-- -->

@@ -2,5 +2,5 @@ $! -*- mode: html-helper; -*- !$
 </div> <!-- content-box -->
 
 <div id="tags-box">
-$page.allTags:tagcloudlink(); separator=", "$
+$page.articlesByTag:{tag | $tagcloudlink(page=page, tag=tag)$}; separator=", "$
 </div>
