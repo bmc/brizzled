@@ -6,6 +6,7 @@
 <div id="articles-container">
 
 {% set sep = "" %}
+{# loop over the summary articles here #}
 {% for article in articles if (article.headers.url.find('summary') != -1) %}
 {% if loop.index <= 20 %}
 

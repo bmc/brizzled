@@ -10,7 +10,7 @@ suppress: yes
 <div id="articles-container">
 <ul>
 
-{% for article in articles if (article.headers.url.find('-summary.html') == -1) and (article.headers.url.find('id/') != -1) %}
+{% for article in articles if (article.headers.url.find('summary') == -1) and (article.headers.url.find('id/') != -1) %}
   <li><a href="{{ article.headers.url }}" class="reference">{{ article.headers.title }}</a>
 
 {% endfor %}
