@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<link href="/cssjs/style.css" media="screen" rel="stylesheet" type="text/css"></link>
+<link href="/cssjs/common.css" media="screen" rel="stylesheet" type="text/css"></link>
+<link href="/cssjs/lytebox/lytebox.css" media="screen" rel="stylesheet" type="text/css"></link>
+<script src="/cssjs/lytebox/lytebox.js" language="javascript" type="text/javascript"></script>
+<title>{{ headers.title }}</title>
+</head>
+
+<body>
+
+<!-- BANNER -->
+
+<div class="banner-background">
+  <div class="banner">
+
+    <div class="banner-image">
+    <a href="/id/4.html"><img src="/images/brizzled.png" width="341" height="56" border="0" align="left"/></a>
+    </div>
+
+    <div class="banner-tagline">It'll only sting a little</div>
+
+    <div class="banner-nav">
+      <div class="text-button" style="width: 7em"><a href="/">top</a></div>
+      <div class="text-button" style="width: 7em"><a href="/everything.html">everything</a></div>
+    </div>
+  </div>
+</div>
+
+<!-- GUTTER -->
+
+<div class="gutter">
+  <div class="gutter-item"></div>
+
+  <div class="gutter-item">
+    <a href="/images/about-me.html" rel="lyteframe" title="Brian M. Clapper" rev="">
+    <img border="0" src="/images/bmc-2010-09-01.jpg" width="90" height="94" align="left">
+    </a>
+  </div>
+  
+  <div class="gutter-item">
+    <div class="email">bmc&nbsp;@&nbsp;clapper.org</div>
+  </div>
+
+  <div class="gutter-item">
+    <div class="text-button">
+      <a href="/about-me.html" rel="lyteframe" title="Brian M. Clapper"
+         rev="" class="button">About me</a>
+    </div>
+  </div>
+
+  <div class="gutter-item">
+    <a title="Full-content Atom feed" href="/atom.xml" class="button"><img src="/images/atom-small.gif" width="32" height="15" border="0" align="left"></a>
+  </div>
+
+{#
+  <div class="gutter-item">
+    <a title="Full-content RSS-2 feed" href="/rss2.xml" class="button"><img src="/images/rss2-small.gif" width="49" height="15" border="0"></a>
+  </div>
+#}
+
+  <div class="gutter-item">
+    <span class="article-ref-header">RECENT ARTICLES</span>
+    <ul class="article-ref-list">
+{#
+{% for article in articles|reverse if not (article.headers.suppress is defined) %}
+#}
+{% for article in articles if not (article.headers.suppress is defined) %}
+      {% if loop.index <= 20 %}
+      <li><a href="/{{ article.headers.url }}">{{ article.headers.title }}</a>
+{{ article.url }}
+      {% endif %}
+ {% endfor %}
+    </ul>
+  </div>
+
+{#
+  <div class="gutter-item">
+    <b><i>BY-MONTH WILL GO HERE</i></b>
+  </div>
+#}
+
+</div>
+
+<div id="content-box">
+
+{% block content %}
+{% endblock %}
+
+</div>
+
+</body>
+</html>

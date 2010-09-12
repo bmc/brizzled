@@ -1,0 +1,22 @@
+template: self
+title: All articles
+suppress: yes
+
+{% extends "main.html" %}
+
+{% block content %}
+
+<div id="articles-box">
+<div id="articles-container">
+<ul>
+
+{% for article in articles if (article.headers.url.find('-summary.html') == -1) and (article.headers.url.find('id/') != -1) %}
+  <li><a href="{{ article.headers.url }}" class="reference">{{ article.headers.title }}</a>
+
+{% endfor %}
+
+</ul>
+</div>
+</div>
+
+{% endblock %}

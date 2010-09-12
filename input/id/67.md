@@ -1,0 +1,136 @@
+template: article.html
+title: ENODICK, reprise
+tags: people, second-life
+date: 2007-07-30
+
+In my [last post][] on this topic, I mentioned the apparently high
+prevalence of virtual sex in [Second Life][]. I also quoted from
+[Kate Amdahl's][] blog; she discusses such matters at length. (Apropos of
+nothing, "Kate Amdahl" is her [Second Life name][]. I do not know who she
+is "for real".)
+
+To my surprise, a few days later, I received an email from Ms.
+Amdahl, responding to my comments. We had a brief email exchange. I
+quote from her email messages, with her permission.
+
+> I came across your blog entry about Second Life, the
+> less-than-mind-blowingly-impressive way First Life companies have
+> (not) gained a foothold there, and, of course, sex. I noticed you
+> brought up the excellent question of why people have sex in Second
+> Life, which at first blush may seem...well, the words "woefully
+> inadequate" come to mind. Fortunately, it's sometimes joyful and
+> marvelous, but knowing this isn't immediately apparent, a while
+> back I wrote about why people have sex in Second Life
+> [here][]. For good
+> measure, I gave some good reasons not to have sex in Second Life
+> [there][].
+> 
+> Just in case the question's of interest. :)
+
+For those who are curious about Second Life virtual sex, her
+comments are worth reading. But there's still an unanswered
+question.
+
+**Why is Second Life Special?**
+
+What originally drew me into this whole discussion was a set of
+unrelated articles I'd seen over the space of a couple of weeks
+that talked about the allegedly large amount of virtual sex in
+Second Life, relative to other possible Second Life pursuits. (The
+various comments I read about about there being a thriving trade in
+penises was just a rather hilarious way to illustrate that
+assertion.) That got me wondering:
+
+-   What, specifically, attracts people to virtual Second Life sex?
+-   What is it about Second Life, in particular, that makes the
+    pursuit of virtual sex the single largest pursuit, dwarfing by a
+    large margin all other pursuits?
+
+Quoting Ms. Amdahl again:
+
+> As to why sex is so popular in Second Life, I have two theories off
+> the top of my head that probably turn out to be just one theory in
+> the end. The first is that a large percentage of the adult
+> population of the world isn't sexually satisfied, and Second Life
+> offers a comparatively easy, safe, and cheap way to meet those
+> needs - especially sexual desires that have more to do with fantasy
+> than with real-life experiences. So probably many people who use
+> Second Life find that they can scratch that itch in that way, and a
+> lot of other people come to Second Life specifically to have that
+> itch scratched.
+> 
+> The other theory is that many people don't feel enough intimacy in
+> their lives, and that this is complicated by intimacy usually
+> meaning increased danger. Virtual sex (done well) is one of the
+> most intimate things you could do with another person through a
+> computer, and it's far safer--emotionally, physically, and
+> socially--than intimacy in First Life.
+> 
+> With that said, as I mention elsewhere, I think that Second Life
+> sex is generally a gap-filler and not a way to satisfyingly run a
+> person's life permanently, at least for the great majority of
+> people. I expect that most of us will use it as a sort of phase in
+> our personal development and then move on, ideally with something
+> good learned.
+
+Okay, I'll buy that. But I still get the sense that there's something
+special about Second Life in this regard. There are other virtual worlds
+out there (e.g., [World of Warcraft][] and [EverQuest][]). You don't read
+about huge numbers of people engaging in virtual sex in those worlds. So,
+assuming the reports of rampant virtual sex in Second Life aren't mere
+sensationalistic distortions, what *is* it about Second Life that seems to
+promote this kind of behavior?
+
+Several theories leap immediately to mind. Of course, I'm neither a
+sociologist nor a highly experienced Second Lifer, so these
+theories are pure speculation.
+
+-   Second Life makes satisfying virtual sex more achievable. This
+    reason may, in fact, be plausible; I don't know. From what I've
+    read and what little I've seen, Second Life is customizable to a
+    surprising degree through animations, clothing, skins, etc. Is it
+    more flexible than other places (e.g., "World of Warcraft" and its
+    ilk)? I don't know the answer to that. But if it *is* more flexible
+    (no pun intended), then that might be a contributing factor.
+-   Second Life is less of a directed place. To put it another way,
+    there's no explicit point to Second Life; it's just there, as a
+    medium for people to interact how they please. This would contrast
+    with the more explicitly quest-oriented worlds, where the "point"
+    is more like a traditional [D&D game][]:
+    going on quests; killing beasties; accumulating experience, power
+    and money; etc. In a virtual world with an explicit point, people
+    aren't there primarily to hang out; they're there to game, and the
+    game generally isn't sex. In a virtual world with no explicit
+    point, people get bored and eventually start screwing around.
+-   Or, perhaps Second Life *does* have a point, and the point is
+    social contact. Second Life does explicitly emphasize social
+    contact, and social contact inevitably leads to sexual behavior of
+    one kind or another--not necessarily in everyone, but in a large
+    (and expected) percentage of people. This explanation may actually
+    have the most merit. In my short time exploring Second Life, I
+    noticed what appeared to be a deliberate attempt to foster a
+    "tribe" mentality among Second Life denizens. The restricted set of
+    last names, explicit comments in a help file about joining extended
+    families, comments about forming communities, etc., all point to an
+    intentional goal of fostering community and social networks. In
+    Second Life, socializing *is*, largely, "the point." Virtual sex is
+    a logical outgrowth of that.
+
+I suspect the real answer is a combination of the above, and other,
+reasons. I still don't find the idea of virtual sex personally
+compelling; it just seems too *disconnected* to me. However, it
+clearly *is* compelling for some. I suspect the whole "sex in
+cyberspace" issue is only going to grow. The technology will
+continue to improve, so that sex in a virtual online world may, at
+some point, begin to feel more like "real" sex--and then a whole
+new set of sociological questions will arise.
+
+[last post]: http://www.clapper.org/bmc/blog/id/66
+[Second Life]: http://www.secondlife.com/
+[Kate Amdahl's]: http://kateamdahl.livejournal.com/
+[Second Life name]: http://kateamdahl.livejournal.com/profile/
+[here]: http://kateamdahl.livejournal.com/5094.html
+[there]: http://kateamdahl.livejournal.com/4625.html
+[World of Warcraft]: http://www.worldofwarcraft
+[EverQuest]: http://everquest.station.sony.com/
+[D&amp;amp;D game]: http://en.wikipedia.org/wiki/Dungeons_&amp;_Dragons
