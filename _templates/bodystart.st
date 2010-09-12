@@ -1,2 +1,0 @@
-$! -*- mode: html-helper; -*- !$
-<body>
