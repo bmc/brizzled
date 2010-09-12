@@ -6,14 +6,14 @@
 <div id="articles-container">
 
 {% set sep = "" %}
-{% for article in articles if (article.headers.url.find('-summary') != -1) %}
+{% for article in articles if (article.headers.url.find('summary') != -1) %}
 {% if loop.index <= 20 %}
 
 {{ sep }}
 <div class="article">
   <div class="article-header">
     <div class="article-title">
-{% set url = article.headers.url|replace('-summary.', '.') %}
+{% set url = article.headers.url|replace('summary.html', '') %}
       <a href="{{ url }}" class="reference">{{ article.headers.title }}</a>
     </div>
     <div class="article-timestamp">

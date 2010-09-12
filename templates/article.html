@@ -58,14 +58,14 @@ createTOC();
   var disqus_identifier = "{{ headers.disqus_id }}";
   var disqus_url = "{{ headers.disqus_id }}";
   {% else %}
-  var disqus_identifier = "{{ headers.url }}";
-  var disqus_url = "{{ headers.url }}";
+  var disqus_identifier = "http://brizzled.clapper.org/{{ headers.url }}";
+  var disqus_url = disqus_identifier;
   {% endif %}
   var disqus_title = "Brizzled: {{ headers.title }}";
 
-  $if (page.disqus_developer)$
+  {% if (headers.disqus_developer is defined) %}
   var disqus_developer = 1;
-  $endif$
+  {% endif %}
 
   (function() {
    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
