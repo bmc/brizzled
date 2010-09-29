@@ -5,8 +5,6 @@ date: 2009-05-21
 
 *(Each line was a single subject from my spam folder, on May 16, 2009.)*
 
-<div class="condensed-paragraphs">
-
 Impress her with your performance.  
 Make your zipper knight the best in the whole town.  
 Your bedroom doesn't smell like passion.  
@@ -53,6 +51,4 @@ CONGRATULATIONS, WINNER!
 YOUR EMAIL WON THIS PRIZE.  
 
 Your Paypal account has been compromised.
-
-</div>
 
