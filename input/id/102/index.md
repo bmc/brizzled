@@ -371,7 +371,7 @@ The logic, above, is wrapped in:
         // Code above
     }
 
-The entire class is available [here](102/ParsedPattern.scala).
+The entire class is available [here](ParsedPattern.scala).
 
 For testing, let's also create simple logging classes:
 
