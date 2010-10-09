@@ -455,7 +455,7 @@ a:link
 
 a:visited
 {
-    color: black;
+    color: gray;
     border-bottom: 1px dotted black;
 }
 
