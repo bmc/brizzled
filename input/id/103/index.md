@@ -61,12 +61,24 @@ But the advantage of editing in a very lightweight markup language, then
 generating PDFs that are typeset through TeX, far outweighs any niggling
 disadvantages.
 
+**Update:** [John MacFarlane][], author of Pandoc, writes, in an email:
+
+> There's no general way to force page breaks, by the way.  If you just
+> want page breaks in PDF (via latex), you can insert a raw latex
+> command,
+> 
+>     \newpage
+> 
+> This should be ignored in HTML and ODT output, so it will only affect
+> latex and PDF via latex.
+
 Here's a list of Markdown-related tools I have found to be helpful:
 
 * The [Pandoc][] document converter.
 * [markdown-mode][], for [Emacs][].
 * [TeX Live][], which allows Pandoc to generate LaTeX-typeset PDFs, among
   other things. (I use TeX Live on both Ubuntu Linux and Mac OS X.)
+* [Lanyon][], the tool I use to generate this blog from Markdown source.
 * Some APIs for parsing Markdown. (I use these APIs in some of my software
   development.)
     - [Markdown in Python][]
@@ -75,12 +87,14 @@ Here's a list of Markdown-related tools I have found to be helpful:
       Uses [Knockoff][] under the covers.
 
 [Markdown]: http://daringfireball.net/projects/markdown/
+[Lanyon]: http://bitbucket.org/arthurk/lanyon/wiki/Home
 [Textile]: http://textile.thresholdstate.com/
 [Knockoff]: http://tristanhunt.com/projects/knockoff/
 [MarkWrap]: http://bmc.github.com/markwrap/
 [Scala]: http://www.scala-lang.org/
 [Markdown in Python]: http://www.freewisdom.org/projects/python-markdown/
 [Pandoc]: http://johnmacfarlane.net/pandoc/
+[John MacFarlane]: http://johnmacfarlane.net/
 [SQLShell Users Guide]: http://bmc.github.com/sqlshell/users-guide.html
 [GitHub]: http://www.github.com/
 [TeX]: http://www.tug.org/texlive/
