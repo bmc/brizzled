@@ -77,6 +77,7 @@ Here's a list of Markdown-related tools I have found to be helpful:
 [Markdown]: http://daringfireball.net/projects/markdown/
 [Textile]: http://textile.thresholdstate.com/
 [Knockoff]: http://tristanhunt.com/projects/knockoff/
+[MarkWrap]: http://bmc.github.com/markwrap/
 [Scala]: http://www.scala-lang.org/
 [Markdown in Python]: http://www.freewisdom.org/projects/python-markdown/
 [Pandoc]: http://johnmacfarlane.net/pandoc/
