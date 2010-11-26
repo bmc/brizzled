@@ -69,10 +69,10 @@ Here's a list of Markdown-related tools I have found to be helpful:
   other things. (I use TeX Live on both Ubuntu Linux and Mac OS X.)
 * Some APIs for parsing Markdown. (I use these APIs in some of my software
   development.)
-  - [Markdown in Python][]
-  - [Knockoff][], a [Scala][] Markdown parser
-  - [MarkWrap][], my API for parsing Markdown, [Textile][] and other formats.
-    Uses [Knockoff][] under the covers.
+    - [Markdown in Python][]
+    - [Knockoff][], a [Scala][] Markdown parser
+    - [MarkWrap][], my API for parsing Markdown, [Textile][] and other formats.
+      Uses [Knockoff][] under the covers.
 
 [Markdown]: http://daringfireball.net/projects/markdown/
 [Textile]: http://textile.thresholdstate.com/
