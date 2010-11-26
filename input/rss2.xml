@@ -7,7 +7,7 @@ suppress: yes
     <title>Brizzled: Brian Clapper's Blog</title>
     <link>http://brizzled.clapper.org/</link>
     <description>Brian Clapper's Blog</description>
-    <copyright>Copyright &copy; 2009-2011 Brian M. Clapper</copyright>
+    <copyright>Copyright 2009-2011 Brian M. Clapper</copyright>
     <webMaster>bmc@clapper.org</webMaster>
     <pubDate>{{ settings.build_time|datetimeformat('%a, %d %b %Y %H:%M:%S %z') }}</pubDate>
 
