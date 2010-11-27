@@ -9,7 +9,7 @@ straightforward, simple markup language that converts cleanly to HTML;
 there are various tools and APIs that do Markdown conversion.
 
 I like Markdown for blogging; this blog's source is Markdown, for instance.
-I write [user's guides][SQLShell Users Guide] using Markdownd, as well.
+I write [user's guides][SQLShell Users Guide] using Markdown, as well.
 Sites like [GitHub][] (where I host my code these days) support Markdown
 natively. Like [TeX][] or [troff][], Markdown input is plain text, which
 means I can use a real editor (such as [Emacs][]), rather than the less
