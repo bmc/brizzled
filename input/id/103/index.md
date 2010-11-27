@@ -61,6 +61,11 @@ But the advantage of editing in a very lightweight markup language, then
 generating PDFs that are typeset through TeX, far outweighs any niggling
 disadvantages.
 
+As of version 1.6, Pandoc can generate [EPUB][] documents, as well. As the
+Pandoc web site puts it, "EPUB books can be viewed on iPads, Nooks, and
+other electronic book readers, including many smart phones. (They can also
+be converted to Kindle books using [KindleGen][].)"
+
 **Update:** [John MacFarlane][], author of Pandoc, writes, in an email:
 
 > There's no general way to force page breaks, by the way.  If you just
@@ -106,3 +111,5 @@ Here's a list of Markdown-related tools I have found to be helpful:
 [Microsoft Word]: http://office.microsoft.com/en-us/word/
 [GNU Make]: http://www.gnu.org/software/make/
 [TeX Live]: http://www.tug.org/texlive/
+[EPUB]: http://en.wikipedia.org/wiki/EPUB
+[KindleGen]: http://www.amazon.com/gp/feature.html?ie=UTF8&docId=1000234621
