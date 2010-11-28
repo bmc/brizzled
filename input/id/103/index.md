@@ -26,8 +26,8 @@ original Markdown script is written in Perl, as a series of regex
 transformations. The Python markdown program is similarly small.
 
 Not too long ago, I stumbled across a *really* useful tool called
-[Pandoc][]. Pandoc converts from a variety of markup formats to other
-markup formats. e.g.:
+[Pandoc][], written by [John MacFarlane][]. Pandoc converts from a variety
+of markup formats to other markup formats. e.g.:
 
 > If you need to convert files from one markup format into another,
 > pandoc is your swiss-army knife. Need to generate a man page from a
@@ -66,7 +66,7 @@ Pandoc web site puts it, "EPUB books can be viewed on iPads, Nooks, and
 other electronic book readers, including many smart phones. (They can also
 be converted to Kindle books using [KindleGen][].)"
 
-**Update:** [John MacFarlane][], author of Pandoc, writes, in an email:
+**Update:** [John MacFarlane][] writes, in an email:
 
 > There's no general way to force page breaks, by the way.  If you just
 > want page breaks in PDF (via latex), you can insert a raw latex
@@ -83,7 +83,10 @@ Here's a list of Markdown-related tools I have found to be helpful:
 * [markdown-mode][], for [Emacs][].
 * [TeX Live][], which allows Pandoc to generate LaTeX-typeset PDFs, among
   other things. (I use TeX Live on both Ubuntu Linux and Mac OS X.)
-* [Lanyon][], the tool I use to generate this blog from Markdown source.
+* [Lanyon][], the static site generator I use to generate this blog from
+  Markdown source.
+* John MacFarlane's [yst][] static site generator. (I will be switching
+  this blog to [yst][], at some point.)
 * Some APIs for parsing Markdown. (I use these APIs in some of my software
   development.)
     - [Markdown in Python][]
@@ -91,6 +94,7 @@ Here's a list of Markdown-related tools I have found to be helpful:
     - [MarkWrap][], my API for parsing Markdown, [Textile][] and other formats.
       Uses [Knockoff][] under the covers.
 
+[yst]: https://github.com/jgm/yst
 [Markdown]: http://daringfireball.net/projects/markdown/
 [Lanyon]: http://bitbucket.org/arthurk/lanyon/wiki/Home
 [Textile]: http://textile.thresholdstate.com/
