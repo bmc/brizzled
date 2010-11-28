@@ -66,6 +66,8 @@ Pandoc web site puts it, "EPUB books can be viewed on iPads, Nooks, and
 other electronic book readers, including many smart phones. (They can also
 be converted to Kindle books using [KindleGen][].)"
 
+---
+
 **Update:** [John MacFarlane][] writes, in an email:
 
 > There's no general way to force page breaks, by the way.  If you just
@@ -76,6 +78,10 @@ be converted to Kindle books using [KindleGen][].)"
 > 
 > This should be ignored in HTML and ODT output, so it will only affect
 > latex and PDF via latex.
+
+This approach works like a charm.
+
+---
 
 Here's a list of Markdown-related tools I have found to be helpful:
 
