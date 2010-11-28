@@ -4,7 +4,7 @@ tags: writing, markdown, pandoc
 date: 2010-11-26
 toc: no
 
-I've been doing a lot of my writing these days using [Markdown][] It's a
+I've been doing a lot of my writing these days using [Markdown][]. It's a
 straightforward, simple markup language that converts cleanly to HTML;
 there are various tools and APIs that do Markdown conversion.
 
