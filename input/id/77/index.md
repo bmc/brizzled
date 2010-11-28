@@ -1495,6 +1495,18 @@ I welcome feedback. Feel free to submit a comment, below, or drop
 me an email with comments or corrections. I'll update this article
 with any good stuff I receive.
 
+# Related Software
+
+**_Update: 28 November, 2010_**
+
+A friend notes that [David Jonathan Nelson][] has created an
+[App Engine Blog][AEB] (AEB) project by forking *picoblog*. AEB "seeks to
+provide a near WordPress quality blog engine that runs on Google App
+Engine."
+
+[David Jonathan Nelson]: http://code.google.com/u/david.jonathan.nelson/
+[AEB]: http://code.google.com/p/appengineblogsoftware/
+
 # Related Brizzled Articles
 
 -   [Adding Page caching to a GAE application][]
