@@ -114,9 +114,9 @@ Here's a list of Markdown-related tools I have found to be helpful:
 [GitHub]: http://www.github.com/
 [TeX]: http://www.tug.org/texlive/
 [troff]: http://www.troff.org/
-[Emacs]: www.gnu.org/software/emacs/
+[Emacs]: http://www.gnu.org/software/emacs/
 [markdown-mode]: http://jblevins.org/projects/markdown-mode/
-[Pages]: www.apple.com/iwork/pages/
+[Pages]: http://www.apple.com/iwork/pages/
 [OpenOffice.org Writer]: http://wiki.services.openoffice.org/wiki/Writer
 [Microsoft Word]: http://office.microsoft.com/en-us/word/
 [GNU Make]: http://www.gnu.org/software/make/
