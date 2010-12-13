@@ -116,20 +116,20 @@ function takes an iterator over lines of Markdown and optional
         val body = XhtmlParser(Source.fromString(sHTML))
         val contentType = "text/html; charset=" + Encoding
         val htmlDocument = 
-    &lt;html&gt;
-    &lt;head&gt;
-    &lt;title&gt;{title}&lt;/title&gt;
-    &lt;style type="text/css"&gt;
+    <html>
+    <head>
+    <title>{title}</title>
+    <style type="text/css">
     {cssString}
-    &lt;/style&gt;
-    &lt;meta http-equiv="content-type" content={contentType}/&gt;
-    &lt;/head&gt;
-    &lt;div id="body"&gt;
+    </style>
+    <meta http-equiv="content-type" content={contentType}/>
+    </head>
+    <div id="body">
     {body}
-    &lt;hr/&gt;
-    &lt;i&gt;Generated {new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date)}&lt;/i&gt;
-    &lt;/div&gt;
-    &lt;/html&gt;
+    <hr/>
+    <i>Generated {new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date)}</i>
+    </div>
+    </html>
     
         htmlDocument.toString
     }

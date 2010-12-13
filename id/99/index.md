@@ -34,7 +34,7 @@ which receives the Editline descriptor and a character. You can then query
 the API for the information about the current line; you get back a
 `LineInfo` structure that looks like this:
 
-    :::c
+{% highlight c %}
     typedef struct lineinfo
     {
         const char *buffer;
@@ -42,6 +42,7 @@ the API for the information about the current line; you get back a
         const char *lastchar;
     }
     LineInfo;
+{% endhighlight %}
 
 From that structure, you know three things:
 
@@ -79,7 +80,7 @@ several things:
 `.desc database` describes the currently connected database. For
 example:
 
-    :::shell
+{% highlight bash %}
     sqlshell> .desc database
     Connected to database: jdbc:mysql://allegro:3306/bmc
     Connected as user:     bmc@localhost
@@ -89,10 +90,11 @@ example:
     JDBC driver version:   mysql-connector-java-5.1.7 ( Revision: ${svn.Revision} )
     Transaction isolation: repeatable read
     Open transaction?      no
+{% endhighlight %}
 
 `.desc table` is used to describe a table. For example:
 
-    :::shell
+{% highlight bash %}
     sqlshell> .desc names
     -----------
     Table names
@@ -103,11 +105,12 @@ example:
     gender         bpchar(1) NOT NULL,
     middleinitial  bpchar(1) NULL,
     creationdate   timestamp NOT NULL
+{% endhighlight %}
 
 With the addition of the string "full", it also gets index
 information:
 
-    :::shell
+{% highlight bash %}
     sqlshell> .desc names full
     -----------
     Table names
@@ -124,12 +127,14 @@ information:
     names_pkey: Unique index on (id)
     namesfirstix: Non-unique index on (firstname)
     nameslastix: Non-unique index on (lastname)
+{% endhighlight %}
 
 Thus, the basic command forms are:
 
-    :::shell
-    \.desc database
-    \.desc table [full]
+{% highlight bash %}
+    .desc database
+    .desc table [full]
+{% endhighlight %}
 
 Here are some of the completion challenges. In the examples, below,
 the location of the cursor is indicated with \[\].
@@ -137,71 +142,80 @@ the location of the cursor is indicated with \[\].
 A tab pressed at the location of the cursor, below, should complete
 ".desc", since there are no other commands starting with ".d":
 
-    :::shell
+{% highlight bash %}
     sqlshell> .d[]
+{% endhighlight %}
 
 By contrast, a tab pressed here does nothing, because the command
 is already completed:
 
-    :::shell
+{% highlight bash %}
     sqlshell> .desc[]
+{% endhighlight %}
 
 In this next case, a tab pressed here should show the choices
 "database" and the list of tables that are available for
 completion:
 
-    :::shell
+{% highlight bash %}
     sqlshell> .desc []
     database
     foo
     names
+{% endhighlight %}
 
 Here, a tab should complete "foo", since there's a table named
 "foo", and no other candidate starting with "f":
 
-    :::shell
+{% highlight bash %}
     sqlshell> .desc f[]
+{% endhighlight %}
 
 In both of the following cases, pressing a tab should complete the
 word "full":
 
-    :::shell
+{% highlight bash %}
     sqlshell> .desc foo []
     sqlshell> .desc foo f[]
+{% endhighlight %}
 
 To make this kind of parsing easier to model, my Scala readline
 adapter API converts the line into a list of tokens.
 
--   A text token is stored in a `Some` object.
--   White space (the delimiter) is represented by `Delim` objects.
-    All adjacent white space is collapsed into a single delimiter.
--   The cursor is represented by a special `Cursor` token.
--   The end of the token stream is denoted by `Nil`.
+* A text token is stored in a `Some` object.
+* White space (the delimiter) is represented by `Delim` objects.
+  All adjacent white space is collapsed into a single delimiter.
+* The cursor is represented by a special `Cursor` token.
+* The end of the token stream is denoted by `Nil`.
 
 Given this input:
 
-    :::shell
+{% highlight bash %}
     sqlshell> .desc foo f[]
+{% endhighlight %}
 
 the API produces this token list:
 
-    :::shell
+{% highlight scala %}
     Some(".desc") :: Delim :: Some("foo") :: Delim :: Some("f") :: Cursor :: Nil
+{% endhighlight %}
 
 Similarly, this input:
 
-    :::shell
+{% highlight bash %}
     sqlshell> .desc []
+{% endhighlight %}
 
 produces this token list:
 
-    :::shell
+{% highlight scala %}
     Some(".desc") :: Delim :: Cursor :: Nil
+{% endhighlight %}
 
 With that approach, writing a completion handler is pretty
 straightforward:
 
-    :::scala
+{% highlight scala %}
     override def complete(token: String, allTokens: List[CompletionToken], line: String): List[String] =
     {
         allTokens match
@@ -239,12 +253,13 @@ straightforward:
                 Nil
         }
     }
+{% endhighlight %}
 
 (The `subCommandCompleter` object is an instance of a stock "List"
-completer that is instantiated with a list of choices ("database"
-and the list of tables, in this case) and returns zero, one or many
-completions from that list. Completing from a list of choices is
-common, so the API provides an easy way to do that.)
+completer that is instantiated with a list of choices ("database" and the
+list of tables, in this case) and returns zero, one or many completions
+from that list. Completing from a list of choices is common, so the API
+provides an easy way to do that.)
 
 This matching-based approach hides the nitty gritty parsing
 details, allowing the completer to focus on the "business logic" of

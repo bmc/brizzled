@@ -230,6 +230,7 @@ invocations--for instance, translate:
 
 to
 
+{% highlight scala %}
     emitLiteral("[")          // [
     formatDate("HH", now)     // %H
     emitLiteral(":")          // :
@@ -242,14 +243,17 @@ to
     emitLevel(logMessage)     // %l
     emitLiteral(": ")         // :<blank>
     emitMessage(logMessage)   // %t
+{% endhighlight %}
 
 If that function chain can be stored somehow, then when a log message comes
 in, the code can simply do something like this:
 
+{% highlight scala %}
     logMessage = new LogMessage(...)
     now = new Date
 
     for (f <- patternFuncs) <call function>
+{% endhighlight %}
 
 ### The implementation
 
@@ -257,6 +261,7 @@ With currying, the implementation turns out to be straightforward.
 
 First, I created a small set of curry-able functions:
 
+{% highlight scala %}
     def insertThreadName(logMessage: LogMessage): String =
         Thread.currentThread.getName
 
@@ -280,6 +285,7 @@ First, I created a small set of curry-able functions:
     }
 
     def copyLiteral(s: String)(logMessage: LogMessage): String = s
+{% endhighlight %}
 
 Each function takes, as its last argument, a `LogMessage` object, which will
 be supplied when a message is actually logged.
@@ -287,7 +293,7 @@ be supplied when a message is actually logged.
 Then, I put together a mapping table. Each entry in the table maps a
 percent-escape into a partial function.
 
-    lazy val Mappings = Map[Char, LogMessage => String](
+    lazy val Mappings = Map[Char, LogMessage => String] (
         'a' -> insertDateChunk(new SimpleDateFormat("E")) _,
         'A' -> insertDateChunk(new SimpleDateFormat("EEEE")) _,
         'b' -> insertDateChunk(new SimpleDateFormat("MMM")) _,
@@ -319,6 +325,7 @@ partial function taking a `LogMessage` object.
 
 The parser itself is simple:
 
+{% highlight scala %}
     def parsePattern(stream: List[Char], gathered: String = ""):
         List[LogMessage => String] =
     {
@@ -346,6 +353,7 @@ The parser itself is simple:
                 parse(tail, gathered + c)
         }
     }
+{% endhighlight %}
 
 It takes a list of characters representing the pattern and:
 
@@ -360,6 +368,7 @@ It takes a list of characters representing the pattern and:
 
 The logic, above, is wrapped in:
 
+{% highlight scala %}
     class ParsedPattern(originalPattern: String)
     {
         val parsedPattern: List[(LogMessage) => String] =
@@ -372,6 +381,7 @@ The logic, above, is wrapped in:
     
         // Code above
     }
+{% endhighlight %}
 
 The entire class is available [here](ParsedPattern.scala).
 
@@ -395,8 +405,10 @@ which takes a `LogMessage` and returns a `String`. The `format` method formats
 a log message by passing it into each function in turn, concatenating the
 results. Here's the `format` method again:
 
+{% highlight scala %}
     def format(logMessage: LogMessage): String =
         parsedPattern.map(_(logMessage)).mkString("")
+{% endhighlight %}
 
 Let's try it:
 

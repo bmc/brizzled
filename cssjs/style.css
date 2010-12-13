@@ -686,10 +686,14 @@ li.tocH6
                                     Pygments
 \* -------------------------------------------------------------------------- */
 
-.highlight .c /* Comment */
+div.highlight
 {
-    color: #008800;
-    font-style: italic
+    margin-left: 0;
+}
+
+div.highlight pre
+{
+    margin-left: 0 !important;
 }
 
 .highlight .err /* Error */
