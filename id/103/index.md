@@ -90,10 +90,12 @@ Here's a list of Markdown-related tools I have found to be helpful:
 * [markdown-mode][], for [Emacs][].
 * [TeX Live][], which allows Pandoc to generate LaTeX-typeset PDFs, among
   other things. (I use TeX Live on both Ubuntu Linux and Mac OS X.)
-* [Lanyon][], the static site generator I use to generate this blog from
+* [Jekyll][], the Ruby-based static site generator I use to generate this
+  blog and my other web sites. ([GitHub][] also uses Jekyll, as the engine
+  behind [GitHub Pages[].)
+* [Lanyon][], a Python-based static site generator, similar to Jekyll.
   Markdown source.
-* John MacFarlane's [yst][] static site generator. (I will be switching
-  this blog to [yst][], at some point.)
+* John MacFarlane's [yst][] static site generator.
 * Some APIs for parsing Markdown. (I use these APIs in some of my software
   development.)
     - [Markdown in Python][]
@@ -113,6 +115,8 @@ Here's a list of Markdown-related tools I have found to be helpful:
 [John MacFarlane]: http://johnmacfarlane.net/
 [SQLShell Users Guide]: http://bmc.github.com/sqlshell/users-guide.html
 [GitHub]: http://www.github.com/
+[GitHub Pages]: http://pages.github.com/
+[Jekyll]: http://www.jekyllrb.com/
 [TeX]: http://www.tug.org/texlive/
 [troff]: http://www.troff.org/
 [Emacs]: http://www.gnu.org/software/emacs/
