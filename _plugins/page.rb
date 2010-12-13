@@ -62,7 +62,7 @@ module Jekyll
     def initialize(site, base, dir, name)
       orig_init(site, base, dir, name)
       @summary = Summary.new(File.join(@base, @dir, SUMMARY_FILE),
-                             File.join(@base, "_site", @dir, SUMMARY_HTML))
+                             File.join(@base, site.dest, @dir, SUMMARY_HTML))
     end
 
     # Add some custom options to the Liquid data for the page.
@@ -77,8 +77,13 @@ module Jekyll
       h['date'] = self.date
       h['summary'] = @summary
       h['has_summary'] = @summary.has_summary?
+      h['path'] = File.join(@base, @dir, @name)
       h['now'] = Date.today
       h
+    end
+
+    def tags
+      (self.data['tags'] || "").split(',').map {|t| t.strip}
     end
 
     def full_url

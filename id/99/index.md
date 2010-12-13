@@ -14,20 +14,19 @@ readline wrapper API, which supports [editline][], [GNU Readline][] and
 [JLine][], is available in my [Grizzled Scala][] library. See the
 `grizzled.cmd` and `grizzled.readline` packages.)
 
-Naturally, I wanted to support tab completion. But, as it happens,
-most completion APIs are a little clunky. They give a bare minimum
-of information, leaving a fair amount of work to the caller.
+Naturally, I wanted to support tab completion. But, as it happens, most
+completion APIs are a little clunky. They give a bare minimum of
+information, leaving a fair amount of work to the caller.
 
-For example, the [Python][] `readline` module
-provides for tab completion; the completion function, according to
-the module's documentation, "is called as *function(text, state)*,
-for *state* in 0, 1, 2, ..., until it returns a non-string value.
-It should return the next possible completion starting with
-*text*."
+For example, the [Python][] `readline` module provides for tab completion;
+the completion function, according to the module's documentation, "is
+called as *function(text, state)*, for *state* in 0, 1, 2, ..., until it
+returns a non-string value. It should return the next possible completion
+starting with *text*."
 
-Wow. Rather ugly. But, in all fairness, it merely mimics the ugly
-approach used by the underlying GNU Readline API. GNU Readline
-itself is considerably [more complicated][].
+Well, *that's* ugly. But, in all fairness, it merely mimics the ugly
+approach used by the underlying GNU Readline API. GNU Readline itself is
+considerably [more complicated][].
 
 Another example is [editline][]. You can install a completion callback,
 which receives the Editline descriptor and a character. You can then query
