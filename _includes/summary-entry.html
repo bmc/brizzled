@@ -1,0 +1,28 @@
+{% comment %}
+Entry for a single article in a summary page. Assumes that variable
+"article" contains the article, a Jekyll page.
+{% endcomment %}
+
+<div class="article">
+  <div class="article-header">
+    <div class="article-title">
+      <a href="{{ article.url }}" class="reference">{{ article.title }}</a>
+    </div>
+    <div class="article-timestamp">{{ article.date | date: '%A, %d %B, %Y' }}</div>
+  </div>
+
+  <div class="article-description">
+{% if article.has_summary %}
+{{ article.summary }}
+{% endif %}
+  </div>
+
+  <div class="article-footer">
+    <a href="{{ article.url }}" class="reference">Read the entire article</a>
+    <span class="summary-tags">Tags:
+{% for tag in article.tags %}
+<a href="/tags/{{ tag.dir }}/">{{ tag.name }}</a>{% if forloop.last %}{% else %},{% endif %}
+{% endfor %}
+    </span>
+  </div>
+</div>

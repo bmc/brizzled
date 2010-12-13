@@ -4,7 +4,7 @@
 <div id="articles-container">
 
 {% assign sep = false %}
-{% for article in site.articles limit:page.limit %}
+{% for article in page.articles %}
 
 {% if sep %}
 <hr/>

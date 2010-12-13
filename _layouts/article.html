@@ -38,7 +38,11 @@
 <div class="article-footer">
 <a href="{{ page.url }}" class="reference">Permalink</a> |
 {% comment %} <a href="/pr-{{ headers.url }}" class="reference">Printer-friendly</a> | {% endcomment %}
-<span class="tags">Tags: {{ page.tags | downcase | join ', ' }}</span>
+<span class="tags">Tags: 
+{% for tag in page.tags %}
+<a href="/tags/{{ tag.dir }}/">{{ tag.name }}</a>{% if forloop.last %}{% else %},{% endif %}
+{% endfor %}
+</span>
 </div>
 
 {% if (page.toc == "yes") %}
@@ -61,7 +65,7 @@ createTOC();
   var disqus_identifier = "http://brizzled.clapper.org/{{ page.url }}";
   var disqus_url = disqus_identifier;
   {% endif %}
-  var disqus_title = "Brizzled: {{ headers.title }}";
+  var disqus_title = "Brizzled: {{ page.title }}";
 
   {% if (page.disqus_developer) %}
   var disqus_developer = 1;
