@@ -92,16 +92,15 @@ Here's a list of Markdown-related tools I have found to be helpful:
   other things. (I use TeX Live on both Ubuntu Linux and Mac OS X.)
 * [Jekyll][], the Ruby-based static site generator I use to generate this
   blog and my other web sites. ([GitHub][] also uses Jekyll, as the engine
-  behind [GitHub Pages[].)
+  behind [GitHub Pages][].)
 * [Lanyon][], a Python-based static site generator, similar to Jekyll.
-  Markdown source.
 * John MacFarlane's [yst][] static site generator.
 * Some APIs for parsing Markdown. (I use these APIs in some of my software
   development.)
-    - [Markdown in Python][]
-    - [Knockoff][], a [Scala][] Markdown parser
-    - [MarkWrap][], my API for parsing Markdown, [Textile][] and other formats.
-      Uses [Knockoff][] under the covers.
+  - [Markdown in Python][]
+  - [Knockoff][], a [Scala][] Markdown parser
+  - [MarkWrap][], my API for parsing Markdown, [Textile][] and other formats.
+    Uses [Knockoff][] under the covers.
 
 [yst]: https://github.com/jgm/yst
 [Markdown]: http://daringfireball.net/projects/markdown/
