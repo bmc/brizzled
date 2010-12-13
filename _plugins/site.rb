@@ -2,10 +2,13 @@ require 'set'
 
 module Jekyll
 
+  # Extensions to the Jekyll Site class.
   class Site
 
+    # Regular expression by which blog posts are recognized
     POST_PAGE_RE = /\/id\/[0-9]+\/index.html/
 
+    # Find my blog posts among all the pages.
     def blog_posts
       self.pages.select {|p| p.full_url =~ POST_PAGE_RE}
     end
@@ -14,7 +17,7 @@ module Jekyll
     # "site" variable within templates.
     #
     # articles - blog articles, in reverse chronological order (like "posts")
-
+    # max_recent - maximum number of recent articles to display
     alias orig_site_payload site_payload
     def site_payload
       h = orig_site_payload
@@ -25,6 +28,8 @@ module Jekyll
       h
     end
 
+    # Get a hash all pages, by tag. The keys in the returned hash are
+    # Tag objects; the values are sets of Page objects.
     def pages_by_tag
       tag_ref = {}
       self.pages.each do |page|

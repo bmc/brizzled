@@ -2,6 +2,8 @@
 
 module Jekyll
 
+  # A version of a page that represents a tag index.
+
   class TagIndex < Page
     def initialize(site, base, dir, tag, articles)
       @site = site
@@ -9,7 +11,8 @@ module Jekyll
       @dir = dir
       @name = 'index.html'
       self.process(@name)
-      self.read_yaml(File.join(base, '_layouts'), 'tag_index.html')
+      tag_index = (site.config['tag_index_layout'] || 'tag_index') + '.html'
+      self.read_yaml(File.join(base, '_layouts'), tag_index)
       self.data['tag'] = tag
       self.data['articles'] = articles.sort { |p1, p2| p1.date <=> p2.date }
       tag_title_prefix = site.config['tag_title_prefix'] || 'Tag: '
