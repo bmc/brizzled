@@ -1,1 +1,5 @@
 pygments: true
+# Maximum number of recent articles displayed on the side
+max_recent: 20
+# Maximum number of articles display on the top page.
+max_top: 15

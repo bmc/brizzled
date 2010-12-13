@@ -24,14 +24,21 @@ body
     height: 100%;
 }
 
+/* -------------------------------------------------------------------------- *\
+                                   Main Blog
+\* -------------------------------------------------------------------------- */
+
 span.summary-tags
 {
     float: right;
 }
 
-/* -------------------------------------------------------------------------- *\
-                                   Main Blog
-\* -------------------------------------------------------------------------- */
+div.page-footer
+{
+    font: 8pt;
+    font-style: italic;
+    text-align: center;
+}
 
 .lytebox-popup
 {
@@ -202,6 +209,10 @@ div.article-title
 
 div.article-footer
 {
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    /* font-size: 50%;*/
+    color: gray;
+    text-align: left;
 }
 
 div.article-footer a.reference
@@ -250,14 +261,6 @@ div.article-timestamp
     border-top: 1px solid gray;
     padding-top: 2px;
     padding-bottom: 8px;
-}
-
-.article-footer
-{
-    font-family: Verdana, Arial, Helvetica, sans-serif;
-    /* font-size: 50%;*/
-    color: gray;
-    text-align: left;
 }
 
 div#tags-box

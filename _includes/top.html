@@ -61,9 +61,9 @@
 {% endcomment %}
 
   <div class="gutter-item">
-    <span class="article-ref-header">RECENT ARTICLES</span>
+    <span class="article-ref-header">LAST {{site.max_recent}} ARTICLES</span>
     <ul class="article-ref-list">
-{% for a in site.articles limit:15 %}
+{% for a in site.articles limit:site.max_recent %}
       <li><a href="{{ a.url }}">{{ a.title }}</a>
 {% endfor %}
     </ul>
