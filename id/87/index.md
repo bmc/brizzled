@@ -8,7 +8,7 @@ toc: yes
 
 I've decided to write a build tool in [Scala][].
 
-(**Update**: No, I haven't. See below.)
+(**Update**: No, I haven't. See [below](#update1).)
 
 # Because I don't like Ant
 
@@ -174,7 +174,7 @@ done, I intend to replace all my uses of Ant with this Scala-based
 build tool. Maybe I'll even include an Ant adapter, enabling me to
 make use of existing Ant tasks.
 
-# Update: July 19, 2009
+# Update: July 19, 2009 # {#update1}
 
 I've finally taken the time to play with both
 [Gradle][] and

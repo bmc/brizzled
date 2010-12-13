@@ -4,25 +4,17 @@ module Jekyll
 
     def initialize(tag_name, markup, tokens)
       @author = markup.strip
+      if @author.length == 0
+        @author = nil
+      end
       super
     end
 
-    protected
-
-    def render_all(nodelist, context)
-      # See https://github.com/tobi/liquid/blob/master/lib/liquid/block.rb
-      nodelist.collect do |token|
-        begin
-          if token.respond_to?(:render)
-            s = token.render(context)
-          else
-            s = emit_lines token
-          end
-          s
-        rescue Exception => e
-          context.handle_error(e)
-        end
-      end
+    def render(context)
+      # Superclass method will get the lines in the block, as an array of
+      # length 1.
+      lines = super
+      emit_lines(lines[0].split("\n"))
     end
 
     private
@@ -32,18 +24,24 @@ module Jekyll
       # Break the token into individual input lines.
       token.each do |line|
         line.strip!
-        if line.length > 0
-          poem += (line + "<br/>")
-        end
+        poem << (line + "<br/>")
       end
-      %{
-<table border="0">
+
+      html = %{
+<table border="0" class="poem">
 <tr valign="top">
-<td class="poem-author">#{@author}</td>
+}
+
+      if @author
+        html << "<td class='poem-author'>#{@author}</td>"
+      end
+
+      html << %{
 <td class="poem-text">#{poem}</td>
 </tr>
 </table>
 }
+      html
     end
   end
 end

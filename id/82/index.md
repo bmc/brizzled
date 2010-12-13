@@ -32,7 +32,7 @@ Then, save the script as an "application bundle", as shown in the
 following dialog box (which comes up if you select "File &gt; Save
 As" from the Script Editor's menu).
 
-![Script Editor Save-As dialog](82/script-editor.png)
+![Script Editor Save-As dialog](script-editor.png)
 
 # Add an Icon
 
@@ -54,7 +54,7 @@ each of the boxes in the second column. In the top three rows, you
 will be asked about a 1-bit mask. (See below.) Select "Extract
 Mask" in all cases.
 
-![Icon Composer - Extract Mask](82/icon-composer.png)
+![Icon Composer - Extract Mask](icon-composer.png)
 
 When you're done, save the resulting icon to a file.
 
