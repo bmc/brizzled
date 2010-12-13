@@ -1,0 +1,104 @@
+{% include top.html %}
+
+<div id="articles-box">
+<div id="articles-container">
+
+<div class="article">
+
+<div class="article-header">
+
+  <div class="article-title">
+  <a href="{{ page.url }}" class="reference">{{ page.title }}</a>
+  </div>
+
+  <div class="article-timestamp">{{ page.date | date: '%A, %d %B, %Y' }}</div>
+
+</div>
+
+{% if (page.toc == "yes") %}
+<script type="text/javascript" src="/cssjs/toc.js">
+<!-- -->
+</script>
+{% endif %}
+
+<div class="article-body" id="content">
+
+{% if (page.toc == "yes") %}
+<div id="tocBlock">
+<span id="tocHeading">Table of Contents</span>
+<div id="toc"></div>
+</div>
+{% endif %}
+
+{{ content }}
+</div>
+
+<br/><br/>
+
+<div class="article-footer">
+<a href="{{ page.url }}" class="reference">Permalink</a> |
+{% comment %} <a href="/pr-{{ headers.url }}" class="reference">Printer-friendly</a> | {% endcomment %}
+<span class="tags">Tags: {{ page.tags | downcase | join ', ' }}</span>
+</div>
+
+{% if (page.toc == "yes") %}
+<script type="text/javascript">
+createTOC();
+</script>
+{% endif %}
+
+<a href="#disqus_thread">Comments</a>
+
+<div id="disqus_thread"></div>
+
+<script type="text/javascript">
+  // Use the base file name (without the ".html") as the Disqus URL. This is
+  // necessary to be consistent with old version of Brizzled on App Engine.
+  {% if (page.disqus_id) %}
+  var disqus_identifier = "{{ headers.disqus_id }}";
+  var disqus_url = "{{ headers.disqus_id }}";
+  {% else %}
+  var disqus_identifier = "http://brizzled.clapper.org/{{ headers.url }}";
+  var disqus_url = disqus_identifier;
+  {% endif %}
+  var disqus_title = "Brizzled: {{ headers.title }}";
+
+  {% if (page.disqus_developer) %}
+  var disqus_developer = 1;
+  {% endif %}
+
+  (function() {
+   var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+   dsq.src = 'http://brizzled.disqus.com/embed.js';
+   (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+
+</script>
+
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=brizzled">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+</div>
+
+</div>
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+(function() {
+	var links = document.getElementsByTagName('a');
+	var query = '?';
+	for(var i = 0; i < links.length; i++) {
+	if(links[i].href.indexOf('#disqus_thread') >= 0) {
+		query += 'url' + i + '=' + encodeURIComponent(links[i].href) + '&';
+	}
+	}
+	document.write('<script charset="utf-8" type="text/javascript" src="http://disqus.com/forums/brizzled/get_num_replies.js' + query + '"></' + 'script>');
+})();
+//]]>
+</script>
+
+
+
+
+{% include bottom.html %}

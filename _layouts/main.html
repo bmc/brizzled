@@ -1,0 +1,46 @@
+{% include top.html %}
+
+<style type="text/css">
+.tags
+{
+    float: right;
+}
+</style>
+
+<div id="articles-box">
+<div id="articles-container">
+
+{% assign sep = false %}
+{% for article in site.articles limit:page.limit %}
+
+{% if sep %}
+<hr/>
+{% endif %}
+
+<div class="article">
+  <div class="article-header">
+    <div class="article-title">
+      <a href="{{ article.url }}" class="reference">{{ article.title }}</a>
+    </div>
+    <div class="article-timestamp">{{ article.date | date: '%A, %d %B, %Y' }}</div>
+  </div>
+
+  <div class="article-description">
+{% if article.summary %}
+{{ article.summary }}
+{% endif %}
+  </div>
+
+  <div class="article-footer">
+    <a href="{{ article.url }}" class="reference">Read the entire article</a>
+    <span class="tags">Tags: {{ article.tags | downcase | join ', ' }}</span>
+  </div>
+</div>
+
+{% assign sep = true %}
+{% endfor %}
+
+{% include bottom.html %}
+
+</div> {% comment %} articles-box {% endcomment %}
+</div> {% comment %} articles-container {% endcomment %}

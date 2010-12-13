@@ -1,0 +1,463 @@
+---
+layout: article
+title: Curry
+tags: scala, currying, functional
+date: 2010-06-07
+toc: yes
+---
+
+# Abstract
+
+Examples of [currying][], or *partial application*, are often simple enough
+to get the concept across, without suggesting real-world uses. This article
+describes a simple, practical currying example.
+
+# Introduction
+
+I'm not the world's best [functional programmer][fp]; I'm still getting my
+head around many of the concepts. The functional approach appeals to me
+greatly, but there are common functional constructs that I'm still
+internalizing.
+
+Until fairly recently, [currying][], or *partial application* was one of
+those concepts. It's not a difficult idea to understand; most of the
+examples I'd seen make the concept of currying easy enough to grasp. But
+the examples never translated well into practice for me; they had little
+bearing on the kinds of programming I do every day. I just couldn't think
+of a place where I was likely to use currying in my day-to-day programming.
+(This, obviously, speaks more to my lack of imagination than anything
+else.)
+
+Then, I stumbled across a use that drove home the power of this simple
+technique.
+
+In this article, I'll be using the [Scala][] programming language, but the
+concepts are not specific to Scala.
+
+# Those Examples
+
+Most currying examples are clear enough. For instance, [A Tour of Scala][]
+has a [currying page][tour-currying] that has a fairly typical example.
+Here's a modified version of it, shown in the Scala REPL:
+
+    scala> def modN(n: Int)(x: Int) = ((x % n) == 0)
+    modN: (n: Int)(x: Int)Boolean
+    
+`modN` is a function taking two parameters, as separate argument lists. The
+first parameter is the modulus; the second parameter is the number to which to
+apply the modulus. In Scala, a function with multiple parameter lists can be
+curried. For example:
+
+    scala> val mod5 = modN(5) _
+    mod5: (Int) => Boolean = <function1>
+    
+Here, we've called `modN` with a modulus of 5, specifying that the second
+parameter isn't filled in. This construct returns another function, one
+that takes a single integer and returns a boolean:
+
+    scala> mod5(10)
+    res0: Boolean = true
+
+    scala> mod5(11)
+    res1: Boolean = false
+
+We can use curried values of `modN` to filter a list of integers:
+
+    scala> val l = (1 to 30).toList                 
+    l: List[Int] = List(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15,
+    16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30)
+
+    scala> l filter modN(5)                         
+    res2: List[Int] = List(5, 10, 15, 20, 25, 30)
+
+    scala> l filter modN(3)
+    res3: List[Int] = List(3, 6, 9, 12, 15, 18, 21, 24, 27, 30)
+
+This example is fairly typical, and it has several things going for it:
+
+* It's straightforward.
+* It's easy to understand.
+* It demonstrates currying quite nicely.
+
+However, it isn't something I find myself needing to do very often. Currying a
+modulus function doesn't save me a lot of coding, or provide any additional
+clarity, over something like this:
+
+    scala> l filter (_ % 5 == 0)
+    res4: List[Int] = List(5, 10, 15, 20, 25, 30)
+    
+# A more useful example (to me): parsing
+
+In the course of building a simple parser, I ran across a straightforward use
+for currying. Since I like writing parser logic, I find this example to be
+more compelling than some of the other examples I've stumbled across.
+
+## The problem
+
+I recently wrote a simple [SLF4J][]-compliant Scala-based logging framework
+called [AVSL][] (*A Very Simple Logger*). One of AVSL's primary goals is
+simplicity of configuration.
+
+When using a logging framework, one usually has to configure a log message
+formatter; that configuration typically includes information on how to
+configure the timestamp. In AVSL, I had several concerns:
+
+* I wanted to use the existing locale-sensitive date formatting capabilities
+  provided by Java's [SimpleDateFormat][] class. (Scala runs on the Java VM
+  and can use whatever is available in the Java runtime.)
+* I wanted a much simpler timestamp configuration syntax, akin to that used
+  by the standard POSIX and ISO C [strftime][] library function.
+* I needed to be able to extend the format to support insertion of other
+  values, such as the log message, log level, and class name.
+
+Initially, I thought I'd use the syntax provided by `SimpleDateFormat`, and
+preparse it, looking for special tokens. However, `SimpleDateFormat` uses
+a date format syntax that's conceptually backward from most format string
+styles. With most format strings, including `printf` and `strftime`, the
+special quantities are escaped somehow (with percents, for instance), and all
+other characters are "regular" characters. With `SimpleDateFormat`, the
+reverse is true: Characters in the string are assumed to be format characters,
+and you have to escape regular characters.
+
+For example, to produce a time string like "Wed, 3 Jun, 2010 at 12:01 PM",
+you use this format string with `strftime`:
+
+    "%a, %d %b, %Y at %I:%M %p"
+
+With `SimpleDateFormat`, however, you have to use this:
+
+    "EEE, d MMM, yyyy 'at' kk:mm a"
+
+While `SimpleDateFormat` has special support for individual non-format
+characters (",", blank, "]", ":", etc.), multi-character non-format strings
+must be escaped with single quotes (e.g., 'at').
+
+I wanted something simpler and more similar to standards like `strftime` and
+loggers like the [Python logging module][].
+
+## The formatter syntax
+
+For AVSL, I settled on a syntax adapted from the [Python logging module][].
+Specifically:
+
+* `%a`: the short day-of-week name (e.g., "Wed")
+* `%A`: the long day-of-week name (e.g., "Wednesday")
+* `%b`: the abbreviated month name (e.g., "Mar", "Nov")
+* `%B`: the full month name (e.g., "March", "November")
+* `%d`: the day of the month
+* `%D`: equivalent to `%m/%d/%y`
+* `%F`: equivalent to `%Y/%m/%d`
+* `%h`: the hour of the day (0-23)
+* `%H`: the hour of the day (1-12)
+* `%j`: the day of the year (i.e., the so-called Julian day)
+* `%l`: the log level name (e.g., "INFO", "DEBUG")
+* `%L`: the log level's numeric value
+* `%m`: the month number (01-12)
+* `%M`: the current minute, zero-padded
+* `%n`: the short name of the logger (i.e., the last token in the class name)
+* `%N`: the full name of the logger (i.e., the class name)
+* `%s`: the current second, zero-padded
+* `%S`: the current millisecond, zero-padded
+* `%t`: the text of the log message
+* `%T`: the current thread name
+* `%y`: the 2-digit year
+* `%Y`: the full 4-digit year
+* `%z`: the time zone name (e.g., "UTC", "PDT", "EST")
+* `%%`: a literal "%"
+
+Since `SimpleDateFormat` won't recognize this kind of syntax, I needed to
+translate one of my format strings into something I *could* use with
+`SimpleDateFormat`. (Either that, or I'd have to reinvent all the
+locale-sensitive capabilities provided by the Java date formatting libraries.)
+
+## First attempt: a bust
+
+My first thought was to translate a format string directly into a
+single `SimpleDateFormat` string. This approach had several problems.
+
+First, I had to allow placeholders for the `%n`, `%N`, `%l` and `%L` tokens,
+since they have no analogs in the `SimpleDateFormat` world. I figured I'd just
+leave them in the format string, and then replace them with the class name and
+level information on the fly.
+
+Second, the `SimpleDateFormat` single-quote escape syntax made things ugly.
+For instance, I'd have to translate a format string like this:
+
+    [%H:%m:%s.%S] level=%l: %t
+
+into:
+
+    [HH:mm:ss.SSS] 'level=%l': '%t'
+
+Worse, I'd have to take special care in the parser to coalesce literals that
+had to be escaped, because the `SimpleDateFormat` parser honors two adjacent
+single quotes as a literal single quote. Thus, if my translator were
+token-based and didn't coalesce adjacent literals before escaping them, I
+might translate
+
+    [%H:%m:%s.%S] level=%l: %t
+
+into:
+
+    [HH:mm:ss.SSS] 'level=''%l': '%t'
+                          ^^
+                   Note the doubled quotes
+
+Watch what happens to a `SimpleDateFormat` string like that:
+
+    scala> val sf = new SimpleDateFormat("[HH:mm:ss.SSS] 'level=''%l' '%t'")
+    sf: java.text.SimpleDateFormat = java.text.SimpleDateFormat@eb3e243a
+    scala> sf.format(new Date)
+    res0: java.lang.String = [12:45:52.289] level='%l %t
+
+Finally, even if I dealt with that problem, I'd still have to handle modifying
+the format string with the log level and log message, every single time a log
+message was posted. Thus, I'd be creating a new `SimpleDateFormat` object
+every time someone logged a message.
+
+There had to be a better way.
+
+## Currying to the rescue
+
+### The approach
+
+Instead of converting my percent-laden format string into a single string, I
+finally hit upon the idea of converting it into a series of curried functions.
+The concept is to reduce a format string into a series of function
+invocations--for instance, translate:
+
+    [%H:%m:%s.%S] level=%l: %t
+
+to
+
+    emitLiteral("[")          // [
+    formatDate("HH", now)     // %H
+    emitLiteral(":")          // :
+    formatDate("mm", now)     // %m
+    emitLiteral(":")          // :
+    formatDate("ss", now)     // %s
+    emitLiteral(".")          // :
+    formatDate("SSS", now)    // %S
+    emitLiteral("] level=")   // ] level=
+    emitLevel(logMessage)     // %l
+    emitLiteral(": ")         // :<blank>
+    emitMessage(logMessage)   // %t
+
+If that function chain can be stored somehow, then when a log message comes
+in, the code can simply do something like this:
+
+    logMessage = new LogMessage(...)
+    now = new Date
+
+    for (f <- patternFuncs) <call function>
+
+### The implementation
+
+With currying, the implementation turns out to be straightforward.
+
+First, I created a small set of curry-able functions:
+
+    def insertThreadName(logMessage: LogMessage): String =
+        Thread.currentThread.getName
+
+    def insertLevelValue(logMessage: LogMessage): String =
+        logMessage.level.value.toString
+
+    def insertLevelName(logMessage: LogMessage): String =
+        logMessage.level.label
+
+    def insertMessage(logMessage: LogMessage): String =
+        logMessage.message.toString
+
+    def insertName(short: Boolean)(logMessage: LogMessage): String =
+        if (short) logMessage.name.split("""\.""").last else logMessage.name
+
+    def insertDateChunk(format: DateFormat)(logMessage: LogMessage): String =
+    {
+        val cal = Calendar.getInstance
+        cal.setTimeInMillis(logMessage.date.getTime)
+        format.format(cal.getTime)
+    }
+
+    def copyLiteral(s: String)(logMessage: LogMessage): String = s
+
+Each function takes, as its last argument, a `LogMessage` object, which will
+be supplied when a message is actually logged.
+
+Then, I put together a mapping table. Each entry in the table maps a
+percent-escape into a partial function.
+
+    lazy val Mappings = Map[Char, LogMessage => String](
+        'a' -> insertDateChunk(new SimpleDateFormat("E")) _,
+        'A' -> insertDateChunk(new SimpleDateFormat("EEEE")) _,
+        'b' -> insertDateChunk(new SimpleDateFormat("MMM")) _,
+        'B' -> insertDateChunk(new SimpleDateFormat("MMMM")) _,
+        'd' -> insertDateChunk(new SimpleDateFormat("dd")) _,
+        'D' -> insertDateChunk(new SimpleDateFormat("MM/dd/yy")) _,
+        'F' -> insertDateChunk(new SimpleDateFormat("yyyy-MM-dd")) _,
+        'h' -> insertDateChunk(new SimpleDateFormat("hh")) _,
+        'H' -> insertDateChunk(new SimpleDateFormat("HH")) _,
+        'j' -> insertDateChunk(new SimpleDateFormat("D")) _,
+        'l' -> insertLevelName _,
+        'L' -> insertLevelValue _,
+        'M' -> insertDateChunk(new SimpleDateFormat("mm")) _,
+        'm' -> insertDateChunk(new SimpleDateFormat("MM")) _,
+        'n' -> insertName(true) _,
+        'N' -> insertName(false) _,
+        's' -> insertDateChunk(new SimpleDateFormat("ss")) _,
+        'S' -> insertDateChunk(new SimpleDateFormat("SSS")) _,
+        't' -> insertMessage _,
+        'T' -> insertThreadName _,
+        'y' -> insertDateChunk(new SimpleDateFormat("yy")) _,
+        'Y' -> insertDateChunk(new SimpleDateFormat("yyyy")) _,
+        'z' -> insertDateChunk(new SimpleDateFormat("z")) _,
+        '%' -> copyLiteral("%") _
+    )
+
+Using this table, the parsing logic can quickly map a percent-escape into a
+partial function taking a `LogMessage` object.
+
+The parser itself is simple:
+
+    def parsePattern(stream: List[Char], gathered: String = ""):
+        List[LogMessage => String] =
+    {
+        def escape(ch: Char): List[LogMessage => String] =
+            List(Mappings.getOrElse(ch, copyLiteral("'%" + ch + "'") _))
+
+        def gatheredFuncList = 
+            if (gathered == "") Nil else List(copyLiteral(gathered) _)
+
+        stream match
+        {
+            case Nil if (gathered != "") =>
+                List(copyLiteral(gathered) _)
+
+            case Nil =>
+                Nil
+
+            case '%' :: Nil =>
+                gatheredFuncList ::: List(copyLiteral("%") _)
+
+            case '%' :: tail =>
+                gatheredFuncList ::: escape(tail(0)) ::: parse(tail drop 1)
+
+            case c :: tail =>
+                parse(tail, gathered + c)
+        }
+    }
+
+It takes a list of characters representing the pattern and:
+
+* maps "%" escapes into curried partial functions, each of which takes a
+  `LogMessage` parameter (even if it doesn't need one).
+* gathers (coalesces) adjacent non-pattern literals into strings and
+  replaces those strings with curried functions that just copy those literal
+  strings, when invoke.
+* handles double-percent escapes.
+
+### Testing
+
+The logic, above, is wrapped in:
+
+    class ParsedPattern(originalPattern: String)
+    {
+        val parsedPattern: List[(LogMessage) => String] =
+            parse(originalPattern.toList)
+
+        def format(logMessage: LogMessage): String =
+            parsedPattern.map(_(logMessage)).mkString("")
+
+        override def toString = originalPattern
+    
+        // Code above
+    }
+
+The entire class is available [here](ParsedPattern.scala).
+
+For testing, let's also create simple logging classes:
+
+    class LogLevel(val value: Int, val label: String)
+    class LogMessage(val level: LogLevel, val message: Any, val name: String, val date: Date)
+
+And now, a test:
+
+    scala> val p = new ParsedPattern("[%H:%m:%s.%S] level=%l: %t")
+    p: ParsedPattern = [%H:%m:%s.%S] level=%l: %t
+
+    scala> p.parsedPattern
+    res0: List[(LogMessage) => String] = List(<function1>, <function1>,
+    <function1>, <function1>, <function1>, <function1>, <function1>,
+    <function1>, <function1>, <function1>, <function1>, <function1>)
+
+Note that the parsed pattern is nothing more than a list of functions, each of
+which takes a `LogMessage` and returns a `String`. The `format` method formats
+a log message by passing it into each function in turn, concatenating the
+results. Here's the `format` method again:
+
+    def format(logMessage: LogMessage): String =
+        parsedPattern.map(_(logMessage)).mkString("")
+
+Let's try it:
+
+    scala> val Info = new LogLevel(10, "info")
+    Info: LogLevel = LogLevel@4fd281f1
+
+    scala> import java.util.Date
+    import java.util.Date
+
+    scala> val msg = new LogMessage(Info, message", "org.clapper.test", new Date)
+    msg: LogMessage = LogMessage@5ba5ba75
+
+    scala> p.format(msg)
+    res1: String = [13:06:36.702] level=info: message
+
+    scala> val p = new ParsedPattern("[%H:%m:%s.%S] (%N) %l: %t")
+    p: ParsedPattern = [%H:%m:%s.%S] (%N) %l: %t
+
+    scala> p.parsedPattern                                       
+    res2: List[(LogMessage) => String] = List(<function1>, <function1>,
+    <function1>, <function1>, <function1>, <function1>, <function1>,
+    <function1>, <function1>, <function1>, <function1>, <function1>,
+    <function1>, <function1>)
+
+    scala> p.format(msg)                                         
+    res3: String = [13:06:36.702] (org.clapper.test) info: test message
+
+It works like a charm.
+
+The parsing class can easily be extended to support locale and time zone (and,
+in fact, the one inside AVSL does).
+
+## Some advantages
+
+There are several advantages to this curried approach:
+
+* Though it uses multiple `SimpleDateFormat` objects, each object is only
+  created once during the life of the calling program, when the `Mappings`
+  table is created. Thus, each log message doesn't result in the creation
+  and destruction of a `SimpleDateFormat` object, as would have been the
+  case with my first approach.
+
+* Parsing the format string and mapping into curried functions is dirt-simple,
+  and dirt-simple parsers are far easier to maintain.
+
+* Adding new formatting characters (new percent escapes) is trivial.
+
+# And, in conclusion
+
+Currying has many, many practical uses. Parsing happens to be a pet interest
+of mine; hopefully this article provides one more useful elucidation of the
+value of currying.
+
+[trampolining]: http://en.wikipedia.org/wiki/Trampoline_(computers)
+[fp]: http://en.wikipedia.org/wiki/Functional_programming
+[currying]: http://en.wikipedia.org/wiki/Currying
+[Scala]: http://www.scala-lang.org/
+[A Tour of Scala]: http://www.scala-lang.org/node/104
+[tour-currying]: http://www.scala-lang.org/node/135
+[SLF4J]: http://slf4j.org/
+[AVSL]: http://bmc.github.com/avsl/
+[SimpleDateFormat]: http://java.sun.com/javase/6/docs/api/java/text/SimpleDateFormat.html
+[strftime]: http://www.opengroup.org/onlinepubs/009695399/functions/strftime.html
+[Python logging module]: http://docs.python.org/library/logging.html

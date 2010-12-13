@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title>Brizzled: Brian Clapper's Blog</title>
+  <link href="http://brizzled.clapper.org/"/>
+  <updated>{{ page.now | date: '%Y-%m-%dT%H:%M:%S%z' }}</updated>
+  <author>
+    <name>Brian M. Clapper</name>
+    <email>bmc@clapper.org</email>
+  </author>
+  <id>http://brizzled.clapper.org/</id>
+
+{% for article in site.articles %}
+
+  <entry>
+    <title>{{ article.title }}</title>
+    <link href="{{ article.headers.url }}"/>
+    <id>http://brizzled.clapper.org{{ article.url }}</id>
+    <updated>{{ articledate | date: '%Y-%m-%dT%H:%M:%S%z' }}</updated>
+    <content type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+<![CDATA[
+{{ article.content }}
+]]>
+      </div>
+    </content>
+
+    <summary type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">{{ article.summary }}</div>
+    </summary>
+
+    <author>
+      <name>Brian M. Clapper</name>
+      <email>bmc@clapper.org</email>
+    </author>
+  </entry>
+
+{% endfor %}
+</feed>

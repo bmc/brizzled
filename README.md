@@ -1,4 +1,4 @@
-Source for my [Brizzled][] blog.  Must be formatted with [lanyon][].
+Source for my [Brizzled][] blog.  Must be formatted with [Jekyll][].
 
-[lanyon]: http://bitbucket.org/arthurk/lanyon/
+[Jekyll]: http://jekyllrb.com/
 [Brizzled]: http://brizzled.clapper.org/
