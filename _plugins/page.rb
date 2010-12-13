@@ -72,7 +72,7 @@ module Jekyll
     def to_liquid
       h = orig_to_liquid
       h['toc'] = self.data['toc'] || 'no'
-      h['disqus_id'] = self.data['disqus_id'] || nil
+      h['disqus_id'] = self.data['disqus_id'] || "http://brizzled.clapper.org#{@dir}/"
       h['disqus_developer'] = self.data['disqus_developer'] || nil
       h['date'] = self.date
       h['summary'] = @summary

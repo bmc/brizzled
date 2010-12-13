@@ -55,10 +55,10 @@ createTOC();
   // Use the base file name (without the ".html") as the Disqus URL. This is
   // necessary to be consistent with old version of Brizzled on App Engine.
   {% if (page.disqus_id) %}
-  var disqus_identifier = "{{ headers.disqus_id }}";
-  var disqus_url = "{{ headers.disqus_id }}";
+  var disqus_identifier = "{{ page.disqus_id }}";
+  var disqus_url = "{{ page.disqus_id }}";
   {% else %}
-  var disqus_identifier = "http://brizzled.clapper.org/{{ headers.url }}";
+  var disqus_identifier = "http://brizzled.clapper.org/{{ page.url }}";
   var disqus_url = disqus_identifier;
   {% endif %}
   var disqus_title = "Brizzled: {{ headers.title }}";
