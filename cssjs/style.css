@@ -213,6 +213,7 @@ div.article-footer
     /* font-size: 50%;*/
     color: gray;
     text-align: left;
+    margin-bottom: 10px;
 }
 
 div.article-footer a.reference

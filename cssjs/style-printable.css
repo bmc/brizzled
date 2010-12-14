@@ -171,6 +171,18 @@ pre
     width: 95%;
 }
 
+div.article-timestamp
+{
+    float:right;
+}
+
+div.article-title
+{
+    font-weight: bold;
+    font-size: 16pt;
+    float: left;
+}
+
 /* -------------------------------------------------------------------------- *\
                          Table of Contents Styling
 \* -------------------------------------------------------------------------- */

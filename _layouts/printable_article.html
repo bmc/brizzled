@@ -1,0 +1,66 @@
+<html>
+<head>
+<link href="/cssjs/style-printable.css" media="screen" rel="stylesheet" type="text/css"></link>
+<link href="/cssjs/common.css" media="screen" rel="stylesheet" type="text/css"></link>
+<title>{{ page.title }}</title>
+</head>
+
+<body>
+
+<div class="banner-background">
+  <div class="banner">
+
+    <div class="banner-image">
+      <img src="/images/brizzled.png" width="341" height="56" border="0" align="left"/>
+    </div>
+
+    <div class="banner-tagline">It'll only sting a little</div>
+  </div>
+</div>
+
+<hr/>
+
+
+<div id="articles-box">
+  <div id="articles-container">
+    <div class="article">
+
+      <div class="article-header">
+
+        <div class="article-title">{{ page.title }}</div>
+        <div class="article-timestamp">{{ page.date | date: '%A, %d %B, %Y' }}</div>
+
+      </div> <!-- article-header -->
+
+{% if (page.toc == "yes") %}
+<script type="text/javascript" src="/cssjs/toc.js">
+<!-- -->
+</script>
+{% endif %}
+
+      <div class="article-body" id="content">
+
+{% if (page.toc == "yes") %}
+        <div id="tocBlock">
+          <span id="tocHeading">Table of Contents</span>
+          <div id="toc"></div>
+        </div> <!-- tocBlock -->
+{% endif %}
+
+{{ content }}
+
+      </div> <!-- article-body/content -->
+
+      <div class="article-footer"><hr/></div>
+    </div> <!-- article -->
+  </div> <!-- articles-container -->
+</div> <!-- articles-box -->
+
+{% if (page.toc == "yes") %}
+<script type="text/javascript">
+createTOC();
+</script>
+{% endif %}
+
+</body>
+</html>

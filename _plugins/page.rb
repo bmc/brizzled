@@ -10,6 +10,8 @@ module Jekyll
     SUMMARY_FILE = "summary.md"
     SUMMARY_HTML = "summary.html"
 
+    attr_accessor :base
+
     @_tags = nil
 
     # Add some custom options to the site payload, accessible via the
@@ -43,8 +45,14 @@ module Jekyll
       h['disqus_id'] = self.data['disqus_id'] || "#{BRIZZLED_URL}#{@dir}/"
       h['disqus_developer'] = self.data['disqus_developer'] || nil
       h['date'] = self.date
-      h['summary'] = @summary
-      h['has_summary'] = @summary.has_summary?
+
+      if @summary
+        h['summary'] = @summary
+        h['has_summary'] = @summary.has_summary?
+      else
+        h['has_summary'] = false
+      end
+
       h['path'] = File.join(@base, @dir, @name)
       h['now'] = Date.today
       h['tags'] = Tag.sort(tags)
