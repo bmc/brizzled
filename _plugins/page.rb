@@ -56,6 +56,9 @@ module Jekyll
       h['path'] = File.join(@base, @dir, @name)
       h['now'] = Date.today
       h['tags'] = Tag.sort(tags)
+      h['max_top'] = (self.data['max_top'] ||
+                      site.config['max_top'] ||
+                      15)
       h
     end
 

@@ -1,5 +1,5 @@
 ---
 title: "Brizzled: All articles"
 layout: main
-limit: 65536
+max_top: 65536
 ---
