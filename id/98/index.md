@@ -43,6 +43,7 @@ Here's a simple Scala function that takes an iterator over lines of
 Markdown (presumed *not* to have a trailing newline) and returns the HTML
 markup produced by the Markdown processor.
 
+{% highlight scala %}
     private def markdown(markdownSource: Iterator[String]): String =
     {
         import org.mozilla.javascript.{Context, Function}
@@ -84,6 +85,7 @@ markup produced by the Markdown processor.
             Context.exit
         }
     }
+{% endhighlight %}
 
 The generated HTML markup does not contain `html` or `body` tags, so we can
 use a simple wrapper function, combined with Scala's inline XML
@@ -91,6 +93,7 @@ capabilities, to generate a full XHTML-compliant document. The following
 function takes an iterator over lines of Markdown and optional
 [Cascading Style Sheet][] content, and produces a complete HTML document.
 
+{% highlight scala %}
     def markdownToDocument(markdownSource: Iterator[String], css: String = null): String =
     {
         import java.text.SimpleDateFormat
@@ -133,6 +136,7 @@ function takes an iterator over lines of Markdown and optional
     
         htmlDocument.toString
     }
+{% endhighlight %}
 
 There. [Markdown][] to HTML in [Scala][], by way of [Showdown][] and
 [Rhino][]. It's kind of a roundabout way to get there, but it gets the job
@@ -144,13 +148,19 @@ user's guide) from Markdown to HTML. I'm seriously considering putting a
 more generic version, similar to the above, in my [Grizzled Scala][]
 library.
 
+**Update** (11 February, 2010): I put a version of this code in my
+[Grizzled Scala][] library.
+
 **Update** (3 March, 2010): Tristan Juricek's [Knockoff][] Markdown parser
 looks very interesting. It's written in Scala, and it parses Markdown into
 an internal object format.
 
-**Update** (14 December, 2010): See [MarkWrap][], a Scala wrapper API for
-various lightweight markup APIs.
+**Update** (14 December, 2010): [MarkWrap][], a Scala wrapper API for
+various lightweight markup APIs, replaces the Markdown parser that was in
+my [Grizzled Scala][] library. [MarkWrap][] parses [Markdown][] and
+[Textile][], and it can easily be extended to handle others.
 
+[Textile]: http://textile.thresholdstate.com/
 [MarkWrap]: http://bmc.github.com/markwrap/
 [reStructured Text]: http://docutils.sourceforge.net/rst.html
 [Scala]: http://www.scala-lang.org/
