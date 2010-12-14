@@ -10,7 +10,7 @@ module Jekyll
     SUMMARY_FILE = "summary.md"
     SUMMARY_HTML = "summary.html"
 
-    attr_accessor :base
+    attr_accessor :base, :markdown
 
     @_tags = nil
 

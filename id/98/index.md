@@ -75,7 +75,7 @@ markup produced by the Markdown processor.
     
             val markdownSourceString = markdownSource mkString "\n"
             val htmlBody = makeHTML.call(ctx, scope, converter,
-                                         Array[Object][])
+                                         Array[Object][](markdownSourceString))
             htmlBody.toString
         }
     
@@ -144,14 +144,14 @@ user's guide) from Markdown to HTML. I'm seriously considering putting a
 more generic version, similar to the above, in my [Grizzled Scala][]
 library.
 
-**Update** (11 February, 2010): I've decided to include a
-[Markdown parser][], based on this approach, in my [Grizzled Scala][]
-library.
-
 **Update** (3 March, 2010): Tristan Juricek's [Knockoff][] Markdown parser
 looks very interesting. It's written in Scala, and it parses Markdown into
 an internal object format.
 
+**Update** (14 December, 2010): See [MarkWrap][], a Scala wrapper API for
+various lightweight markup APIs.
+
+[MarkWrap]: http://bmc.github.com/markwrap/
 [reStructured Text]: http://docutils.sourceforge.net/rst.html
 [Scala]: http://www.scala-lang.org/
 [DocUtils]: http://docutils.sourceforge.net/
