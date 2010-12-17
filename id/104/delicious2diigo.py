@@ -14,10 +14,10 @@
 #
 # CHANGE THESE VALUES
 
-DELICIOUS_USER = 'bclapper'
-DELICIOUS_PASSWORD = '2furguf-'
-DIIGO_USER = 'bclapper'
-DIIGO_PASSWORD = '2furguf-'
+DELICIOUS_USER = 'username'
+DELICIOUS_PASSWORD = 'password'
+DIIGO_USER = 'username'
+DIIGO_PASSWORD = 'password'
 
 #############################################################################
 # Should not need to change anything below here.
