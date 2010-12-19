@@ -1514,8 +1514,8 @@ Engine."
 [full archive page image is here]: archive.png
 [Pygments]: http://pygments.org/
 [Google Analytics]: http://www.google.com/analytics/
-[Adding Page caching to a GAE application]: 78.html
-[Making XML-RPC calls from a Google App Engine application]: http://brizzled.clapper.org/id/80
+[Adding Page caching to a GAE application]: /id/78/
+[Making XML-RPC calls from a Google App Engine application]: /id/80
 [Experimenting with Google App Engine]: http://bret.appspot.com/entry/experimenting-google-app-engine
 [Building Scalable Web Applications with Google App Engine]: http://sites.google.com/site/io/building-scalable-web-applications-with-google-app-engine
 [Google App Engine documentation]: http://code.google.com/appengine/docs/

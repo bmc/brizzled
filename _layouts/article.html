@@ -15,7 +15,7 @@
 
 </div>
 
-{% if (page.toc == "yes") %}
+{% if (page.toc) %}
 <script type="text/javascript" src="/cssjs/toc.js">
 <!-- -->
 </script>
@@ -23,7 +23,7 @@
 
 <div class="article-body" id="content">
 
-{% if (page.toc == "yes") %}
+{% if (page.toc) %}
 <div id="tocBlock">
 <span id="tocHeading">Table of Contents</span>
 <div id="toc"></div>
@@ -45,7 +45,7 @@
 </span>
 </div>
 
-{% if (page.toc == "yes") %}
+{% if (page.toc) %}
 <script type="text/javascript">
 createTOC();
 </script>

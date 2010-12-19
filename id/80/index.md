@@ -528,8 +528,8 @@ The code used in this article is available at
 [Apache HTTP server]: http://www.apache.org/httpd/
 [fetch()]: http://code.google.com/appengine/docs/urlfetch/fetchfunction.html
 [http://software.clapper.org/python/picoblog/]: http://software.clapper.org/python/picoblog/
-[Writing Blogging Software for Google App Engine]: http://brizzled.clapper.org/id/77
-[Adding Page caching to a GAE application]: http://brizzled.clapper.org/id/78
+[Writing Blogging Software for Google App Engine]: /id/77/
+[Adding Page caching to a GAE application]: id/78/
 [XML-RPC HOWTO]: http://www.tldp.org/HOWTO/XML-RPC-HOWTO/index.html
 [xmlrpclib.py source code]: http://svn.python.org/projects/python/trunk/Lib/xmlrpclib.py
 [xmlrpclib documentation]: http://docs.python.org/lib/module-xmlrpclib.html

@@ -553,8 +553,8 @@ work well for me.
 [http://software.clapper.org/python/picoblog/.]: http://software.clapper.org/python/picoblog/.
 [Mark Chadwick]: http://hipstersinc.com/
 [python decorator]: http://www.python.org/dev/peps/pep-0318/
-[Writing Blogging Software for Google App Engine]: 77.html
-[Making XML-RPC calls from a Google App Engine application]: http://brizzled.clapper.org/id/80
+[Writing Blogging Software for Google App Engine]: /id/77/
+[Making XML-RPC calls from a Google App Engine application]: /id/80/
 [Experimenting with Google App Engine]: http://bret.appspot.com/entry/experimenting-google-app-engine
 [Building Scalable Web Applications with Google App Engine]: http://sites.google.com/site/io/building-scalable-web-applications-with-google-app-engine
 [Google App Engine documentation]: http://code.google.com/appengine/docs/
