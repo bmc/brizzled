@@ -3,7 +3,7 @@ layout: article
 date: 2009-02-12
 title: A Scala build tool
 tags: scala, ant, rake, make, DSL, programming
-toc: yes
+toc: toc
 ---
 
 I've decided to write a build tool in [Scala][].

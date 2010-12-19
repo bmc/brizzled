@@ -3,7 +3,7 @@ layout: article
 tags: mac-os-x, unix, software
 title: Wrapping an executable inside a Mac OS X application
 date: 2008-10-22
-toc: yes
+toc: toc
 ---
 
 # Introduction

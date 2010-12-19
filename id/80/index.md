@@ -3,7 +3,7 @@ layout: article
 tags: python, App-Engine, programming, XML-RPC
 title: Making XML-RPC calls from a Google App Engine application
 date: 2008-08-25
-toc: yes
+toc: toc
 ---
 
 # Introduction

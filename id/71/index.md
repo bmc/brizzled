@@ -3,7 +3,7 @@ layout: article
 tags: python, programming
 title: Python, sys.path and EasyInstall
 date: 2008-03-18
-toc: yes
+toc: toc
 ---
 
 # The Problem

@@ -3,7 +3,7 @@ layout: article
 title: Adding Page caching to a GAE application
 tags: python, App-Engine, blogging, programming
 date: 2008-08-15
-toc: yes
+toc: toc
 ---
 
 # Introduction

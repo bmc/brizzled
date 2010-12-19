@@ -3,7 +3,7 @@ title: SBT and Your Own Maven Repository
 tags: scala, sbt, maven
 date: 2010-05-07
 layout: article
-toc: yes
+toc: toc
 ---
 
 # Introduction

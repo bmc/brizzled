@@ -3,7 +3,7 @@ title: Programming Command-line Completion in Scala
 layout: article
 tags: scala, parsing, readline, editline, REPL, completion
 date: 2010-02-21
-toc: yes
+toc: toc
 ---
 
 I wrote a [Scala][]-based SQL [REPL][] called [SQLShell][]. To make it more

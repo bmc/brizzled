@@ -3,7 +3,7 @@ layout: article
 title: Curry
 tags: scala, currying, functional
 date: 2010-06-07
-toc: yes
+toc: toc
 ---
 
 # Abstract

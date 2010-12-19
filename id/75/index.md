@@ -3,7 +3,7 @@ layout: article
 title: Why is Python more fun than Java?
 tags: java, python, programming
 date: 2008-07-28
-toc: yes
+toc: toc
 ---
 
 # Intro
