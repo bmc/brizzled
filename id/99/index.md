@@ -268,11 +268,11 @@ being completed.
 
 [Scala]: http://www.scala-lang.org/
 [REPL]: http://en.wikipedia.org/wiki/Read-eval-print_loop
-[SQLShell]: http://www.clapper.org/software/scala/sqlshell/
+[SQLShell]: http://software.clapper.org/scala/sqlshell/
 [editline]: http://www.thrysoee.dk/editline/
 [GNU Readline]: http://tiswww.case.edu/php/chet/readline/rltop.html
 [JLine]: http://jline.sourceforge.net/
-[Grizzled Scala]: http://www.clapper.org/software/scala/grizzled-scala/
+[Grizzled Scala]: http://software.clapper.org/scala/grizzled-scala/
 [Python]: http://www.python.org/
 [more complicated]: http://tiswww.case.edu/php/chet/readline/readline.html#SEC44
 [editline]: http://www.thrysoee.dk/editline/

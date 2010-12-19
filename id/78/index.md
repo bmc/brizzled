@@ -74,7 +74,7 @@ In the remainder of this article, I'll discuss how I implemented the page
 cache, using the [picoblog][] software I described in my previous article,
 [Writing Blogging Software for Google App Engine][]. The modified
 [picoblog][] software (as well as the original non-caching software) is
-available at [http://www.clapper.org/software/python/picoblog/.][]
+available at [http://software.clapper.org/python/picoblog/.][]
 
 ## Data Model Changes
 
@@ -515,7 +515,7 @@ there are far fewer "high CPU" warning messages in the log.
 
 As noted above, the modified [picoblog][] software (as well as the original
 non-caching software) is available at
-[http://www.clapper.org/software/python/picoblog/.][]
+[http://software.clapper.org/python/picoblog/.][]
 
 # Disclaimer
 
@@ -545,12 +545,12 @@ work well for me.
 [profiled]: http://code.google.com/appengine/kb/commontasks.html#profiling
 [memory cache API]: http://code.google.com/appengine/docs/memcache/
 [memcached]: http://www.danga.com/memcached/
-[picoblog]: http://www.clapper.org/software/python/picoblog/
+[picoblog]: http://software.clapper.org/python/picoblog/
 [Writing Blogging Software for Google App Engine]: /id/77
-[picoblog]: http://www.clapper.org/software/python/picoblog/
-[http://www.clapper.org/software/python/picoblog/.]: http://www.clapper.org/software/python/picoblog/.
-[picoblog]: http://www.clapper.org/software/python/picoblog/
-[http://www.clapper.org/software/python/picoblog/.]: http://www.clapper.org/software/python/picoblog/.
+[picoblog]: http://software.clapper.org/python/picoblog/
+[http://software.clapper.org/python/picoblog/.]: http://software.clapper.org/python/picoblog/.
+[picoblog]: http://software.clapper.org/python/picoblog/
+[http://software.clapper.org/python/picoblog/.]: http://software.clapper.org/python/picoblog/.
 [Mark Chadwick]: http://hipstersinc.com/
 [python decorator]: http://www.python.org/dev/peps/pep-0318/
 [Writing Blogging Software for Google App Engine]: 77.html

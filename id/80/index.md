@@ -500,7 +500,7 @@ Note that XML-RPC calls can fail for several reasons, including:
 # Getting the Code
 
 The code used in this article is available at
-[http://www.clapper.org/software/python/picoblog/][].
+[http://software.clapper.org/python/picoblog/][].
 
 # Related Brizzled Articles
 
@@ -520,14 +520,14 @@ The code used in this article is available at
 
 [App Engine]: http://appengine.google.com/
 [sandbox]: http://code.google.com/appengine/docs/python/sandbox.html
-[picoblog]: http://www.clapper.org/software/python/picoblog/
+[picoblog]: http://software.clapper.org/python/picoblog/
 [Writing Blogging Software for Google App Engine]: http://brizzled.clapper.org/id/77
 [Technorati]: http://www.technorati.com/
 [sandbox]: http://code.google.com/appengine/docs/python/sandbox.html
 [xmlrpclib.py source code]: http://svn.python.org/projects/python/trunk/Lib/xmlrpclib.py
 [Apache HTTP server]: http://www.apache.org/httpd/
 [fetch()]: http://code.google.com/appengine/docs/urlfetch/fetchfunction.html
-[http://www.clapper.org/software/python/picoblog/]: http://www.clapper.org/software/python/picoblog/
+[http://software.clapper.org/python/picoblog/]: http://software.clapper.org/python/picoblog/
 [Writing Blogging Software for Google App Engine]: http://brizzled.clapper.org/id/77
 [Adding Page caching to a GAE application]: http://brizzled.clapper.org/id/78
 [XML-RPC HOWTO]: http://www.tldp.org/HOWTO/XML-RPC-HOWTO/index.html

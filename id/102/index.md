@@ -469,7 +469,7 @@ value of currying.
 [A Tour of Scala]: http://www.scala-lang.org/node/104
 [tour-currying]: http://www.scala-lang.org/node/135
 [SLF4J]: http://slf4j.org/
-[AVSL]: http://bmc.github.com/avsl/
+[AVSL]: http://software.clapper.org/avsl/
 [SimpleDateFormat]: http://java.sun.com/javase/6/docs/api/java/text/SimpleDateFormat.html
 [strftime]: http://www.opengroup.org/onlinepubs/009695399/functions/strftime.html
 [Python logging module]: http://docs.python.org/library/logging.html

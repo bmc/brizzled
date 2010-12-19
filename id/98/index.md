@@ -161,7 +161,7 @@ my [Grizzled Scala][] library. [MarkWrap][] parses [Markdown][] and
 [Textile][], and it can easily be extended to handle others.
 
 [Textile]: http://textile.thresholdstate.com/
-[MarkWrap]: http://bmc.github.com/markwrap/
+[MarkWrap]: http://software.clapper.org/markwrap/
 [reStructured Text]: http://docutils.sourceforge.net/rst.html
 [Scala]: http://www.scala-lang.org/
 [DocUtils]: http://docutils.sourceforge.net/
@@ -180,7 +180,7 @@ my [Grizzled Scala][] library. [MarkWrap][] parses [Markdown][] and
 [Showdown]: http://attacklab.net/showdown/
 [Rhino]: http://www.mozilla.org/rhino/
 [SBT]: http://code.google.com/p/simple-build-tool/
-[Grizzled Scala]: http://www.clapper.org/software/scala/grizzled-scala/
+[Grizzled Scala]: http://software.clapper.org/scala/grizzled-scala/
 [Markdown parser]: http://github.com/bmc/grizzled-scala/raw/master/src/main/scala/grizzled/parsing/markdown.scala
-[Grizzled Scala]: http://www.clapper.org/software/scala/grizzled-scala/
+[Grizzled Scala]: http://software.clapper.org/scala/grizzled-scala/
 [Knockoff]: http://tristanhunt.com/projects/knockoff/

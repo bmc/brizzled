@@ -1151,7 +1151,7 @@ Thanks, Kevin.
 [Use cases for closures]: http://gafter.blogspot.com/2006/08/use-cases-for-closures.html
 [reddit.com]: http://www.reddit.com/
 [Programming]: http://www.reddit.com/r/programming/
-[FileHashMap]: http://www.clapper.org/software/java/util/javadocs/util/api/org/clapper/util/misc/FileHashMap.html
+[FileHashMap]: http://software.clapper.org/java/util/javadocs/util/api/org/clapper/util/misc/FileHashMap.html
 [Reflection API]: http://java.sun.com/docs/books/tutorial/reflect/index.html
 [Django]: http://www.djangoproject.com/
 [Tomcat]: http://tomcat.apache.org/

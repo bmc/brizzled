@@ -90,5 +90,5 @@ I'm sold.
 [Scala]: http://www.scala-lang.org/
 [Ivy]: http://ant.apache.org/ivy/
 [Grizzled Scala Library]: https://github.com/bmc/grizzled-scala/tree
-[sqlcmd]: http://www.clapper.org/software/python/sqlcmd/
+[sqlcmd]: http://software.clapper.org/python/sqlcmd/
 [file:]: file:

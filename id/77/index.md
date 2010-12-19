@@ -90,7 +90,7 @@ you can customize as you see fit.
 # The Code
 
 The source code for this blog engine is available on GitHub. See the
-Picoblog web page, at [http://bmc.github.com/picoblog/][]
+Picoblog web page, at [http://software.clapper.org/picoblog/][]
 
 # Get Going with App Engine
 
@@ -1490,12 +1490,12 @@ Engine."
 [Disqus]: http://www.disqus.com/
 [Technorati]: http://www.technorati.com/
 [reStructuredText]: http://docutils.sourceforge.net/rst.html
-[http://bmc.github.com/picoblog/]: http://bmc.github.com/picoblog/
+[http://software.clapper.org/picoblog/]: http://software.clapper.org/picoblog/
 [GAE]: http://appengine.google.com/
 [GAE]: http://appengine.google.com/
 [App Engine documentation]: http://code.google.com/appengine/docs/
 [Keys and Entity Groups]: http://code.google.com/appengine/docs/datastore/keysandentitygroups.html
-[web site]: http://bmc.github.com/picoblog/
+[web site]: http://software.clapper.org/picoblog/
 [GitHub repository]: http://github.com/bmc/picoblog
 [documentation for the Query class]: http://code.google.com/appengine/docs/datastore/queryclass.html
 [GAE Query Filter]: http://code.google.com/appengine/docs/datastore/queryclass.html#Query_filter

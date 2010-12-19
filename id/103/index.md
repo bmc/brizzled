@@ -107,12 +107,12 @@ Here's a list of Markdown-related tools I have found to be helpful:
 [Lanyon]: http://bitbucket.org/arthurk/lanyon/wiki/Home
 [Textile]: http://textile.thresholdstate.com/
 [Knockoff]: http://tristanhunt.com/projects/knockoff/
-[MarkWrap]: http://bmc.github.com/markwrap/
+[MarkWrap]: http://software.clapper.org/markwrap/
 [Scala]: http://www.scala-lang.org/
 [Markdown in Python]: http://www.freewisdom.org/projects/python-markdown/
 [Pandoc]: http://johnmacfarlane.net/pandoc/
 [John MacFarlane]: http://johnmacfarlane.net/
-[SQLShell Users Guide]: http://bmc.github.com/sqlshell/users-guide.html
+[SQLShell Users Guide]: http://software.clapper.org/sqlshell/users-guide.html
 [GitHub]: http://www.github.com/
 [GitHub Pages]: http://pages.github.com/
 [Jekyll]: http://www.jekyllrb.com/
