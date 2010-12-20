@@ -1,3 +1,6 @@
+# Ignore these.
+exclude: README.md
+# Use Pygments
 pygments: true
 # Maximum number of recent articles displayed on the side
 max_recent: 20

@@ -362,7 +362,7 @@ To accomplish this goal, I monkeypatched the following method into the Jekyll
 The `pages_by_tag` method returns a hash, where each key is a `Tag` object, and
 each value is a set of `Page` objects that are associated with the hash.
 
-## Goal #4: Generate a page for each tag
+## Goal 4: Generate a page for each tag
 
 A Jekyll generator plugin (see the [Jekyll plugins][] page) solved this
 problem for me. Using the code at <https://gist.github.com/524748> as a
@@ -413,9 +413,38 @@ model, I wrote the following code, which I placed in `_plugins/tags.rb`:
         end
       end
     end
-
 {% endhighlight %}
 
+Jekyll runs the generator toward the beginning of its processing. The
+`TagGenerator` class only runs if there's a `_layouts/tag_index.html`
+layout. If it finds that layout, `TagGenerator` creates a directory for
+each tag, under `_site/tags`, and uses the `tag_index.html` layout to
+create an `index.html` file for the tag. The articles associated with each
+tag appear in the `page.articles` template variable.
+
+My version of `tag_index.html` looks a lot like the [top-level page template][]:
+
+    {\% include top.html \%}
+
+    <div id="articles-box">
+    <div id="articles-container">
+
+    {\% assign sep = false \%}
+    {\% for article in page.articles \%}
+
+    {\% if sep \%}
+    <hr/>
+    {\% endif \%}
+
+    {\% include summary-entry.html \%}
+
+    {\% assign sep = true \%}
+    {\% endfor \%}
+
+    {\% include bottom.html \%}
+
+    </div>
+    </div>
 
 # Printer-friendly Pages
 
@@ -425,6 +454,213 @@ something Jekyll can do, out of the box. Stock Jekyll generates a single HTML
 file from the combination of a layout (template) and a markup article. Generating
 two HTML files from the same input article requires a little code.
 
+The first piece of code is a new `PrintablePage` class, stored in
+`_plugins/printable_page.rb`. A `PrintablePage` object delegates most of
+its work to an existing `Page` object, but it overrides a few things:
+
+{% highlight ruby %}
+  require 'delegate'
+
+  module Jekyll
+    class PrintablePage < DelegateClass(Page)
+
+      def initialize(page)
+        @real_page = page
+        @dir = page.dir
+        @base = page.base
+        @name = page.name
+        @site = page.site
+
+        super(@real_page)
+        self.data = @real_page.data.clone
+        self.data['layout'] = @site.config['printable_layout'] || 'printable'
+        @printable_html = @site.config['printable_html'] || 'printable.html'
+      end
+
+      def url
+          self.full_url
+      end
+
+      # Hack
+      def write(dest_prefix, dest_suffix = nil)
+        dest = File.join(dest_prefix, @real_page.dir)
+        dest = File.join(dest, dest_suffix) if dest_suffix
+
+        # The url needs to be unescaped in order to preserve the
+        # correct filename
+
+        path = File.join(dest, CGI.unescape(self.url))
+        if self.url =~ /\/$/
+            FileUtils.mkdir_p(path)
+            path = File.join(path, "index.html")
+        end
+
+        path.sub!('index.html', @printable_html)
+        File.open(path, 'w') do |f|
+            f.write(self.output)
+        end
+      end
+    end 
+  end
+{% endhighlight %}
+
+Basically, a `PrintablePage` wraps a `Page`, but makes the following changes:
+
+1. It changes the associated layout to the name of the layout specified by
+   `printable_layout` in the `_config.yml` file (defaulting to "printable").
+2. It arranges to write its output to the file named by `printable_html` in
+   `_config.yml` (defaulting to "printable.html"). The printer-friendly HTML
+   output is written in the same directory as the regular output for the page.
+
+The second change requires a hack to the stock Jekyll's `Page.write()`
+function. This version of `write()` is identical to the one in Jekyll's
+source, except for the addition of this line of code:
+
+{% highlight ruby %}
+    path.sub!('index.html', @printable_html)
+{% endhighlight %}
+
+Because the standard `Page.write()` method doesn't provide any way to
+override the path generation logic, I had to clone and hack the whole
+method. In the future, if Jekyll is extended to resolve the name of the
+output file via a separate method, I will get rid of this hacked `write()`
+method and override only that new call-out method.
+
+There's a piece missing, though: `PrintablePage` does a nice job of
+representing a printable version for a page, but some piece of code has to
+cause `PrintablePage` objects to be created. A little more monkeypatching
+of the Jekyll `Site` class accomplishes that goal:
+
+{% highlight ruby %}
+    module Jekyll
+      class Site
+
+        ...
+        
+        alias orig_write write
+        def write
+            orig_write
+
+            puts('Writing printable pages')
+            blog_posts.each do |page|
+                printable_page = PrintablePage.new(page)
+                printable_page.render(self.layouts, site_payload)
+                printable_page.write(self.dest)
+            end
+        end
+      end
+    end
+{% endhighlight %}
+
+With that code in place, Jekyll will generate a printable version of each
+blog post, alongside the regular version.
+
+# Article Summaries
+
+If you visit the [top page](/) of my blog, or [any tag page](/tags/blogging/),
+you'll see that each article title is accompanied by a short summary. Those
+summaries represent a final Jekyll hack.
+
+To create a summary, I create a `summary.md` file in the same directory
+as the blog article. Unlike the article itself, this summary Markdown file
+contains no YAML front-matter; it's just a plain file. Thus, Jekyll will simply
+copy the file to its appropriate `_site` directory, instead of processing it.
+
+I monkeypatched a little *more* code to cause Jekyll to generate the
+summary. First, I created a `_plugins/summary.rb` file, containing a
+`Summary` class. You can see the entire class
+[here](https://github.com/bmc/brizzled/blob/master/_plugins/summary.rb). The
+most important parts are:
+
+{% highlight ruby %}
+    module Jekyll
+
+      class Summary
+
+        def initialize(source_file, html_file)
+          @summary_file = source_file
+          @summary_html = html_file
+        end
+
+        def to_liquid
+          # Return the location of the summary HTML file.
+          File.exists?(@summary_file) ? get_html : ""
+        end
+
+        def has_summary?
+          File.exists?(@summary_file)
+        end
+
+        def get_html
+          make = false
+          if not File.exists?(@summary_html)
+            puts("#{@summary_html} does not exist. Making it.")
+            make = true
+          elsif (File.mtime(@summary_html) <=> File.mtime(@summary_file)) < 0
+            puts("#{@summary_html} is older than #{@summary_file}. Remaking it.")
+            make = true
+          end
+
+          if make
+            html = Maruku.new(File.readlines(@summary_file).join("")).to_html
+            FileUtils.mkdir_p(File.dirname(@summary_html))
+            f = File.open(@summary_html, 'w')
+            f.write(html)
+            f.close
+          else
+            html = File.readlines(@summary_html).join("")
+          end
+
+          html
+        end
+      end
+    end
+{% endhighlight %}
+
+The `get_html` method generates the summary HTML file, if it is out of date.
+That method is called by `to_liquid`, which will *only* be called if the summary
+is referenced within a Liquid template.
+
+Another monkeypatch to `Page` ensures that the summary is set in the article:
+
+{% highlight ruby %}
+    module Jekyll
+      class Page
+
+        ...
+
+        # Chained version of constructor, used to generate the location of
+        # the "summary" file.
+        alias orig_init initialize
+        def initialize(site, base, dir, name)
+            orig_init(site, base, dir, name)
+
+            # Allow for a summary.md file that generates the article summary.
+            @summary = Summary.new(File.join(@base, @dir, SUMMARY_FILE),
+                                   File.join(@base, site.dest, @dir, 
+                                             SUMMARY_HTML))
+        end
+      end
+    end
+{% endhighlight %}
+
+With that small bit of code in place, a layout can force generation of a
+summary merely be referencing it:
+
+    {\% if article.has_summary \%}
+    \{\{ article.summary \}\}
+    {\% endif \%}
+
+# Conclusion
+
+These relatively simple Jekyll hacks allow me to use Jekyll to handle this
+blog, without requiring that I fork and hack the Jekyll code itself.
+
+# Caveats
+
+There may be more efficient, or more elegant, ways to solve some of these
+issues. If you have any suggestions on how I can improve these hacks, feel
+free to email me or leave a comment.
 
 [Jekyll]: http://jekyllrb.com/
 [Jekyll plugins]: https://github.com/mojombo/jekyll/wiki/Plugins
@@ -439,3 +675,4 @@ two HTML files from the same input article requires a little code.
 [App Engine template markup]: http://code.google.com/appengine/docs/python/gettingstarted/templates.html
 [Liquid]: http://www.liquidmarkup.org/
 [Markdown]: http://daringfireball.net/projects/markdown/
+[top-level page template]: https://github.com/bmc/brizzled/blob/master/_layouts/main.html

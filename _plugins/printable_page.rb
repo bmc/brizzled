@@ -16,10 +16,6 @@ module Jekyll
             @printable_html = @site.config['printable_html'] || 'printable.html'
         end
 
-        def render(layouts, site_payload)
-            @real_page.render(layouts, site_payload)
-        end
-
         def url
             self.full_url
         end
