@@ -10,12 +10,12 @@ module Jekyll
         SUMMARY_FILE = "summary.md"
         SUMMARY_HTML = "summary.html"
 
-        attr_accessor :base, :markdown
+        # Additional accessors
 
-        @_tags = nil
+        attr_accessor :base, :markdown, :summary
 
-        # Add some custom options to the site payload, accessible via the
-        # "page" variable within templates.
+        # Chained version of constructor, used to generate the location of
+        # the "summary" file.
         alias orig_init initialize
         def initialize(site, base, dir, name)
             orig_init(site, base, dir, name)
@@ -63,6 +63,9 @@ module Jekyll
             h
         end
 
+        # Chained version of render() method. This version takes the
+        # output (from `self.output`) and "fixes" escaped Liquid
+        # strings, allowing Liquid markup to be escaped, for display.
         alias orig_render render
         def render(layouts, site_payload)
             res = orig_render(layouts, site_payload)
@@ -87,9 +90,10 @@ module Jekyll
         end
 
         def fix_liquid_escapes(s)
-            s.gsub!('{@{', '{{')
-            s.gsub!('}@}', '}}')
-            s.gsub!('@%', '%')
+            s.gsub!('\{\{', '{{')
+            s.gsub!('\}\}', '}}')
+            s.gsub!('\%', '%')
+            s.gsub!("\\\\", "\\")
             s
         end
     end

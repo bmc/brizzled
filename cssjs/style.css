@@ -1,5 +1,3 @@
-/* $Id: bbc33f28928de9677a4d84b9f265eec37a274c87 $ */
-
 /* -------------------------------------------------------------------------- *\
                                    Everything
 \* -------------------------------------------------------------------------- */
@@ -18,7 +16,6 @@ body
     margin: 0 0 0 0;
     border: 0 0 0 0;
     padding: 0 0 0 0;
-    font-size: 10pt;
     font-family: Verdana, Arial, Helvetica, sans-serif;
     width: 100%;
     height: 100%;
@@ -27,6 +24,16 @@ body
 /* -------------------------------------------------------------------------- *\
                                    Main Blog
 \* -------------------------------------------------------------------------- */
+
+dl dt
+{
+    font-weight: bold;
+}
+
+dl dd
+{
+    margin-bottom: 1em;
+}
 
 span.summary-tags
 {
@@ -210,7 +217,6 @@ div.article-title
 div.article-footer
 {
     font-family: Verdana, Arial, Helvetica, sans-serif;
-    /* font-size: 50%;*/
     color: gray;
     text-align: left;
     margin-bottom: 10px;
@@ -381,6 +387,10 @@ h1
     font-size: 130%;
     font-weight: bold;
     font-family: Arial, Helvetica, sans-serif;
+    background-color: #dddddd;
+    border: 1px solid black;
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
 h2
@@ -697,7 +707,9 @@ li.tocH6
 
 div.highlight
 {
-    margin-left: 0;
+    /* same margins as <pre> tag */
+    margin-left: 2em;
+    margin-right: 2em;
 }
 
 div.highlight pre

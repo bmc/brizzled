@@ -376,15 +376,15 @@ It consists of a link to the style sheet, some Javascript, some
 standard HTML layout, and this block of template logic:
 
     <ul>
-    {@% for article in articles @%}
-      {@% if article.draft @%}
+    {\% for article in articles \%}
+      {\% if article.draft \%}
       <li class="admin-draft">
-      {@% else @%}
+      {\% else \%}
       <li class="admin-published">
-      {@% endif @%}
-      {@{ article.published_when|date:"j F, Y" }@}
-      <a href="/admin/article/edit/?id={@{ article.id }@}">{@{ article.title }@}</a>
-    {@% endfor @%}
+      {\% endif \%}
+      \{\{ article.published_when|date:"j F, Y" \}\}
+      <a href="/admin/article/edit/?id=\{\{ article.id \}\}">\{\{ article.title \}\}</a>
+    {\% endfor \%}
     </ul>
 
 This template code assumes that the variables passed to the template will
@@ -860,25 +860,25 @@ The simplest way to build these screens is to use Django template
 inheritance, which has the additional benefit of ensuring a consistent
 look. Most of the HTML goes into a [base template][]. That template defines
 the basic look and feel of the display pages, with various template
-substitutions like `{@{blog_name}@}` and `{@{blog_owner}@}`.
+substitutions like `\{\{blog_name\}\}` and `\{\{blog_owner\}\}`.
 
 However, the base template also contains template code like the
 following:
 
     <div id="articles_container">
-    {@% for article in articles @%}
+    {\% for article in articles \%}
 
-      {@% block main @%}
-      {@% endblock @%}
+      {\% block main \%}
+      {\% endblock \%}
     </div>
 
 and this:
 
     <div id="right-margin">
-      {@% block recent_list @%}
-      {@% endblock @%}
-      {@% block date_list @%}
-      {@% endblock @%}
+      {\% block recent_list \%}
+      {\% endblock \%}
+      {\% block date_list \%}
+      {\% endblock \%}
     </div>
 
 The blocks can be filled in by other templates that inherit from
@@ -1009,12 +1009,12 @@ The base class also contains a few other methods used by
 Next, let's get the *Not Found* page out of the way. The template
 is very simple:
 
-    {@% extends "base.html" @%}
+    {\% extends "base.html" \%}
 
-    {@% block main @%}
+    {\% block main \%}
       <p class="article_title">Not Found</p>
       <p>Sorry, but there's no such page here.</p>
-    {@% endblock @%}
+    {\% endblock \%}
 
 It extends the base template and fills in the `main` block with a
 simple static message. We'll use this template in a couple places.
@@ -1040,58 +1040,58 @@ The main screen requires a template and a handler. With the base template
 and the `AbstractPageHandler` class in place, both are pretty simple.
 Here's the template, which resides in `show-articles.html`:
 
-    {@% extends "base.html" @%}
+    {\% extends "base.html" \%}
 
-    {@% block main @%}
-      {@% for article in articles @%}
-        {@% include "article.html" @%}
+    {\% block main \%}
+      {\% for article in articles \%}
+        {\% include "article.html" \%}
         </td></tr></table>
-      {@% endfor @%}
-    {@% endblock @%}
+      {\% endfor \%}
+    {\% endblock \%}
 
-    {@% block recent_list @%}
-      {@% if recent @%}
+    {\% block recent_list \%}
+      {\% if recent \%}
         <b>Recent:</b>
         <ul>
-        {@% for article in recent @%}
-          <li><a href="{@{ article.path }@}">{@{ article.title }@}</a>
-        {@% endfor @%}
+        {\% for article in recent \%}
+          <li><a href="\{\{ article.path \}\}">\{\{ article.title \}\}</a>
+        {\% endfor \%}
         </ul>
-      {@% endif @%}
-    {@% endblock @%}
+      {\% endif \%}
+    {\% endblock \%}
 
-    {@% block date_list @%}
-      {@% if date_list @%}
+    {\% block date_list \%}
+      {\% if date_list \%}
         <b>By month:</b>
         <ul>
-        {@% for date_count in date_list @%}
-          <li><a href="{@{ date_path }@}/{@{ date_count.date|date:"Y-m" }@}/">
-              {@{ date_count.date|date:"F, Y" }@}</a> ({@{ date_count.count }@})
-        {@% endfor @%}
+        {\% for date_count in date_list \%}
+          <li><a href="\{\{ date_path \}\}/\{\{ date_count.date|date:"Y-m" \}\}/">
+              \{\{ date_count.date|date:"F, Y" \}\}</a> (\{\{ date_count.count \}\})
+        {\% endfor \%}
         </ul>
-      {@% endif @%}
-    {@% endblock @%}
+      {\% endif \%}
+    {\% endblock \%}
 
-    {@% block tag_list @%}
-      {@% if tag_list @%}
+    {\% block tag_list \%}
+      {\% if tag_list \%}
         <div id="tag-cloud">
-        {@% for tag_count in tag_list @%}
-          <a class="{@{ tag_count.css_class }@}"
-             href="{@{ tag_path }@}/{@{ tag_count.tag }@}/">
-             {@{ tag_count.tag }@}({@{ tag_count.count }@})</a>
-             {@% if not forloop.last @%},{@% endif @%}
-        {@% endfor @%}
+        {\% for tag_count in tag_list \%}
+          <a class="\{\{ tag_count.css_class \}\}"
+             href="\{\{ tag_path \}\}/\{\{ tag_count.tag \}\}/">
+             \{\{ tag_count.tag \}\}(\{\{ tag_count.count \}\})</a>
+             {\% if not forloop.last \%},{\% endif \%}
+        {\% endfor \%}
         </div>
-      {@% endif @%}
-    {@% endblock @%}
+      {\% endif \%}
+    {\% endblock \%}
 
 The template extends the base template, and then just fills in the
 HTML for each block that's defined in the base template. Note, in
 particular, this block:
 
-    {@% for article in articles @%}
-      {@% include "article.html" @%}
-    {@% endfor @%}
+    {\% for article in articles \%}
+      {\% include "article.html" \%}
+    {\% endfor \%}
 
 The actual template that displays an article resides in yet another
 file, so it can be re-used in different templates.
@@ -1102,24 +1102,24 @@ The `article.html` template looks like this:
 
     <table width="100%" border="0" cellspacing="0" cellpadding="0">
       <tr class="article_title_line">
-        <td class="article_title">{@{ article.title }@}</td>
+        <td class="article_title">\{\{ article.title \}\}</td>
         <td class="timestamp">
-           {@{ article.published_when|date:"j F, Y \a\t g:i A" }@}
+           \{\{ article.published_when|date:"j F, Y \a\t g:i A" \}\}
         </td>
       </tr>
       <tr>
-        {@% if article.draft @%}
+        {\% if article.draft \%}
         <td colspan="2" class="article-body-draft">
-        {@% else @%}
+        {\% else \%}
         <td colspan="2" class="article-body">
-        {@% endif @%}
-        {@{ article.html }@}
+        {\% endif \%}
+        \{\{ article.html \}\}
         </td>
       </tr>
       <tr>
         <td colspan="2" class="article-footer">
-          <a href="{@{ article.path }@}" class="reference">Permalink</a>|
-          Tags: {@{ article.tags|join:", " }@}</td>
+          <a href="\{\{ article.path \}\}" class="reference">Permalink</a>|
+          Tags: \{\{ article.tags|join:", " \}\}</td>
       </tr>
     </table>
 
@@ -1286,21 +1286,21 @@ chronological order. I chose to make this page even simpler than
 the other pages: It lacks the tag cloud, recent posts, and
 posts-by-month sections in the margin. The template is trivial:
 
-    {@% extends "base.html" @%}
+    {\% extends "base.html" \%}
 
-    {@% block main @%}
+    {\% block main \%}
       <span class="heading">Complete Archive:</span>
-      {@% if articles @%}
+      {\% if articles \%}
         <ul>
-        {@% for article in articles @%}
-          <li><a href="{@{ article.path }@}">{@{ article.title }@}</a>
-              ({@{ article.timestamp|date:"j F, Y" }@})
-        {@% endfor @%}
+        {\% for article in articles \%}
+          <li><a href="\{\{ article.path \}\}">\{\{ article.title \}\}</a>
+              (\{\{ article.timestamp|date:"j F, Y" \}\})
+        {\% endfor \%}
         </ul>
-      {@% else @%}
+      {\% else \%}
       <p>This blog is empty. (Someone want to fix that?)
-      {@% endif @%}
-    {@% endblock @%}
+      {\% endif \%}
+    {\% endblock \%}
 
 And the handler is, once again, trivial:
 
@@ -1318,9 +1318,9 @@ Note that `ArchivePageHandler` passes an empty list for the
 Here's what the archive page looks like with our two articles in
 the archive:
 
-![Archive screen](77/archive-small.png)
+![Archive screen](archive-small.png)
 
-The [full archive page image is here](77/archive.png).
+The [full archive page image is here](archive.png).
 
 ## RSS Feed
 
@@ -1342,22 +1342,22 @@ The template is simple, too:
     <?xml version="1.0" encoding="utf-8" ?>
     <rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/">
       <channel>
-        <title>{@{ blog_name }@}</title>
-        <link>{@{ blog_url }@}</link>
-        <description>{@{ blog_name }@}</description>
-        <pubDate>{@{ last_updated|date:"D, d M Y H:i:s T" }@}</pubDate>
-        {@% for article in articles @%}
+        <title>\{\{ blog_name \}\}</title>
+        <link>\{\{ blog_url \}\}</link>
+        <description>\{\{ blog_name \}\}</description>
+        <pubDate>\{\{ last_updated|date:"D, d M Y H:i:s T" \}\}</pubDate>
+        {\% for article in articles \%}
         <item>
-          <title>{@{ article.title }@}</title>
-          <link>{@{ article.url }@}</link>
-          <guid>{@{ article.url }@}</guid>
-          <pubDate>{@{ article.timestamp|date:"D, d M Y H:i:s T" }@}</pubDate>
+          <title>\{\{ article.title \}\}</title>
+          <link>\{\{ article.url \}\}</link>
+          <guid>\{\{ article.url \}\}</guid>
+          <pubDate>\{\{ article.timestamp|date:"D, d M Y H:i:s T" \}\}</pubDate>
           <description>
-            {@{ article.html|escape }@}
+            \{\{ article.html|escape \}\}
           </description>
-          <author>{@{ blog_author }@}</author>
+          <author>\{\{ blog_author \}\}</author>
         </item>
-        {@% endfor @%}
+        {\% endfor \%}
       </channel>
     </rss>
 
@@ -1414,7 +1414,7 @@ add these lines right after the end of the form:
 
     <h1 class="admin-page-title">Preview:</h1>
     <div style="border-top: 1px solid black">
-    <iframe src="/id/{@{ article.id }@}" width="97%" scrolling="auto" height="750"
+    <iframe src="/id/\{\{ article.id \}\}" width="97%" scrolling="auto" height="750"
             frameborder="0">
     </iframe>
 

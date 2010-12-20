@@ -3,3 +3,7 @@ pygments: true
 max_recent: 20
 # Maximum number of articles display on the top page.
 max_top: 15
+# Layout to use for printer-friendly pages
+printable_layout: printable_article
+# Name of printer-friendly HTML file to generate.
+printable_html: printable.html
