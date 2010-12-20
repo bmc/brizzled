@@ -1,4 +1,4 @@
-Using [Jekyll][] to generate this blog presented few challenges, which I
+Using [Jekyll][] to generate this blog presented a few challenges, which I
 was able to address with some simple, if [crufty][], Jekyll hacks.
 
 [Jekyll]: http://jekyllrb.com/
