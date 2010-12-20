@@ -11,15 +11,12 @@
   <div class="banner">
 
     <div class="banner-image">
-      <img src="/images/brizzled.png" width="341" height="56" border="0" align="left"/>
+       Brizzled: Brian Clapper's Blog
     </div>
-
-    <div class="banner-tagline">It'll only sting a little</div>
   </div>
 </div>
 
-<hr/>
-
+<br clear="all/">
 
 <div id="articles-box">
   <div id="articles-container">
@@ -32,20 +29,9 @@
 
       </div> <!-- article-header -->
 
-{% if (page.toc == "yes") %}
-<script type="text/javascript" src="/cssjs/toc.js">
-<!-- -->
-</script>
-{% endif %}
+      <hr/>
 
       <div class="article-body" id="content">
-
-{% if (page.toc == "yes") %}
-        <div id="tocBlock">
-          <span id="tocHeading">Table of Contents</span>
-          <div id="toc"></div>
-        </div> <!-- tocBlock -->
-{% endif %}
 
 {{ content }}
 
@@ -55,12 +41,6 @@
     </div> <!-- article -->
   </div> <!-- articles-container -->
 </div> <!-- articles-box -->
-
-{% if (page.toc == "yes") %}
-<script type="text/javascript">
-createTOC();
-</script>
-{% endif %}
 
 </body>
 </html>

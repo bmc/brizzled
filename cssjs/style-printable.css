@@ -5,6 +5,26 @@ body
     font-family: Verdana, Arial, Helvetica, sans-serif;
     font-size: 10pt;
     background-color: white;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+div.banner-background
+{
+    width: 100%;
+}
+
+div.banner
+{
+    width: 80%;
+    height: 60px;
+}
+
+div.banner-image
+{
+    float: left;
+    font-size: 18pt;
+    font-weight: bold;
 }
 
 div.printable-page
@@ -173,14 +193,12 @@ pre
 
 div.article-timestamp
 {
-    float:right;
 }
 
 div.article-title
 {
     font-weight: bold;
     font-size: 16pt;
-    float: left;
 }
 
 /* -------------------------------------------------------------------------- *\

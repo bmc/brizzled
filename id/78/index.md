@@ -333,7 +333,7 @@ Removing the preview frame is a matter of removing these lines from
 {% highlight html %}
     <h1 class="admin-page-title">Preview:</h1>
     <div style="border-top: 1px solid black">
-    <iframe src="/id/{{ article.id }}" width="97%" scrolling="auto" height="750"
+    <iframe src="/id/{@{ article.id }@}" width="97%" scrolling="auto" height="750"
             frameborder="0">
     </iframe>
     </div>
