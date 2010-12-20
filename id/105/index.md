@@ -99,7 +99,7 @@ There's another piece of code that's required, in a file called
 This code adds a `Page.full_url` method that guarantees to return the full
 URL path. I added that method, because I noticed that calling `Page.url`
 returns only a partial path, and I need the full path in various
-places--including within my `Site.blog_posts` method.
+places, including within my `Site.blog_posts` method.
 
 The code also chains the `to_liquid` method, to augment the hash table of
 data available to the Liquid template, when a page is being rendered. The
@@ -134,8 +134,8 @@ following in my layouts:
 # Liquid and Django
 
 The article entitled [*Writing Blogging Software for Google App Engine*][77]
-contains [App Engine template markup][] that confuses The [Liquid][] template
-engine Jekyll uses. The occurrence of a block of code like this:
+contains [App Engine template markup][] that confuses the [Liquid][] template
+engine Jekyll uses. The occurrence of a block of markup like this:
 
     {\% block main \%}
     {\% endblock \%}
@@ -149,10 +149,8 @@ can result in an empty line, because Liquid will attempt to substitute the
 value of `article.path`, only to find it *has* no value.
 
 I needed to add a means of escaping those tags, so that Liquid would ignore
-them. The solution is fairly simple. Underneath the top level of my blog
-source, I created a `_plugins` directory; that's where Jekyll expects to
-find plugin [Ruby][] code. Within that directory, I created a `page.rb`
-file with the following source.
+them. The solution is straightforward and involves some more monkeypatching
+to Jekyll's `Page` class:
 
 {% highlight ruby %}
     module Jekyll
@@ -227,7 +225,7 @@ tags in an article's YAML front-matter. For instance:
 ## Goal 2: Allow the layout for a page to be able to see the page's tags
 
 To make the tags available to the page, I first modified my `_plugins/page.rb`
-file, to monkeypath a `tags` method into the `Page` class:
+file, to monkeypatch a `tags` method into the `Page` class:
 
 {% highlight ruby %}
     module Jekyll
@@ -451,8 +449,9 @@ My version of `tag_index.html` looks a lot like the [top-level page template][]:
 I believe blogs should provide printer-friendly formats, and this blog is no
 exception. However, generating a printer-friendly version of each article isn't
 something Jekyll can do, out of the box. Stock Jekyll generates a single HTML
-file from the combination of a layout (template) and a markup article. Generating
-two HTML files from the same input article requires a little code.
+file from the combination of a layout (template) and a markup article.
+Generating two HTML files from the same input article requires some
+customizing.
 
 The first piece of code is a new `PrintablePage` class, stored in
 `_plugins/printable_page.rb`. A `PrintablePage` object delegates most of
@@ -539,14 +538,14 @@ of the Jekyll `Site` class accomplishes that goal:
         
         alias orig_write write
         def write
-            orig_write
+          orig_write
 
-            puts('Writing printable pages')
-            blog_posts.each do |page|
-                printable_page = PrintablePage.new(page)
-                printable_page.render(self.layouts, site_payload)
-                printable_page.write(self.dest)
-            end
+          puts('Writing printable pages')
+          blog_posts.each do |page|
+            printable_page = PrintablePage.new(page)
+            printable_page.render(self.layouts, site_payload)
+            printable_page.write(self.dest)
+          end
         end
       end
     end
@@ -559,18 +558,21 @@ blog post, alongside the regular version.
 
 If you visit the [top page](/) of my blog, or [any tag page](/tags/blogging/),
 you'll see that each article title is accompanied by a short summary. Those
-summaries represent a final Jekyll hack.
+summaries are the result of one final Jekyll hack.
 
 To create a summary, I create a `summary.md` file in the same directory
 as the blog article. Unlike the article itself, this summary Markdown file
 contains no YAML front-matter; it's just a plain file. Thus, Jekyll will simply
 copy the file to its appropriate `_site` directory, instead of processing it.
+While that isn't exactly what I want, there's no harm in allowing Jekyll to
+copy the file.
 
-I monkeypatched a little *more* code to cause Jekyll to generate the
-summary. First, I created a `_plugins/summary.rb` file, containing a
-`Summary` class. You can see the entire class
-[here](https://github.com/bmc/brizzled/blob/master/_plugins/summary.rb). The
-most important parts are:
+However, I *really* want Jekyll to convert the file into HTML, which I can
+use, inline, in my layouts. To get that to happen, I monkeypatched yet again.
+First, I created a `_plugins/summary.rb` file, containing a `Summary` class.
+You can see the entire class
+[here](https://github.com/bmc/brizzled/blob/935ef1d0a4ba0015760aa1933977e4157a2ce8cc/_plugins/summary.rb).
+The most important parts are:
 
 {% highlight ruby %}
     module Jekyll
@@ -675,4 +677,4 @@ free to email me or leave a comment.
 [App Engine template markup]: http://code.google.com/appengine/docs/python/gettingstarted/templates.html
 [Liquid]: http://www.liquidmarkup.org/
 [Markdown]: http://daringfireball.net/projects/markdown/
-[top-level page template]: https://github.com/bmc/brizzled/blob/master/_layouts/main.html
+[top-level page template]: https://github.com/bmc/brizzled/blob/76f6bf8f2830b4c7c41a39d50ad12ca6aedd679b/_layouts/main.html
