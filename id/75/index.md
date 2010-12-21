@@ -78,6 +78,7 @@ both of which do the same job.
 
 Java:
 
+{% highlight java %}
     public class Test
     {
          public static void main(String[] args)
@@ -88,16 +89,19 @@ Java:
              System.exit(0);
          }
     }
+{% endhighlight %}
 
 Granted, the `System.exit(0)` doesn't really need to be there; I got in the
 habit of putting it in, though, when using versions of Java that wouldn't
 exit properly without such a call. But even if you remove that line, it's
 still more verbose than the Python version:
 
+{% highlight python %}
     import sys
     
     for s in sys.argv[1].split():
         print s
+{% endhighlight %}
 
 Yes, I could make the Java example shorter by putting the braces on the
 same line as the code, as most people do, but I actually find that to be
@@ -116,6 +120,7 @@ variables by making the private, so callers can only interact with them via
 getter and setter methods. Why? Well, consider this scenario. Suppose you
 write a class called `Point` that looks something like this:
 
+{% highlight java %}
     public class Point
     {
         public int x;
@@ -127,14 +132,16 @@ write a class called `Point` that looks something like this:
             this.y = y;
         }
     }
+{% endhighlight %}
 
-Pretty soon, all over the code base, people are writing code like
-this:
+Pretty soon, all over the code base, people are writing code like this:
 
-    point1 = Point(...)
-    point2 = Point(...)
+{% highlight java %}
+    point1 = new Point(...)
+    point2 = new Point(...)
     point2.x = point1.x - deltaX
     point2.y = point1.y - deltaY
+{% endhighlight %}
 
 That's actually quite readable, but there's a problem: Suppose your
 requirements change, and now you have to ensure that all coordinates are
@@ -145,6 +152,7 @@ Crap.
 Now you realize that you *should* have written your `Point` class like
 this:
 
+{% highlight java %}
     public class Point
     {
         private int x;
@@ -176,13 +184,16 @@ this:
             this.y = newY;
         }
     }
+{% endhighlight %}
 
 If you'd written it *that* way, people would've had to use it like this:
 
-    point1 = Point(...)
-    point2 = Point(...)
+{% highlight java %}
+    point1 = new Point(...)
+    point2 = new Point(...)
     point2.setX(point1.getX() - deltaX)
     point2.setY(point1.getY() - deltaY)
+{% endhighlight %}
 
 `point2.setX(point1.getX() - deltaX)` isn't anywhere near as intuitive or
 nice-looking as `point2.x = point1.x - deltaX`, but it's a lot safer. And
@@ -191,6 +202,7 @@ methods and add your constraint checks to ensure the arguments are
 positive, without having to go change a whole bunch of calling code. For
 instance:
 
+{% highlight java %}
     public int setX(int newX)
     {
         if (newX > 0)
@@ -198,6 +210,7 @@ instance:
     
         this.x = newX;
     }
+{% endhighlight %}
 
 Okay, why is Python's solution to this problem more readable? Because
 Python has a neat construct called a *property*. As Python's inventor,
@@ -208,30 +221,36 @@ Guido van Rossum, puts it:
 > calls. These are sometimes known as "managed attributes".
 
 Basically, a property is a way to make a function call look like an
-instance variable reference. Let's take our example, above, and do it in
-Python. First, the `Point` class:
+instance variable reference, which allows one to write code that adheres
+better to the [Uniform Access Principal][]. Let's take our example, above,
+and do it in Python. First, the `Point` class:
 
+{% highlight python %}
     class Point(object):
     
         def __init__(self, x, y):
             self.x = x
             self.y = y
+{% endhighlight %}
 
 (You'll note that it's a tad shorter than the equivalent Java class, while
 being just as readable.)
 
 So, as before, people start using your `Point` class:
 
+{% highlight python %}
     point1 = Point(...)
     point2 = Point(...)
     point2.x = point1.x - delta_x
     point2.y = point1.y - delta_y
+{% endhighlight %}
 
 Okay, now along comes that pesky requirement that all coordinates must be
 positive. Instead of going back and changing all the callers to use new
 `set` methods, you can simply wrap access to `x` and `y` in functions, as
 show below.
 
+{% highlight python %}
     class Point(object):
     
         def __init__(self, x, y):
@@ -259,6 +278,7 @@ show below.
             self.__y = newy
     
         y = property(gety, sety, doc='Y coordinate')
+{% endhighlight %}
 
 Now, whenever someone writes `point.x`, they're really calling
 `point.getx()`. Similarly, `point.x = 1` results in a call to the
@@ -303,6 +323,7 @@ allowing the caller to specify the matching function.
 
 Here's how you might implement that logic in Java, using an interface.
 
+{% highlight java %}
     import java.util.Collection;
     import java.util.ArrayList;
     
@@ -326,9 +347,11 @@ Here's how you might implement that logic in Java, using an interface.
             return result;
         }
     }
+{% endhighlight %}
 
 And here's how a caller might use it, using an anonymous inner class:
 
+{% highlight java %}
     MyTree<String> keywords = new MyTree<String>();
     
     // Code that fills the tree goes here
@@ -343,18 +366,22 @@ And here's how a caller might use it, using an anonymous inner class:
                  return s.startsWith("a");
              }
          });
+{% endhighlight %}
 
 Now let's look at the same thing in Python. First the class:
 
+{% highlight python %}
     class MyTree(object):
     
         # details omitted
     
         def matches(self, match_func):
             return [element for element in self.__tree_elements if match_func(element)]
+{% endhighlight %}
 
 And now the caller:
 
+{% highlight python %}
     keywords = MyTree()
     
     # Code that fills the tree goes here
@@ -362,13 +389,16 @@ And now the caller:
     # Now, get all keywords starting with 'a'.
     
     matches = keywords.matches(lambda element: element.startswith('a'))
+{% endhighlight %}
 
 It's also possible to use a "real" function, rather than a `lambda`:
 
+{% highlight python %}
     def match(element):
         return element[0] == 'a'
     
     matches = keywords.matches(match)
+{% endhighlight %}
 
 In simple cases like this, however, it's easier and more straightforward to
 use a lambda.
@@ -392,6 +422,7 @@ different RPC implements (e.g., "XML-RPC", "JSON-RPC", "SOAP", etc.) Each
 implementation is encoded in a concrete class, and all classes adhere to a
 specific interface:
 
+{% highlight java %}
     public interface RPC
     {
         public Object callRemote(String function, Object ... args);
@@ -418,6 +449,7 @@ specific interface:
     }
     
     // etc.
+{% endhighlight %}
 
 Now, suppose your application is going to support a configuration option
 that allows the user to specify the desired RPC mechanism using a string,
@@ -428,11 +460,12 @@ interface. You have two choices:
 
 1. Convert the `RPC` interface to an abstract class, and put the method
    there. Doing that, of course, means that RPC subclasses can't extend any
-   other abstract classes, which may cause some implementation headaches (or
-   might not, depending).
-2. Create a special `RPCFactory` class, which is clumsy, but is
-   probably the safest way to go.
+   other abstract classes, which may cause some implementation headaches
+   (or might not, depending).
+2. Create a special `RPCFactory` class, which is clumsy, but is probably
+   the safest way to go.
 
+{% highlight java %}
     public class RPCFactory
     {
         public static RPC getRPC(String identifier)
@@ -442,6 +475,7 @@ interface. You have two choices:
             ...
         }
     }
+{% endhighlight %}
 
 With Python, it's easier: Simply create a factory method right in your
 module. To make things even simpler, you can use a hash table to look up
@@ -449,6 +483,7 @@ the implementing classes. (You can do that with Java, too, but you end up
 having to use the Reflection API, which is clumsier than in Python. (See
 *Observation 4: Introspection is easier in Python*, below.)
 
+{% highlight python %}
     RPC_CLASSES = {'xmlrpc'  : XMLRPC,
                    'jsonrpc' : JSONRPC,
                    ... }
@@ -458,6 +493,7 @@ having to use the Reflection API, which is clumsier than in Python. (See
             return RPC_CLASSES[identifier]()
         except KeyError:
             raise ValueError, '"%s" is an unknown RPC type' % identifier
+{% endhighlight %}
 
 ## Closures
 
@@ -474,8 +510,8 @@ I'm not going to go into the differences between inner classes and
 closures; there are plenty of discussions on that issue already. For
 further reading, here are a few pointers:
 
-- [Closures and Java: A Tutorial][]
-- [Yet another reason for why Java needs Closures][]
+* [Closures and Java: A Tutorial][]
+* [Yet another reason for why Java needs Closures][]
 
 Since I'm mostly concerned about "fun", readability and productivity, let's
 look at one example. Closures are useful for a *lot* of things; this is
@@ -491,9 +527,10 @@ part doesn't matter here.) Since the table is shared, it must be locked to
 prevent corruption. You have to be sure to release the lock, even if an
 error occurs.
 
-The standard pattern for this approach (using Python, in this case)
-is something like:
+The standard pattern for this approach (using Python, in this case) is
+something like:
 
+{% highlight python %}
     def increment(key):
         self.lock.lock()
         try:
@@ -504,6 +541,7 @@ is something like:
             return value
         finally:
             lock.unlock()
+{% endhighlight %}
 
 There are two problems with that code:
 
@@ -520,15 +558,18 @@ There are two problems with that code:
 Closures solve that problem. Using closures, you can augment the locking
 API (or write a local front-end function) that looks like this:
 
+{% highlight python %}
     def with_lock(lock, action, *args, **keyword_args):
         try:
             lock.lock()
             action(*args, **keyword_args)
         finally:
             lock.unlock()
+{% endhighlight %}
 
 Now our function becomes much simpler:
 
+{% highlight python %}
     def increment(key):
         value = None
     
@@ -539,6 +580,7 @@ Now our function becomes much simpler:
                 value = 1
     
         with_lock(self.lock, do_incr, key)
+{% endhighlight %}
 
 Better yet, the locking semantics are enforced in one place: the
 `with_lock()` function.
@@ -557,6 +599,7 @@ statement (available in the `__future__` module). For complete details, see
 
 First, the lock API can provide a *context manager* function, like this:
 
+{% highlight python %}
     from contextlib import contextmanager
     
     @contextmanger
@@ -566,9 +609,11 @@ First, the lock API can provide a *context manager* function, like this:
             yield the_lock
         finally:
             the_lock.unlock()
+{% endhighlight %}
 
 Now, the calling code becomes even more straightforward:
 
+{% highlight python %}
     from __future__ import with_statement
     
     def increment(key):
@@ -577,12 +622,14 @@ Now, the calling code becomes even more straightforward:
             if not value:
                 self.counter_table.add(key, 1)
                 value = 1
+{% endhighlight %}
 
 You can't do that in Java very cleanly right now, though the various
 closures proposals, targeted at Java 7, attempt to address that problem.
 Neal Gafter's [Use cases for closures][] goes through his favored closure
 proposal in detail. Using that approach, you'd do something like this:
 
+{% highlight java %}
     <E extends Exception>
     public static void withLock(Lock lock, void()throws E block) throws E 
     {
@@ -596,6 +643,7 @@ proposal in detail. Using that approach, you'd do something like this:
             lock.unlock();
         }
     }
+{% endhighlight %}
 
 That block of code defines the method that will run my code within a lock.
 The Java closure proposal also adds some syntactic sugar that says,
@@ -604,22 +652,23 @@ it can be specified *outside* the argument list's final parenthesis."
 
 That means you can invoke `withLock()` like this:
 
+{% highlight java %}
     withLock(myLock)
     {
         // code (closure) that operates within the lock
     }
+{% endhighlight %}
 
 The code between the curly braces is *really* the last argument to the
 `withLock()` method. And it truly *is* a closure: Unlike an anonymous inner
 class, the code block has read-write access to all the identifiers in the
 parent block's scope.
 
-I heard about the closures-in-Java proposals while I was still
-programming Java for my previous employer. I was very excited about
-the idea, since it makes a lot of programming tasks easier and
-safer. However, while adding closures to Java would be a good
-thing, they're still not as simple as closures are in other
-languages, such as Python.
+I heard about the closures-in-Java proposals while I was still programming
+Java for my previous employer. I was very excited about the idea, since it
+makes a lot of programming tasks easier and safer. However, while adding
+closures to Java would be a good thing, they're still not as simple as
+closures are in other languages, such as Python.
 
 ## Array and String Support
 
@@ -632,33 +681,41 @@ simpler and more readable code. Here are some examples:
 In Java, to get a "slice" out of a string, you have to use methods
 on the `java.lang.String` class, like so:
 
+{% highlight java %}
     String s = "foo and bar"
     
     s1 = s.substring(4, 7);           // get the word "and"
     last = s.charAt(s.length() - 1);  // get the last character in the string
     first = s.charAt(0);              // get the first character in the string
+{% endhighlight %}
 
 The same operations are simpler and more readable in Python:
 
+{% highlight python %}
     s = 'foo and bar'
     
     s1 = s[4:7]       # get the word 'and'
     last = s[-1]      # get the last character in the string
     first = s[0]      # get the first character in the string
+{% endhighlight %}
 
 Further, while Java allows strings to be concatenated via the "+"
 operator, that usage is discouraged for building up strings, since
 it can be inefficient. So, instead of the readable:
 
+{% highlight java %}
     message = "I don't recognize the command \"" + s + "\". Sorry."
+{% endhighlight %}
 
 you end up writing:
 
+{% highlight java %}
     buf = StringBuffer()
     buf.append("I don't recognize the command \"");
     buf.append(s);
     buf.append("\" Sorry.");
     message = buf.toString();
+{% endhighlight %}
 
 Oh, joy.
 
@@ -666,8 +723,10 @@ Oh, joy.
 that using "+" for string concatenation isn't really encouraged in Python,
 either. The author of the comment suggests one of the following, instead:
 
+{% highlight python %}
     message = 'I don\'t recognize the command "%s". Sorry.' % s
     message = ' '.join(['I don\'t recognize the command "', s, '". Sorry.'])
+{% endhighlight %}
 
 Fair enough, but my point still holds: Both of those alternatives are more
 readable and shorter than the Java alternative.
@@ -691,6 +750,7 @@ them requires more code. Consider this simple example, a symbol table of
 keywords. Let's assume the existence of a `Symbol` class that captures
 information about a symbol (the line where it's defined, its type, etc.).
 
+{% highlight java %}
     public class SymbolTable
     {
         private Map<String,Symbol> symbols = new HashMap<String,Symbol>();
@@ -711,9 +771,11 @@ information about a symbol (the line where it's defined, its type, etc.).
             return sym;
         }
     }
+{% endhighlight %}
 
 Here's the equivalent Python code:
 
+{% highlight python %}
     class SymbolTable(object):
     
         symbols = {}
@@ -726,6 +788,7 @@ Here's the equivalent Python code:
                 symbols[identifier] = sym
     
             return sym
+{% endhighlight %}
 
 It may seem like I'm nit-picking, but the Python approach just seems
 simpler and more natural. (And believe me, I've used my share of Java `Map`
@@ -740,7 +803,9 @@ pain in the ass in Java.
 Let's suppose you want to write a function that'll take *any* object that
 has a method with this signature:
 
+{% highlight java %}
     boolean compare(String s1, String s2);
+{% endhighlight %}
 
 Further, you don't want to constrain the objects to implementing a specific
 interface. (Though this situation doesn't sound likely, and isn't something
@@ -750,6 +815,7 @@ To do that in Java requires resorting to the [Reflection API][]. Here's the
 code you have to write to verify that the object has such a method, and
 then to call that method with two strings:
 
+{% highlight java %}
     import java.lang.reflect.Method;
     
     ...
@@ -783,6 +849,7 @@ then to call that method with two strings:
             {
                 ...
             }
+{% endhighlight %}
 
 That code is ugly for a few reasons. (It used to be worse, before Java 5
 introduced variable arguments.)
@@ -796,6 +863,7 @@ introduced variable arguments.)
 
 Here's how you do the same thing in Python:
 
+{% highlight python %}
     o = ...
     s1 = ...
     s2 = ...
@@ -805,6 +873,7 @@ Here's how you do the same thing in Python:
     except AttributeError:
         # Doesn't have that method.
         ...
+{% endhighlight %}
 
 In addition to being short and to-the-point, the Python code actually
 *looks* like what it's doing.
@@ -898,10 +967,12 @@ article.) Unlike any Java IDE, there are cases where Wing just cannot tell
 the type of a variable and, therefore, cannot help me determine what fields
 and methods that variable provides. Here's a case where it *can* tell:
 
+{% highlight python %}
     my_foo = Foo()
     
     my_foo.a
             ^
+{% endhighlight %}
 
 If I invoke auto-completion where the caret is, Wing can show me all
 attributes that start with "a", because the assignment of a `Foo` object to
@@ -909,9 +980,11 @@ attributes that start with "a", because the assignment of a `Foo` object to
 
 However, here's a case where it cannot tell:
 
+{% highlight python %}
     def somefunc(foo):
         foo.a
              ^
+{% endhighlight %}
 
 At runtime, the argument `foo` can be anything, so the IDE cannot tell what
 fields it might have (other than, of course, the fields that all Python
@@ -970,18 +1043,22 @@ Both Dan Barbus *dan.barbus /at/ gmail.com* and Simon Lieschke *simon at
 lieschke.net* pointed out an oversight. My original Python `matches()`
 function (see [Callbacks][], above) was written like this:
 
+{% highlight python %}
     def matches(self, match_func):
         for element in self.__tree_elements:
             if match_func(element):
                 result.append(element)
     
         return result
+{% endhighlight %}
 
 Both Dan and Simon pointed out that the function can be reduced to
 a one-liner:
 
+{% highlight python %}
     def matches(self, match_func):
         return [element for element in self.__tree_elements if match_func(element)]
+{% endhighlight %}
 
 One-liner list comprehensions like that are one of the things I like about
 Python, and I'm not sure why I wrote the function the "long" way
@@ -1170,7 +1247,6 @@ Thanks, Kevin.
 [Pyanno]: http://www.fightingquaker.com/pyanno/
 [Dive Into Python]: http://diveintopython.org/toc/index.html
 [Python documentation on dictionaries]: http://www.python.org/doc/2.5.2/lib/typesmapping.html
-
-
 [Callbacks]: #callbacks
 [Dictionary Syntax]: #dictionary_syntax
+[Uniform Access Principal]: http://en.wikipedia.org/wiki/Uniform_access_principal

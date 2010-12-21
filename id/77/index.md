@@ -22,42 +22,42 @@ engine that runs under GAE.
 I'm grateful to the following people for reviewing and commenting
 on this article before I published it.
 
-- [J.J. Geewax][]
-- [Toby DiPasquale][]
-- [Mark Chadwick][]
-- [Rob Keiser][]
+* [J.J. Geewax][]
+* [Toby DiPasquale][]
+* [Mark Chadwick][]
+* [Rob Keiser][]
 
 In addition, the following people sent me some valuable insights
 and corrections after the article was published:
 
-- [Bill Katz][], for clarifying the querying of list properties.
-- [Fernando Correia][], for reminding me that unique keys do have
+* [Bill Katz][], for clarifying the querying of list properties.
+* [Fernando Correia][], for reminding me that unique keys do have
   associated unique IDs, forcing me to re-read that part of the GAE docs
   again.
-- [Alexander Kojevnikov][], for clarifying that the GAE user API works with
+* [Alexander Kojevnikov][], for clarifying that the GAE user API works with
   Google accounts, not GMail accounts. (The difference is that a registered
   Google user need not be a GMail user.) Alexander also pointed out that
   `Query.fetch(1)` can be more simply expressed as `Query.get()`.
-- [Mark Lissaman][], for pointing out a semantic error in the `picoblog`
+* [Mark Lissaman][], for pointing out a semantic error in the `picoblog`
   code.
 
 # Similar Articles and Software
 
-- [Experimenting with Google App Engine][],
-  by Bret Taylor. Also describes building a blogging engine on GAE.
-- [Bloog][], Bill Katz's RESTful GAE blogging engine.
-- [cpedialog][], another GAE-based blogging engine.
+* [Experimenting with Google App Engine][], by Bret Taylor. Also describes
+  building a blogging engine on GAE.
+* [Bloog][], Bill Katz's RESTful GAE blogging engine.
+* [cpedialog][], another GAE-based blogging engine.
 
 # Caveats
 
 Before I jump into the tutorial, there are a few caveats:
 
-- The point of this article is to build an App Engine application, to get
+* The point of this article is to build an App Engine application, to get
   to know some GAE internals. If you just want to host a blog on GAE, and
   you're not interested in understanding the software involved, you might
   consider installing [cpedialog][], a blogging engine that will run on
   GAE.
-- I am *certain* there are things about GAE that I could do better. I
+* I am *certain* there are things about GAE that I could do better. I
   welcome corrections and suggestions; just drop me an email.
 
 ## What this Blog Engine Supports
@@ -66,23 +66,23 @@ The blog engine outlined in this article is fully functional; this
 blog runs on similar software. However, it lacks a few features
 some people might want, such as:
 
-- Image uploading. I just haven't put that in yet. When I do, I'll update
+* Image uploading. I just haven't put that in yet. When I do, I'll update
   this article. In the meantime, I'm able to live without it by uploading
   the images via GAE's `appcfg.py update` capability.
-- Comments. It's easy enough to drop [Disqus][] into your templates, if you
+* Comments. It's easy enough to drop [Disqus][] into your templates, if you
   want.
-- Integration into blog aggregators like [Technorati][]. (There's a
+* Integration into blog aggregators like [Technorati][]. (There's a
   follow-up article on this topic.)
 
 It *does* have the following features, though:
 
-- Tag handling, including support for generating a tag cloud.
-- Support for RSS and Atom feeds.
-- Displaying articles by month or tag.
-- Template-driven theme customization.
-- Unpublished drafts.
-- Secured administration screens.
-- [reStructuredText][] markup (instead of HTML) for the articles.
+* Tag handling, including support for generating a tag cloud.
+* Support for RSS and Atom feeds.
+* Displaying articles by month or tag.
+* Template-driven theme customization.
+* Unpublished drafts.
+* Secured administration screens.
+* [reStructuredText][] markup (instead of HTML) for the articles.
 
 In short, it's a serviceable blog engine, with simple, straightforward code
 you can customize as you see fit.
@@ -121,6 +121,7 @@ you develop your App Engine application. It wouldn't hurt to review the
 Create a directory called `picoblog` in which to do your work. In
 that directory, create a file called `app.yaml`:
 
+{% highlight yaml %}
     application: picoblog
     version: 1
     runtime: python
@@ -144,6 +145,7 @@ that directory, create a file called `app.yaml`:
 
     - url: /.*
       script: blog.py
+{% endhighlight %}
 
 This file configures your application. You can treat most of the
 top of the file as magic. For now, the parts we care about are:
@@ -154,21 +156,21 @@ top of the file as magic. For now, the parts we care about are:
   against incoming URL requests; on a match, it'll run the
   associated script. In this case, we're saying:
 
-    - Any path starting with `/static` is resolved via the built-in static
+    * Any path starting with `/static` is resolved via the built-in static
       file handler. This is where we'll put our images. So go ahead and
       create a `static` directory under `picoblog`.
 
-    - Since browsers always look for `/favicon.ico`, and I get tired
+    * Since browsers always look for `/favicon.ico`, and I get tired
       of seeing all the "not found" messages in the logs, there's an
       entry for an icon. It's stored in the `static` directory.
 
-    - The administrative screens (for creating and editing blog
+    * The administrative screens (for creating and editing blog
       articles) live under '/admin' and are secured: Only a Google
       account with administrative privileges on the project is allowed to
       get to them. They're handled by the `admin.py` script. We'll be
       creating that script in the `picoblog` directory.
 
-    - Finally, the published blog itself matches everything else, and
+    * Finally, the published blog itself matches everything else, and
       it's handled by the `blog.py` script. That script, too, will end up
       in the `picoblog` directory.
 
@@ -182,18 +184,18 @@ this blog engine, there's a single object type in the database, called an
 `Article`. It has the following properties (which would be columns in a SQL
 database):
 
-- `title`: The 1-line title of the article
-- `body`: The body of the article, which is reStructuredText markup.
-- `draft`: Whether or not the article is a draft (i.e., not published)
+* `title`: The 1-line title of the article
+* `body`: The body of the article, which is reStructuredText markup.
+* `draft`: Whether or not the article is a draft (i.e., not published)
    or not. Drafts are only visible in the administration screen.
-- `published_when`: The time the entry was published. In this context,
+* `published_when`: The time the entry was published. In this context,
   "published" means "goes from being a draft to not being a draft". This
   time stamp is initialized to the time the article is created, and it's
   updated when the article is saved as a non-draft. (Toggling the "draft"
   flag multiple times will continue to update this time; you're obviously
   free to change that behavior by hacking the code.)
-- `tags`: a list of tags (strings) assigned to the articles. May be empty.
-- `id`: a unique ID assigned to the article.
+* `tags`: a list of tags (strings) assigned to the articles. May be empty.
+* `id`: a unique ID assigned to the article.
 
 A note about the unique ID: GAE does not provide support for an
 automatically incremented integer ID field the same way that Django does.
@@ -220,6 +222,7 @@ So, that's what we're going to do.
 
 The data model for our `Article` class looks like this:
 
+{% highlight python %}
     import datetime
     import sys
 
@@ -232,6 +235,7 @@ The data model for our `Article` class looks like this:
         tags = db.ListProperty(db.Category)
         id = db.StringProperty()
         draft = db.BooleanProperty(required=True, default=False)
+{% endhighlight %}
 
 If you're familiar with Django, you'll notice that it's similar to
 Django's data models, but not exactly the same.
@@ -243,34 +247,41 @@ method that returns all non-draft articles. (The `published()` method will
 be separated into two methods, so the query itself can be shared. More on
 that later.)
 
+{% highlight python %}
     @classmethod
     def get_all(cls):
         q = db.Query(Article)
         q.order('-published_when')
         return q.fetch(FETCH_THEM_ALL)
-    
+{% endhighlight %}
+
+{% highlight python %}
     @classmethod
     def get(cls, id):
         q = db.Query(Article)
         q.filter('id = ', id)
         return q.get()
-    
+{% endhighlight %}
+
+{% highlight python %}
     @classmethod
     def published_query(cls):
         q = db.Query(Article)
         q.filter('draft = ', False)
         return q
-    
+{% endhighlight %}
+
+{% highlight python %}
     @classmethod
     def published(cls):
         return Article.published_query().order('-published_when').fetch(FETCH_THEM_ALL)
+{% endhighlight %}
 
 `FETCH_THEM_ALL` is an integer constant with a large value, defined
 at the top of the module.
 
-**NOTE**: In the original version of the code, and in the zip files
-posted to the [web site][],
-`FETCH_THEM_ALL` is defined as follows:
+**NOTE**: In the original version of the code, and in the zip files posted
+to the [web site][], `FETCH_THEM_ALL` is defined as follows:
 
     FETCH_THEM_ALL = sys.maxint - 1
 
@@ -282,14 +293,14 @@ For a more complete understanding of the GAE query interface, see the
 [documentation for the Query class][] and the [GAE Query Filter][]
 documentation.
 
-Finally, let's add a `save()` method that does two important
-things:
+Finally, let's add a `save()` method that does two important things:
 
-- Copies the GAE-assigned unique ID into our `id` field, so we
-  can use it in queries.
-- Updates the time stamp if the article being saved is going from
-  draft to published status.
+* Copies the GAE-assigned unique ID into our `id` field, so we can use it
+  in queries.
+* Updates the time stamp if the article being saved is going from draft to
+  published status.
 
+{% highlight python %}
     def save(self):
         previous_version = Article.get(self.id)
         try:
@@ -316,9 +327,9 @@ things:
         if resave:
             self.id = self.key().id()
             self.put()
+{% endhighlight %}
 
-Okay, that's the model. (See the \`source code\`\_ for the complete
-file.)
+Okay, that's the model. (See the source code for the complete file.)
 
 # Create the Administration Screens
 
@@ -327,10 +338,10 @@ create articles. We'll create two screens.
 
 The main administration screen contains three things:
 
-- A button to create a new article. Pressing this button creates
+* A button to create a new article. Pressing this button creates
   an empty article and launches the Edit Article screen to edit it.
-- A button to go back to blog itself.
-- A list of the existing articles. The articles will be sorted in
+* A button to go back to blog itself.
+* A list of the existing articles. The articles will be sorted in
   reverse chronological order, and each article's date and title will
   be displayed. The article's date and title will also be a hyperlink
   to the edit screen for the article. Further, drafts will be shown
@@ -338,22 +349,22 @@ The main administration screen contains three things:
 
 The Edit Article screen contains
 
-- A text box for the the title
-- A text area for the body of the article, which is assumed to be
+* A text box for the the title
+* A text area for the body of the article, which is assumed to be
   reStructuredText
-- A text box for the list of tags (comma-separated)
-- A check box to indicate whether or not the item is a draft
+* A text box for the list of tags (comma-separated)
+* A check box to indicate whether or not the item is a draft
 
 To create these screens requires five files:
 
-- `defs.py` will hold some constants that we share between all
-  the blog scripts.
-- `request.py` will hold a base class request handler, which is
-  basically a place to hang logic that we need in every script.
-- `admin.py` contains the Python code for the admin screens--the
-  equivalent of a Django `views.py` file for the admin screns.
-- `admin-main.html` is the template for the main administration screen.
-- `admin-edit.html` is the template for the Edit Article screen.
+* `defs.py` will hold some constants that we share between all the blog
+  scripts.
+* `request.py` will hold a base class request handler, which is basically a
+  place to hang logic that we need in every script.
+* `admin.py` contains the Python code for the admin screens--the equivalent
+  of a Django `views.py` file for the admin screns.
+* `admin-main.html` is the template for the main administration screen.
+* `admin-edit.html` is the template for the Edit Article screen.
 
 To keep things organized, we'll store the templates in a `templates`
 subdirectory.
@@ -425,6 +436,7 @@ files we're using to consolidate common logic.
 
 `defs.py` just contains some common constants:
 
+{% highlight python %}
     BLOG_NAME = 'PicoBlog'
     BLOG_OWNER = 'Joe Example'
 
@@ -440,6 +452,7 @@ files we're using to consolidate common logic.
 
     MAX_ARTICLES_PER_PAGE = 5
     TOTAL_RECENT = 10
+{% endhighlight %}
 
 We'll see how they're used as we get further into this tutorial.
 
@@ -447,6 +460,7 @@ We'll see how they're used as we get further into this tutorial.
 
 `request.py` contains our base request handler class:
 
+{% highlight python %}
     import os
 
     from google.appengine.ext import webapp
@@ -490,15 +504,17 @@ We'll see how they're used as we get further into this tutorial.
             """
             template_path = self.get_template(template_name)
             template.render(template_path, template_vars)
+{% endhighlight %}
 
-As you can see, it just contains some methods to make rendering
-templates a little simpler.
+As you can see, it just contains some methods to make rendering templates a
+little simpler.
 
 ### `admin.py`
 
 *Now* we're ready to look at the administration view code. First,
 we have some imports:
 
+{% highlight python %}
     import cgi
 
     from google.appengine.api import users
@@ -507,9 +523,11 @@ we have some imports:
 
     from models import *
     import request
+{% endhighlight %}
 
 These are followed by the request handler classes:
 
+{% highlight python %}
     class ShowArticlesHandler(request.BlogRequestHandler):
         def get(self):
             articles = Article.get_all()
@@ -591,9 +609,11 @@ These are followed by the request handler classes:
                 article.delete()
 
             self.redirect('/admin/')
+{% endhighlight %}
 
 The file ends with some initialization logic and the main program:
 
+{% highlight python %}
     application = webapp.WSGIApplication(
         [('/admin/?', ShowArticlesHandler),
          ('/admin/article/new/?', NewArticleHandler),
@@ -609,6 +629,7 @@ The file ends with some initialization logic and the main program:
 
     if __name__ == "__main__":
         main()
+{% endhighlight %}
 
 Let's break this down a bit. First, the initialization logic at the bottom
 (that is, the creation of the `webapp.WSGIApplication` object) defines what
@@ -618,18 +639,18 @@ The `application` variable further breaks those URLs down, so that certain
 URLs map to certain handlers. The list passed to the `WSGIApplication`
 constructor contains tuples; each tuple defines a URL mapping.
 
-- The first element of the tuple is a regular expression. Note
-  that the regular expressions we're using end with `/?`, allowing
-  the trailing slash to be omitted in the URL.
-- The name of the class that will handle requests to URLs that
-  match the regular expression.
+* The first element of the tuple is a regular expression. Note that the
+  regular expressions we're using end with `/?`, allowing the trailing
+  slash to be omitted in the URL.
+* The name of the class that will handle requests to URLs that match the
+  regular expression.
 
 Next, let's look at some of the handlers. There are basically two
 kinds of handlers here:
 
-- Handlers that just display a page (i.e., retrieve data from the
+* Handlers that just display a page (i.e., retrieve data from the
   database and stuff it into a template).
-- Handlers that process form submissions.
+* Handlers that process form submissions.
 
 #### Handlers that Only Display a Page
 
@@ -637,23 +658,26 @@ kinds of handlers here:
 example of handlers that simply display a page. Here's the
 `ShowArticlesHandler` class again:
 
+{% highlight python %}
     class ShowArticlesHandler(request.BlogRequestHandler):
         def get(self):
             articles = Article.get_all()
             template_vars = {'articles' : articles}
             self.render_template('admin-main.html', template_vars)
+{% endhighlight %}
 
 First, because it defines only the `get()` method, it supports just the
 HTTP GET semantics. (POST is not supported for the associated URL.)
 
-The actual handler is simple: It retrieves all articles, whether
-draft or published, puts the resulting list in a dictionary, and
-uses that dictionary to render the template. That's it; that's the
-*entire* handler. The `NewArticleHandler` is similarly simple.
+The actual handler is simple: It retrieves all articles, whether draft or
+published, puts the resulting list in a dictionary, and uses that
+dictionary to render the template. That's it; that's the *entire* handler.
+The `NewArticleHandler` is similarly simple.
 
-The `EditArticleHandler` is a little more complicated, only because
-it has to handle a few additional things:
+The `EditArticleHandler` is a little more complicated, only because it has
+to handle a few additional things:
 
+{% highlight python %}
     class EditArticleHandler(request.BlogRequestHandler):
         def get(self):
             id = int(self.request.get('id'))
@@ -664,20 +688,21 @@ it has to handle a few additional things:
             article.tag_string = ', '.join(article.tags)
             template_vars = {'article'  : article}
             self.render_template('admin-edit.html', template_vars)
+{% endhighlight %}
 
-First, it determines whether the article being edited is in the
-database or not; if not, it throws an exception, because it should
-never be invoked on a non-existent article. (If it is, we have a
-bug.)
+First, it determines whether the article being edited is in the database or
+not; if not, it throws an exception, because it should never be invoked on
+a non-existent article. (If it is, we have a bug.)
 
-Next, it creates a comma-separated string from the list of tags, so
-the template can simply stuff that string into the tags edit box.
+Next, it creates a comma-separated string from the list of tags, so the
+template can simply stuff that string into the tags edit box.
 
 #### Handlers that Process Forms
 
 The most complicated handler is the `SaveArticleHandler` class.
 Let's look at that one again:
 
+{% highlight python %}
     class SaveArticleHandler(request.BlogRequestHandler):
         def post(self):
             title = cgi.escape(self.request.get('title'))
@@ -720,31 +745,30 @@ Let's look at that one again:
                 self.redirect('/admin/article/edit/?id=%s' % id)
             else:
                 self.redirect('/admin/')
+{% endhighlight %}
 
 That one's a little longer, but what it does is simple enough:
 
-- First, it retrieves all the form variables.
-- Next, if there are any tags in the form, it splits the tag
-  string to make it into a list.
-- The tags are actually stored as GAE `db.Category` objects, not
-  strings, so the code calls a special `Article` class method to
-  convert the strings from the form into `Category` objects. (Consult
-  the code for that conversion method; it's trivial, and it's not
-  included here.)
-- It processes the Draft checkbox.
-- It attempts to load the referenced article. If the article
-  exists, the handler updates its contents. Otherwise, it creates a
-  new Article object with the specified ID.
-- Then, it saves the article.
-- If the `edit_again` request variable is set, then the handler
-  redisplays the edit screen; otherwise, it displays the main
-  administration screen again.
+* First, it retrieves all the form variables.
+* Next, if there are any tags in the form, it splits the tag string to make
+  it into a list.
+* The tags are actually stored as GAE `db.Category` objects, not strings,
+  so the code calls a special `Article` class method to convert the strings
+  from the form into `Category` objects. (Consult the code for that
+  conversion method; it's trivial, and it's not included here.)
+* It processes the Draft checkbox.
+* It attempts to load the referenced article. If the article exists, the
+  handler updates its contents. Otherwise, it creates a new Article object
+  with the specified ID.
+* Then, it saves the article.
+* If the `edit_again` request variable is set, then the handler redisplays
+  the edit screen; otherwise, it displays the main administration screen
+  again.
 
-That's it. We've finished our admin screens. Let's take a look at
-them. To do that, fire up a terminal window, change your working
-directory to the `picoblog` directory, and run the following
-command. (You must have put the root of the unpacked GAE toolkit in
-your path.)
+That's it. We've finished our admin screens. Let's take a look at them. To
+do that, fire up a terminal window, change your working directory to the
+`picoblog` directory, and run the following command. (You must have put the
+root of the unpacked GAE toolkit in your path.)
 
     dev_appserver.py .
 
@@ -758,8 +782,8 @@ You'll see output something like this:
 
 You can now surf to `http://localhost:8080/admin/` using your browser.
 
-Here's a screen shot of the main screen, showing several articles.
-The top-most article is a draft; the rest are published.
+Here's a screen shot of the main screen, showing several articles. The
+top-most article is a draft; the rest are published.
 
 ![Admin screen](admin-main-small.png)
 
@@ -771,10 +795,9 @@ And here's the edit screen for the draft article:
 
 The [full-size edit page image is here](admin-edit.png).
 
-From a stylistic viewpoint, these screens are really simple.
-However, making them look fancier and slicker is simply a matter of
-fiddling with the templates and the stylesheet. The Python code
-doesn't change.
+From a stylistic viewpoint, these screens are really simple. However,
+making them look fancier and slicker is simply a matter of fiddling with
+the templates and the stylesheet. The Python code doesn't change.
 
 # The Markup Language
 
@@ -809,6 +832,7 @@ from there into the top directory of the blog.
 
 The code that actually translates RST to HTML is rather simple:
 
+{% highlight python %}
     import os
 
     from docutils.core import publish_parts
@@ -823,34 +847,33 @@ The code that actually translates RST to HTML is rather simple:
                               writer_name='html4css1',
                               settings_overrides=settings)
         return parts['fragment']
+{% endhighlight %}
 
 The only wrinkle is the setting of the `DOCUTILSCONFIG` environment
-variable. I determined empirically that if you don't set that
-variable to an empty string, the Docutils package attempts to read
-a startup file via the `codecs` module, and the way it calls the
-`codecs.open()` method conflicts with how that method is defined in
-the GAE Python library. (GAE has replaced Python's file handling
-routines with routines of its own, and they're not always 100%
-compatible.)
+variable. I determined empirically that if you don't set that variable to
+an empty string, the Docutils package attempts to read a startup file via
+the `codecs` module, and the way it calls the `codecs.open()` method
+conflicts with how that method is defined in the GAE Python library. (GAE
+has replaced Python's file handling routines with routines of its own, and
+they're not always 100% compatible.)
 
-Store this code in file `rst.py`. We'll then import it in our
-display code.
+Store this code in file `rst.py`. We'll then import it in our display code.
 
 # Create the Display Screens
 
 Now we're ready to create the display screens. There are six views
 to support:
 
-- **Main** shows the top *n* articles (where *n* is the value of
-  `MAX_ARTICLES_PER_PAGE` in the `defs.py` file). This screen is the
-  main blog screen--the one a visitor sees first.
-- **Show One Article** shows a single article. It's used when
-  someone clicks on the link for a single article.
-- **Show Articles by Tag** shows all articles with a specific tag.
-- **Show Articles by Month** shows all articles in a specified month.
-- **Show Archive** lists the titles and dates of all articles in the blog.
-- **Not Found** is a simple screen to display when an article or page 
-  isn't found.
+* **Main** shows the top *n* articles (where *n* is the value of
+  `MAX_ARTICLES_PER_PAGE` in the `defs.py` file). This screen is the main
+  blog screen--the one a visitor sees first.
+* **Show One Article** shows a single article. It's used when someone
+  clicks on the link for a single article.
+* **Show Articles by Tag** shows all articles with a specific tag.
+* **Show Articles by Month** shows all articles in a specified month.
+* **Show Archive** lists the titles and dates of all articles in the blog.
+* **Not Found** is a simple screen to display when an article or page isn't
+  found.
 
 We'll also add some query methods to the `Article` class as we go along.
 
@@ -890,6 +913,7 @@ The handlers go in `blog.py`, which is similar to `admin.py`. There's an
 initialization section at the bottom that sets up the URL-to-handler
 mappings. Let look at that first:
 
+{% highlight python %}
     application = webapp.WSGIApplication([('/', FrontPageHandler),
                                           ('/tag/([^/]+)/*$', ArticlesByTagHandler),
                                           ('/date/(\d\d\d\d)-(\d\d)/?$', ArticlesForMonthHandler),
@@ -901,12 +925,14 @@ mappings. Let look at that first:
                                          ],
 
                                          debug=True)
+{% endhighlight %}
 
 ## `AbstractPageHandler`
 
 At the top of the file, there's a base class that consolidates a lot of the
 common logic. The most important method it contains is `render_articles()`:
 
+{% highlight python %}
     class AbstractPageHandler(request.BlogRequestHandler):
 
         def render_articles(self,
@@ -958,13 +984,14 @@ common logic. The most important method it contains is `render_articles()`:
                                   'recent'       : recent}
 
             return self.render_template(template_name, template_variables)
+{% endhighlight %}
 
 This method takes:
 
-- a list of `Article` objects to be displayed
-- the original incoming HTTP request
-- a list of recent articles to display (which can be empty)
-- the template name to use, which defaults to the `show-articles.html` template
+* a list of `Article` objects to be displayed
+* the original incoming HTTP request
+* a list of recent articles to display (which can be empty)
+* the template name to use, which defaults to the `show-articles.html` template
 
 `render_articles()` then puts together the list of template variables,
 renders the specified template, and returns the result.
@@ -975,6 +1002,7 @@ the base class.
 Another method we should examine is `augment_articles()`, also in the
 `AbstractPageHandler` class:
 
+{% highlight python %}
     def augment_articles(self, articles, url_prefix, html=True):
         for article in articles:
             if html:
@@ -984,6 +1012,7 @@ Another method we should examine is `augment_articles()`, also in the
                     article.html = ''
             article.path = '/' + defs.ARTICLE_URL_PATH + '/%s' % article.id
             article.url = url_prefix + article.path
+{% endhighlight %}
 
 This method renders the HTML for each article to be displayed (if
 requested), and computes the article's path and URL.
@@ -991,18 +1020,18 @@ requested), and computes the article's path and URL.
 The base class also contains a few other methods used by
 `render_template()`:
 
-- `get_tag_counts()` assembles the list of unique tags, associating an
+* `get_tag_counts()` assembles the list of unique tags, associating an
   article count with each one. It also determines which CSS class to
   associate with each tag, based on the tag's relative frequency, for use
   when rendering the tag cloud; this information is returned in a list of
   `TagCount` objects. (`TagCount` is defined in `blog.py`. It's not shown
   here.)
-- `get_month_counts()` returns a list of `DateCount` objects that the
+* `get_month_counts()` returns a list of `DateCount` objects that the
   number of articles in each unique month/year.
-- `get_recent()` gets the most recent articles, making sure the list
+* `get_recent()` gets the most recent articles, making sure the list
   doesn't exceed the maximum specified in `defs.TOTAL_RECENT`.
 
-(See the complete file in the \`source code\`\_ for details.)
+(See the complete file in the source code for details.)
 
 ## Not Found Page
 
@@ -1021,12 +1050,14 @@ simple static message. We'll use this template in a couple places.
 
 The `NotFoundHandler` class is also simple:
 
+{% highlight python %}
     class NotFoundPageHandler(AbstractPageHandler):
         def get(self):
             self.response.out.write(self.render_articles([],
                                                          self.request,
                                                          [],
                                                          'not-found.html'))
+{% endhighlight %}
 
 Recall that this handler is the last, catch-all handler in the list of URLs
 in `blog.py`, so it's automatically invoked if the incoming request doesn't
@@ -1129,6 +1160,7 @@ displayed.
 
 The handler for the main page is even simpler:
 
+{% highlight python %}
     class FrontPageHandler(AbstractPageHandler):
         def get(self):
             articles = Article.published()
@@ -1138,6 +1170,7 @@ The handler for the main page is even simpler:
             self.response.out.write(self.render_articles(articles,
                                                          self.request,
                                                          self.get_recent()))
+{% endhighlight %}
 
 It gets the list of published articles, trims it down to the
 maximum number of articles on the main page, renders the articles
@@ -1148,9 +1181,9 @@ If you did not leave the `dev_appserver` running, bring it up
 again. Then, connect to `http://localhost:8080/`, and check out
 your main page. It should look something like this:
 
-![Main screen](77/main-small.png)
+![Main screen](main-small.png)
 
-The [full main page image is here](77/main.png).
+The [full main page image is here](main.png).
 
 ## Show One Article
 
@@ -1160,6 +1193,7 @@ selects a single post (e.g., `http://www.example.org/blog/id/5`).
 It re-uses the same `show-articles.html` template, but with just
 one article in the list. The handler looks like this:
 
+{% highlight python %}
     class SingleArticleHandler(AbstractPageHandler):
 
         def get(self, id):
@@ -1176,6 +1210,7 @@ one article in the list. The handler looks like this:
                                                          request=self.request,
                                                          recent=self.get_recent(),
                                                          template_name=template))
+{% endhighlight %}
 
 It attempts to retrieve the article with the specified ID. If the
 article exists in the database, then the code puts it in a
@@ -1191,6 +1226,7 @@ parameter. Where does that come from? Recall the configuration for
 this handler in the `WSGIApplication` object at the bottom of the
 script:
 
+{% highlight python %}
     application = webapp.WSGIApplication(
         [ ...
 
@@ -1198,6 +1234,7 @@ script:
 
          ...
          ],
+{% endhighlight %}
 
 Note that the regular expression, `'/id/(\d+)/?$` contains a group,
 `(\d+)`. Like Django, GAE maps each group into a parameter to the `get()`
@@ -1210,23 +1247,27 @@ first parameter to the `get()` method.
 The `ArticlesByTagHandler` class again re-uses the `show-articles.html`
 template:
 
+{% highlight python %}
     class ArticlesByTagHandler(AbstractPageHandler):
         def get(self, tag):
             articles = Article.all_for_tag(tag)
             self.response.out.write(self.render_articles(articles,
                                                          self.request,
                                                          self.get_recent()))
+{% endhighlight %}
 
 Note, however, that it's calling a class method called
 `all_for_tag()` in the `Article` class. We have to extend `Article`
 to support this query method. That method turns out to be trivial:
 
+{% highlight python %}
     @classmethod
     def all_for_tag(cls, tag):
         return Article.published_query()\
                       .filter('tags = ', tag)\
                       .order('-published_when')\
                       .fetch(FETCH_THEM_ALL)
+{% endhighlight %}
 
 My original version of this method loaded all published articles and
 manually searched through their tags. However, in an
@@ -1234,8 +1275,8 @@ manually searched through their tags. However, in an
 [something I missed in the GAE docs][]:
 
 > In a query, comparing a list property to a value performs the test
-> against the list members: `list_property = value` tests if the
-> value appears anywhere in the list.
+> against the list members: `list_property = value` tests if the value
+> appears anywhere in the list.
 
 This is convenient and more efficient than my original solution.
 
@@ -1243,20 +1284,21 @@ This is convenient and more efficient than my original solution.
 
 By now, you should be getting the hang of this.
 
-Next, we have to write a handler that'll produce a page of posts
-for a given month. As with the tag handler, the month handler is
-trivial:
+Next, we have to write a handler that'll produce a page of posts for a
+given month. As with the tag handler, the month handler is trivial:
 
+{% highlight python %}
     class ArticlesForMonthHandler(AbstractPageHandler):
         def get(self, year, month):
             articles = Article.all_for_month(int(year), int(month))
             self.response.out.write(self.render_articles(articles,
                                                          self.request,
                                                          self.get_recent()))
+{% endhighlight %}
 
-Again, though, it calls an `Article` class method we have yet to
-write:
+Again, though, it calls an `Article` class method we have yet to write:
 
+{% highlight python %}
     @classmethod
     def all_for_month(cls, year, month):
         start_date = datetime.date(year, month, 1)
@@ -1266,25 +1308,24 @@ write:
         else:
             next_year = start_date.year
             next_month = start_date.month + 1
-
         end_date = datetime.date(next_year, next_month, 1)
-        query = Article.published_query()\
-                       .filter('published_when >=', start_date)\
-                       .filter('published_when <', end_date)\
+        query = Article.published_query()\\
+                       .filter('published_when >=', start_date)\\
+                       .filter('published_when <', end_date)\\
                        .order('-published_when')
         return query.fetch(FETCH_THEM_ALL)
+{% endhighlight %}
 
 This method chains query filters to the query returned by
-`Article.published_query()`. The filters ensure that the returned
-articles are the ones published within the specified year and
-month.
+`Article.published_query()`. The filters ensure that the returned articles
+are the ones published within the specified year and month.
 
 ## Show Archive
 
 This page shows the titles of all published articles, in reverse
-chronological order. I chose to make this page even simpler than
-the other pages: It lacks the tag cloud, recent posts, and
-posts-by-month sections in the margin. The template is trivial:
+chronological order. I chose to make this page even simpler than the other
+pages: It lacks the tag cloud, recent posts, and posts-by-month sections in
+the margin. The template is trivial:
 
     {\% extends "base.html" \%}
 
@@ -1304,6 +1345,7 @@ posts-by-month sections in the margin. The template is trivial:
 
 And the handler is, once again, trivial:
 
+{% highlight python %}
     class ArchivePageHandler(AbstractPageHandler):
         def get(self):
             articles = Article.published()
@@ -1311,9 +1353,10 @@ And the handler is, once again, trivial:
                                                          self.request,
                                                          [],
                                                          'archive.html'))
+{% endhighlight %}
 
-Note that `ArchivePageHandler` passes an empty list for the
-"recent" posts (since it won't be used) and the archive template.
+Note that `ArchivePageHandler` passes an empty list for the "recent" posts
+(since it won't be used) and the archive template.
 
 Here's what the archive page looks like with our two articles in
 the archive:
@@ -1328,6 +1371,7 @@ Any decent blog supplies an RSS feed, so we should do that, too. Of
 course, that's simply a matter of writing a template and a small
 handler. By now, the handler should look pretty familiar:
 
+{% highlight python %}
     class RSSFeedHandler(AbstractPageHandler):
         def get(self):
             articles = Article.published()
@@ -1336,6 +1380,7 @@ handler. By now, the handler should look pretty familiar:
                                                          self.request,
                                                          [],
                                                          'rss2.xml'))
+{% endhighlight %}
 
 The template is simple, too:
 
@@ -1385,9 +1430,11 @@ up to the Google App Engine server, where you can use them.
 For instance, assume you have a picture call `foo.png` that you
 want to use in a blog article. Here's how you might deploy it:
 
+{% highlight bash %}
     $ cd picoblog
     $ cp ~/foo.png static
     $ appcfg.py update .
+{% endhighlight %}
 
 Then, you can use the reStructuredText `.. image` directive to pull
 it into an article:
@@ -1426,27 +1473,26 @@ controls.
 Now that you have the basic blog in place, you can start to add
 other enhancements, such as:
 
-- Support for [Pygments][] syntax coloring.
-- Support for [Google Analytics][], which is useful for analyzing logs and
+* Support for [Pygments][] syntax coloring.
+* Support for [Google Analytics][], which is useful for analyzing logs and
   traffic.
-- Image uploading.
-- A more individual theme.
-- etc.
+* Image uploading.
+* A more individual theme.
+* etc.
 
 # In Closing
 
-In this (long) tutorial, we built a simple blog using Python and
-Google's App Engine. The code represented in this article is very
-similar to the code that runs this very blog; it's certainly
-effective, even if it lacks certain bells and whistles right now.
-With any luck, you now have a better understanding of what it means
-to build an application on App Engine.
+In this (long) tutorial, we built a simple blog using Python and Google's
+App Engine. The code represented in this article is very similar to the
+code that runs this very blog; it's certainly effective, even if it lacks
+certain bells and whistles right now. With any luck, you now have a better
+understanding of what it means to build an application on App Engine.
 
 # Feedback
 
-I welcome feedback. Feel free to submit a comment, below, or drop
-me an email with comments or corrections. I'll update this article
-with any good stuff I receive.
+I welcome feedback. Feel free to submit a comment, below, or drop me an
+email with comments or corrections. I'll update this article with any good
+stuff I receive.
 
 # Related Software
 
@@ -1462,15 +1508,15 @@ Engine."
 
 # Related Brizzled Articles
 
-- [Adding Page caching to a GAE application][]
-- [Making XML-RPC calls from a Google App Engine application][]
+* [Adding Page caching to a GAE application][]
+* [Making XML-RPC calls from a Google App Engine application][]
 
 # Additional Reading
 
-- [Experimenting with Google App Engine][], by Bret Taylor.
-- [Building Scalable Web Applications with Google App Engine][]
+* [Experimenting with Google App Engine][], by Bret Taylor.
+* [Building Scalable Web Applications with Google App Engine][]
   (presentation), by Google's Brett Slatkin.
-- [Google App Engine documentation][]
+* [Google App Engine documentation][]
 
 [rehosted this blog]: 76.html
 [App Engine]: http://appengine.google.com/

@@ -70,9 +70,14 @@ module Jekyll
         # strings, allowing Liquid markup to be escaped, for display.
         alias orig_render render
         def render(layouts, site_payload)
-            res = orig_render(layouts, site_payload)
-            self.output = fix_liquid_escapes(self.output)
-            res
+            begin
+                res = orig_render(layouts, site_payload)
+                self.output = fix_liquid_escapes(self.output)
+                res
+            rescue
+                puts("Error during processing of #{self.full_url}")
+                raise
+            end
         end
 
         # Get the list of tags, unsorted. Returned array consists of Tag

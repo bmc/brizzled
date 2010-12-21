@@ -25,29 +25,26 @@ can send a "ping" to [Technorati][] when a new article is published.
 
 ## A Quick Overview of `xmlrpclib`
 
-It's entirely possible to do XML-RPC without the benefit of the
-standard Python `xmlrpclib` module. But `xmlrpclib` makes things so
-much simpler that it'd be nice to use it. Doing the job manually
-means building an XML message, sending it to the remote HTTP
-server, reading the result XML, and parsing that XML. `xmlrpclib`
-already does all that. But `xmlrpclib` attempts to open a socket to
-connect to the remote HTTP server, and opening a socket is strictly
-forbidden by the GAE
-[sandbox][].
+It's entirely possible to do XML-RPC without the benefit of the standard
+Python `xmlrpclib` module. But `xmlrpclib` makes things so much simpler
+that it'd be nice to use it. Doing the job manually means building an XML
+message, sending it to the remote HTTP server, reading the result XML, and
+parsing that XML. `xmlrpclib` already does all that. But `xmlrpclib`
+attempts to open a socket to connect to the remote HTTP server, and opening
+a socket is strictly forbidden by the GAE [sandbox][].
 
-Ideally, we want to use `xmlrpclib`, but have it connect to the
-remote HTTP server using the
-[fetch()][]
-function provided by the `google.appengine.api.urlfetch` module. We
-*could* create our own hacked version of `xmlrpclib` to do just
-that, but, luckily, the authors of `xmlrpclib` thought ahead and
-made the library easy to extend.
+Ideally, we want to use `xmlrpclib`, but have it connect to the remote HTTP
+server using the [fetch()][] function provided by the
+`google.appengine.api.urlfetch` module. We *could* create our own hacked
+version of `xmlrpclib` to do just that, but, luckily, the authors of
+`xmlrpclib` thought ahead and made the library easy to extend.
 
 ### Sample XML-RPC call
 
 Typically, making an XML-RPC call through `xmlrpclib` requires code
 like this:
 
+{% highlight python %}
     rpc_server = xmlrpclib.ServerProxy('http://rpc.technorati.com/rpc/ping')
     result = rpc_server.weblogUpdates.ping('My Blog Name', 
                                            'http://picoblog.example.com/')
@@ -58,17 +55,21 @@ like this:
                       result.get('message', '(No message in RPC result)'))
     else:
         logging.debug('Technorati ping successful.')
+{% endhighlight %}
 
-There are a couple things going on here. The first line of code
-sets up a `ServerProxy` object that allows us to interact with the
-remote RPC server. The actual method call looks just like a method
-call. The `xmlrpclib` module translates this line of code:
+There are a couple things going on here. The first line of code sets up a
+`ServerProxy` object that allows us to interact with the remote RPC server.
+The actual method call looks just like a method call. The `xmlrpclib`
+module translates this line of code:
 
+{% highlight python %}
     result = rpc_server.weblogUpdates.ping('My Blog Name', 'http://picoblog.example.com/')
+{% endhighlight %}
 
 into the following chunk of XML, which it then sends to the remote
 web server:
 
+{% highlight xml %}
     <?xml version="1.0"?>
     <methodCall>
       <methodName>weblogUpdates.ping</methodName>
@@ -81,11 +82,13 @@ web server:
         </param>
       </params>
     </methodCall>
+{% endhighlight %}
 
 It then waits for the XML-RPC response and decodes it into a
 dictionary of name-value pairs. Just for completeness, here's the
 successful result from a Technorati ping:
 
+{% highlight xml %}
     <?xml version="1.0" encoding="UTF-8"?>
     <methodResponse>
         <params>
@@ -105,9 +108,11 @@ successful result from a Technorati ping:
             </param>
         </params>
     </methodResponse>
+{% endhighlight %}
 
 And here's the failure result:
 
+{% highlight xml %}
     <?xml version="1.0" encoding="UTF-8"?>
     <methodResponse>
         <params>
@@ -130,6 +135,7 @@ And here's the failure result:
             </param>
         </params>
     </methodResponse>
+{% endhighlight %}
 
 ## `xmlrpclib` Transport Classes
 
@@ -147,6 +153,7 @@ at the
 in your Python distribution. Here's a portion of that class; the
 method we care about is `request()`:
 
+{% highlight python %}
     class Transport:
         """Handles an HTTP transaction to an XML-RPC server."""
     
@@ -209,6 +216,7 @@ method we care about is `request()`:
             p.close()
     
             return u.close()
+{% endhighlight %}
 
 The class is considerably larger than that, but `request()` is the
 only method that's required by the interface.
@@ -226,6 +234,7 @@ We can create our own transport class that uses the
 method instead of standard socket access. That class turns out to
 be pretty simple:
 
+{% highlight python %}
     import sys
     import xmlrpclib
     import logging
@@ -267,20 +276,21 @@ be pretty simple:
             p, u = xmlrpclib.getparser(use_datetime=False)
             p.feed(response_body)
             return u.close()
+{% endhighlight %}
 
 There are several things to note about the `request()` method.
 
--   It uses the `fetch()` method from the GAE API.
--   It scrupulously raises `xmlrpclib` exceptions on error
-    conditions.
--   It uses `xmlrpclib` function `getparser()` to parse the result.
-    Unlike the response parsing logic in the `xmlrpclib.Transport`
-    class, ours is much simpler, since it has the entire response in
-    hand and doesn't have to read it a bufferful at a time.
+* It uses the `fetch()` method from the GAE API.
+* It scrupulously raises `xmlrpclib` exceptions on error conditions.
+* It uses `xmlrpclib` function `getparser()` to parse the result. Unlike
+  the response parsing logic in the `xmlrpclib.Transport` class, ours is
+  much simpler, since it has the entire response in hand and doesn't have
+  to read it a bufferful at a time.
 
 Using the `GAEXMLRPCTransport()` class, we can now make our XML-RPC
 client code work within GAE:
 
+{% highlight python %}
     rpc_server = xmlrpclib.ServerProxy('http://rpc.technorati.com/rpc/ping',
                                        GAEXMLRPCTransport())
     result = rpc_server.weblogUpdates.ping('My Blog Name', 
@@ -292,6 +302,7 @@ client code work within GAE:
                       result.get('message', '(No message in RPC result)'))
     else:
         logging.debug('Technorati ping successful.')
+{% endhighlight %}
 
 # Changes to `picoblog`
 
@@ -308,6 +319,7 @@ file, and put that file at the root of the `picoblog` source tree.
 
 Next, we add a few things to the `defs.py` module:
 
+{% highlight python %}
     CANONICAL_BLOG_URL = 'http://picoblog.appspot.com/'
     
     import os
@@ -317,6 +329,7 @@ Next, we add a few things to the `defs.py` module:
     else:
         ON_GAE = False
     del _server_software
+{% endhighlight %}
 
 The `CANONICAL_BLOG_URL` constant defines the URL of our blog; we
 have to include that information in the Technorati ping. (We
@@ -331,15 +344,16 @@ URL; see below.
 
 ### `SaveArticleHandler`
 
-The bulk of the changes are in the `admin.py` module. First, we
-have to modify the `SaveArticleHandler` class to detect when an
-article is published and notify Technorati when that happens. (GAE
-invokes an instance of the `SaveArticleHandler` class to process
-the "save article" action.) We'll use a simple definition of
-"published": When the "draft" flag is cleared.
+The bulk of the changes are in the `admin.py` module. First, we have to
+modify the `SaveArticleHandler` class to detect when an article is
+published and notify Technorati when that happens. (GAE invokes an instance
+of the `SaveArticleHandler` class to process the "save article" action.)
+We'll use a simple definition of "published": When the "draft" flag is
+cleared.
 
 Here's the new version of `SaveArticleHandler`:
 
+{% highlight python %}
     class SaveArticleHandler(request.BlogRequestHandler):
         """
         Handles form submissions to save an edited article.
@@ -392,9 +406,11 @@ Here's the new version of `SaveArticleHandler`:
                 self.redirect('/admin/article/edit/?id=%s' % article.id)
             else:
                 self.redirect('/admin/')
+{% endhighlight %}
 
 Here are the relevant changes:
 
+{% highlight python %}
     article = Article.get(id) if id else None
     if article:
         # It's an edit of an existing item.
@@ -417,23 +433,25 @@ Here are the relevant changes:
         logging.debug('Article %d just went from draft to published. '
                       'Alerting the media.' % article.id)
         alert_the_media()
+{% endhighlight %}
 
-Determining that the article was just published is trivial. If it
-*has* just been published, we call a (new) `alert_the_media()`
-function.
+Determining that the article was just published is trivial. If it *has*
+just been published, we call a (new) `alert_the_media()` function.
 
 ### The `alert_the_media()` function
 
-This function sends the appropriate alerts to whichever external
-web sites we think should hear about new articles. Currently,
-that's only Technorati, but we might want to add more later, so it
-doesn't hurt to put this logic in a separate function.
+This function sends the appropriate alerts to whichever external web sites
+we think should hear about new articles. Currently, that's only Technorati,
+but we might want to add more later, so it doesn't hurt to put this logic
+in a separate function.
 
 The `alert_the_media()` function is simple enough:
 
+{% highlight python %}
     def alert_the_media():
         # Right now, we only alert Technorati
         ping_technorati()
+{% endhighlight %}
 
 ### The `ping_technorati()` function
 
@@ -441,6 +459,7 @@ Finally, we get to the function that *uses* our XML-RPC coolness.
 It's not a whole lot different from the \`sample XML-RPC call\`\_
 at the top of the article:
 
+{% highlight python %}
     def ping_technorati():
         if defs.ON_GAE:
             url = TECHNORATI_PING_RPC_URL
@@ -461,16 +480,19 @@ at the top of the article:
         except:
             raise urlfetch.DownloadError, \
                   "Can't ping Technorati: %s" % sys.exc_info()[1]
+{% endhighlight %}
 
 Note the first four lines, though. They say:
 
--   If we're running on GAE, use the real Technorati ping URL.
--   Otherwise, use a fake one.
+* If we're running on GAE, use the real Technorati ping URL.
+* Otherwise, use a fake one.
 
 Those constants are defined at the top of `admin.py`:
 
+{% highlight python %}
     TECHNORATI_PING_RPC_URL = 'http://rpc.technorati.com/rpc/ping'
     FAKE_TECHNORATI_PING_RPC_URL = 'http://localhost/~bmc/technorati-mock.xml'
+{% endhighlight %}
 
 The fake URL is nothing more than a canned page. On my development
 machine, I run an instance of the
@@ -485,17 +507,13 @@ And that's all there is to it.
 
 Note that XML-RPC calls can fail for several reasons, including:
 
-1.  The XML-RPC response is too large. GAE defines a
-    `ResponseTooLargeError` that is sent when the response data exceeds
-    the maximum allowed size and the `allow_truncated` parameter passed
-    to
-    [fetch()][]
-    was `False`. Passing `allow_truncated=True` to
-    [fetch()][]
-    isn't especially helpful, so there isn't much we can do about this
-    error.
-2.  The remote HTTP server takes too long to respond. There's not
-    much we can do about this error.
+1. The XML-RPC response is too large. GAE defines a `ResponseTooLargeError`
+   that is sent when the response data exceeds the maximum allowed size and
+   the `allow_truncated` parameter passed to [fetch()][] was `False`.
+   Passing `allow_truncated=True` to [fetch()][] isn't especially helpful,
+   so there isn't much we can do about this error.
+2. The remote HTTP server takes too long to respond. There's not much we
+   can do about this error.
 
 # Getting the Code
 
@@ -504,19 +522,17 @@ The code used in this article is available at
 
 # Related Brizzled Articles
 
--   [Writing Blogging Software for Google App Engine][]
--   [Adding Page caching to a GAE application][]
+* [Writing Blogging Software for Google App Engine][]
+* [Adding Page caching to a GAE application][]
 
 # Additional Reading
 
--   [XML-RPC HOWTO][]
--   The
-    [xmlrpclib.py source code][]
--   The
-    [xmlrpclib documentation][]
--   [Building Scalable Web Applications with Google App Engine][]
-    (presentation), by Google's Brett Slatkin.
--   [Google App Engine documentation][]
+* [XML-RPC HOWTO][]
+* The [xmlrpclib.py source code][]
+* The [xmlrpclib documentation][]
+* [Building Scalable Web Applications with Google App Engine][]
+  (presentation), by Google's Brett Slatkin.
+* [Google App Engine documentation][]
 
 [App Engine]: http://appengine.google.com/
 [sandbox]: http://code.google.com/appengine/docs/python/sandbox.html

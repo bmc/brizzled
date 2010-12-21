@@ -708,13 +708,18 @@ li.tocH6
 div.highlight
 {
     /* same margins as <pre> tag */
+    margin-left: 0;
+    margin-right: 0;
+    background-color: #f6f6f6;
+/*
     margin-left: 2em;
     margin-right: 2em;
+*/
 }
 
 div.highlight pre
 {
-    margin-left: 0 !important;
+/*    margin-left: 0 !important; */
 }
 
 .highlight .err /* Error */
@@ -724,8 +729,7 @@ div.highlight pre
 
 .highlight .k /* Keyword */
 {
-    color: red;
-    font-weight: bold
+    color: blue;
 }
 
 .highlight .o /* Operator */
@@ -860,7 +864,8 @@ div.highlight pre
 
 .highlight .nc /* Name.Class */
 {
-    color: #0000FF
+    color: red;
+    font-weight: bold;
 }
 
 .highlight .no /* Name.Constant */
@@ -876,18 +881,17 @@ div.highlight pre
 .highlight .ni /* Name.Entity */
 {
     color: #999999;
-    font-weight: bold
 }
 
 .highlight .ne /* Name.Exception */
 {
     color: #D2413A;
-    font-weight: bold
+    font-weight: bold;
 }
 
 .highlight .nf /* Name.Function */
 {
-    color: #00A000
+    color: red;
 }
 
 .highlight .nl /* Name.Label */

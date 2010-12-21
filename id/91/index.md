@@ -21,7 +21,7 @@ Bags and wallets.
 Swiss Branded Watches.
 Best-selling luxury bags and wallets.
 Top quality replicas for sale.
-\*\*\* All hand made \*\*\*
+ALL HAND MADE.
 
 Ascent your darling sexuality.
 Lift your bed event.
