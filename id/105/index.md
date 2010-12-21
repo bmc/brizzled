@@ -11,26 +11,29 @@ toc: toc
 I use [Jekyll][] to generate this blog (in addition to the
 [clapper.org web site][] and my [company web site][]). This blog presented
 a few challenges, which I was able to address with some simple, if
-[crufty][], Jekyll hacks. The hacks are all accomplished via
-[Jekyll plugins][] and [monkeypatching][], and they work with Jekyll 0.8.0.
-(I haven't tested them with other versions.)
+[crufty][], Jekyll hacks. The hacks are all accomplished via Jekyll
+[plugins][] and [monkeypatching][], and they work with Jekyll 0.8.0. (I
+haven't tested them with other versions.)
 
 # Non-standard Blog Layout
 
-For [historical reasons][], this blog uses a layout that doesn't match Jekyll's
-blog-specific [post format][]. Each article has a unique numeric ID, and all
-articles live within an `id` directory. So, the first problem to be solved is
-to ensure that Jekyll finds and renders the blog's articles.
+For [historical reasons][], this blog uses a layout that doesn't match
+Jekyll's blog-specific [post format][]. Each article has a unique numeric
+ID, which corresponds to a subdirectory of a top -level `id` directory. For
+instance, this article, and any related files, live in source directory
+`id/105/`; the article's source is in file `index.md`.
 
-The solution is fairly simple. Underneath the top level of my blog
-source, I created a `_plugins` directory; that's where Jekyll expects to
-find plugin [Ruby][] code. Within that directory, I created a `site.rb`
-file, with the following source.
+So, the first problem to be solved is to ensure that Jekyll finds and
+renders the blog's articles. The solution is fairly simple. Underneath the
+top level of my blog source, I created a `_plugins` directory; that's where
+Jekyll expects to find its [plugins][], which must be [Ruby][] code. Within
+that directory, I created a `site.rb` file, containing code that augments
+the stock Jekyll `Site` class:
 
 {% highlight ruby %}
     module Jekyll
 
-      # Extensions to the Jekyll Page class.
+      # Extensions to the Jekyll Site class.
 
       class Site
       
@@ -64,9 +67,9 @@ That code does two things:
 
 * It adds a `blog_posts` method that returns the Jekyll `Page` objects
   that correspond to my blog posts.
-* It augments the stock Jekyll `site_payload` method to add the list of
-  blog posts (and some other information) to the payload, thus making them
-  available to the [Liquid][] templates.
+* It augments the stock Jekyll `Site::site_payload` method to add the list
+  of blog posts (and some other information) to the site payload, thus making
+  them available to the [Liquid][] templates.
 
 There's another piece of code that's required, in a file called
 `_plugins/page.rb`:
@@ -665,7 +668,7 @@ issues. If you have any suggestions on how I can improve these hacks, feel
 free to email me or leave a comment.
 
 [Jekyll]: http://jekyllrb.com/
-[Jekyll plugins]: https://github.com/mojombo/jekyll/wiki/Plugins
+[plugins]: https://github.com/mojombo/jekyll/wiki/Plugins
 [clapper.org web site]: http://www.clapper.org/
 [company web site]: http://www.ardentex.com/
 [crufty]: http://www.jargon.net/jargonfile/c/crufty.html
