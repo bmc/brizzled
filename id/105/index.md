@@ -111,13 +111,13 @@ custom version of `to_liquid` adds the following values:
 `date`:
 :  Because my blog articles don't have a date in the file name, I have to be
    able to specify the publication date somewhere. I do so via the `date`
-   variable in the YAML front-matter. The code ensures that the parsed date
-   is available to the Liquid template.
+   variable in the [YAML front matter][]. The code ensures that the parsed
+   date is available to the Liquid template.
 
 `max_top`:
 :  `max_top` controls the number of articles shown on the summary (top) page
    of the blog. The code uses the the value of `max_top` from the page's
-   YAML front matter is used, if it's present. (Realistically, this value
+   [YAML front matter][], if it's present. (Realistically, this value
    will only appear in the [Markdown][] source for the top page.) If
    `max_top` isn't in the front matter, then the code tries to find it in
    the `_config.yml` data. If it's not there either, then `to_liquid` uses
@@ -217,7 +217,7 @@ I had several goals in mind:
 ## Goal 1: Be able to specify one or more tags for each page.
 
 Addressing the first goal was simple: I just specify a comma-separated list of
-tags in an article's YAML front-matter. For instance:
+tags in an article's [YAML front matter][]. For instance:
 
     ---
     layout: article
@@ -563,12 +563,12 @@ If you visit the [top page](/) of my blog, or [any tag page](/tags/blogging/),
 you'll see that each article title is accompanied by a short summary. Those
 summaries are the result of one final Jekyll hack.
 
-To create a summary, I create a `summary.md` file in the same directory
-as the blog article. Unlike the article itself, this summary Markdown file
-contains no YAML front-matter; it's just a plain file. Thus, Jekyll will simply
-copy the file to its appropriate `_site` directory, instead of processing it.
-While that isn't exactly what I want, there's no harm in allowing Jekyll to
-copy the file.
+To create a summary, I create a `summary.md` file in the same directory as
+the blog article. Unlike the article itself, this summary Markdown file
+contains no [YAML front matter][]; it's just a plain file. Thus, Jekyll
+will simply copy the file to its appropriate `_site` directory, instead of
+processing it. While that isn't exactly what I want, there's no harm in
+allowing Jekyll to copy the file.
 
 However, I *really* want Jekyll to convert the file into HTML, which I can
 use, inline, in my layouts. To get that to happen, I monkeypatched yet again.
@@ -681,3 +681,4 @@ free to email me or leave a comment.
 [Liquid]: http://www.liquidmarkup.org/
 [Markdown]: http://daringfireball.net/projects/markdown/
 [top-level page template]: https://github.com/bmc/brizzled/blob/76f6bf8f2830b4c7c41a39d50ad12ca6aedd679b/_layouts/main.html
+[YAML front matter]: https://github.com/mojombo/jekyll/wiki/YAML-Front-Matter
