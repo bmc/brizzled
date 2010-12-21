@@ -22,7 +22,7 @@ module Jekyll
 
             # Allow for a summary.md file that generates the article summary.
             @summary = Summary.new(File.join(@base, @dir, SUMMARY_FILE),
-                                   File.join(@base, site.dest, @dir, 
+                                   File.join(site.dest, @dir, 
                                              SUMMARY_HTML))
         end
 
