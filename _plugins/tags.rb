@@ -14,7 +14,7 @@ module Jekyll
       tag_index = (site.config['tag_index_layout'] || 'tag_index') + '.html'
       self.read_yaml(File.join(base, '_layouts'), tag_index)
       self.data['tag'] = tag
-      self.data['articles'] = articles.sort { |p1, p2| p1.date <=> p2.date }
+      self.data['articles'] = articles.sort { |p1, p2| p2.date <=> p1.date }
       tag_title_prefix = site.config['tag_title_prefix'] || 'Tag: '
       self.data['title'] = "#{tag_title_prefix}#{tag}"
       @summary = Summary.empty
