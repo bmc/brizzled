@@ -135,8 +135,8 @@ SBT project, simply add these lines:
 
 {% highlight scala %}
     // Tell SBT about my repository.
-    val myRepo = My Maven Repository" at "http://maven.example.org"
-    
+    val myRepo = "My Maven Repository" at "http://maven.example.org"
+
     // Create a dependency on bodacious.
     val bodacious = "org.example" % "bodacious" % "0.1"
 {% endhighlight %}
