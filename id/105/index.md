@@ -137,8 +137,10 @@ following in my layouts:
 # Liquid and Django
 
 The article entitled [*Writing Blogging Software for Google App Engine*][77]
-contains [App Engine template markup][] that confuses the [Liquid][] template
-engine Jekyll uses. The occurrence of a block of markup like this:
+contains [App Engine template][] markup (which is based on
+[Django template][] markup). These sequences confuse the [Liquid][]
+template engine Jekyll uses, because they look similar to Liquid's template
+language. For example, the occurrence of a block of markup like this:
 
     {\% block main \%}
     {\% endblock \%}
@@ -146,10 +148,10 @@ engine Jekyll uses. The occurrence of a block of markup like this:
 can cause Liquid to throw an exception about a bad tag ("block"). Similarly,
 something like this:
 
-    \{\{ article.path \}\}
+    \{\{ blog.name \}\}
 
 can result in an empty line, because Liquid will attempt to substitute the
-value of `article.path`, only to find it *has* no value.
+value of `blog.name`, only to find it *has* no value.
 
 I needed to add a means of escaping those tags, so that Liquid would ignore
 them. The solution is straightforward and involves some more monkeypatching
@@ -184,12 +186,11 @@ to Jekyll's `Page` class:
 {% endhighlight %}
 
 In that small bit of code, I've replaced the Jekyll `Page.render()` method
-with my own version of that method, which:
+with my own version of that method, which first invokes the actual Jekyll
+`Page.render()` method, then replaces escaped Liquid tags with their actual
+tags.
 
-* first invokes the actual Jekyll `Page.render()` method, then
-* replaces escaped Liquid tags with their actual tags.
-
-This small hack allows me to represent Liquid (or Django) template markup
+This hack allows me to represent Liquid (or [Django][]) template markup
 within my Markdown blog articles like this:
 
     {\\% block main \\%}
@@ -346,15 +347,15 @@ To accomplish this goal, I monkeypatched the following method into the Jekyll
         ...
         
         def pages_by_tag
-            tag_ref = {}
-            self.pages.each do |page|
-                page.tags.each do |tag|
-                    pages = tag_ref.fetch(tag, Set.new)
-                    pages << page
-                    tag_ref[tag] = pages
-                end
+          tag_ref = {}
+          self.pages.each do |page|
+            page.tags.each do |tag|
+              pages = tag_ref.fetch(tag, Set.new)
+              pages << page
+              tag_ref[tag] = pages
             end
-            tag_ref
+          end
+          tag_ref
         end
       end
     end
@@ -449,16 +450,17 @@ My version of `tag_index.html` looks a lot like the [top-level page template][]:
 
 # Printer-friendly Pages
 
-I believe blogs should provide printer-friendly formats, and this blog is no
-exception. However, generating a printer-friendly version of each article isn't
-something Jekyll can do, out of the box. Stock Jekyll generates a single HTML
-file from the combination of a layout (template) and a markup article.
-Generating two HTML files from the same input article requires some
-customizing.
+I believe blogs should provide printer-friendly formats, and this blog is
+no exception. However, generating a printer-friendly version of each
+article isn't something stock Jekyll can do. By default, Jekyll generates a
+single HTML file from the combination of a layout (template) and a markup
+article. Generating two HTML files from the same input article requires
+some customizing.
 
 The first piece of code is a new `PrintablePage` class, stored in
-`_plugins/printable_page.rb`. A `PrintablePage` object delegates most of
-its work to an existing `Page` object, but it overrides a few things:
+`_plugins/printable_page.rb`. A `PrintablePage` object
+[delegates][Ruby delegates] most of its work to an existing `Page` object,
+but it overrides a few things:
 
 {% highlight ruby %}
   require 'delegate'
@@ -655,6 +657,9 @@ summary merely be referencing it:
     {\% if article.has_summary \%}
     \{\{ article.summary \}\}
     {\% endif \%}
+    
+In addition, referring to the summary via `\{\{ article.summary \}\}`
+substitutes its rendered content into the document.
 
 # Conclusion
 
@@ -677,8 +682,11 @@ free to email me or leave a comment.
 [historical reasons]: ../77/
 [post format]: https://github.com/mojombo/jekyll/wiki/Permalinks
 [77]: ../77/
-[App Engine template markup]: http://code.google.com/appengine/docs/python/gettingstarted/templates.html
+[App Engine template]: http://code.google.com/appengine/docs/python/gettingstarted/templates.html
 [Liquid]: http://www.liquidmarkup.org/
 [Markdown]: http://daringfireball.net/projects/markdown/
 [top-level page template]: https://github.com/bmc/brizzled/blob/76f6bf8f2830b4c7c41a39d50ad12ca6aedd679b/_layouts/main.html
 [YAML front matter]: https://github.com/mojombo/jekyll/wiki/YAML-Front-Matter
+[Django]: http://www.djangoproject.com/
+[Django template]: http://www.djangoproject.com/documentation/0.96/templates/
+[Ruby delegates]: http://ruby-doc.org/docs/ProgrammingRuby/html/lib_patterns.html#S1
