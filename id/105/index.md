@@ -365,7 +365,7 @@ each value is a set of `Page` objects that are associated with the hash.
 
 ## Goal 4: Generate a page for each tag
 
-A Jekyll generator plugin (see the [Jekyll plugins][] page) solved this
+A Jekyll generator plugin (see the Jekyll [plugins][] page) solved this
 problem for me. Using the code at <https://gist.github.com/524748> as a
 model, I wrote the following code, which I placed in `_plugins/tags.rb`:
 
