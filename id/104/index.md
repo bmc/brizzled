@@ -25,6 +25,8 @@ settled on [Diigo][], for these reasons:
 * It supports essentially the same features as Delicious, with additional
   capabilities.
 * It has both a free and a [premium](http://www.diigo.com/premium) service.
+* It works on Linux, not just Mac and Windows. (I use all three, though I
+  spend most of my time on my Mac laptop or on Linux.)
 
 [Diigo]: http://www.diigo.com/
 [Google Chrome]: http://www.google.com/chrome/
