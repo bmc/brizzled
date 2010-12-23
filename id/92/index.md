@@ -51,7 +51,7 @@ I'm building a Scala-based replacement for my Python [sqlcmd][] tool
 project over, too. The Ant build file for that project is 250 lines of XML,
 and it doesn't support external dependencies. The Maven POM file (if there
 were one) would, of course, be smaller than that. But the configuration
-file for SBT is trivial, and far more readable than a `pom.xml` [file:][]
+file for SBT is trivial, and far more readable than a `pom.xml` file:
 
     import sbt._
     
@@ -91,4 +91,3 @@ I'm sold.
 [Ivy]: http://ant.apache.org/ivy/
 [Grizzled Scala Library]: https://github.com/bmc/grizzled-scala/tree
 [sqlcmd]: http://software.clapper.org/python/sqlcmd/
-[file:]: file:
