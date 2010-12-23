@@ -6,4 +6,4 @@ like [Ant][].
 
 [Scala]: http://www.scala-lang.org/
 [Ant]: http://ant.apache.org/
-[using SBT]: 92.html
+[using SBT]: /id/92/

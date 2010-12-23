@@ -1518,7 +1518,7 @@ Engine."
   (presentation), by Google's Brett Slatkin.
 * [Google App Engine documentation][]
 
-[rehosted this blog]: 76.html
+[rehosted this blog]: /id/76/
 [App Engine]: http://appengine.google.com/
 [Django]: http://www.djangoproject.com/
 [J.J. Geewax]: http://blog.geewax.org/

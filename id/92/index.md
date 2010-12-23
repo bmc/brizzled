@@ -75,11 +75,11 @@ file for SBT is trivial, and far more readable than a `pom.xml` file:
 
 I'm sold.
 
-[yet another build tool]: /id/87.html
+[yet another build tool]: /id/87/
 [Scala]: http://www.scala-lang.org/
 [SBT]: http://code.google.com/p/simple-build-tool/
 [Ant]: http://ant.apache.org/
-[previous build tool discussion]: /id/87.html
+[previous build tool discussion]: /id/87/
 [Maven]: http://maven.apache.org/
 [Ivy]: http://ant.apache.org/ivy/
 [Gradle]: http://www.gradle.org/

@@ -532,9 +532,9 @@ work well for me.
   (presentation), by Google's Brett Slatkin.
 * [Google App Engine documentation][]
 
-[previous article]: 77.html
+[previous article]: /id/77/
 [App Engine]: http://appengine.google.com/
-[previous article]: 77.html
+[previous article]: /id/77/
 [reStructuredText]: http://docutils.sourceforge.net/rst.html
 [profiled]: http://code.google.com/appengine/kb/commontasks.html#profiling
 [memory cache API]: http://code.google.com/appengine/docs/memcache/

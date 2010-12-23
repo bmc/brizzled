@@ -40,7 +40,7 @@ however, it wasn't a big effort.
 Later, I'll write one or more blog posts on writing a simple
 blogging engine using App Engine.
 
-[this blog is now running under Django]: /id/73.html
+[this blog is now running under Django]: /id/73/
 [VPS]: http://onlinebusiness.about.com/od/webhosting/g/vps.htm
 [Django]: http://www.djangoproject.com/
 [App Engine]: http://appengine.google.com/
