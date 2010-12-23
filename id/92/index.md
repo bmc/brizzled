@@ -22,9 +22,9 @@ Yay!), with complete access to Ant tasks and full external dependency
 management.
 
 Before diving feet-first into Gradle, though, I decided to take a closer
-look at [SBT][], a tool Daniel Spiewak recommended. SBT bills itself as "a
-simple build tool for Scala projects that aims to do the basics well." SBT
-uses [Scala][], much the same way that Gradle uses Groovy; this is
+look at [SBT][], a tool [Daniel Spiewak][] recommended. SBT bills itself as
+"a simple build tool for Scala projects that aims to do the basics well."
+SBT uses [Scala][], much the same way that Gradle uses Groovy; this is
 appealing to me, since I'm doing most of my "elective programming" in Scala
 these days. After digging a bit, I found that SBT has complete support for
 external dependency management.
@@ -91,3 +91,4 @@ I'm sold.
 [Ivy]: http://ant.apache.org/ivy/
 [Grizzled Scala Library]: https://github.com/bmc/grizzled-scala/tree
 [sqlcmd]: http://software.clapper.org/python/sqlcmd/
+[Daniel Spiewak]: http://www.codecommit.com/blog/
