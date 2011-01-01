@@ -30,13 +30,7 @@ The function to run a block of Ruby code as another user is trivial:
 
 Using the function is also trivial:
 
-{% highlight ruby %}
-    puts("Caller PID = #{Process.pid}")
-    puts("Caller UID = #{Process.uid}")
-    as_user "bmc" do |user|
-      puts("In child process. User=#{user}, PID=#{Process.pid}, UID=#{Process.uid}")
-    end
-{% endhighlight %}
+<script src="https://gist.github.com/761820.js?file=asusertest.rb"> </script>
 
 Of course, the calling code has to be running as *root* (or *setuid* to
 *root*) to switch to another user. Running the above code on my Mac OS X
