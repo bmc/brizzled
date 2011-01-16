@@ -450,6 +450,15 @@ My version of `tag_index.html` looks a lot like the [top-level page template][]:
 
 # Printer-friendly Pages
 
+> **Update:** While this technique served as a useful exercise, I am no longer
+> using it in this blog. Instead, I have adopted [Stephan Sokolow's][]
+> suggestion (see [his comment][ssokolow-comment], below), and I now use
+> separate [CSS styling rules][] for the screen and the printer.
+
+[Stephan Sokolow's]: http://blog.ssokolow.com/
+[ssokolow-comment]: #comment-120190386
+[CSS styling rules]: http://www.killersites.com/articles/newsletterArchive/Newsletter_Nov3_2003.htm
+
 I believe blogs should provide printer-friendly formats, and this blog is
 no exception. However, generating a printer-friendly version of each
 article isn't something stock Jekyll can do. By default, Jekyll generates a

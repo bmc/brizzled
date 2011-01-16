@@ -1,9 +1,7 @@
-/* $Id: f5110ad6efb1fbf9183309ef7c4b229067600d1f $ */
-
 body
 {
     font-family: Verdana, Arial, Helvetica, sans-serif;
-    font-size: 11pt;
+    font-size: 9pt;
     background-color: white;
     margin-left: 20px;
     margin-right: 20px;
@@ -12,6 +10,11 @@ body
 table
 {
     font-size: 10pt;
+}
+
+.screen
+{
+    display: none;
 }
 
 div.banner-background
@@ -30,6 +33,17 @@ div.banner-image
     float: left;
     font-size: 18pt;
     font-weight: bold;
+}
+
+div.banner-tagline
+{
+    float: right;
+    width: 30em;
+    padding-left: 5em;
+    padding-top: 10px;
+    background-color: #eeeeee;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-style: italic;
 }
 
 div.printable-page
@@ -78,6 +92,11 @@ pre
 tt
 {
     font-family: Andale Mono, Lucidatypewriter, Lucida Typewriter, monospace;
+}
+
+div#content-box
+{
+    border-top: 1px solid black;
 }
 
 #contents
@@ -204,6 +223,7 @@ div.article-title
 {
     font-weight: bold;
     font-size: 16pt;
+    padding-top: 1em;
 }
 
 /* -------------------------------------------------------------------------- *\

@@ -21,6 +21,11 @@ body
     height: 100%;
 }
 
+.print
+{
+    display: none;
+}
+
 /* -------------------------------------------------------------------------- *\
                                    Main Blog
 \* -------------------------------------------------------------------------- */
@@ -49,6 +54,11 @@ div.page-footer
 
 .lytebox-popup
 {
+    // For vertical centering
+    min-height: 10em;
+    display: table-cell;
+    vertical-align: middle;
+
     padding: 1em 1em 1em 1em;
     background-color: #eeeeee;
     font-family: Verdana, Arial, Helvetica, sans-serif;

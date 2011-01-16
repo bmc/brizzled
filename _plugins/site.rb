@@ -13,17 +13,18 @@ module Jekyll
             self.pages.select {|p| p.full_url =~ POST_PAGE_RE}
         end
 
-        alias orig_write write
-        def write
-            orig_write
-
-            puts('Writing printable pages')
-            blog_posts.each do |page|
-                printable_page = PrintablePage.new(page)
-                printable_page.render(self.layouts, site_payload)
-                printable_page.write(self.dest)
-            end
-        end
+        # Printable pages are now handled by alternate style sheet.
+        #alias orig_write write
+        #def write
+        #    orig_write
+        #
+        #    puts('Writing printable pages')
+        #    blog_posts.each do |page|
+        #        printable_page = PrintablePage.new(page)
+        #        printable_page.render(self.layouts, site_payload)
+        #        printable_page.write(self.dest)
+        #    end
+        #end
 
         # Add some custom options to the site payload, accessible via the
         # "site" variable within templates.

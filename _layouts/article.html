@@ -8,13 +8,21 @@
 <div class="article-header">
 
   <div class="article-title">
-  <a href="{{ page.url }}" class="reference">{{ page.title }}</a>
+    <div class="screen">
+      <a href="{{ page.url }}" class="reference">{{ page.title }}</a>
+    </div>
+    <div class="print">
+      {{ page.title }}
+    </div>
   </div>
 
-  <div class="article-timestamp">
-<a href="printable.html">Printer-friendly</a> |
+  <div class="article-timestamp screen">
+<a href="/printer-friendly.html" rel="lyteframe" title="Printer-friendly" rev="width: 400px; height: 300px;">Printer-friendly</a> |
 {{ page.date | date: '%A, %d %B, %Y' }}</div>
 
+  <div class="article-timestamp print">
+    {{ page.date | date: '%A, %d %B, %Y' }}
+  </div>
 </div>
 
 {% if (page.toc == "toc") %}
@@ -26,7 +34,7 @@
 <div class="article-body" id="content">
 
 {% if (page.toc == "toc") %}
-<div id="tocBlock">
+<div id="tocBlock" class="screen">
 <span id="tocHeading">Table of Contents</span>
 <div id="toc"></div>
 </div>
@@ -37,9 +45,9 @@
 
 <br/>
 
-<div class="article-footer">
+<div class="article-footer screen">
 <a href="{{ page.url }}" class="reference">Permalink</a> |
-<a href="printable.html" class="reference">Printer-friendly</a> |
+<a href="/printer-friendly.html" rel="lyteframe" title="Printer-friendly" rev="width: 400px; height: 300px;">Printer-friendly</a> |
 <span class="tags">Tags: 
 {% for tag in page.tags %}
 <a href="/tags/{{ tag.dir }}/">{{ tag.name }}</a>{% if forloop.last %}{% else %},{% endif %}
@@ -53,6 +61,8 @@
 createTOC();
 </script>
 {% endif %}
+
+<div class="screen">
 
 <a href="#disqus_thread">Comments</a>
 
@@ -105,7 +115,7 @@ createTOC();
 //]]>
 </script>
 
-
+</div>
 
 
 {% include bottom.html %}

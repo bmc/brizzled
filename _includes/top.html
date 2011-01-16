@@ -3,6 +3,8 @@
 <head>
 <link href="/cssjs/style.css" media="screen" rel="stylesheet" type="text/css"></link>
 <link href="/cssjs/common.css" media="screen" rel="stylesheet" type="text/css"></link>
+<link href="/cssjs/style-printable.css" media="print" rel="stylesheet" type="text/css"></link>
+<link href="/cssjs/common.css" media="print" rel="stylesheet" type="text/css"></link>
 <link href="/cssjs/lytebox/lytebox.css" media="screen" rel="stylesheet" type="text/css"></link>
 <script src="/cssjs/lytebox/lytebox.js" language="javascript" type="text/javascript"></script>
 <title>{{ page.title }}</title>
@@ -15,23 +17,30 @@
 
 <div class="banner-background">
   <div class="banner">
-
     <div class="banner-image">
-    <a href="/id/4/"><img src="/images/brizzled.png" width="341" height="56" border="0" align="left"/></a>
+      <!-- The image is most suited for screen display. -->
+      <div class="screen">
+        <a href="/id/4/"><img src="/images/brizzled.png" width="341" height="56" border="0" align="left"/></a>
+      </div>
+      <!-- Use plain text, for the printable version. -->
+      <div class="print">
+        Brizzled: Brian Clapper's blog
+      </div>
     </div>
 
     <div class="banner-tagline">... wherein I bloviate discursively.</div>
 
-    <div class="banner-nav">
+    <!-- Banner navigation: Only displayed on the screen -->
+    <div class="banner-nav screen">
       <div class="text-button" style="width: 7em"><a href="/">top</a></div>
       <div class="text-button" style="width: 7em"><a href="/everything.html">everything</a></div>
     </div>
   </div>
 </div>
 
-<!-- GUTTER -->
+<!-- GUTTER: Only displayed on the screen. -->
 
-<div class="gutter">
+<div class="gutter screen">
   <div class="gutter-item"></div>
 
   <div class="gutter-item">
