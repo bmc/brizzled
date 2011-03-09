@@ -144,7 +144,8 @@ stuff into one place, like so:
 The `GrizzledRake::TimeFormat` module simply consolidates the timeformat
 handling in one place.
 
-Once the gem is installed, two lines of code in my Rakefile enable timestamps:
+Once the gem is installed, two lines of code in my Rakefile will enable
+timestamps:
 
 {% highlight ruby %}
     require 'grizzled/rake'
