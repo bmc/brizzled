@@ -718,8 +718,8 @@ li.tocH6
 div.highlight
 {
     /* same margins as <pre> tag */
-    margin-left: 0;
-    margin-right: 0;
+    margin-left: 2em;
+    margin-right: 2em;
     background-color: #f6f6f6;
 /*
     margin-left: 2em;
@@ -729,7 +729,7 @@ div.highlight
 
 div.highlight pre
 {
-/*    margin-left: 0 !important; */
+    margin-left: 0 !important;
 }
 
 .highlight .err /* Error */

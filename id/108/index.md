@@ -26,17 +26,14 @@ Ideally, I want:
 
 One simple solution I came up with follows.
 
-## `environment.rb`
-
 First, in `config/environment.rb`, I define various globals, which I then
 use to configure ActionMailer:
 
-<script src="https://gist.github.com/826322.js"></script>
+<script src="https://gist.github.com/826322.js"> </script>
 
-## My environment's configuration
-
-I have `RAILS_ENV` set to `bmc-dev`. So, I have my configuration overrides
-in `config/bmc-dev.rb`. In that file, I simply include:
+In my environment, I have `RAILS_ENV` set to `bmc-dev`. So, I have my
+configuration overrides in `config/bmc-dev.rb`. In that file, I simply
+include:
 
 <script src="https://gist.github.com/826333.js"> </script>
 
