@@ -1,6 +1,6 @@
 ---
 layout: article
-title: 'Customizing Rake Messages: Is there an easier way?'
+title: 'Customizing Rake messages: Is there an easier way?'
 tags: ruby, rake
 date: 2011-03-09
 toc: toc
