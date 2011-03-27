@@ -1,5 +1,5 @@
 # Ignore these.
-exclude: README.md
+exclude: README.md sass
 # Use Pygments
 pygments: true
 # Maximum number of recent articles displayed on the side
