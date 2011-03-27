@@ -26,16 +26,14 @@ is available via `Gem::searcher`:
     def show_version_only
       gem_spec = Gem.searcher.find(THIS_GEM_PATH)
       if not gem_spec
-        raise StandardError.new("Can't find Gem specification for path \"" +
-                                "#{THIS_GEM_PATH}\".")
+        raise StandardError.new("Can't find Gem specification for path \"#{THIS_GEM_PATH}\".")
       end
-      puts("#{PROGRAM_NAME}, version #{gem_spec.version}. " +
-           "#{gem_spec.homepage}")
+      puts("#{PROGRAM_NAME}, version #{gem_spec.version}. #{gem_spec.homepage}")
     end
 
 The `GemPathSearcher` class is documented
 [here](http://rubygems.rubyforge.org/rubygems-update/Gem/GemPathSearcher.html).
-Or, you can just [UTSL][].
+Or, you can just [use the source, Luke](https://github.com/rubygems/rubygems/blob/master/lib/rubygems/gem_path_searcher.rb).
 
 [Ruby Gem]: https://rubygems.org/
 [Gem Specification]: http://docs.rubygems.org/read/chapter/20
