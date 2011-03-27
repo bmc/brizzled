@@ -33,6 +33,7 @@ end
 
 rule %r{^#{CSS_DIR}/.*\.css$} => [css_to_scss, 'Rakefile'] do |t|
   require 'sass'
+  mkdir_p CSS_DIR
   puts("#{t.source} -> #{t.name}")
   Dir.chdir('sass') do
     sass_input = File.basename(t.source)
