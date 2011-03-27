@@ -20,6 +20,7 @@ became clear.
 The solution is to use a `Gem::GemPathSearcher` class, an instance of which
 is available via `Gem::searcher`:
 
+{% highlight ruby %}
     PROGRAM_NAME = 'coolness'
     THIS_GEM_PATH = 'coolness' # What you'd require to pull this thing in
 
@@ -30,6 +31,7 @@ is available via `Gem::searcher`:
       end
       puts("#{PROGRAM_NAME}, version #{gem_spec.version}. #{gem_spec.homepage}")
     end
+{% endhighlight %}
 
 The `GemPathSearcher` class is documented
 [here](http://rubygems.rubyforge.org/rubygems-update/Gem/GemPathSearcher.html).

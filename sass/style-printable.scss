@@ -1,0 +1,266 @@
+@import "pygments.scss";
+
+$background_color: #ffffff;
+//$font_family: Verdana, Arial, Helvetica, sans-serif;
+$font_family: Garamond, Times New Roman, Times, serif;
+$pre_font_family: Andale Mono, Lucidatypewriter, Lucida Typewriter, monospace;
+
+body
+{
+    font-family: $font_family;
+    font-size: 9pt;
+    background-color: white;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+table
+{
+    font-size: 10pt;
+}
+
+.screen
+{
+    display: none;
+}
+
+div.banner-background
+{
+    width: 100%;
+}
+
+div.banner
+{
+    width: 80%;
+    height: 60px;
+}
+
+div.banner-image
+{
+    float: left;
+    font-size: 18pt;
+    font-weight: bold;
+}
+
+div.banner-tagline
+{
+    float: right;
+    width: 30em;
+    padding-left: 5em;
+    padding-top: 10px;
+    background-color: #eeeeee;
+    font-family: $font_family;
+    font-style: italic;
+}
+
+div.printable-page
+{
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+blockquote
+{
+    font-family: $font_family;
+    padding-left: 20px;
+    border-left: 5px solid #ddd;
+}
+
+hr.docutils
+{
+    width: 10em;
+    color: grey;
+}
+
+h1
+{
+    font-family: $font_family;
+}
+
+h2
+{
+    font-family: $font_family;
+}
+
+h3
+{
+    font-style: italic;
+    font-family: $font_family;
+}
+
+pre
+{
+    margin-top: 0;
+    margin-bottom: 0;
+    padding: 3px;
+    font-family: $font_family;
+}
+
+tt
+{
+    font-family: $font_family;
+}
+
+div#content-box
+{
+    border-top: 1px solid black;
+}
+
+#contents
+{
+    float: right;
+    background-color: #f6f6f6;
+    padding: 3px;
+    border: 1px dashed black;
+    margin-left: 5px;
+    margin-top: 5px;
+}
+
+.code
+{
+    font-family: $font_family;
+    font-size: 10pt;
+}
+
+a
+{
+   text-decoration: none;
+}
+
+a.reference
+{
+    text-decoration: none;
+    border-bottom: 1px dotted #3333aa;
+}
+
+a
+{
+    &:link
+    {
+        /*    color: red; */
+        color: #3333aa;
+    }
+
+    &:visited
+    {
+        color: black;
+        border-bottom: 1px dotted black;
+
+        img
+        {
+            text-decoration: none;
+            border: none;
+        }
+    }
+
+    &:hover
+    {
+        /*
+          background-color: #eed2ee;
+          color: black;
+        */
+        color: grey;
+    }
+}
+
+a.button
+{
+    text-decoration: none;
+    border: none;
+}
+
+
+a.toc-backref
+{
+    text-decoration: none;
+    color: black;
+}
+
+img
+{
+    margin-left: 5em;
+}
+
+
+pre
+{
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: 2em;
+    margin-right: 2em;
+    font-size: 10pt;
+    padding: 3px;
+    font-family: Andale Mono, Lucidatypewriter, Lucida Typewriter, monospace;
+    width: 95%;
+}
+
+div.article-timestamp
+{
+}
+
+div.article-title
+{
+    font-weight: bold;
+    font-size: 16pt;
+    padding-top: 1em;
+}
+
+/* -------------------------------------------------------------------------- *\
+                         Table of Contents Styling
+\* -------------------------------------------------------------------------- */
+
+div#toc
+{
+    width: auto;
+    border-bottom: 1px solid black;
+    border-top: 1px solid black;
+}
+
+span#tocHeading
+{
+    width: auto;
+    font-weight: bold;
+}
+
+div#tocBlock
+{
+    padding: 10px;
+}
+
+ul.toc
+{
+}
+
+li.tocH1
+{
+    margin-left: 0em
+}
+
+li.tocH2
+{ 
+    margin-left: 1em
+}
+
+li.tocH3
+{ 
+    margin-left: 2em
+}
+
+li.tocH4
+{ 
+    margin-left: 3em
+}
+
+li.tocH5
+{
+    margin-left: 4em
+}
+
+li.tocH6
+{
+    margin-left: 5em
+}
+
+/* --- END table of contents styles */
+
+@import "pygments.scss"

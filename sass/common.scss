@@ -1,0 +1,43 @@
+.url
+{
+    font-style: italic;
+}
+
+div.note
+{
+    margin-left: 5em;
+    margin-right: 5em;
+    border: 2px solid red;
+    align: center;
+    padding: 5px 5px 5px 5px;
+
+
+    p.admonition-title
+    {
+        margin-top: 0;
+        text-align: center;
+        font-weight: bold;
+    }
+
+    p.last
+    {
+        text-align: left;
+    }
+}
+
+div.condensed-paragraphs
+{
+    p
+    {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+}
+
+ul
+{
+    li
+    {
+        list-style-type: disc;
+    }
+}
