@@ -44,7 +44,7 @@ computers. I got the usual responses, such as:
 [Nintendo DS]: http://www.nintendo.com/ds
 
 I then pulled out my [Droid][] phone and asked them if they knew what it
-was. They did, of course, though some mistook it for an [iPhone][] I asked
+was. They did, of course, though some mistook it for an [iPhone][]. I asked
 if it was a computer, and we talked about that for a minute or so. I showed
 them the flashlight app for it and talked about how someone actually sat
 down and wrote a program to grab the camera's flash and turn it on, and
@@ -93,10 +93,11 @@ Inevitably, at least one child piped up, "Friction!"
 At this point, I told them how, when I was learning to drive, we were told
 to pump the brakes, which is kind of like skip-stepping on that slippery
 floor, to avoid sliding in your socks. This proved to be a very natural way
-to describe, in simple terms, how an anti-lock braking system, which has a
-built-in computer, monitors the slippage of the wheels and pumps the brakes
-"really, really fast" *and* doesn't forget to do that, like we humans
-can--and how someone had to write the anti-lock braking software.
+to describe, in simple terms, how an anti-lock braking system uses its
+built-in computer to monitor the slippage of the wheels, how pumps the
+brakes "really, really fast" when the car loses friction, how it doesn't
+forget to do that (like we humans can)--*and* how someone had to write the
+anti-lock braking software.
 
 In all three sessions, this little discussion resulted in lots of nodding
 heads, so, apparently, I hadn't bored the crap out of them so far.
@@ -113,26 +114,26 @@ half, the really *fun* half?"
 
 Invariably, there was a least one kid who said, "Experiments!"
 
-That analogy not only gave me a chance to invoke [Mythbusters][] (always
-good for an "Oh, yeah!"), but it's a perfect analogy for describing how
-learning programming is *also* part book-learning and part playing.
+That not only gave me a chance to invoke [Mythbusters][] (always good for
+an, "Oh, yeah!"), but it was a great analogy for describing how learning
+programming is *also* part book-learning and part playing.
 
 [Mythbusters]: http://www.discovery.com/mythbusters/
 
 This was a perfect segu&eacute; into the next part: A demo. I had found
 [Scratch][], a free, cross-platform programming environment that obviously
-has roots in [Logo][]. But, it's like Logo on steroids.
+has roots in [Logo][]. But, Scratch is like Logo on steroids.
 
 <a href="scratch.png"><img class="image-right" src="scratch-small.png" width="559" height="398" border="0"></a>
 
 [Scratch]: http://scratch.mit.edu/
 [Logo]: http://en.wikipedia.org/wiki/Logo_(programming_language)
 
-In Scratch, you program by dragging various widgets from tool bars onto the
-canvas, fitting them together like puzzle pieces. They drive a small
-screen, where you can add [sprites][], draw lines, and play music, among
-other things. A small [Paint][]-like popup allows you to draw your own
-sprites, but you can also load prebuilt graphics. Widgets include:
+In Scratch, you write a program by dragging various widgets from tool bars
+onto the canvas, fitting them together like puzzle pieces. They drive a
+small screen, where you can add [sprites][], draw lines, and play music,
+among other things. A small [Paint][]-like popup allows you to draw your
+own sprites, but you can also load prebuilt graphics. Widgets include:
 
 * control structures (loops, `if` statements, etc.)
 * sounds (drums, tones, and rests, with adjustable tempos and instruments)
