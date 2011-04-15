@@ -31,7 +31,7 @@ def css_to_scss
   Proc.new {|task| task.sub(/^#{CSS_DIR}/, SASS_DIR).sub(/\.css$/, '.scss')}
 end
 
-rule %r{^#{CSS_DIR}/.*\.css$} => [css_to_scss, 'Rakefile'] do |t|
+rule %r{^#{CSS_DIR}/.*\.css$} => [css_to_scss, 'Rakefile'] + SASS_FILES do |t|
   require 'sass'
   mkdir_p CSS_DIR
   puts("#{t.source} -> #{t.name}")
