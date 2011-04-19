@@ -124,7 +124,7 @@ This was a perfect segu&eacute; into the next part: A demo. I had found
 [Scratch][], a free, cross-platform programming environment that obviously
 has roots in [Logo][]. But, Scratch is like Logo on steroids.
 
-<a href="scratch.png"><img class="image-right" src="scratch-small.png" width="559" height="398" border="0"></a>
+<a href="scratch.png"><img src="scratch-small.png" width="559" height="398" border="0"></a>
 
 [Scratch]: http://scratch.mit.edu/
 [Logo]: http://en.wikipedia.org/wiki/Logo_(programming_language)

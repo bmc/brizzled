@@ -5,9 +5,14 @@
 div.highlight
 {
     /* same margins as <pre> tag */
-    margin-left: 2em;
-    margin-right: 2em;
-    background-color: #f6f6f6;
+
+    pre
+    {
+        code
+        {
+            margin-left: -2em;
+        }
+    }
 }
 
 .highlight

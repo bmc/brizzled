@@ -427,21 +427,41 @@ h3
     font-style: italic;
 }
 
+@mixin shrink-to-fit
+{
+    /* "display: inline-block" forces browser to shrink width to fit. */
+    display: inline-block;
+}
+
+@mixin code-like
+{
+    background-color: #dedede;
+    font-family: $pre_font_family;
+    font-size: 10pt;
+    margin: 0;
+    padding: 3px;
+
+    @include shrink-to-fit;
+}
+
 pre
 {
-    margin-top: 0;
-    margin-bottom: 0;
     margin-left: 2em;
-    margin-right: 2em;
     font-size: 10pt;
-    padding: 3px;
-    background-color: #f6f6f6;
     font-family: $pre_font_family;
     /* font-family: Courier New, Courier, monospace; */
-    width: 95%;
+
+    @include shrink-to-fit;
+
+    width: auto;
     overflow: auto;
     overflow-y: hidden; /* for IE */
     -ms-overflow-y: hidden; /* for IE8 */
+
+    code
+    {
+        @include code-like;
+    }
 }
 
 tt
@@ -462,8 +482,11 @@ tt
 
 .code
 {
-    font-family: $pre_font_family;
-    font-size: 10pt;
+    @include code-like;
+}
+
+code
+{
 }
 
 a
