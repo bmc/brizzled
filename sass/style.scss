@@ -6,6 +6,12 @@ $background_color: #eeeeee;
 $font_family: Verdana, Arial, Helvetica, sans-serif;
 $pre_font_family: Andale Mono, Lucidatypewriter, Lucida Typewriter, monospace;
 
+@mixin centered
+{
+    margin-left: auto;
+    margin-right: auto;
+}
+
 @import "pygments.scss";
 
 html
@@ -19,7 +25,11 @@ body
     font-size: 11pt;
     font-family: $font_family;
 
-    margin: 0 0 0 0;
+    max-width: 1000px;
+    width: auto;
+    margin-top: 0;
+    margin-bottom: 0;
+    @include centered;
     border: 0 0 0 0;
     padding: 0 0 0 0;
     width: 100%;
