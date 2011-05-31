@@ -1,10 +1,13 @@
 # Adapted from https://gist.github.com/524748
 
+require 'fileutils'
+
 module Jekyll
 
   # A version of a page that represents a tag index.
 
   class TagIndex < Page
+    attr_reader :dir
     def initialize(site, base, dir, tag, articles)
       @site = site
       @base = base
@@ -18,6 +21,22 @@ module Jekyll
       tag_title_prefix = site.config['tag_title_prefix'] || 'Tag: '
       self.data['title'] = "#{tag_title_prefix}#{tag}"
       @summary = Summary.empty
+    end
+
+    def render(layouts, site_payload)
+      begin
+        res = super(layouts, site_payload)
+        tag_dir = File.join(self.base, "_site", self.dir)
+        FileUtils::mkdir_p tag_dir
+        path = File.join(self.base, self.dir, self.name)
+        open (path, "w") do |f|
+          f.write(self.output)
+        end
+        res
+      rescue
+        puts("Error during processing of #{self.full_url}")
+        raise
+      end
     end
   end
 
@@ -38,7 +57,7 @@ module Jekyll
     def write_tag_index(site, dir, tag, articles)
       index = TagIndex.new(site, site.source, dir, tag, articles)
       index.render(site.layouts, site.site_payload)
-      index.write(site.dest)
+      #index.write(site.dest)
     end
   end
 end

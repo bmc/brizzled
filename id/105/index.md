@@ -411,7 +411,6 @@ model, I wrote the following code, which I placed in `_plugins/tags.rb`:
         def write_tag_index(site, dir, tag, articles)
           index = TagIndex.new(site, site.source, dir, tag, articles)
           index.render(site.layouts, site.site_payload)
-          index.write(site.dest)
         end
       end
     end
