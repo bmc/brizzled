@@ -28,8 +28,8 @@ module Jekyll
         res = super(layouts, site_payload)
         tag_dir = File.join(self.base, "_site", self.dir)
         FileUtils::mkdir_p tag_dir
-        path = File.join(self.base, self.dir, self.name)
-        open (path, "w") do |f|
+        path = File.join(tag_dir, self.name)
+        open(path, "w") do |f|
           f.write(self.output)
         end
         res
