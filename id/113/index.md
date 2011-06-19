@@ -77,7 +77,7 @@ Here are some other stories and web sites related to this kind of scam:
 * [WARNING: Requests for Payment of Fees](http://www.wipo.int/pct/en/warning/pct_warning.html)
   (A list of such scams, from the World Intellectual Property Organization)
 * [Avoiding Trademark and Domain Name Scams](http://www.smithhopen.com/trademark_scams.aspx)
-* (from Smith &amp; Hopen, a Florida law firm specializing in patents and trademarks)
+  (from Smith &amp; Hopen, a Florida law firm specializing in patents and trademarks)
 
 These scams are common. "Read the fine print" and "Keep your bullshit
 detector plugged in" remain, as always, good advice.
