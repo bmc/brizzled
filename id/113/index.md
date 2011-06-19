@@ -10,7 +10,7 @@ company, ArdenTex, Inc. Registering a trademark or service mark is simple
 enough these days: You go to the [appropriate web page][] of the
 [United States Patent and Trademark Office][], fill out some occasionally
 puzzling forms, send them in, pay the fee ($275.00 for filing
-electronically, as if this writing), and wait. Then wait some more.
+electronically, as of this writing), and wait. Then wait some more.
 
 If you're willing to spend some time, you don't need to hire a lawyer; you
 can do the job yourself. (I did.)
@@ -22,22 +22,22 @@ document for *my* mark, I picture paralegals or associates in various law
 offices being tasked with the dull job of reading every page, looking for
 possible conflicts with existing trademarks or service marks.)
 
-After the 30-day review time expires, if there are no challenges to your
-mark, the USPTO will grant the registration with 45 days. At that point,
-you are free to put that little &reg; after your mark's symbol or phrase.
+If there are no challenges to your mark during the review period, the USPTO
+will grant the registration in another 45 days. At that point, you are free
+to put that little &reg; after your mark's symbol or phrase.
 
 That's it.
 
 Predictably there are all manner of shady firms out there attempting to
 turn this process into easy money.
 
-<a href="trademark-scan-letter.png"><img src="trademark-scam-letter-sm.png" width="400" height="518" class="image-right" style="border: 1px solid black !important"></a>
+<a href="trademark-scam-letter.html" title="Click for larger version"><img src="trademark-scam-letter-sm.png" width="400" height="518" class="image-right" style="border: 1px solid black !important"></a>
 
-I received notification last week that my registered service mark had been
-granted. Two days ago, I received two separate, slightly different, letters
-from some company in Bratislava, Slovak Republic. One (pictured) has
-"Patent Trademark Register" at the top, next to a portion of a United
-States flag. The other has the same flag logo, with "Register of
+I received notification from the USPTO last week that my registered service
+mark had been granted. Two days ago, I received two separate, slightly
+different, letters from some company in Bratislava, Slovak Republic. One
+(pictured) has "Patent Trademark Register" at the top, next to a portion of
+a United States flag. The other has the same flag logo, with "Register of
 International Patents and Trademarks" in a gothic font, at the top. Both
 appear to be from the same Slovakian company.
 
