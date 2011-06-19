@@ -31,7 +31,7 @@ That's it.
 Predictably there are all manner of shady firms out there attempting to
 turn this process into easy money.
 
-<a href="trademark-scan-letter.png"><img src="trademark-scam-letter-sm.png" width="400" height="518" class="image-right"></a>
+<a href="trademark-scan-letter.png"><img src="trademark-scam-letter-sm.png" width="400" height="518" class="image-right" style="border: 1px solid black !important"></a>
 
 I received notification last week that my registered service mark had been
 granted. Two days ago, I received two separate, slightly different, letters
