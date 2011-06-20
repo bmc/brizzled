@@ -15,6 +15,8 @@ electronically, as of this writing), and wait. Then wait some more.
 If you're willing to spend some time, you don't need to hire a lawyer; you
 can do the job yourself. (I did.)
 
+<a href="trademark-scam-letter.html" title="Click for larger version"><img src="trademark-scam-letter-sm.png" width="400" height="518" class="image-right" style="border: 1px solid black !important"></a>
+
 A few months later, the USPTO will get around to reviewing your application
 and, if it's kosher, they'll publish it in a huge document of proposed
 marks, allowing a 30-day challenge period. (Having searched through such a
@@ -30,8 +32,6 @@ That's it.
 
 Predictably there are all manner of shady firms out there attempting to
 turn this process into easy money.
-
-<a href="trademark-scam-letter.html" title="Click for larger version"><img src="trademark-scam-letter-sm.png" width="400" height="518" class="image-right" style="border: 1px solid black !important"></a>
 
 I received notification from the USPTO last week that my registered service
 mark had been granted. Two days ago, I received two separate, slightly
