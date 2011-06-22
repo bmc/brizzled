@@ -94,7 +94,7 @@ At this point, I told them how, when I was learning to drive, we were told
 to pump the brakes, which is kind of like skip-stepping on that slippery
 floor, to avoid sliding in your socks. This proved to be a very natural way
 to describe, in simple terms, how an anti-lock braking system uses its
-built-in computer to monitor the slippage of the wheels, how pumps the
+built-in computer to monitor the slippage of the wheels, how it pumps the
 brakes "really, really fast" when the car loses friction, how it doesn't
 forget to do that (like we humans can)--*and* how someone had to write the
 anti-lock braking software.
