@@ -3,7 +3,7 @@
 require 'rubygems'
 require 'rake/clean'
 
-CLEAN << ['css', '_site']
+CLEAN << ['css', '_site', 'tags']
 
 version = '>= 0'
 gem 'jekyll', version
@@ -12,6 +12,11 @@ task :default => :jekyll
 
 task :jekyll => :css do |t|
   load Gem.bin_path('jekyll', 'jekyll', version)
+
+  # For some reason, Jekyll isn't copying the generated "tags" directory.
+  # Do it manually.
+  puts "Copying tags..."
+  cp_r "tags", "_site"
 end
 
 # Generate CSS files from SCSS files

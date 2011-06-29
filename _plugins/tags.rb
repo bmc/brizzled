@@ -26,7 +26,7 @@ module Jekyll
     def render(layouts, site_payload)
       begin
         res = super(layouts, site_payload)
-        tag_dir = File.join(self.base, "_site", self.dir)
+        tag_dir = File.join(self.base, self.dir)
         FileUtils::mkdir_p tag_dir
         path = File.join(tag_dir, self.name)
         open(path, "w") do |f|
@@ -57,7 +57,7 @@ module Jekyll
     def write_tag_index(site, dir, tag, articles)
       index = TagIndex.new(site, site.source, dir, tag, articles)
       index.render(site.layouts, site.site_payload)
-      #index.write(site.dest)
+      index.write(site.dest)
     end
   end
 end
