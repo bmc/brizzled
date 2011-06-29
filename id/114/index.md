@@ -56,6 +56,8 @@ that you only view updates from people within a particular circle.
 
 # Sparks
 
+<img class="image-left" src="screenshot2.png">
+
 *Sparks*, in Google's words, "brings you stories on the things you love
 from all across the Web, so it's easy to strike up meaningful conversations
 with your friends. ... Let's say you're learning to juggle. You can search
@@ -69,10 +71,8 @@ register various interests, and Sparks finds things on the web that are
 *like* that topic, feeding them to you as it finds them.
 
 I've added a couple Sparks under my account; each one has a link in the
-control area (see the image). Clicking on a link replaces your news feed
-with stories from that Sparks category.
-
-<img class="image-left" src="screenshot2.png">
+control area (see the circled area in the image). Clicking on a link
+replaces your news feed with stories from that Sparks category.
 
 I'm not sure how useful Sparks will be. To be truly stellar, it would
 permit me to vote a particular story up or down, the way Pandora does with
