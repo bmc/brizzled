@@ -12,6 +12,12 @@ up for the beta of [Google+][], Google's latest salvo at [Facebook][],
 [Twitter][], and social media, in general. I've played with Google+ for all
 of about a day, but I already have some initial impressions.
 
+<div class="centered" style="width: 535px !important">
+<a href="http://xkcd.com/918/">
+<img src="http://imgs.xkcd.com/comics/googleplus.png">
+</a>
+</div>
+
 # General impressions
 
 Overall, Google+ is slicker and much better thought-out than Facebook. Of
@@ -189,6 +195,10 @@ Facebook. However, Google+ has a lot going for it. Among its advantages:
 
 Based solely on one day's playing around, I'd love to see Google+ succeed.
  
+# Other reviews
+
+* [*Google+ steers clear of privacy missteps*](http://news.cnet.com/8301-31921_3-20075281-281/google-steers-clear-of-privacy-missteps/), Declan McCullagh (CNet News)
+* [*Google+ invite received, we go hands-on*](http://www.engadget.com/2011/06/28/google-invite-received-we-go-hands-on/), Brian Heater (Engadget)
 
 [Google]: http://www.google.com/
 [Google+]: http://plus.google.com/
