@@ -159,6 +159,16 @@ Google has already released a Google+ client for the Android; I used it a
 bit, and it's well done and easy to navigate. They claim to have one in the
 works for the iPhone, as well.
 
+# Hosted Accounts
+
+In addition to a "regular" Google account (@gmail.com), I have a couple of
+hosted accounts, where my domains are registered with Google Apps. It would
+be nice to be able to use Google+ from those hosted accounts, but, so far,
+I've had no luck doing so. Google claims that Google Profile is necessary
+for Google+, and Google Profile isn't available for my hosted accounts.
+
+As deficiencies go, this one is minor, though it'd be nice if it worked.
+
 # Conclusion
 
 I've only touched on some of the features of Google+. I may update this
