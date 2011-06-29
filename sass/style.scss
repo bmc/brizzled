@@ -197,7 +197,7 @@ div#articles-box
 .article-description
 {
     clear: both;
-    padding-top: 5px;
+    padding-top: 2px;
     background-color: white;
     margin-left: 0.5in;
 }
@@ -278,11 +278,14 @@ div.article-timestamp
 {
     font-size: 75%;
     padding-left: 2em;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    vertical-align: top;
     color: gray;
     text-align: right;
     width: 40%;
     float: right;
-    padding: 0;
 }
 
 .first-article-container
