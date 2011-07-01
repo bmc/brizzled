@@ -60,6 +60,22 @@ In a nutshell, with Google+, you have *far* more granular control over how
 you share information. In addition, you can easily change your news feed so
 that you only view updates from people within a particular circle.
 
+## Resharing
+
+By default, anyone can reshare something you've posted. But, in the spirit
+of giving you as much control as possible, Google+ also permits you to
+disable resharing on anything you've posted. Thus, you can share something
+with your circles, while ensuring that it can't leak *out* of your circles.
+
+## Private conversations
+
+Google+ supports a natural extension of the whole Circles notion: Private
+conversations. You can post something and share it with one or more
+specific people, instead of sharing it with a circle or two. Disable
+resharing on the post, and the conversation becomes truly private.
+
+I find this feature to be *highly* compelling.
+
 # Sparks
 
 <img class="image-left" src="screenshot2.png">
@@ -199,6 +215,13 @@ Based solely on one day's playing around, I'd love to see Google+ succeed.
 
 * [*Google+ steers clear of privacy missteps*](http://news.cnet.com/8301-31921_3-20075281-281/google-steers-clear-of-privacy-missteps/), Declan McCullagh (CNet News)
 * [*Google+ invite received, we go hands-on*](http://www.engadget.com/2011/06/28/google-invite-received-we-go-hands-on/), Brian Heater (Engadget)
+* [*9 Reasons to Switch from Facebook to Google+*](http://www.pcworld.com/article/234825/9_reasons_to_switch_from_facebook_to_google.html), Mark Sullivan (PCWorld)
+
+# Updates
+
+1 July, 2011:
+
+* Added brief section on private conversations, under Circles.
 
 [Google]: http://www.google.com/
 [Google+]: http://plus.google.com/
