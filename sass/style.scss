@@ -634,11 +634,13 @@ span.text-button
         {
              /* color: white; */
             color: black;
+            background-color: white;
         }
 
         &:hover
         {
-             color: red;
+            color: red;
+            background-color: white;
         }
     }
 }
