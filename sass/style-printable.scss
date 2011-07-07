@@ -31,8 +31,8 @@ div.banner-background
 
 div.banner
 {
-    width: 80%;
-    height: 60px;
+    width: 100%;
+    height: 80px;
 }
 
 div.banner-image
@@ -42,12 +42,18 @@ div.banner-image
     font-weight: bold;
 }
 
+div.article-title
+{
+    margin-top: 1em;
+}
+
 div.banner-tagline
 {
     float: right;
     width: 30em;
     padding-left: 5em;
     padding-top: 10px;
+    padding-bottom: 1em;
     background-color: #eeeeee;
     font-family: $font_family;
     font-style: italic;

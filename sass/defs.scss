@@ -1,0 +1,15 @@
+$rounded_box_border_radius: 10px;
+
+@mixin rounded-border
+{
+    border-radius: $rounded_box_border_radius;
+    -moz-border-radius: $rounded_box_border_radius;
+   padding: $rounded_box_border_radius;
+}
+
+@mixin centered
+{
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
