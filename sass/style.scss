@@ -182,6 +182,7 @@ div#articles-box
 
 #articles-container
 {
+    @include rounded-border;
     border: 1px solid #a9a9a9;
     font-family: $font_family;
     /* margin-right: 1em; */
