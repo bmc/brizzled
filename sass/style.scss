@@ -98,7 +98,7 @@ blockquote
     font-family: $font_family;
     padding-left: 20px;
     border-left: 5px solid #ddd;
-    /* color: #777; */
+    color: #555555;
 }
 
 hr.docutils
@@ -453,13 +453,17 @@ h3
 
 @mixin code-like
 {
-    background-color: #dedede;
+    // background-color: #eeeeee;
+    background-color: #ffffe0;
     font-family: $pre_font_family;
-    font-size: 10pt;
-    margin: 0;
-    padding: 3px;
+    font-size: 14px;
+    overflow: auto;
+    max-width: 90%;
+    margin-left: 1px;
+    padding: 5px;
+    border: 1px solid #aaaaaa !important;
 
-    @include shrink-to-fit;
+    @include shrink-to-fit;    
 }
 
 pre
@@ -468,8 +472,6 @@ pre
     font-size: 10pt;
     font-family: $pre_font_family;
     /* font-family: Courier New, Courier, monospace; */
-
-    @include shrink-to-fit;
 
     width: auto;
     overflow: auto;
@@ -513,14 +515,12 @@ a
 
    &:link
    {
-       /*    color: red; */
        color: #3333aa;
    }
 
    &:visited
    {
-       color: gray;
-       border-bottom: 1px dotted black;
+       color: #333388;
 
        img
        {
@@ -534,34 +534,34 @@ a
        background-color: $background_color;
        color: black;
    }
-}
 
-a.reference
-{
-    text-decoration: none;
-    border-bottom: 1px dotted #3333aa;
-}
+   &.reference
+   {
+       text-decoration: none;
+       border-bottom: 1px dotted #3333aa;
+   }
 
-a.about-me
-{
-    text-decoration: none;
-    border: none;
-    font-style: italic;
-    font-weight: bold;
+   &.about-me
+   {
+       text-decoration: none;
+       border: none;
+       font-style: italic;
+       font-weight: bold;
 
-    &:visited
-    {
-    }
-}
+       &:visited
+       {
+       }
+   }
 
-a.button
-{
-    text-decoration: none;
-    border: none;
+   &.button
+   {
+       text-decoration: none;
+       border: none;
 
-    &:visited
-    {
-    }
+       &:visited
+       {
+       }
+   }
 }
 
 
