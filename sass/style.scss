@@ -665,10 +665,11 @@ span#tocHeading
 
 div#tocBlock
 {
+    -moz-box-shadow: 5px 5px 5px #999;
+    -webkit-box-shadow: 5px 5px 5px #999;
+    box-shadow: 5px 5px 5px #999;
+    border: 1px solid #ccc;
 
-    -moz-box-shadow: 5px 5px 5px #ccc;
-    -webkit-box-shadow: 5px 5px 5px #ccc;
-    box-shadow: 5px 5px 5px #ccc;
     margin-right: 0em;
     margin-left: 10px;
     background-color: #f0f0f0;
