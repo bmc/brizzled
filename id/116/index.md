@@ -13,7 +13,7 @@ A few nights ago, I converted
 horrid, old-style [Ant][] build to [Maven][], largely because of several
 advantages Maven provides:
 
-* It third-party manages dependencies cleanly and simply.
+* It manages third-party dependencies cleanly and simply.
 * It allows me to publish my library in a Maven repository, so that others
   who use Maven can easily depend on my library.
 * It's the defacto standard Java build environment.
@@ -51,8 +51,8 @@ fragment:
       ...
 
 You have to wade through a lot of extraneous characters to get to the meat
-of that configuration item, which is that *the build source encoding is
-UTF-8*.
+of that configuration item, which is: **the build source encoding is
+UTF-8**.
 
 Imagine the same thing in a more typical configuration syntax:
 
@@ -63,6 +63,9 @@ Imagine the same thing in a more typical configuration syntax:
     project:
       properties:
         build.sourceEncoding: UTF-8
+
+Those latter two formats are more readable, with less visual noise, than
+the Maven XML version.
 
 A fully-loaded Maven configuration file--even a simple one­-can look like a
 [big, gray blob][javautil-pom], with all that XML markup getting in the way
@@ -101,12 +104,13 @@ POMs in Groovy, Scala, Clojure and JRuby, among others. I'll admit that
 I've only played with Polyglot Maven a little bit. However, Polyglot Maven
 is really just Maven, with language-specific syntaxes replacing the XML
 version of the POM. As far as I can tell, from reading and experimenting
-with Polyglot Maven, I still can't escape Maven's declarative nature very
-easy. I can't, for instance, just add some new inline Scala code to
+with Polyglot Maven, I *still* can't escape Maven's declarative nature very
+easily. I can't, for instance, just add some new inline Scala code to
 accomplish some project-specific task.
 
-Clearly, what I want is something with Maven's power, but with an easy way
-to escape to a real programming language.
+Clearly, what I want is something with Maven's dependency-handling power,
+but with an easy way to escape to a real programming language, in case I
+have to do some local, heavy lifting.
 
 ## Yeah, but what's my alternative?
 
