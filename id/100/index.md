@@ -64,8 +64,8 @@ obviously have SSH login privileges on my own server. (**Don't** publish as
 In my case, with *nginx*, I did something like this:
 
 {% highlight bash %}
-    $ sudo mkdir -p /var/www/maven.example.org/html
-    $ sudo chown bmc /var/www/maven.example.org/html
+$ sudo mkdir -p /var/www/maven.example.org/html
+$ sudo chown bmc /var/www/maven.example.org/html
 {% endhighlight %}
 
 # Update your SBT project to publish to your repository
@@ -79,8 +79,8 @@ Once you have your build file (a Scala source file), you merely need to add
 two lines to start publishing right away:
 
 {% highlight scala %}
-    override def managedStyle = ManagedStyle.Maven
-    lazy val publishTo = Resolver.sftp("My Maven Repo", "maven.example.org", "/var/www/maven/html")
+override def managedStyle = ManagedStyle.Maven
+lazy val publishTo = Resolver.sftp("My Maven Repo", "maven.example.org", "/var/www/maven/html")
 {% endhighlight %}
 
 `publishTo` defines your Maven repository. The first parameter is an
@@ -95,14 +95,14 @@ Once those two lines are in your build file, you can publish your jar file
 and a corresponding POM file (which SBT generates) with this command:
 
 {% highlight bash %}
-    $ sbt publish
+$ sbt publish
 {% endhighlight %}
 
 If you're [cross-building][] to multiple Scala versions, you'll probably
 want to use this, instead:
 
 {% highlight bash %}
-    $ sbt +publish
+$ sbt +publish
 {% endhighlight %}
 
 When you run that command, SBT will prompt you, via a Swing GUI popup
@@ -134,19 +134,19 @@ published to your repository. To use version 0.1 of that package in another
 SBT project, simply add these lines:
 
 {% highlight scala %}
-    // Tell SBT about my repository.
-    val myRepo = "My Maven Repository" at "http://maven.example.org"
+// Tell SBT about my repository.
+val myRepo = "My Maven Repository" at "http://maven.example.org"
 
-    // Create a dependency on bodacious.
-    val bodacious = "org.example" % "bodacious" % "0.1"
+// Create a dependency on bodacious.
+val bodacious = "org.example" % "bodacious" % "0.1"
 {% endhighlight %}
 
 If you cross-built *bodacious*, then use this dependency line,
 instead:
 
 {% highlight scala %}
-    // Create a dependency on bodacious.
-    val bodacious = "org.example" %% "bodacious" % "0.1"
+// Create a dependency on bodacious.
+val bodacious = "org.example" %% "bodacious" % "0.1"
 {% endhighlight %}
 
 The double percent ("%%") tells SBT that the library was cross-built, and
@@ -158,22 +158,22 @@ If you didn't cross build, then you can tell Maven users to use a
 dependency like this:
 
 {% highlight xml %}
-    <dependency>
-      <groupId>org.example</groupId>
-      <artifactId>bodacious</artifactId>
-      <version>0.1</version>
-    </dependency>
+<dependency>
+  <groupId>org.example</groupId>
+  <artifactId>bodacious</artifactId>
+  <version>0.1</version>
+</dependency>
 {% endhighlight %}
 
 If you cross-built *bodacious*, just add the appropriate Scala version to
 the artifact. For instance:
 
 {% highlight xml %}
-    <dependency>
-      <groupId>org.example</groupId>
-      <artifactId>bodacious_2.7.7</artifactId>
-      <version>0.1</version>
-    </dependency>
+<dependency>
+  <groupId>org.example</groupId>
+  <artifactId>bodacious_2.7.7</artifactId>
+  <version>0.1</version>
+</dependency>
 {% endhighlight %}
 
 # Conclusion

@@ -68,6 +68,11 @@ A fully-loaded Maven configuration file--even a simple one­-can look like a
 [big, gray blob][javautil-pom], with all that XML markup getting in the way
 of the actual semantics of the build file.
 
+Maven is also *declarative*, but not *procedural*. If I want to augment
+Maven's logic--say, introduce a new goal--I have to do it through a custom
+Maven plugin; I can't just stuff some special procedural logic into my POM.
+If I have to copy some extra files, that's a rather high bar to clear.
+
 I'm not the only person who thinks XML sucks as a configuration language.
 A full decade ago, [Terence Parr][], author of [ANTLR][] and [StringTemplate][],
 wrote an article entitled [*Humans should not have to grok XML*][parr-xml].
@@ -91,6 +96,18 @@ Among the many good points he made, he wrote:
 Parr outlines, very clearly, why XML is an inferior language for
 *human-to-computer* interaction.
 
+[Polyglot Maven][] has promise, since it provides a way to express Maven
+POMs in Groovy, Scala, Clojure and JRuby, among others. I'll admit that
+I've only played with Polyglot Maven a little bit. However, Polyglot Maven
+is really just Maven, with language-specific syntaxes replacing the XML
+version of the POM. As far as I can tell, from reading and experimenting
+with Polyglot Maven, I still can't escape Maven's declarative nature very
+easy. I can't, for instance, just add some new inline Scala code to
+accomplish some project-specific task.
+
+Clearly, what I want is something with Maven's power, but with an easy way
+to escape to a real programming language.
+
 ## Yeah, but what's my alternative?
 
 There *are* alternatives to Maven, alternatives that still retain the power
@@ -109,11 +126,6 @@ dependency uses a simple DSL that's far easier to read than Maven's XML:
 
 All the artifact information is there, without much extraneous markup
 getting in the way.
-
-[Polyglot Maven][] also has promise, since it provides a way to express
-Maven POMs in Groovy, Scala, Clojure and JRuby, among others. I'll admit
-that I haven't played much with Polyglot Maven, but it's on my list of
-things to try.
 
 ## So, why Buildr?
 

@@ -45,16 +45,16 @@ Typically, making an XML-RPC call through `xmlrpclib` requires code
 like this:
 
 {% highlight python %}
-    rpc_server = xmlrpclib.ServerProxy('http://rpc.technorati.com/rpc/ping')
-    result = rpc_server.weblogUpdates.ping('My Blog Name', 
-                                           'http://picoblog.example.com/')
-    # The result is dictionary. In Technorati's case, we have to check the
-    # flerror element.
-    if result.get('flerror', False) == True:
-        logging.error('Technorati ping error from server: %s' %
-                      result.get('message', '(No message in RPC result)'))
-    else:
-        logging.debug('Technorati ping successful.')
+rpc_server = xmlrpclib.ServerProxy('http://rpc.technorati.com/rpc/ping')
+result = rpc_server.weblogUpdates.ping('My Blog Name', 
+                                       'http://picoblog.example.com/')
+# The result is dictionary. In Technorati's case, we have to check the
+# flerror element.
+if result.get('flerror', False) == True:
+    logging.error('Technorati ping error from server: %s' %
+                  result.get('message', '(No message in RPC result)'))
+else:
+    logging.debug('Technorati ping successful.')
 {% endhighlight %}
 
 There are a couple things going on here. The first line of code sets up a
@@ -63,25 +63,25 @@ The actual method call looks just like a method call. The `xmlrpclib`
 module translates this line of code:
 
 {% highlight python %}
-    result = rpc_server.weblogUpdates.ping('My Blog Name', 'http://picoblog.example.com/')
+result = rpc_server.weblogUpdates.ping('My Blog Name', 'http://picoblog.example.com/')
 {% endhighlight %}
 
 into the following chunk of XML, which it then sends to the remote
 web server:
 
 {% highlight xml %}
-    <?xml version="1.0"?>
-    <methodCall>
-      <methodName>weblogUpdates.ping</methodName>
-      <params>
-        <param>
-          <value>My Blog Name</value>
-        </param>
-        <param>
-          <value>http://picoblog.example.com/</value>
-        </param>
-      </params>
-    </methodCall>
+<?xml version="1.0"?>
+<methodCall>
+  <methodName>weblogUpdates.ping</methodName>
+  <params>
+    <param>
+      <value>My Blog Name</value>
+    </param>
+    <param>
+      <value>http://picoblog.example.com/</value>
+    </param>
+  </params>
+</methodCall>
 {% endhighlight %}
 
 It then waits for the XML-RPC response and decodes it into a
@@ -89,52 +89,52 @@ dictionary of name-value pairs. Just for completeness, here's the
 successful result from a Technorati ping:
 
 {% highlight xml %}
-    <?xml version="1.0" encoding="UTF-8"?>
-    <methodResponse>
-        <params>
-            <param>
-                <value>
-                    <struct>
-                        <member>
-                            <name>flerror</name>
-                            <value><boolean>0</boolean></value>
-                        </member>
-                        <member>
-                            <name>message</name>
-                            <value><string>Thanks for the ping</string></value>
-                        </member>
-                    </struct>
-                </value>
-            </param>
-        </params>
-    </methodResponse>
+<?xml version="1.0" encoding="UTF-8"?>
+<methodResponse>
+    <params>
+        <param>
+            <value>
+                <struct>
+                    <member>
+                        <name>flerror</name>
+                        <value><boolean>0</boolean></value>
+                    </member>
+                    <member>
+                        <name>message</name>
+                        <value><string>Thanks for the ping</string></value>
+                    </member>
+                </struct>
+            </value>
+        </param>
+    </params>
+</methodResponse>
 {% endhighlight %}
 
 And here's the failure result:
 
 {% highlight xml %}
-    <?xml version="1.0" encoding="UTF-8"?>
-    <methodResponse>
-        <params>
-            <param>
-                <value>
-                    <struct>
-                        <member>
-                            <name>flerror</name>
-                            <value><boolean>0</boolean></value>
-                        </member>
-                        <member>
-                            <name>message</name>
-                            <value>
-                                <string>You just sent a ping, please only
-                                ping when you update </string>
-                            </value>
-                        </member>
-                    </struct>
-                </value>
-            </param>
-        </params>
-    </methodResponse>
+<?xml version="1.0" encoding="UTF-8"?>
+<methodResponse>
+    <params>
+        <param>
+            <value>
+                <struct>
+                    <member>
+                        <name>flerror</name>
+                        <value><boolean>0</boolean></value>
+                    </member>
+                    <member>
+                        <name>message</name>
+                        <value>
+                            <string>You just sent a ping, please only
+                            ping when you update </string>
+                        </value>
+                    </member>
+                </struct>
+            </value>
+        </param>
+    </params>
+</methodResponse>
 {% endhighlight %}
 
 ## `xmlrpclib` Transport Classes
@@ -154,68 +154,68 @@ in your Python distribution. Here's a portion of that class; the
 method we care about is `request()`:
 
 {% highlight python %}
-    class Transport:
-        """Handles an HTTP transaction to an XML-RPC server."""
-    
-        user_agent = "xmlrpclib.py/%s (by www.pythonware.com)" % __version__
-    
-        def __init__(self, use_datetime=0):
-            self._use_datetime = use_datetime
-    
-        def request(self, host, handler, request_body, verbose=0):
-            # issue XML-RPC request
-    
-            h = self.make_connection(host)
-            if verbose:
-                h.set_debuglevel(1)
-    
-            self.send_request(h, handler, request_body)
-            self.send_host(h, host)
-            self.send_user_agent(h)
-            self.send_content(h, request_body)
-    
-            errcode, errmsg, headers = h.getreply()
-    
-            if errcode != 200:
-                raise ProtocolError(
-                    host + handler,
-                    errcode, errmsg,
-                    headers
-                    )
-    
-            self.verbose = verbose
-    
-            try:
-                sock = h._conn.sock
-            except AttributeError:
-                sock = None
-    
-            return self._parse_response(h.getfile(), sock)
-    
-        def getparser(self):
-            # get parser and unmarshaller
-            return getparser(use_datetime=self._use_datetime)
-    
-        def _parse_response(self, file, sock):
-            # read response from input file/socket, and parse it
-    
-            p, u = self.getparser()
-    
-            while 1:
-                if sock:
-                    response = sock.recv(1024)
-                else:
-                    response = file.read(1024)
-                if not response:
-                    break
-                if self.verbose:
-                    print "body:", repr(response)
-                p.feed(response)
-    
-            file.close()
-            p.close()
-    
-            return u.close()
+class Transport:
+    """Handles an HTTP transaction to an XML-RPC server."""
+
+    user_agent = "xmlrpclib.py/%s (by www.pythonware.com)" % __version__
+
+    def __init__(self, use_datetime=0):
+        self._use_datetime = use_datetime
+
+    def request(self, host, handler, request_body, verbose=0):
+        # issue XML-RPC request
+
+        h = self.make_connection(host)
+        if verbose:
+            h.set_debuglevel(1)
+
+        self.send_request(h, handler, request_body)
+        self.send_host(h, host)
+        self.send_user_agent(h)
+        self.send_content(h, request_body)
+
+        errcode, errmsg, headers = h.getreply()
+
+        if errcode != 200:
+            raise ProtocolError(
+                host + handler,
+                errcode, errmsg,
+                headers
+                )
+
+        self.verbose = verbose
+
+        try:
+            sock = h._conn.sock
+        except AttributeError:
+            sock = None
+
+        return self._parse_response(h.getfile(), sock)
+
+    def getparser(self):
+        # get parser and unmarshaller
+        return getparser(use_datetime=self._use_datetime)
+
+    def _parse_response(self, file, sock):
+        # read response from input file/socket, and parse it
+
+        p, u = self.getparser()
+
+        while 1:
+            if sock:
+                response = sock.recv(1024)
+            else:
+                response = file.read(1024)
+            if not response:
+                break
+            if self.verbose:
+                print "body:", repr(response)
+            p.feed(response)
+
+        file.close()
+        p.close()
+
+        return u.close()
 {% endhighlight %}
 
 The class is considerably larger than that, but `request()` is the
@@ -235,47 +235,47 @@ method instead of standard socket access. That class turns out to
 be pretty simple:
 
 {% highlight python %}
-    import sys
-    import xmlrpclib
-    import logging
-    
-    from google.appengine.api import urlfetch
-    
-    class GAEXMLRPCTransport(object):
-        """Handles an HTTP transaction to an XML-RPC server."""
-    
-        def __init__(self):
-            pass
-    
-        def request(self, host, handler, request_body, verbose=0):
-            result = None
-            url = 'http://%s%s' % (host, handler)
-            try:
-                response = urlfetch.fetch(url,
-                                          payload=request_body,
-                                          method=urlfetch.POST,
-                                          headers={'Content-Type': 'text/xml'})
-            except:
-                msg = 'Failed to fetch %s' % url
-                logging.error(msg)
-                raise xmlrpclib.ProtocolError(host + handler, 500, msg, {})
-    
-            if response.status_code != 200:
-                logging.error('%s returned status code %s' % 
-                              (url, response.status_code))
-                raise xmlrpclib.ProtocolError(host + handler,
-                                              response.status_code,
-                                              "",
-                                              response.headers)
-            else:
-                result = self.__parse_response(response.content)
-    
-            return result
-    
-        def __parse_response(self, response_body):
-            p, u = xmlrpclib.getparser(use_datetime=False)
-            p.feed(response_body)
-            return u.close()
+import sys
+import xmlrpclib
+import logging
+
+from google.appengine.api import urlfetch
+
+class GAEXMLRPCTransport(object):
+    """Handles an HTTP transaction to an XML-RPC server."""
+
+    def __init__(self):
+        pass
+
+    def request(self, host, handler, request_body, verbose=0):
+        result = None
+        url = 'http://%s%s' % (host, handler)
+        try:
+            response = urlfetch.fetch(url,
+                                      payload=request_body,
+                                      method=urlfetch.POST,
+                                      headers={'Content-Type': 'text/xml'})
+        except:
+            msg = 'Failed to fetch %s' % url
+            logging.error(msg)
+            raise xmlrpclib.ProtocolError(host + handler, 500, msg, {})
+
+        if response.status_code != 200:
+            logging.error('%s returned status code %s' % 
+                          (url, response.status_code))
+            raise xmlrpclib.ProtocolError(host + handler,
+                                          response.status_code,
+                                          "",
+                                          response.headers)
+        else:
+            result = self.__parse_response(response.content)
+
+        return result
+
+    def __parse_response(self, response_body):
+        p, u = xmlrpclib.getparser(use_datetime=False)
+        p.feed(response_body)
+        return u.close()
 {% endhighlight %}
 
 There are several things to note about the `request()` method.
@@ -291,17 +291,17 @@ Using the `GAEXMLRPCTransport()` class, we can now make our XML-RPC
 client code work within GAE:
 
 {% highlight python %}
-    rpc_server = xmlrpclib.ServerProxy('http://rpc.technorati.com/rpc/ping',
-                                       GAEXMLRPCTransport())
-    result = rpc_server.weblogUpdates.ping('My Blog Name', 
-                                           'http://picoblog.example.com/')
-    # The result is dictionary. In Technorati's case, we have to check the
-    # flerror element.
-    if result.get('flerror', False) == True:
-        logging.error('Technorati ping error from server: %s' %
-                      result.get('message', '(No message in RPC result)'))
-    else:
-        logging.debug('Technorati ping successful.')
+rpc_server = xmlrpclib.ServerProxy('http://rpc.technorati.com/rpc/ping',
+                                   GAEXMLRPCTransport())
+result = rpc_server.weblogUpdates.ping('My Blog Name', 
+                                       'http://picoblog.example.com/')
+# The result is dictionary. In Technorati's case, we have to check the
+# flerror element.
+if result.get('flerror', False) == True:
+    logging.error('Technorati ping error from server: %s' %
+                  result.get('message', '(No message in RPC result)'))
+else:
+    logging.debug('Technorati ping successful.')
 {% endhighlight %}
 
 # Changes to `picoblog`
@@ -320,15 +320,15 @@ file, and put that file at the root of the `picoblog` source tree.
 Next, we add a few things to the `defs.py` module:
 
 {% highlight python %}
-    CANONICAL_BLOG_URL = 'http://picoblog.appspot.com/'
-    
-    import os
-    _server_software = os.environ.get('SERVER_SOFTWARE','').lower()
-    if _server_software.startswith('goog'):
-        ON_GAE = True
-    else:
-        ON_GAE = False
-    del _server_software
+CANONICAL_BLOG_URL = 'http://picoblog.appspot.com/'
+
+import os
+_server_software = os.environ.get('SERVER_SOFTWARE','').lower()
+if _server_software.startswith('goog'):
+    ON_GAE = True
+else:
+    ON_GAE = False
+del _server_software
 {% endhighlight %}
 
 The `CANONICAL_BLOG_URL` constant defines the URL of our blog; we
@@ -354,85 +354,85 @@ cleared.
 Here's the new version of `SaveArticleHandler`:
 
 {% highlight python %}
-    class SaveArticleHandler(request.BlogRequestHandler):
-        """
-        Handles form submissions to save an edited article.
-        """
-        def post(self):
-            title = cgi.escape(self.request.get('title'))
-            body = cgi.escape(self.request.get('content'))
-            s_id = cgi.escape(self.request.get('id'))
-            id = int(s_id) if s_id else None
-            tags = cgi.escape(self.request.get('tags'))
-            published_when = cgi.escape(self.request.get('published_when'))
-            draft = cgi.escape(self.request.get('draft'))
-            if tags:
-                tags = [t.strip() for t in tags.split(',')]
-            else:
-                tags = []
-            tags = Article.convert_string_tags(tags)
-    
-            if not draft:
-                draft = False
-            else:
-                draft = (draft.lower() == 'on')
-    
-            article = Article.get(id) if id else None
-            if article:
-                # It's an edit of an existing item.
-                just_published = article.draft and (not draft)
-                article.title = title
-                article.body = body
-                article.tags = tags
-                article.draft = draft
-            else:
-                # It's new.
-                article = Article(title=title,
-                                  body=body,
-                                  tags=tags,
-                                  draft=draft)
-                just_published = not draft
-    
-            article.save()
-    
-            if just_published:
-                logging.debug('Article %d just went from draft to published. '
-                              'Alerting the media.' % article.id)
-                alert_the_media()
-    
-            edit_again = cgi.escape(self.request.get('edit_again'))
-            edit_again = edit_again and (edit_again.lower() == 'true')
-            if edit_again:
-                self.redirect('/admin/article/edit/?id=%s' % article.id)
-            else:
-                self.redirect('/admin/')
+class SaveArticleHandler(request.BlogRequestHandler):
+    """
+    Handles form submissions to save an edited article.
+    """
+    def post(self):
+        title = cgi.escape(self.request.get('title'))
+        body = cgi.escape(self.request.get('content'))
+        s_id = cgi.escape(self.request.get('id'))
+        id = int(s_id) if s_id else None
+        tags = cgi.escape(self.request.get('tags'))
+        published_when = cgi.escape(self.request.get('published_when'))
+        draft = cgi.escape(self.request.get('draft'))
+        if tags:
+            tags = [t.strip() for t in tags.split(',')]
+        else:
+            tags = []
+        tags = Article.convert_string_tags(tags)
+
+        if not draft:
+            draft = False
+        else:
+            draft = (draft.lower() == 'on')
+
+        article = Article.get(id) if id else None
+        if article:
+            # It's an edit of an existing item.
+            just_published = article.draft and (not draft)
+            article.title = title
+            article.body = body
+            article.tags = tags
+            article.draft = draft
+        else:
+            # It's new.
+            article = Article(title=title,
+                              body=body,
+                              tags=tags,
+                              draft=draft)
+            just_published = not draft
+
+        article.save()
+
+        if just_published:
+            logging.debug('Article %d just went from draft to published. '
+                          'Alerting the media.' % article.id)
+            alert_the_media()
+
+        edit_again = cgi.escape(self.request.get('edit_again'))
+        edit_again = edit_again and (edit_again.lower() == 'true')
+        if edit_again:
+            self.redirect('/admin/article/edit/?id=%s' % article.id)
+        else:
+            self.redirect('/admin/')
 {% endhighlight %}
 
 Here are the relevant changes:
 
 {% highlight python %}
-    article = Article.get(id) if id else None
-    if article:
-        # It's an edit of an existing item.
-        just_published = article.draft and (not draft)
-        article.title = title
-        article.body = body
-        article.tags = tags
-        article.draft = draft
-    else:
-        # It's new.
-        article = Article(title=title,
-                          body=body,
-                          tags=tags,
-                          draft=draft)
-        just_published = not draft
-    
-    ...
-    
-    if just_published:
-        logging.debug('Article %d just went from draft to published. '
-                      'Alerting the media.' % article.id)
-        alert_the_media()
+article = Article.get(id) if id else None
+if article:
+    # It's an edit of an existing item.
+    just_published = article.draft and (not draft)
+    article.title = title
+    article.body = body
+    article.tags = tags
+    article.draft = draft
+else:
+    # It's new.
+    article = Article(title=title,
+                      body=body,
+                      tags=tags,
+                      draft=draft)
+    just_published = not draft
+
+...
+
+if just_published:
+    logging.debug('Article %d just went from draft to published. '
+                  'Alerting the media.' % article.id)
+    alert_the_media()
 {% endhighlight %}
 
 Determining that the article was just published is trivial. If it *has*
@@ -448,9 +448,9 @@ in a separate function.
 The `alert_the_media()` function is simple enough:
 
 {% highlight python %}
-    def alert_the_media():
-        # Right now, we only alert Technorati
-        ping_technorati()
+def alert_the_media():
+    # Right now, we only alert Technorati
+    ping_technorati()
 {% endhighlight %}
 
 ### The `ping_technorati()` function
@@ -460,26 +460,26 @@ It's not a whole lot different from the \`sample XML-RPC call\`\_
 at the top of the article:
 
 {% highlight python %}
-    def ping_technorati():
-        if defs.ON_GAE:
-            url = TECHNORATI_PING_RPC_URL
+def ping_technorati():
+    if defs.ON_GAE:
+        url = TECHNORATI_PING_RPC_URL
+    else:
+        url = FAKE_TECHNORATI_PING_RPC_URL
+
+    logging.debug('Pinging Technorati at: %s' % url)
+    try:
+        transport = xmlrpc.GoogleXMLRPCTransport()
+        rpc_server = xmlrpclib.ServerProxy(url, transport=transport)
+        result = rpc_server.weblogUpdates.ping(defs.BLOG_NAME,
+                                               defs.CANONICAL_BLOG_URL)
+        if result.get('flerror', False) == True:
+            logging.error('Technorati ping error from server: %s' %
+                          result.get('message', '(No message in RPC result)'))
         else:
-            url = FAKE_TECHNORATI_PING_RPC_URL
-    
-        logging.debug('Pinging Technorati at: %s' % url)
-        try:
-            transport = xmlrpc.GoogleXMLRPCTransport()
-            rpc_server = xmlrpclib.ServerProxy(url, transport=transport)
-            result = rpc_server.weblogUpdates.ping(defs.BLOG_NAME,
-                                                   defs.CANONICAL_BLOG_URL)
-            if result.get('flerror', False) == True:
-                logging.error('Technorati ping error from server: %s' %
-                              result.get('message', '(No message in RPC result)'))
-            else:
-                logging.debug('Technorati ping successful.')
-        except:
-            raise urlfetch.DownloadError, \
-                  "Can't ping Technorati: %s" % sys.exc_info()[1]
+            logging.debug('Technorati ping successful.')
+    except:
+        raise urlfetch.DownloadError, \
+              "Can't ping Technorati: %s" % sys.exc_info()[1]
 {% endhighlight %}
 
 Note the first four lines, though. They say:
@@ -490,8 +490,8 @@ Note the first four lines, though. They say:
 Those constants are defined at the top of `admin.py`:
 
 {% highlight python %}
-    TECHNORATI_PING_RPC_URL = 'http://rpc.technorati.com/rpc/ping'
-    FAKE_TECHNORATI_PING_RPC_URL = 'http://localhost/~bmc/technorati-mock.xml'
+TECHNORATI_PING_RPC_URL = 'http://rpc.technorati.com/rpc/ping'
+FAKE_TECHNORATI_PING_RPC_URL = 'http://localhost/~bmc/technorati-mock.xml'
 {% endhighlight %}
 
 The fake URL is nothing more than a canned page. On my development
