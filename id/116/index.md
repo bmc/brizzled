@@ -110,6 +110,11 @@ dependency uses a simple DSL that's far easier to read than Maven's XML:
 All the artifact information is there, without much extraneous markup
 getting in the way.
 
+[Polyglot Maven][] also has promise, since it provides a way to express
+Maven POMs in Groovy, Scala, Clojure and JRuby, among others. I'll admit
+that I haven't played much with Polyglot Maven, but it's on my list of
+things to try.
+
 ## So, why Buildr?
 
 While I use [SBT][] heavily, in my Scala work, I wanted to keep things even
@@ -212,3 +217,4 @@ alternatives.
 [StringTemplate]: http://stringtemplate.org/
 [fowler-rake]: http://martinfowler.com/articles/rake.html
 [DSL]: http://en.wikipedia.org/wiki/Domain-specific_language
+[Polyglot Maven]: https://github.com/sonatype/polyglot-maven
