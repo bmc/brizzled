@@ -182,19 +182,12 @@ div#articles-box
 
 #articles-container
 {
+    font-family: $font_family;
     @include rounded-border;
     border: 1px solid #a9a9a9;
-    font-family: $font_family;
-    /* margin-right: 1em; */
-    /*float: left;*/
+    @include drop-shadow-right-bottom(5px, #999);
 
-/*
-    border-top: 3px solid #cccccc;
-    border-left: 3px solid #888888;
-    border-bottom: 3px solid black;
-    border-right: 3px solid #555555;
-*/
-
+    margin-right: 1em;
     background-color: white;
     padding: 1em;
 }

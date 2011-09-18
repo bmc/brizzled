@@ -1,15 +1,22 @@
 $rounded_box_border_radius: 10px;
 
-@mixin rounded-border
+@mixin rounded-border($radius: $rounded_box_border_radius)
 {
-    border-radius: $rounded_box_border_radius;
-    -moz-border-radius: $rounded_box_border_radius;
-   padding: $rounded_box_border_radius;
+    border-radius: $radius;
+    -moz-border-radius: $radius;
+   padding: $radius;
 }
 
-@mixin centered
+@mixin centered($width: 100%)
 {
-    width: 100%;
+    width: $width;
     margin-left: auto;
     margin-right: auto;
+}
+
+@mixin drop-shadow-right-bottom($width: 5px, $color: #999)
+{
+    box-shadow: $width $width $width $color;
+    -moz-box-shadow: $width $width $width $color;
+    -webkit-box-shadow: $width $width $width $color;
 }
