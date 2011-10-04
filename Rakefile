@@ -19,6 +19,10 @@ task :jekyll => :css do |t|
   cp_r "tags", "_site"
 end
 
+task :run => :css do |t|
+  sh "jekyll", "--server"
+end
+
 # Generate CSS files from SCSS files
 
 SASS_DIR = 'sass'
