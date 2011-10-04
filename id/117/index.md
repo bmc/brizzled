@@ -285,7 +285,7 @@ colorized (not shown here).
 # Conclusion
 
 [Jasmine][] is an excellent Javascript test framework. Mix it with
-[CoffeeScript][], and you get some seriously deliciousness.
+[CoffeeScript][], and you get some serious deliciousness.
 
 [npm]: http://npmjs.org/
 [BDD]: http://en.wikipedia.org/wiki/Behavior_Driven_Development
