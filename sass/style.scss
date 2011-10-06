@@ -272,17 +272,27 @@ div.article-footer
     }
 }
 
-div.article-timestamp
+@mixin timestamp-common
 {
     font-size: 75%;
-    padding-left: 2em;
+    padding-left: 0;
     padding-right: 0;
     padding-top: 0;
     padding-bottom: 0;
     vertical-align: top;
     color: gray;
-    text-align: right;
     width: 40%;
+}
+
+div.summary-timestamp
+{
+    @include timestamp-common;
+    text-align: left;
+}
+
+div.article-timestamp
+{
+    @include timestamp-common;
     float: right;
 }
 
@@ -663,6 +673,8 @@ div#tocBlock
 
     margin-right: 0em;
     margin-left: 10px;
+    margin-bottom: 5px;
+
     background-color: #f0f0f0;
     padding: 10px;
     width: 40%;
