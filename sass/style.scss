@@ -8,12 +8,6 @@ $background_color: #eeeeee;
 $font_family: Verdana, Arial, Helvetica, sans-serif;
 $pre_font_family: Andale Mono, Lucidatypewriter, Lucida Typewriter, monospace;
 
-@mixin centered
-{
-    margin-left: auto;
-    margin-right: auto;
-}
-
 @import "pygments.scss";
 
 html
@@ -567,6 +561,20 @@ a
    }
 }
 
+div.image-container
+{
+    border: 1px solid gray;
+    @include drop-shadow-right-bottom(5px, #999);
+    padding: 10px;
+    margin: 5px;
+}
+
+div.caption
+{
+    font-size: 80%;
+    font-style: italic;
+    text-align: center;
+}
 
 div.article-title a.reference
 {
