@@ -40,9 +40,9 @@ operating systems; you'll even see POSIX APIs in Windows. According to
 and languages directly descended from it (C++, C#, and Java, for example)
 also rank in the top 10.
 
-I was fortunate to meet Dennis Ritchie, once (and briefly), at a [Usenix][]
+I was fortunate to meet Dennis Ritchie, briefly, at a [Usenix][]
 conference, many years ago; his colleague (and my long-time friend),
-[Bill Cheswick][], insisted on introducing me. In person, to me, Ritchie
+[Bill Cheswick][], insisted on introducing me. In person, Ritchie
 seemed to be quiet and somewhat self-effacing; however, as a Unix
 aficianado, I was more than a little awed by the man. I couldn't think of
 much to say that wouldn't sound stupid, so I just bought a signed copy of
