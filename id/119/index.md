@@ -48,7 +48,7 @@ aficianado, I was more than a little awed by the man. I couldn't think of
 much to say that wouldn't sound stupid, so I just bought a signed copy of
 K&R from him.
 
-We have lost both a brilliant innovator.
+We have lost both a brilliant innovator and an amazing programmer.
 
 Rest in peace, Dr. Ritchie.
 
