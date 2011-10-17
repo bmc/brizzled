@@ -7,6 +7,8 @@ date: 2011-08-26
 
 <div style="float: right"><img src="beachball.png"></div>
 
+*Updated: It's all about the RAM. See [below](#update).*
+
 About a month ago, I upgraded my vintage 2006 MacBook Pro to
 [Mac OS X Lion][]. It was only $29.95, so, why not?
 
@@ -68,6 +70,26 @@ claims that *cron*(1) jobs or login actions that
 but having to do that seems like a complete [kluge][]--assuming it even works.
 
 Alas, a new Mac is not in the budget right now.
+
+## *Update, 17 October, 2011* {#update}
+
+Over the weekend, I bought a new Mac, a 15-inch MacBook Pro with a
+quad-core i5 and 8Gb RAM. It came with Snow Leopard (it's a refurbished
+machine), so I upgraded it to Lion.
+
+It's behaving just fine, compared to the old machine. But, of course, it
+has 2&#x2154; times the RAM. I'm running my usual complement of stuff: a
+remote SSH session, a number of Terminal.app windows, Thunderbird, Chrome,
+iChat, the (impossible to spell correctly) Yorufukurou Twitter client,
+iCal, TrueCrypt, and iTunes. According to *htop*(1), it's using just north
+of 4Gb of RAM.
+
+With 8Gb on board, that's not a problem, of course. But my old machine
+maxed out at 3Gb, so, with Lion, it swapped like crazy.
+
+Moral: Apperently, Lion wants RAM. If you're fond of running as much stuff
+as I am, jam your machine as full of RAM as you can.
+
 
 [Mac OS X Lion]: http://en.wikipedia.org/wiki/Mac_OS_X_Lion
 [spinning beach balls of death]: http://www.thexlab.com/faqs/sbbod.html
