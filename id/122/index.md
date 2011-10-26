@@ -3,7 +3,6 @@ layout: article
 title: 'Rails Local Configuration'
 tags: ruby, rails
 date: 2011-10-26
-toc: toc
 ---
 
 # The problem
