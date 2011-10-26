@@ -45,6 +45,9 @@ It's a simple matter to provide the necessary logic in `config/boot.rb`:
 
 <script src="https://gist.github.com/1316837.js"> </script>
 
+By saving the environment-specific configuration in a global `LocalConfig`
+hash, I can then use it from other initializers.
+
 # Sample runs
 
 When I use the `development` environment, Rails listens on the standard port:
