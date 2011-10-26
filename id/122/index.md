@@ -57,6 +57,7 @@ When I use the `development` environment, Rails listens on the standard port:
     => Call with -d to detach
     => Ctrl-C to shutdown server
     ^C
+    $
 
 When I use the `bmc` environment, Rails listens on port 1234:
 
