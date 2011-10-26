@@ -5,8 +5,10 @@
 \* -------------------------------------------------------------------------- */
 
 $background_color: #eeeeee;
+$code_background_color: #ffffe0;
 $font_family: Verdana, Arial, Helvetica, sans-serif;
 $pre_font_family: Andale Mono, Lucidatypewriter, Lucida Typewriter, monospace;
+$article_background_color: white;
 
 @import "pygments.scss";
 
@@ -182,7 +184,7 @@ div#articles-box
     @include drop-shadow-right-bottom(5px, #999);
 
     margin-right: 1em;
-    background-color: white;
+    background-color: $article_background_color;
     padding: 1em;
 }
 
@@ -190,7 +192,7 @@ div#articles-box
 {
     clear: both;
     padding-top: 2px;
-    background-color: white;
+    background-color: $article_background_color;
     margin-left: 0.5in;
 }
 
@@ -198,7 +200,7 @@ div#articles-box
 {
     clear: both;
     padding-top: 5px;
-    background-color: white;
+    background-color: $article_background_color;
 }
 
 .article-body-draft
@@ -210,7 +212,7 @@ div#articles-box
 
 div.article
 {
-    background-color: white;
+    background-color: $article_background_color;
 }
 
 div.article-header
@@ -448,27 +450,61 @@ h3
     display: inline-block;
 }
 
+@mixin code-container
+{
+    margin-left: 2em;
+    background-color: $code_background_color;
+    @include shrink-to-fit;
+    border: 1px solid #aaaaaa !important;
+    padding: 5px;
+}
+
 @mixin code-like
 {
-    // background-color: #eeeeee;
-    background-color: #ffffe0;
+    background-color: $code_background_color;
     font-family: $pre_font_family;
     font-size: 14px;
     overflow: auto;
     max-width: 90%;
     margin-left: 1px;
-    padding: 5px;
-    border: 1px solid #aaaaaa !important;
+}
 
-    @include shrink-to-fit;    
+div.gist
+{
+    @include code-container;
+
+    .gist-file
+    {
+        border: none;
+
+        .gist-meta
+        {
+            background-color: $article_background_color;
+            border: 1px dotted #aaaaaa !important;
+        }
+
+        .gist-syntax
+        {
+            width: 100%;
+            background-color: $code_background_color;
+
+            .gist-highlight
+            {
+                pre
+                {
+                    background-color: $code_background_color;
+                    font-family: $pre_font_family;
+                    width: 100%;
+                }
+            }
+        }
+    }
 }
 
 pre
 {
-    margin-left: 2em;
+    @include code-container;
     font-size: 10pt;
-    font-family: $pre_font_family;
-    /* font-family: Courier New, Courier, monospace; */
 
     width: auto;
     overflow: auto;
