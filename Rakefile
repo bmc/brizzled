@@ -19,6 +19,8 @@ task :jekyll => :css do |t|
   cp_r "tags", "_site"
 end
 
+task :server => :run
+
 task :run => :css do |t|
   sh "jekyll", "--server"
 end

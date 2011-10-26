@@ -1,0 +1,17 @@
+{% include top.html %}
+
+<div id="articles-box">
+<div id="articles-container">
+
+<h1>{{ page.title }}</h1>
+
+<ul>
+{% for t in page.all_tags %}
+<li> <a href="/tags/{{ t.dir }}/">{{ t.name }}</a> ({{ t.total }})</li>
+{% endfor %}
+</ul>
+
+{% include bottom.html %}
+
+</div> {% comment %} articles-box {% endcomment %}
+</div> {% comment %} articles-container {% endcomment %}

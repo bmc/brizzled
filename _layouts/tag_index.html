@@ -1,7 +1,13 @@
+{% comment %}
+This page represents the main index page that lists all articles associated with
+a specific tag.
+{% endcomment %}
 {% include top.html %}
 
 <div id="articles-box">
 <div id="articles-container">
+
+<h1>{{ page.title }}</h1>
 
 {% assign sep = false %}
 {% for article in page.articles %}

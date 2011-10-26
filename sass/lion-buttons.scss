@@ -1,0 +1,305 @@
+.lion-buttons {
+    background: #ccc;
+    padding: 20px 10px 10px 20px;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    float: left;
+    margin-bottom: 40px;
+    width: 830px;
+}
+a.lion-button,
+a.lion-icon {
+    color: #484848;
+    text-decoration: none;
+    text-shadow: 0 1px 0 #fff;
+    font: bold 12px Helvetica, Arial, sans-serif;
+    line-height: 35px;
+    height: 35px;
+    display: block;
+    float: left;
+    margin-right: 10px;
+    padding: 0 10px;
+    background: #f0f0f0;
+    background: -webkit-linear-gradient(top, #f7f7f7, #d1d1d1);
+    background: -moz-linear-gradient(top, #f7f7f7, #d1d1d1);
+    background: -ms-linear-gradient(top, #f7f7f7, #d1d1d1);
+    background: -o-linear-gradient(top, #f7f7f7, #d1d1d1);
+    border: solid 1px #7f7f7f;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -moz-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+    -webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+    -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=1, Direction=90, Color='#ffffff')";
+    filter: progid:DXImageTransform.Microsoft.Shadow(Strength=1, Direction=90, Color='#ffffff');
+    -webkit-transition: border-color .218s;
+    -moz-transition: border .218s;
+    -o-transition: border-color .218s;
+    transition: border-color .218s;
+}
+a.lion-button:hover,
+a.lion-icon:hover {
+    border: solid 1px #333;
+    color: #282828;
+    background: -webkit-linear-gradient(top, #ffffff, #dfdfdf);
+    background: -moz-linear-gradient(top, #ffffff, #dfdfdf);
+    background: -ms-linear-gradient(top, #ffffff, #dfdfdf);
+    background: -o-linear-gradient(top, #ffffff, #dfdfdf);
+}
+a.lion-button:active,
+a.lion-icon:active {
+    border: solid 1px #7f7f7f;
+    background: #d0d0d0;
+    background: -webkit-gradient(linear, left top, left bottom, from(#a8a8a8), color-stop(0.15, #c6c6c6), to(#d8d8d8));
+    background: -webkit-linear-gradient(top, #a8a8a8, #c6c6c6 15%, #d8d8d8);
+    background: -moz-linear-gradient(top, #a8a8a8, #c6c6c6 15%, #d8d8d8);
+    background: -ms-linear-gradient(top, #a8a8a8, #c6c6c6 15%, #d8d8d8);
+    background: -o-linear-gradient(top, #a8a8a8, #c6c6c6 15%, #d8d8d8);
+}
+a.lion-icon {
+    padding: 0;
+    margin-bottom: 10px;
+}
+a.lion-icon span {
+    display: block;
+    line-height: 35px;
+    height: 35px;
+    width: 36px;
+    max-width: 36px;
+    overflow: hidden;
+    text-indent: -9999px;
+}
+a.lion-left {
+    margin: 0;
+    border-right: solid 1px #b0b0b0;
+    -webkit-border-top-right-radius: 0;
+    -moz-border-radius-topright: 0;
+    border-top-right-radius: 0;
+    -webkit-border-bottom-right-radius: 0;
+    -moz-border-radius-bottomright: 0;
+    border-bottom-right-radius: 0;
+}
+a.lion-middle {
+    border-radius: 0;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    margin: 0;
+    border-left: solid 1px rgba(255, 255, 255, 0);
+    border-right: solid 1px #b0b0b0;
+}
+a.lion-middle:hover,
+a.lion-right:hover { border-left: solid 1px #333 }
+a.lion-middle:active,
+a.lion-right:active { border-left: solid 1px #7f7f7f }
+a.lion-right {
+    border-left: solid 1px rgba(255, 255, 255, 0);
+    -webkit-border-top-left-radius: 0;
+    -moz-border-radius-topleft: 0;
+    border-top-left-radius: 0;
+    -webkit-border-bottom-left-radius: 0;
+    -moz-border-radius-bottomleft: 0;
+    border-bottom-left-radius: 0;
+}
+
+a.lion-icon1 span {background:url(button-icons.png) -0px -36px;}
+a.lion-icon2 span {background:url(button-icons.png) -36px -36px;}
+a.lion-icon3 span {background:url(button-icons.png) -72px -36px;}
+a.lion-icon4 span {background:url(button-icons.png) -108px -36px;}
+a.lion-icon5 span {background:url(button-icons.png) -144px -36px;}
+a.lion-icon6 span {background:url(button-icons.png) -180px -36px;}
+a.lion-icon7 span {background:url(button-icons.png) -216px -36px;}
+a.lion-icon8 span {background:url(button-icons.png) -252px -36px;}
+a.lion-icon9 span {background:url(button-icons.png) -288px -36px;}
+a.lion-icon10 span {background:url(button-icons.png) -324px -36px;}
+a.lion-icon11 span {background:url(button-icons.png) -0px -72px;}
+a.lion-icon12 span {background:url(button-icons.png) -36px -72px;}
+a.lion-icon13 span {background:url(button-icons.png) -72px -72px;}
+a.lion-icon14 span {background:url(button-icons.png) -108px -72px;}
+a.lion-icon15 span {background:url(button-icons.png) -144px -72px;}
+a.lion-icon16 span {background:url(button-icons.png) -180px -72px;}
+a.lion-icon17 span {background:url(button-icons.png) -216px -72px;}
+a.lion-icon18 span {background:url(button-icons.png) -252px -72px;}
+a.lion-icon19 span {background:url(button-icons.png) -288px -72px;}
+a.lion-icon20 span {background:url(button-icons.png) -324px -72px;}
+a.lion-icon21 span {background:url(button-icons.png) -0px -108px;}
+a.lion-icon22 span {background:url(button-icons.png) -36px -108px;}
+a.lion-icon23 span {background:url(button-icons.png) -72px -108px;}
+a.lion-icon24 span {background:url(button-icons.png) -108px -108px;}
+a.lion-icon25 span {background:url(button-icons.png) -144px -108px;}
+a.lion-icon26 span {background:url(button-icons.png) -180px -108px;}
+a.lion-icon27 span {background:url(button-icons.png) -216px -108px;}
+a.lion-icon28 span {background:url(button-icons.png) -252px -108px;}
+a.lion-icon29 span {background:url(button-icons.png) -288px -108px;}
+a.lion-icon30 span {background:url(button-icons.png) -324px -108px;}
+a.lion-icon31 span {background:url(button-icons.png) -0px -144px;}
+a.lion-icon32 span {background:url(button-icons.png) -36px -144px;}
+a.lion-icon33 span {background:url(button-icons.png) -72px -144px;}
+a.lion-icon34 span {background:url(button-icons.png) -108px -144px;}
+a.lion-icon35 span {background:url(button-icons.png) -144px -144px;}
+a.lion-icon36 span {background:url(button-icons.png) -180px -144px;}
+a.lion-icon37 span {background:url(button-icons.png) -216px -144px;}
+a.lion-icon38 span {background:url(button-icons.png) -252px -144px;}
+a.lion-icon39 span {background:url(button-icons.png) -288px -144px;}
+a.lion-icon40 span {background:url(button-icons.png) -324px -144px;}
+a.lion-icon41 span {background:url(button-icons.png) -0px -180px;}
+a.lion-icon42 span {background:url(button-icons.png) -36px -180px;}
+a.lion-icon43 span {background:url(button-icons.png) -72px -180px;}
+a.lion-icon44 span {background:url(button-icons.png) -108px -180px;}
+a.lion-icon45 span {background:url(button-icons.png) -144px -180px;}
+a.lion-icon46 span {background:url(button-icons.png) -180px -180px;}
+a.lion-icon47 span {background:url(button-icons.png) -216px -180px;}
+a.lion-icon48 span {background:url(button-icons.png) -252px -180px;}
+a.lion-icon49 span {background:url(button-icons.png) -288px -180px;}
+a.lion-icon50 span {background:url(button-icons.png) -324px -180px;}
+a.lion-icon51 span {background:url(button-icons.png) -0px -216px;}
+a.lion-icon52 span {background:url(button-icons.png) -36px -216px;}
+a.lion-icon53 span {background:url(button-icons.png) -72px -216px;}
+a.lion-icon54 span {background:url(button-icons.png) -108px -216px;}
+a.lion-icon55 span {background:url(button-icons.png) -144px -216px;}
+a.lion-icon56 span {background:url(button-icons.png) -180px -216px;}
+a.lion-icon57 span {background:url(button-icons.png) -216px -216px;}
+a.lion-icon58 span {background:url(button-icons.png) -252px -216px;}
+a.lion-icon59 span {background:url(button-icons.png) -288px -216px;}
+a.lion-icon60 span {background:url(button-icons.png) -324px -216px;}
+a.lion-icon61 span {background:url(button-icons.png) -0px -252px;}
+a.lion-icon62 span {background:url(button-icons.png) -36px -252px;}
+a.lion-icon63 span {background:url(button-icons.png) -72px -252px;}
+a.lion-icon64 span {background:url(button-icons.png) -108px -252px;}
+a.lion-icon65 span {background:url(button-icons.png) -144px -252px;}
+a.lion-icon66 span {background:url(button-icons.png) -180px -252px;}
+a.lion-icon67 span {background:url(button-icons.png) -216px -252px;}
+a.lion-icon68 span {background:url(button-icons.png) -252px -252px;}
+a.lion-icon69 span {background:url(button-icons.png) -288px -252px;}
+a.lion-icon70 span {background:url(button-icons.png) -324px -252px;}
+a.lion-icon71 span {background:url(button-icons.png) -0px -288px;}
+a.lion-icon72 span {background:url(button-icons.png) -36px -288px;}
+a.lion-icon73 span {background:url(button-icons.png) -72px -288px;}
+a.lion-icon74 span {background:url(button-icons.png) -108px -288px;}
+a.lion-icon75 span {background:url(button-icons.png) -144px -288px;}
+a.lion-icon76 span {background:url(button-icons.png) -180px -288px;}
+a.lion-icon77 span {background:url(button-icons.png) -216px -288px;}
+a.lion-icon78 span {background:url(button-icons.png) -252px -288px;}
+a.lion-icon79 span {background:url(button-icons.png) -288px -288px;}
+a.lion-icon80 span {background:url(button-icons.png) -324px -288px;}
+a.lion-icon81 span {background:url(button-icons.png) -0px -324px;}
+a.lion-icon82 span {background:url(button-icons.png) -36px -324px;}
+a.lion-icon83 span {background:url(button-icons.png) -72px -324px;}
+a.lion-icon84 span {background:url(button-icons.png) -108px -324px;}
+a.lion-icon85 span {background:url(button-icons.png) -144px -324px;}
+a.lion-icon86 span {background:url(button-icons.png) -180px -324px;}
+a.lion-icon87 span {background:url(button-icons.png) -216px -324px;}
+a.lion-icon88 span {background:url(button-icons.png) -252px -324px;}
+a.lion-icon89 span {background:url(button-icons.png) -288px -324px;}
+a.lion-icon90 span {background:url(button-icons.png) -324px -324px;}
+a.lion-icon91 span {background:url(button-icons.png) -0px -360px;}
+a.lion-icon92 span {background:url(button-icons.png) -36px -360px;}
+a.lion-icon93 span {background:url(button-icons.png) -72px -360px;}
+a.lion-icon94 span {background:url(button-icons.png) -108px -360px;}
+a.lion-icon95 span {background:url(button-icons.png) -144px -360px;}
+a.lion-icon96 span {background:url(button-icons.png) -180px -360px;}
+a.lion-icon97 span {background:url(button-icons.png) -216px -360px;}
+a.lion-icon98 span {background:url(button-icons.png) -252px -360px;}
+a.lion-icon99 span {background:url(button-icons.png) -288px -360px;}
+a.lion-icon100 span {background:url(button-icons.png) -324px -360px;}
+a.lion-icon101 span {background:url(button-icons.png) -0px -396px;}
+a.lion-icon102 span {background:url(button-icons.png) -36px -396px;}
+a.lion-icon103 span {background:url(button-icons.png) -72px -396px;}
+a.lion-icon104 span {background:url(button-icons.png) -108px -396px;}
+a.lion-icon105 span {background:url(button-icons.png) -144px -396px;}
+a.lion-icon106 span {background:url(button-icons.png) -180px -396px;}
+a.lion-icon107 span {background:url(button-icons.png) -216px -396px;}
+a.lion-icon108 span {background:url(button-icons.png) -252px -396px;}
+a.lion-icon109 span {background:url(button-icons.png) -288px -396px;}
+a.lion-icon110 span {background:url(button-icons.png) -324px -396px;}
+a.lion-icon111 span {background:url(button-icons.png) -0px -432px;}
+a.lion-icon112 span {background:url(button-icons.png) -36px -432px;}
+a.lion-icon113 span {background:url(button-icons.png) -72px -432px;}
+a.lion-icon114 span {background:url(button-icons.png) -108px -432px;}
+a.lion-icon115 span {background:url(button-icons.png) -144px -432px;}
+a.lion-icon116 span {background:url(button-icons.png) -180px -432px;}
+a.lion-icon117 span {background:url(button-icons.png) -216px -432px;}
+a.lion-icon118 span {background:url(button-icons.png) -252px -432px;}
+a.lion-icon119 span {background:url(button-icons.png) -288px -432px;}
+a.lion-icon120 span {background:url(button-icons.png) -324px -432px;}
+a.lion-icon121 span {background:url(button-icons.png) -0px -468px;}
+a.lion-icon122 span {background:url(button-icons.png) -36px -468px;}
+a.lion-icon123 span {background:url(button-icons.png) -72px -468px;}
+a.lion-icon124 span {background:url(button-icons.png) -108px -468px;}
+a.lion-icon125 span {background:url(button-icons.png) -144px -468px;}
+a.lion-icon126 span {background:url(button-icons.png) -180px -468px;}
+a.lion-icon127 span {background:url(button-icons.png) -216px -468px;}
+a.lion-icon128 span {background:url(button-icons.png) -252px -468px;}
+a.lion-icon129 span {background:url(button-icons.png) -288px -468px;}
+a.lion-icon130 span {background:url(button-icons.png) -324px -468px;}
+a.lion-icon131 span {background:url(button-icons.png) -0px -504px;}
+a.lion-icon132 span {background:url(button-icons.png) -36px -504px;}
+a.lion-icon133 span {background:url(button-icons.png) -72px -504px;}
+a.lion-icon134 span {background:url(button-icons.png) -108px -504px;}
+a.lion-icon135 span {background:url(button-icons.png) -144px -504px;}
+a.lion-icon136 span {background:url(button-icons.png) -180px -504px;}
+a.lion-icon137 span {background:url(button-icons.png) -216px -504px;}
+a.lion-icon138 span {background:url(button-icons.png) -252px -504px;}
+a.lion-icon139 span {background:url(button-icons.png) -288px -504px;}
+a.lion-icon140 span {background:url(button-icons.png) -324px -504px;}
+a.lion-icon141 span {background:url(button-icons.png) -0px -540px;}
+a.lion-icon142 span {background:url(button-icons.png) -36px -540px;}
+a.lion-icon143 span {background:url(button-icons.png) -72px -540px;}
+a.lion-icon144 span {background:url(button-icons.png) -108px -540px;}
+a.lion-icon145 span {background:url(button-icons.png) -144px -540px;}
+a.lion-icon146 span {background:url(button-icons.png) -180px -540px;}
+a.lion-icon147 span {background:url(button-icons.png) -216px -540px;}
+a.lion-icon148 span {background:url(button-icons.png) -252px -540px;}
+a.lion-icon149 span {background:url(button-icons.png) -288px -540px;}
+a.lion-icon150 span {background:url(button-icons.png) -324px -540px;}
+a.lion-icon151 span {background:url(button-icons.png) -0px -576px;}
+a.lion-icon152 span {background:url(button-icons.png) -36px -576px;}
+a.lion-icon153 span {background:url(button-icons.png) -72px -576px;}
+a.lion-icon154 span {background:url(button-icons.png) -108px -576px;}
+a.lion-icon155 span {background:url(button-icons.png) -144px -576px;}
+a.lion-icon156 span {background:url(button-icons.png) -180px -576px;}
+a.lion-icon157 span {background:url(button-icons.png) -216px -576px;}
+a.lion-icon158 span {background:url(button-icons.png) -252px -576px;}
+a.lion-icon159 span {background:url(button-icons.png) -288px -576px;}
+a.lion-icon160 span {background:url(button-icons.png) -324px -576px;}
+a.lion-icon161 span {background:url(button-icons.png) -0px -612px;}
+a.lion-icon162 span {background:url(button-icons.png) -36px -612px;}
+a.lion-icon163 span {background:url(button-icons.png) -72px -612px;}
+a.lion-icon164 span {background:url(button-icons.png) -108px -612px;}
+a.lion-icon165 span {background:url(button-icons.png) -144px -612px;}
+a.lion-icon166 span {background:url(button-icons.png) -180px -612px;}
+a.lion-icon167 span {background:url(button-icons.png) -216px -612px;}
+a.lion-icon168 span {background:url(button-icons.png) -252px -612px;}
+a.lion-icon169 span {background:url(button-icons.png) -288px -612px;}
+a.lion-icon170 span {background:url(button-icons.png) -324px -612px;}
+a.lion-icon171 span {background:url(button-icons.png) -0px -648px;}
+a.lion-icon172 span {background:url(button-icons.png) -36px -648px;}
+a.lion-icon173 span {background:url(button-icons.png) -72px -648px;}
+a.lion-icon174 span {background:url(button-icons.png) -108px -648px;}
+a.lion-icon175 span {background:url(button-icons.png) -144px -648px;}
+a.lion-icon176 span {background:url(button-icons.png) -180px -648px;}
+a.lion-icon177 span {background:url(button-icons.png) -216px -648px;}
+a.lion-icon178 span {background:url(button-icons.png) -252px -648px;}
+a.lion-icon179 span {background:url(button-icons.png) -288px -648px;}
+a.lion-icon180 span {background:url(button-icons.png) -324px -648px;}
+a.lion-icon181 span {background:url(button-icons.png) -0px -684px;}
+a.lion-icon182 span {background:url(button-icons.png) -36px -684px;}
+a.lion-icon183 span {background:url(button-icons.png) -72px -684px;}
+a.lion-icon184 span {background:url(button-icons.png) -108px -684px;}
+a.lion-icon185 span {background:url(button-icons.png) -144px -684px;}
+a.lion-icon186 span {background:url(button-icons.png) -180px -684px;}
+a.lion-icon187 span {background:url(button-icons.png) -216px -684px;}
+a.lion-icon188 span {background:url(button-icons.png) -252px -684px;}
+a.lion-icon189 span {background:url(button-icons.png) -288px -684px;}
+a.lion-icon190 span {background:url(button-icons.png) -324px -684px;}
+a.lion-icon191 span {background:url(button-icons.png) -0px -720px;}
+a.lion-icon192 span {background:url(button-icons.png) -36px -720px;}
+a.lion-icon193 span {background:url(button-icons.png) -72px -720px;}
+a.lion-icon194 span {background:url(button-icons.png) -108px -720px;}
+a.lion-icon195 span {background:url(button-icons.png) -144px -720px;}
+a.lion-icon196 span {background:url(button-icons.png) -180px -720px;}
+a.lion-icon197 span {background:url(button-icons.png) -216px -720px;}
+a.lion-icon198 span {background:url(button-icons.png) -252px -720px;}
+a.lion-icon199 span {background:url(button-icons.png) -288px -720px;}
+a.lion-icon200 span {background:url(button-icons.png) -324px -720px;}

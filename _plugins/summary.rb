@@ -40,7 +40,7 @@ module Jekyll
 
         def get_html
             if not File.exists?(@summary_html)
-                puts("#{@summary_html} does not exist. Making it.")
+                #puts("#{@summary_html} does not exist. Making it.")
                 html = make_html
             elsif (File.mtime(@summary_html) <=> File.mtime(@summary_file)) < 0
                 puts("#{@summary_html} is older than #{@summary_file}. Remaking.")
