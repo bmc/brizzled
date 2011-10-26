@@ -19,8 +19,8 @@ that goal is by metaprogramming `Rails::Server` in `config/boot.rb`, as
 described in this
 [StackOverflow answer](http://stackoverflow.com/questions/3842818#6539193).
 
-However, I didn't want to hack the port for *everyone*, so I wanted a solution
-that was specific to my `RAILS_ENV` setting.
+However, I didn't want to hack the port for *everyone*; I wanted a solution
+that would be specific to a `RAILS_ENV` setting.
 
 # A simple solution
 
