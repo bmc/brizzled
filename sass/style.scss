@@ -506,7 +506,7 @@ pre
     @include code-container;
     font-size: 10pt;
 
-    width: auto;
+    max-width: 95%;
     overflow: auto;
     overflow-y: hidden; /* for IE */
     -ms-overflow-y: hidden; /* for IE8 */
