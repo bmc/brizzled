@@ -32,9 +32,6 @@ when `RAILS_ENV` is set to `bmc`, I'd simply put the following in that file:
     # NOTE: This file is NOT supplied by Rails. See the logic at the bottom
     # of boot.rb.
     #
-    # Each section's key is the name of a Rails environment. Currently
-    # supported values:
-    #
     # port - TCP port on which to run the Rails server. Default: 3000
     # -----------------------------------------------------------------------
 
@@ -43,10 +40,22 @@ when `RAILS_ENV` is set to `bmc`, I'd simply put the following in that file:
 
 It's a simple matter to provide the necessary logic in `config/boot.rb`:
 
-<script src="https://gist.github.com/1316837.js"> </script>
+<script src="https://gist.github.com/1321419.js"> </script>
 
-By saving the environment-specific configuration in a global `LocalConfig`
-hash, I can then use it from other initializers.
+Note that the code is more general-purpose than merely what's necessary to 
+handle a TCP port override.
+
+* The `OPTIONS` hash defines the default values for various configuration
+  parameters.
+* The `fix_config_hash` function recursively walks through a hash table,
+  converting its string keys to Ruby symbols. It's used to convert the
+  parsed YAML file into a hash that can be merged with `OPTIONS`.
+* The final merged configuration is stored in a `LocalConfig` global constant,
+  which is accessible elsewhere in the Rails application.
+* The configuration YAML file is preparsed with [ERB][], allowing ERB
+  template logic in the YAML configurations.
+
+[ERB]: http://www.ruby-doc.org/stdlib-1.9.2/libdoc/erb/rdoc/ERB.html
 
 # Sample runs
 
