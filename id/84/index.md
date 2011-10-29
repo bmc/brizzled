@@ -1,6 +1,6 @@
 ---
 layout: article
-tags: python, udp, notification, messaging
+tags: python, udp, notification, messaging, programming
 title: "eventter: A lightweight notification framework"
 date: 2009-01-07
 ---

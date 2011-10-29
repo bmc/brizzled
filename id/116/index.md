@@ -1,7 +1,7 @@
 ---
 layout: article
 title: Why I dislike Maven
-tags: maven, java, buildr, xml
+tags: maven, java, buildr, xml, programming
 toc: toc
 date: 2011-09-17
 ---

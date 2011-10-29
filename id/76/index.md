@@ -1,6 +1,6 @@
 ---
 layout: article
-tags: django, blogging, python, App-Engine
+tags: django, blogging, python, App-Engine, programming
 title: Now blogging on App Engine
 date: 2008-08-04
 ---

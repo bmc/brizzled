@@ -1,7 +1,7 @@
 ---
 layout: article
 title: Finding Ruby Gem Specifications Programmatically
-tags: ruby, rubygems, gems
+tags: ruby, rubygems, gems, programming
 date: 2011-03-27
 ---
 

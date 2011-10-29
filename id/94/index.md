@@ -1,6 +1,6 @@
 ---
 layout: article
-tags: scala, programming, books
+tags: scala, programming, books, programming
 title: Beginning Scala considered useful
 date: 2009-08-17
 ---

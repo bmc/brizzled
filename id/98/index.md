@@ -1,6 +1,6 @@
 ---
 layout: article
-tags: scala, markdown, javascript, rhino
+tags: scala, markdown, javascript, rhino, programming
 title: Parsing Markdown in Scala
 date: 2010-02-10
 ---

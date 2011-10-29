@@ -1,7 +1,7 @@
 ---
 layout: article
 title: Some Jekyll Hacks
-tags: jekyll, ruby, blogging, liquid
+tags: jekyll, ruby, blogging, liquid, programming, programming
 date: 2010-12-20
 toc: toc
 ---

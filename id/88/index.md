@@ -1,6 +1,6 @@
 ---
 layout: article
-tags: python, scala, java, jvm, performance, tcp
+tags: python, scala, java, jvm, performance, tcp, programming
 title: "Scala and Python: An informal TCP performance benchmark"
 date: 2009-03-09
 toc: toc

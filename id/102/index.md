@@ -1,7 +1,7 @@
 ---
 layout: article
 title: Curry
-tags: scala, currying, functional
+tags: scala, currying, functional, programming
 date: 2010-06-07
 toc: toc
 ---

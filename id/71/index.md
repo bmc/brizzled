@@ -1,7 +1,7 @@
 ---
 layout: article
 tags: python, programming
-title: Python, sys.path and EasyInstall
+title: Python, sys.path and EasyInstall, programming
 date: 2008-03-18
 toc: toc
 ---
@@ -16,10 +16,8 @@ this article. What *is* germane is that the installation script
 must use the `virtualenv` package, but it cannot assume that the
 `virtualenv` package has been installed.
 
-This
-[chicken and egg][]
-problem is easily managed by adding a "bootstrap" phase to the
-installation module. It works something like this:
+This [chicken and egg][] problem is easily managed by adding a "bootstrap"
+phase to the installation module. It works something like this:
 
     # create a temporary directory
     

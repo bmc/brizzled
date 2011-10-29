@@ -1,6 +1,6 @@
 ---
 layout: article
-tags: django, blogging, vps, python
+tags: django, blogging, vps, python, programming
 title: Django blog
 date: 2008-07-27
 ---
