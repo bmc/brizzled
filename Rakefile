@@ -10,6 +10,7 @@ gem 'jekyll', version
 
 task :default => :jekyll
 
+desc "Format the blog."
 task :jekyll => :css do |t|
   load Gem.bin_path('jekyll', 'jekyll', version)
 
@@ -21,9 +22,11 @@ end
 
 task :server => :run
 
+desc "Format the blog, then fire up a local HTTP server."
 task :run => :css do |t|
   sh "jekyll", "--server"
 end
+
 
 # Generate CSS files from SCSS files
 
@@ -58,5 +61,26 @@ rule %r{^#{CSS_DIR}/.*\.css$} => [css_to_scss, 'Rakefile'] + SASS_FILES do |t|
   end
 end
 
+desc "Run SASS to produce the stylesheets."
 task :css => CSS_OUTPUT_FILES
+
+desc "Make a new entry"
+task :new do
+  require 'erb'
+  here = File.dirname(__FILE__)
+  dir = File.join(here, 'id')
+  last = Dir.entries(dir).select do |f|
+    File.directory?(File.join(dir, f)) && (f =~ /^\d+$/)
+  end.map {|f| f.to_i}.max
+
+  new_dir = File.join(dir, (last + 1).to_s)
+  Dir.mkdir new_dir
+  Dir.glob(File.join(here, '_templates', '*.md')).each do |path|
+    template = ERB.new(File.open(path).read)
+    File.open(File.join(new_dir, File.basename(path)), "w") do |f|
+      f.write(template.result)
+    end
+  end
+  puts "New blog entry is in #{new_dir}"
+end
 

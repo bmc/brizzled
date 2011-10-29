@@ -42,8 +42,8 @@ tag. The approach is adapted from <https://gist.github.com/524748>.
 
 ## Summary
 
-Each page in the blog has a summary. `_plugins/summary.rb`, and some
-monkeypatching in `_plugins/page.rb`, takes care of generating those
+Each page in the blog has a summary. `_plugins/summary.rb` and some
+monkeypatching in `_plugins/page.rb` takes care of generating those
 summary files.
 
 ## More Information
