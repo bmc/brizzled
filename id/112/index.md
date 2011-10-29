@@ -106,7 +106,7 @@ Believers...
 [R.E.M.]: http://www.youtube.com/watch?v=_eyFiClAzq8
 [Camping's reasoning]: http://en.wikipedia.org/wiki/2011_end_times_prediction
 [adjustments to the Julian calendar]: http://en.wikipedia.org/wiki/Gregorian_calendar
-[Proving the Existence of Fish?]: http://web.science.mq.edu.au/~wardle/Personal/fish.html
+[Proving the Existence of Fish]: http://web.science.mq.edu.au/~wardle/Personal/fish.html
 [complificated]: http://www.urbandictionary.com/define.php?term=Complification
 [numerology]: http://www.skepdic.com/numology.html
 [inflatable dolls]: http://www.amazon.com/Jenna-Holes-Blow-Up-Doll/dp/B00162YWGE
