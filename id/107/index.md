@@ -1,7 +1,7 @@
 ---
 layout: article
 title: Running a Ruby block as another user
-tags: ruby, unix, processes
+tags: ruby, unix, processes, programming
 date: 2011-01-01
 ---
 

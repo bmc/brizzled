@@ -8,10 +8,13 @@ $pre_font_family: Andale Mono, Lucidatypewriter, Lucida Typewriter, monospace;
 body
 {
     font-family: $font_family;
-    font-size: 9pt;
+    font-size: 12pt;
     background-color: white;
-    margin-left: 20px;
-    margin-right: 20px;
+}
+
+.blog-title
+{
+    color: black !important;
 }
 
 table
@@ -47,7 +50,7 @@ div.article-title
     margin-top: 1em;
 }
 
-div.banner-tagline
+.banner-tagline
 {
     float: right;
     width: 30em;

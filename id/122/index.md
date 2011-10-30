@@ -1,7 +1,7 @@
 ---
 layout: article
 title: 'Rails Local Configuration'
-tags: ruby, rails
+tags: ruby, rails, programming
 date: 2011-10-26
 ---
 
