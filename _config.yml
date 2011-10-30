@@ -13,4 +13,4 @@ printable_html: printable.html
 # Name of layout to use to generate index of all tags.
 all_tags_index_layout: all_tags_page.html
 # Markdown engine
-markdown: redcarpet
+markdown: kramdown
