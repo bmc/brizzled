@@ -1,7 +1,7 @@
 ---
 layout: article
 title: What branch is this?
-tags: git, svn, subversion, programming
+tags: git, svn, subversion, programming, bzr, bazaar, mercurial, hg
 date: 2011-10-31
 ---
 
