@@ -52,6 +52,9 @@ We have lost both a brilliant innovator and an amazing programmer.
 
 Rest in peace, Dr. Ritchie.
 
+**UPDATE**: Tim O'Reilly declares October 30th to be
+[Dennis Ritchie Day](http://radar.oreilly.com/2011/10/dennis-ritchie-day.html).
+
 [Usenix]: http://www.usenix.org/
 [Bill Cheswick]: http://www.cheswick.com/ches/index.html
 [langpop]: http://langpop.com/

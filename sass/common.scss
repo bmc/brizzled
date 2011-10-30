@@ -1,6 +1,7 @@
 // @import url("http://fonts.googleapis.com/css?family=Miltonian&v2");
 // @import url(http://fonts.googleapis.com/css?family=Architects+Daughter);
-@import url(http://fonts.googleapis.com/css?family=Slackey);
+// @import url(http://fonts.googleapis.com/css?family=Slackey);
+@import url(http://fonts.googleapis.com/css?family=Rock+Salt);
 
 @import "defs.scss";
 
@@ -8,9 +9,8 @@ $gray: #999999;
 
 .blog-title
 {
-    // font-family: Miltonian, serif;
-    font-family: 'Slackey', cursive;
-    font-size: 72px;
+    font-family: $title_font;
+    font-size: 64px;
     color: #777777;
 }
 

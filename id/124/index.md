@@ -18,7 +18,11 @@ or [Bazaar][] repository. How do you figure out the URL of the remote
 
     git config --get remote.origin.url
 
-If you put that command in a shell script called `git-url`, you can simply
+or, if you want all of them:
+
+    git remote -v
+
+If you put the command in a shell script called `git-url`, you can simply
 invoke it like this:
 
     git url

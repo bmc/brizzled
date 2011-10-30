@@ -112,24 +112,16 @@ div.banner-background
 div.banner
 {
     width: 80%;
-    height: 60px;
     background-color: $background_color;
 }
 
-div.banner-image
+.banner-tagline
 {
-    float: left;
-    background-color: $background_color;
-}
-
-div.banner-tagline
-{
-    float: left;
     width: 30em;
     padding-left: 5em;
     padding-top: 10px;
     background-color: $background_color;
-    font-family: $font_family;
+    font-family: $title_font;
     font-style: italic;
 }
 
@@ -141,6 +133,7 @@ div.banner-nav
     padding-top: 2px;
     padding-bottom: 5px;
     margin-bottom: 15px;
+    margin-top: 0px;
     font-family: $font_family;
 }
 
