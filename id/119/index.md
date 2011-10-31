@@ -23,10 +23,8 @@ National Medal of Technology, and IEEE's
 [Richard W. Hamming Medal][hamming].
 
 <div markdown="1" style="float: right; width: 350px !important" class="image-container">
-<img src="kr.jpg" width="330" height="395"><br clear="all"/>
-<div class="caption" width="200">
+<img src="kr.jpg" width="330" height="395"><br clear="all"/><br/>
 The title page of my copy of K&R, Second Edition, signed by Dennis Ritchie
-</div>
 </div>
 
 Dennis Ritchie was, by all accounts, a quiet and brilliant man.
