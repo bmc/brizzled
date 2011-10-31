@@ -1,6 +1,6 @@
 ---
 layout: article
-title: What branch is this?
+title: Where does this thing go?
 tags: git, svn, subversion, programming, bzr, bazaar, mercurial, hg
 date: 2011-10-31
 ---
