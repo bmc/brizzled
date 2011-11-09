@@ -14,7 +14,7 @@ to that event. According to the [grand jury report][], you chose to leave
 the room, "distraught."
 
 You are a larger than average man. At the time, you were accustomed to
-physical violence of college football. Yet, you simply turned tail and
+the physical violence of college football. Yet, you simply turned tail and
 fled.
 
 You could have shouted at Jerry Sandusky to stop what he was doing. You could
@@ -25,13 +25,13 @@ assault on the young boy--an assault that surely caused profound and
 lasting damage that boy's pysche.
 
 You could have called the police and provided eyewitness testimony against
-the man, thus helping to prevent subsequent years of sexual abuse he
+the man, thus helping to prevent the subsequent years of sexual abuse he
 allegedly perpetrated against more young children.
 
 You did neither of these things. Instead, according to the grand jury
 report, you fled from the locker room and called your dad, who counseled
 you to tell Joe Paterno--which, apparently, you did, but not until the next
-day. You can be excused for, perhaps, having a naive belief that the
+day. You can be excused for, perhaps, having had a naive belief that the
 almighty Coach Paterno would fix everything. Clearly, you could not have known
 that Paterno would simply kick the matter upstairs.
 
