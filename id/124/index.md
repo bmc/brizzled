@@ -33,7 +33,7 @@ invoke it like this:
 
 ## Mercurial
 
-    hg paths | grep default
+    hg paths default
 
 ## Bazaar
 
