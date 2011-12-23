@@ -24,7 +24,7 @@ On December 21, 2011, [Gizmodo][] published the United States House of
 Representatives Judiciary Committee's [list of supporters of H.R. 3251][], the
 _Stop Online Piracy Act_ (SOPA).
 
-GoDaddy supports SOPA.
+GoDaddy is on that list. GoDaddy supports SOPA.
 
 SOPA is a _very_ bad piece of legislation for the Internet. To understand precisely _how_ bad it is, read some of the following articles:
 
