@@ -2,3 +2,4 @@ _site
 sass/.sass-cache
 css
 tags
+*.sublime-*
