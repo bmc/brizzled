@@ -32,6 +32,7 @@ SOPA is a _very_ bad piece of legislation for the Internet. To understand precis
 * [All About SOPA, the Bill That Wants to Cripple Your Internet *Very Soon*][ref2] (*lifehacker*)
 * [Stop the Internet Blacklist Legislation][ref3] (Electronic Frontier Foundation)
 * [Google, Facebook, Zynga oppose new SOPA copyright bill][ref4] (CNet)
+* [Please Take the No Go Daddy Pledge][ref5] (Lauren Weinstein)
 
 GoDaddy's support for SOPA was the last straw for me. Today, I initiated the
 transfer of all domains under my control (both personal and business), from
@@ -51,3 +52,4 @@ GoDaddy will no longer get any of my business.
 [ref2]: http://lifehacker.com/5860205/all-about-sopa-the-bill-thats-going-to-cripple-your-internet
 [ref3]: https://action.eff.org/o/9042/p/dia/action/public/?action_KEY=8173
 [ref4]: http://news.cnet.com/8301-31921_3-57325134-281/google-facebook-zynga-oppose-new-sopa-copyright-bill/
+[ref5]: http://lauren.vortex.com/archive/000921.html
