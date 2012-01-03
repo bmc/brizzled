@@ -1,9 +1,8 @@
-{% comment %}  -*- xml -*-  {% endcomment %}
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?> {% comment %}  -*- xml -*-  {% endcomment %}
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title>Brizzled: Brian Clapper's Blog</title>
-  <link rel="self" href="http://brizzled.clapper.org/" type="application/atom+xml"/>
+  <link rel="self" href="http://brizzled.clapper.org/feed.atom" type="application/atom+xml"/>
   <updated>{{ page.now | date: '%Y-%m-%dT%H:%M:%S' }}Z</updated>
   <author>
     <name>Brian M. Clapper</name>
