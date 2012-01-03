@@ -2,7 +2,7 @@
 layout: article
 title: Where does this thing go?
 tags: git, svn, subversion, programming, bzr, bazaar, mercurial, hg
-date: 2011-10-31
+date: 2011-10-31 00:00:00
 ---
 
 Quick: You're in a local copy of a [Git][], [Subversion][], [Mercurial][]

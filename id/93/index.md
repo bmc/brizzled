@@ -2,7 +2,7 @@
 layout: article
 tags: java, c#, scala, programming
 title: C# is now a better language than Java
-date: 2009-07-31
+date: 2009-07-31 00:00:00
 ---
 
 I'm currently teaching myself [C#][] (with [.NET][] to follow); my client

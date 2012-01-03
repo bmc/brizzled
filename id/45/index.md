@@ -2,7 +2,7 @@
 layout: article
 title: Don't look now, but I think we're being watched...
 tags: surveillance, privacy, crime
-date: 2006-02-11
+date: 2006-02-11 00:00:00
 ---
 
 Today's [Philadelphia Inquirer][] reports that

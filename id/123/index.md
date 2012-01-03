@@ -2,7 +2,7 @@
 layout: article
 title: A bash stack
 tags: bash, shell, programming
-date: 2011-10-28
+date: 2011-10-28 00:00:00
 toc: toc
 ---
 

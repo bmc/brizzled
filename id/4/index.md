@@ -1,7 +1,7 @@
 ---
 title: The definition of "Brizzled"
 tags: brizzled
-date: 2008-07-26
+date: 2008-07-26 00:00:00
 layout: article
 ---
 

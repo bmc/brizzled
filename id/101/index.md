@@ -1,7 +1,7 @@
 ---
 title: Scala in Philly
 tags: scala, enthusiasts, phase, user-group, programming
-date: 2010-05-27
+date: 2010-05-27 00:00:00
 layout: article
 ---
 

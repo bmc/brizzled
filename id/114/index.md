@@ -2,7 +2,7 @@
 layout: article
 title: Initial thoughts on Google+
 tags: social media, Google, Facebook
-date: 2011-06-29
+date: 2011-06-29 00:00:00
 ---
 
 # Intro

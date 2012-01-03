@@ -2,7 +2,7 @@
 layout: article
 title: The Northeast Scala Symposium
 tags: scala, symposium, programming
-date: 2010-12-21
+date: 2010-12-21 00:00:00
 ---
 
 A month or so ago, [Nathan Hamblen][], of the

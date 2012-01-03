@@ -2,7 +2,7 @@
 layout: article
 title: The Macabre World of Disney
 tags: disney, polly-pockets, macabre, aladdin
-date: 2005-09-27
+date: 2005-09-27 00:00:00
 ---
 
 If you have a young daughter, you've probably run across the

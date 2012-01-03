@@ -2,7 +2,7 @@
 layout: article
 title: SpotlightFS
 tags: mac-os-x, spotlightfs, spotlight, unix, computers
-date: 2007-02-04
+date: 2007-02-04 00:00:00
 ---
 
 Okay, this one hits the Unix geek in me right where I live.

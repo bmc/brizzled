@@ -2,7 +2,7 @@
 layout: article
 title: "Details, Details"
 tags: humility, programming, bug
-date: 2011-11-06
+date: 2011-11-06 00:00:00
 ---
 
 About 15 years ago, I wrote a network server that could talk to a Visa point of

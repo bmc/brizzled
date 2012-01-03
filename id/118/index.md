@@ -2,7 +2,7 @@
 layout: article
 title: R.I.P., Steve Jobs
 tags: apple, steve jobs
-date: 2011-10-06
+date: 2011-10-06 00:00:00
 ---
 
 While I can't say I'm overly fond of the hyper-controlled [walled garden][]

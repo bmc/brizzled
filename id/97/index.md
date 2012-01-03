@@ -2,7 +2,7 @@
 layout: article
 tags: scala, programming
 title: Loving Scala 2.8
-date: 2010-02-05
+date: 2010-02-05 00:00:00
 ---
 
 The [Scala 2.8.0 Beta 1 prerelease][] was released on January 27, 2010. I

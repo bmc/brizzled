@@ -1,6 +1,6 @@
 ---
 layout: article
-date: 2009-02-12
+date: 2009-02-12 00:00:00
 title: A Scala build tool
 tags: scala, ant, rake, make, DSL, programming
 toc: toc

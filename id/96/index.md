@@ -2,7 +2,7 @@
 layout: article
 tags: skeptic, science, podcasts
 title: Good Skeptical Podcasts
-date: 2010-02-04
+date: 2010-02-04 00:00:00
 ---
 
 Over the past few years, I've become more and more of a [skeptic][] and

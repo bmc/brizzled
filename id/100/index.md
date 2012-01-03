@@ -1,7 +1,7 @@
 ---
 title: SBT and Your Own Maven Repository
 tags: scala, sbt, maven, programming
-date: 2010-05-07
+date: 2010-05-07 00:00:00
 layout: article
 toc: toc
 ---

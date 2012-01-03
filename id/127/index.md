@@ -2,7 +2,7 @@
 layout: article
 title: GoDaddy has lost my business
 tags: sopa, godaddy, internet, registrar
-date: 2011-12-22
+date: 2011-12-22 00:00:00
 ---
 
 It was bad enough when [GoDaddy][] CEO Bob Parsons [killed an elephant][].

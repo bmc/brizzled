@@ -2,7 +2,7 @@
 layout: article
 tags: django, blogging, python, App-Engine, programming
 title: Now blogging on App Engine
-date: 2008-08-04
+date: 2008-08-04 00:00:00
 ---
 
 About a week ago, I wrote that [this blog is now running under Django][] on

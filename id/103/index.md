@@ -2,7 +2,7 @@
 layout: article
 title: Writing, Markdown and Pandoc
 tags: writing, markdown, pandoc
-date: 2010-11-26
+date: 2010-11-26 00:00:00
 ---
 
 I've been doing a lot of my writing these days using [Markdown][]. It's a

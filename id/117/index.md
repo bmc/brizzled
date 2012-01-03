@@ -3,7 +3,7 @@ layout: article
 title: Jasmine and Coffee
 tags: javascript, coffeescript, testing, bdd
 toc: toc
-date: 2011-10-04
+date: 2011-10-04 00:00:00
 ---
 
 # Introduction

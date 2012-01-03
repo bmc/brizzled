@@ -2,7 +2,7 @@
 layout: article
 tags: scala, markdown, javascript, rhino, programming
 title: Parsing Markdown in Scala
-date: 2010-02-10
+date: 2010-02-10 00:00:00
 ---
 
 For documentation, simple markup is often best. For instance, I used to

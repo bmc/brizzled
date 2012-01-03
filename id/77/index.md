@@ -2,7 +2,7 @@
 layout: article
 tags: python, App-Engine, blogging, programming
 title: Writing Blogging Software for Google App Engine
-date: 2008-08-07
+date: 2008-08-07 00:00:00
 toc: toc
 ---
 

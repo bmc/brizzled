@@ -2,7 +2,7 @@
 layout: article
 title: Getting Delicious bookmarks to Diigo
 tags: del.icio.us, diigo, bookmarks
-date: 2010-12-17
+date: 2010-12-17 00:00:00
 ---
 
 On 16 December, 2010, a [leaked slide][], purportedly from [Yahoo!][]

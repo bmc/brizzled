@@ -2,7 +2,7 @@
 layout: article
 title: Talking to Fourth Graders about Programming
 tags: programming, software, children
-date: 2011-04-15
+date: 2011-04-15 00:00:00
 ---
 
 I volunteered to participate in Career Day, at my daughter's elementary

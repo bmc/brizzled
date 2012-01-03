@@ -2,7 +2,7 @@
 layout: article
 title: The Candidates
 tags: bachmann, cain, romney, republicans, 2012
-date: 2011-10-23
+date: 2011-10-23 00:00:00
 ---
 
 A temporary departure from technical topics, for an amusing cartoon.

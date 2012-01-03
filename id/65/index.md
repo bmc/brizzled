@@ -2,7 +2,7 @@
 layout: article
 title: Error Message of the Day
 tags: software, oracle
-date: 2007-07-12
+date: 2007-07-12 00:00:00
 ---
 
 I'm looking into an issue with Oracle's text search capability. (We use it

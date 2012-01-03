@@ -2,7 +2,7 @@
 layout: article
 title: Running a Ruby block as another user
 tags: ruby, unix, processes, programming
-date: 2011-01-01
+date: 2011-01-01 00:00:00
 ---
 
 Recently, on [stack**overflow**][SO], someone asked:

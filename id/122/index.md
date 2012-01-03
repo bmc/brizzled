@@ -2,7 +2,7 @@
 layout: article
 title: 'Rails Local Configuration'
 tags: ruby, rails, programming
-date: 2011-10-26
+date: 2011-10-26 00:00:00
 ---
 
 # The problem

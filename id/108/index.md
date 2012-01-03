@@ -2,7 +2,7 @@
 layout: article
 title: 'Rails: Configuring ActionMailer'
 tags: ruby, email, mail, rails, programming
-date: 2011-02-14
+date: 2011-02-14 00:00:00
 toc: toc
 ---
 

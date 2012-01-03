@@ -2,7 +2,7 @@
 layout: article
 title: In General
 tags: generalist, perfectionism
-date: 2005-12-11
+date: 2005-12-11 00:00:00
 ---
 
 I'm not the best at anything, and I probably never will be. And

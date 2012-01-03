@@ -2,7 +2,7 @@
 layout: article
 tags: python, programming
 title: Python, sys.path and EasyInstall, programming
-date: 2008-03-18
+date: 2008-03-18 00:00:00
 toc: toc
 ---
 

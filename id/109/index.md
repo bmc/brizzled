@@ -2,7 +2,7 @@
 layout: article
 title: 'Customizing Rake messages: Is there an easier way?'
 tags: ruby, rake, programming
-date: 2011-03-09
+date: 2011-03-09 00:00:00
 toc: toc
 ---
 

@@ -2,7 +2,7 @@
 layout: article
 tags: wifi, furnace, Internet
 title: When the furnace goes out
-date: 2009-01-21
+date: 2009-01-21 00:00:00
 ---
 
 We live in bizarre times. I got home around 10:00 PM last night, having

@@ -2,7 +2,7 @@
 layout: article
 title: R.I.P., Dennis Ritchie
 tags: dennis ritchie, unix
-date: 2011-10-13
+date: 2011-10-13 00:00:00
 ---
 
 While the world was loudly eulogizing [Steve Jobs'](../118/) death, we lost

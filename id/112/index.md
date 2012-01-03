@@ -2,7 +2,7 @@
 layout: article
 title: Rapture Math
 tags: may21, math, religion
-date: 2011-05-20
+date: 2011-05-20 00:00:00
 ---
 
 What is it about fundamentalists? They seem to hate science and

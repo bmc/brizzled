@@ -1,7 +1,7 @@
 ---
 layout: article
 title: Happy Birthday, Robert Negus
-date: 2005-12-21
+date: 2005-12-21 00:00:00
 tags: melanoma, Robert-Negus
 ---
 

@@ -2,7 +2,7 @@
 layout: article
 title: Hateful and Hypocritical
 tags: religious-right, intolerance, homosexuality, people
-date: 2006-03-01
+date: 2006-03-01 00:00:00
 ---
 
 I was a freshman in college in 1979. The AIDS epidemic was just

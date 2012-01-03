@@ -2,7 +2,7 @@
 layout: article
 tags: computers, software, mac-os-x
 title: Unintended Consequences
-date: 2007-08-11
+date: 2007-08-11 00:00:00
 ---
 
 This is the story of an unintended interference between two

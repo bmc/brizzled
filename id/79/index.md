@@ -2,7 +2,7 @@
 layout: article
 tags: subversion, git, programming, revision-control
 title: One case for git
-date: 2008-08-20
+date: 2008-08-20 00:00:00
 ---
 
 The more I play with [git][], the more I like the idea of distributed

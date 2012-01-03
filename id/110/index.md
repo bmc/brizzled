@@ -2,7 +2,7 @@
 layout: article
 title: Finding Ruby Gem Specifications Programmatically
 tags: ruby, rubygems, gems, programming
-date: 2011-03-27
+date: 2011-03-27 00:00:00
 ---
 
 So, you're writing a [Ruby Gem][] with a command-line program or two, and

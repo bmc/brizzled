@@ -2,7 +2,7 @@
 layout: article
 title: 'An open letter to Mike McQueary'
 tags: penn state, scandal, cowardice
-date: 2011-11-08
+date: 2011-11-08 00:00:00
 ---
 
 Mr. McQueary,

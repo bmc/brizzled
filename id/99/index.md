@@ -2,7 +2,7 @@
 title: Programming Command-line Completion in Scala
 layout: article
 tags: scala, parsing, readline, editline, REPL, completion, programming
-date: 2010-02-21
+date: 2010-02-21 00:00:00
 toc: toc
 ---
 

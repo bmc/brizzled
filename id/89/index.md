@@ -2,7 +2,7 @@
 layout: article
 tags: scala, repl, readline, programming
 title: Readline support in Scala's REPL
-date: 2009-04-29
+date: 2009-04-29 00:00:00
 ---
 
 Scala's command-line interpreter (its [REPL][]) is *highly* useful, but if

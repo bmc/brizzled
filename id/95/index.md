@@ -2,7 +2,7 @@
 layout: article
 tags: rdbms, microsoft access, database
 title: How Not to Design a Database
-date: 2010-02-03
+date: 2010-02-03 00:00:00
 ---
 
 How not to build a database:

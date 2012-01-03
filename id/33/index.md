@@ -2,7 +2,7 @@
 layout: article
 title: Sanity Clause
 tags: photography, digital-photography, photo-with-santa
-date: 2005-12-12
+date: 2005-12-12 00:00:00
 ---
 
 This weekend, we took our daughter to the local [mall][] to have her

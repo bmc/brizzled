@@ -2,7 +2,7 @@
 layout: article
 tags: spam, poem, email
 title: A spam poem
-date: 2009-05-21
+date: 2009-05-21 00:00:00
 ---
 
 *(Each line was a single subject from my spam folder, on May 16, 2009.)*

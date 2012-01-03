@@ -2,7 +2,7 @@
 layout: article
 tags: scala, programming, books, programming
 title: Beginning Scala considered useful
-date: 2009-08-17
+date: 2009-08-17 00:00:00
 ---
 
 I picked up a copy of [Beginning Scala][] a week ago, and I'm finding it to

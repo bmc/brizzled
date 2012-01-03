@@ -2,7 +2,7 @@
 layout: article
 tags: scala, ant, rake, make, maven, ivy, gradle, SBT, programming
 title: "SBT: A Scala-based Simple Build Tool"
-date: 2009-07-19
+date: 2009-07-19 00:00:00
 ---
 
 Awhile ago, I embarked on an effort to build [yet another build tool][],

@@ -2,7 +2,7 @@
 layout: article
 tags: phlx, deadlock, programming, semaphore
 title: "War Stories: Deadlocks and Semaphores"
-date: 2005-08-28
+date: 2005-08-28 00:00:00
 ---
 
 At [work][] a couple of days ago, we had a

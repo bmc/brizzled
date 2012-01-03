@@ -2,7 +2,7 @@
 layout: article
 title: A flood of bad meat
 tags: spam, computers
-date: 2007-06-17
+date: 2007-06-17 00:00:00
 ---
 
 I don't know why this crap continues to amaze me after more than a

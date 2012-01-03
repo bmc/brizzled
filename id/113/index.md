@@ -2,7 +2,7 @@
 layout: article
 title: Trademark Scams
 tags: business, trademark, scam
-date: 2011-06-19
+date: 2011-06-19 00:00:00
 ---
 
 Late in 2010, I decided to register a formal [service mark][] for my

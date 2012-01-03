@@ -2,7 +2,7 @@
 layout: article
 tags: java, python, jython, groovy, programming, scala
 title: Interpreting Java
-date: 2009-01-08
+date: 2009-01-08 00:00:00
 ---
 
 In nearly nine years of programming Java, it never really occurred

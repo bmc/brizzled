@@ -12,7 +12,7 @@ module Jekyll
 
     # Additional accessors
 
-    attr_accessor :base, :markdown, :summary
+    attr_accessor :base, :summary
 
     # Chained version of constructor, used to generate the location of
     # the "summary" file.
@@ -21,9 +21,10 @@ module Jekyll
       orig_init(site, base, dir, name)
 
       # Allow for a summary.md file that generates the article summary.
-      @summary = Summary.new(File.join(@base, @dir, SUMMARY_FILE),
-        File.join(site.dest, @dir, 
-          SUMMARY_HTML))
+      @summary = Summary.new(
+        File.join(@base, @dir, SUMMARY_FILE),
+        File.join(site.dest, @dir,SUMMARY_HTML)
+      )
     end
     
     # Add some custom options to the Liquid data for the page.
@@ -59,9 +60,7 @@ module Jekyll
       h['path'] = File.join(@base, @dir, @name)
       h['now'] = Date.today
       h['tags'] = Tag.sort(tags)
-      h['max_top'] = (self.data['max_top'] ||
-        site.config['max_top'] ||
-        15)
+      h['max_top'] = (self.data['max_top'] || site.config['max_top'] || 15)
       h
     end
 

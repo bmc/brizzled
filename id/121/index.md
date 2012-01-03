@@ -2,7 +2,7 @@
 layout: article
 title: The Candidates, Part 2
 tags: perry, paul, santorum, republicans, 2012
-date: 2011-10-25
+date: 2011-10-25 00:00:00
 ---
 
 A follow-up to my [previous cartoon](/id/120/).

@@ -2,7 +2,7 @@
 layout: article
 title: Mac OS X Lion has ruined my MacBook Pro
 tags: hardware, mac-os-x, apple
-date: 2011-08-26
+date: 2011-08-26 00:00:00
 ---
 
 <div style="float: right"><img src="beachball.png"></div>

@@ -2,7 +2,7 @@
 layout: article
 title: WAP! Ow!
 tags: WPA, WAP, computers, networking
-date: 2006-03-10
+date: 2006-03-10 00:00:00
 ---
 
 We bought my wife a new laptop. I finally got it configured today, but I

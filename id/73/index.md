@@ -2,7 +2,7 @@
 layout: article
 tags: django, blogging, vps, python, programming
 title: Django blog
-date: 2008-07-27
+date: 2008-07-27 00:00:00
 ---
 
 As previously noted, this blog now runs under [Django][], on the lowest-end
