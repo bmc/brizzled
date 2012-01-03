@@ -41,7 +41,35 @@ GoDaddy to another registrar. Like so many others on the Internet, I'm
 
 GoDaddy will no longer get any of my business.
 
+**Update, December 23, 2011** GoDaddy has [reversed course][]. In a flurry
+of disingenuous backpedaling, Warren Adelman, GoDaddy's CEO, said:
+
+> Fighting online piracy is of the utmost importance, which is why Go Daddy has
+> been working to help craft revisions to this legislation—but we can clearly
+> do better. It's very important that all Internet stakeholders work together
+> on this. Getting it right is worth the wait. Go Daddy will support it when
+> and if the Internet community supports it.
+
+As Gizmodo's Casey Chan put it, "If a sleazeball company like GoDaddy can ditch
+SOPA because of pressure from the Internet, you bet other companies currently
+supporting SOPA will cave too. Let yourself be heard and let's freaking kill
+this bill."
+
+However, while I'm delighted that GoDaddy is responding to the pressure, I
+don't trust that this reversal is anything more than panic and politics. I
+doubt that they have _really_ realized the error of their ways. As
+[Lauren Weinstein puts it](http://lauren.vortex.com/archive/000922.html):
+
+> Do not be fooled.  Make no mistake about their motives.  They're not suddenly
+> against the censorship principles of SOPA: "Go Daddy will support it when and
+> if the Internet community supports it."  There is no indication whatsoever
+> that they have had a fundamental change of heart.
+
+I'm still not giving that sleazeball company any more of my money. My domains
+are on their way to another registrar.
+
 [GoDaddy]: http://www.godaddy.com/
+[reversed course]: http://gizmodo.com/5870870/godaddy-changes-its-mind-on-supporting-that-evil-sopa-legislation
 [killed an elephant]: http://mashable.com/2011/04/01/bob-parsons-elephant-story/
 [PETA]: http://www.peta.org/
 [SOPA]: http://technorati.com/technology/cloud-computing/article/if-sopa-passes-impact-will-devastate/
