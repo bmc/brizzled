@@ -13,28 +13,7 @@
 
 {% for article in site.articles %}
 
-  <entry>
-    <title>{{ article.title }}</title>
-    <link href="{{ article.headers.url }}"/>
-    <id>http://brizzled.clapper.org{{ article.url }}</id>
-    <updated>{{ article.date | date: '%Y-%m-%d' }}T00:00:00Z</updated>
-    <content type="xhtml">
-      <div xmlns="http://www.w3.org/1999/xhtml">
-<![CDATA[
-{{ article.class.name }}
-]]>
-      </div>
-    </content>
-
-    <summary type="xhtml">
-      <div xmlns="http://www.w3.org/1999/xhtml">{{ article.summary }}</div>
-    </summary>
-
-    <author>
-      <name>Brian M. Clapper</name>
-      <email>bmc@clapper.org</email>
-    </author>
-  </entry>
+{% include entry.atom %}
 
 {% endfor %}
 </feed>
