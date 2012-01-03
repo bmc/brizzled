@@ -10,25 +10,30 @@ module Jekyll
   class TagIndex < Page
     attr_reader :dir
     def initialize(site, base, dir, tag, articles)
-      @site = site
-      @base = base
-      @dir = dir
-      @name = 'index.html'
+      @site                 = site
+      @base                 = base
+      @dir                  = dir
+      @name                 = 'index.html'
+
       self.process(@name)
+
       tag_index = (site.config['tag_index_layout'] || 'tag_index') + '.html'
       self.read_yaml(File.join(base, '_layouts'), tag_index)
-      self.data['tag'] = tag
+
+      self.data['tag']      = tag
       self.data['articles'] = articles.sort { |p1, p2| p2.date <=> p1.date }
-      tag_title_prefix = site.config['tag_title_prefix'] || 'Tag: '
-      self.data['title'] = "#{tag_title_prefix}#{tag}"
-      @summary = Summary.empty
+      tag_title_prefix      = site.config['tag_title_prefix'] || 'Tag: '
+      self.data['title']    = "#{tag_title_prefix}#{tag}"
+      @summary              = Summary.empty
     end
 
     def render(layouts, site_payload)
       begin
-        res = super(layouts, site_payload)
+        res     = super(layouts, site_payload)
         tag_dir = File.join(self.base, self.dir)
+
         FileUtils::mkdir_p tag_dir
+
         path = File.join(tag_dir, self.name)
         open(path, "w") do |f|
           f.write(self.output)
@@ -78,11 +83,11 @@ module Jekyll
         sorted_keys = tags.keys.sort {|k1, k2| k1 <=> k2}
         all_tags = sorted_keys.map {|k| TagWithTotal.new(k, tags[k].length)}
 
-        self.data['all_tags'] = all_tags
+        self.data['all_tags']      = all_tags
         self.data['all_tags_list'] = all_tags.inspect.to_s
-        self.data['tag_hash'] = tags
-        self.data['tag_dir'] = dir
-        self.data['title'] = "All Tags"
+        self.data['tag_hash']      = tags
+        self.data['tag_dir']       = dir
+        self.data['title']         = "All Tags"
       end
     end
 

@@ -58,12 +58,12 @@ module Jekyll
           end
         end
 
-        @css_prefix = @options.fetch('css_prefix', 'file_table')
-        @table_css = "#{@css_prefix}_table"
+        @css_prefix     = @options.fetch('css_prefix', 'file_table')
+        @table_css      = "#{@css_prefix}_table"
         @subheading_css = "#{@css_prefix}_header"
-        @entry_css = "#{@css_prefix}_entry"
-        @blurb_css = "#{@css_prefix}_blurb"
-        @desc_css = "#{@css_prefix}_desc"
+        @entry_css      = "#{@css_prefix}_entry"
+        @blurb_css      = "#{@css_prefix}_blurb"
+        @desc_css       = "#{@css_prefix}_desc"
       else
         raise SyntaxError.new("Syntax error in '#{@directive}': Must be " +
                               "#{name} yaml_file [options]")

@@ -23,12 +23,9 @@ module Jekyll
       h = orig_site_payload
       payload = h["site"]
 
-      payload["articles"] = blog_posts.sort do |p1, p2|
-        p2.date <=> p1.date
-      end
-        
+      payload["articles"]   = blog_posts.sort { |p1, p2| p2.date <=> p1.date }
       payload["max_recent"] = payload.fetch("max_recent", 15)
-      h["site"] = payload
+      h["site"]             = payload
       h
     end
 

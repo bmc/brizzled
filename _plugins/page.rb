@@ -45,21 +45,21 @@ module Jekyll
     alias orig_to_liquid to_liquid
     def to_liquid
       h = orig_to_liquid
-      h['toc'] = self.data['toc'] || 'no'
-      h['disqus_id'] = self.data['disqus_id'] || "#{BRIZZLED_URL}#{@dir}/"
+      h['toc']              = self.data['toc'] || 'no'
+      h['disqus_id']        = self.data['disqus_id'] || "#{BRIZZLED_URL}#{@dir}/"
       h['disqus_developer'] = self.data['disqus_developer'] || nil
-      h['date'] = self.date
+      h['date']             = self.date
 
       if @summary
-        h['summary'] = @summary
+        h['summary']     = @summary
         h['has_summary'] = @summary.has_summary?
       else
         h['has_summary'] = false
       end
 
-      h['path'] = File.join(@base, @dir, @name)
-      h['now'] = Date.today
-      h['tags'] = Tag.sort(tags)
+      h['path']    = File.join(@base, @dir, @name)
+      h['now']     = Date.today
+      h['tags']    = Tag.sort(tags)
       h['max_top'] = (self.data['max_top'] || site.config['max_top'] || 15)
       h
     end
