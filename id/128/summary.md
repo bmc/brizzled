@@ -1,1 +1,1 @@
-Summary, for the title page.
+Recursive globbing: Not just a *Zsh* feature.
