@@ -79,6 +79,10 @@ module Jekyll
       end
     end
 
+    def <=>(other)
+      self.date <=> other.date
+    end
+
     # Get the list of tags, unsorted. Returned array consists of Tag
     # objects.
     def tags
