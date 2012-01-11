@@ -6,7 +6,7 @@ module Jekyll
   class Site
 
     # Regular expression by which blog posts are recognized
-    POST_PAGE_RE = /\/id\/[0-9]+\/index.html/
+    POST_PAGE_RE = %r{/id/[0-9]+/index.html}
 
     # Find my blog posts among all the pages.
     def blog_posts
@@ -23,9 +23,10 @@ module Jekyll
       h = orig_site_payload
       payload = h["site"]
 
-      payload["articles"]   = blog_posts.sort.reverse
-      payload["max_recent"] = payload.fetch("max_recent", 15)
-      h["site"]             = payload
+      articles = blog_posts.sort.reverse
+      payload["articles"]     = articles
+      payload["max_recent"] ||= 15
+      h["site"]               = payload
       h
     end
 
@@ -41,10 +42,6 @@ module Jekyll
         end
       end
       tag_ref
-    end
-
-    def page_cmp(p1, p2)
-      p2.date <=> p1.date
     end
   end
 end

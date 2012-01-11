@@ -1,120 +1,120 @@
 {% include top.html %}
 
 <div id="articles-box">
-<div id="articles-container">
+  <!-- #START ARTICLE -->
+  <div id="articles-container">
 
-<div class="article">
+    <div class="article">
 
-<div class="article-header">
+      <div class="article-header">
 
-  <div class="article-title">
-    <div class="screen">
-      <a href="{{ page.url }}" class="reference">{{ page.title }}</a>
-    </div>
-    <div class="print">
-      <br clear="all">
-      <span class="article-title">{{ page.title }}</span>
+        <div class="article-title">
+          <div class="screen">
+            <a href="{{ page.url }}" class="reference">{{ page.title }}</a>
+          </div>
+          <div class="print">
+            <br clear="all">
+            <span class="article-title">{{ page.title }}</span>
+          </div>
+        </div>
+
+        <div class="article-timestamp screen">
+          <a href="/printer-friendly.html" rel="lyteframe" title="Printer-friendly" rev="width: 400px; height: 300px;">Printer-friendly</a> | {{ page.date | date: '%A, %d %B, %Y' }}
+        </div>
+
+        <div class="article-timestamp print">
+          {{ page.date | date: '%A, %d %B, %Y' }}
+        </div>
+      </div>
+
+      {% if (page.toc == "toc") %}
+      <script type="text/javascript" src="/js/toc.js">
+      <!-- -->
+      </script>
+      {% endif %}
+
+      <div class="article-body" id="content">
+
+        {% if (page.toc == "toc") %}
+        <div id="tocBlock" class="screen">
+        <span id="tocHeading">Table of Contents</span>
+        <div id="toc"></div>
+        </div>
+        {% endif %}
+
+        {{ content }}
+      </div>
+
+      <br/>
+
+      <div class="article-footer screen">
+        <a href="{{ page.url }}" class="reference">Permalink</a> |
+        <a href="/printer-friendly.html" rel="lyteframe" title="Printer-friendly" rev="width: 400px; height: 300px;">Printer-friendly</a> |
+        <span class="tags">Tags: 
+        {% for tag in page.tags %}
+        <a href="/tags/{{ tag.dir }}/">{{ tag.name }}</a>{% if forloop.last %}{% else %},{% endif %}
+        {% endfor %}
+        </span>
+      </div>
+      <hr/>
+
+      {% if (page.toc == "toc") %}
+      <script type="text/javascript">
+        createTOC();
+      </script>
+      {% endif %}
+
+      <div class="screen">
+
+        <a href="#disqus_thread">Comments</a>
+
+        <div id="disqus_thread"></div>
+
+        <script type="text/javascript">
+          // Use the base file name (without the ".html") as the Disqus URL. This is
+          // necessary to be consistent with old version of Brizzled on App Engine.
+          {% if (page.disqus_id) %}
+          var disqus_identifier = "{{ page.disqus_id }}";
+          var disqus_url = "{{ page.disqus_id }}";
+          {% else %}
+          var disqus_identifier = "http://brizzled.clapper.org/{{ page.url }}";
+          var disqus_url = disqus_identifier;
+          {% endif %}
+          var disqus_title = "Brizzled: {{ page.title }}";
+
+          {% if (page.disqus_developer) %}
+          var disqus_developer = 1;
+          {% endif %}
+
+          (function() {
+           var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+           dsq.src = 'http://brizzled.disqus.com/embed.js';
+           (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+          })();
+        </script>
+
+        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=brizzled">comments powered by Disqus.</a></noscript>
+        <a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+      </div>
+
     </div>
   </div>
+  <!-- #END ARTICLE -->
 
-  <div class="article-timestamp screen">
-<a href="/printer-friendly.html" rel="lyteframe" title="Printer-friendly" rev="width: 400px; height: 300px;">Printer-friendly</a> |
-{{ page.date | date: '%A, %d %B, %Y' }}</div>
-
-  <div class="article-timestamp print">
-    {{ page.date | date: '%A, %d %B, %Y' }}
-  </div>
-</div>
-
-{% if (page.toc == "toc") %}
-<script type="text/javascript" src="/js/toc.js">
-<!-- -->
-</script>
-{% endif %}
-
-<div class="article-body" id="content">
-
-{% if (page.toc == "toc") %}
-<div id="tocBlock" class="screen">
-<span id="tocHeading">Table of Contents</span>
-<div id="toc"></div>
-</div>
-{% endif %}
-
-{{ content }}
-</div>
-
-<br/>
-
-<div class="article-footer screen">
-<a href="{{ page.url }}" class="reference">Permalink</a> |
-<a href="/printer-friendly.html" rel="lyteframe" title="Printer-friendly" rev="width: 400px; height: 300px;">Printer-friendly</a> |
-<span class="tags">Tags: 
-{% for tag in page.tags %}
-<a href="/tags/{{ tag.dir }}/">{{ tag.name }}</a>{% if forloop.last %}{% else %},{% endif %}
-{% endfor %}
-</span>
-</div>
-<hr/>
-
-{% if (page.toc == "toc") %}
-<script type="text/javascript">
-createTOC();
-</script>
-{% endif %}
-
-<div class="screen">
-
-<a href="#disqus_thread">Comments</a>
-
-<div id="disqus_thread"></div>
-
-<script type="text/javascript">
-  // Use the base file name (without the ".html") as the Disqus URL. This is
-  // necessary to be consistent with old version of Brizzled on App Engine.
-  {% if (page.disqus_id) %}
-  var disqus_identifier = "{{ page.disqus_id }}";
-  var disqus_url = "{{ page.disqus_id }}";
-  {% else %}
-  var disqus_identifier = "http://brizzled.clapper.org/{{ page.url }}";
-  var disqus_url = disqus_identifier;
-  {% endif %}
-  var disqus_title = "Brizzled: {{ page.title }}";
-
-  {% if (page.disqus_developer) %}
-  var disqus_developer = 1;
-  {% endif %}
-
+  <script type="text/javascript">
+  //<![CDATA[
   (function() {
-   var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-   dsq.src = 'http://brizzled.disqus.com/embed.js';
-   (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  	var links = document.getElementsByTagName('a');
+  	var query = '?';
+  	for(var i = 0; i < links.length; i++) {
+  	if(links[i].href.indexOf('#disqus_thread') >= 0) {
+  		query += 'url' + i + '=' + encodeURIComponent(links[i].href) + '&';
+  	}
+  	}
+  	document.write('<script charset="utf-8" type="text/javascript" src="http://disqus.com/forums/brizzled/get_num_replies.js' + query + '"></' + 'script>');
   })();
-
-</script>
-
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=brizzled">comments powered by Disqus.</a></noscript>
-<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
-
-</div>
-
-</div>
-</div>
-
-<script type="text/javascript">
-//<![CDATA[
-(function() {
-	var links = document.getElementsByTagName('a');
-	var query = '?';
-	for(var i = 0; i < links.length; i++) {
-	if(links[i].href.indexOf('#disqus_thread') >= 0) {
-		query += 'url' + i + '=' + encodeURIComponent(links[i].href) + '&';
-	}
-	}
-	document.write('<script charset="utf-8" type="text/javascript" src="http://disqus.com/forums/brizzled/get_num_replies.js' + query + '"></' + 'script>');
-})();
-//]]>
-</script>
+  //]]>
+  </script>
 
 </div>
 

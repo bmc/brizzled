@@ -12,7 +12,7 @@ module Jekyll
 
     # Additional accessors
 
-    attr_accessor :base, :summary
+    attr_accessor :base, :summary, :atom
 
     # Chained version of constructor, used to generate the location of
     # the "summary" file.
@@ -25,6 +25,8 @@ module Jekyll
         File.join(@base, @dir, SUMMARY_FILE),
         File.join(site.dest, @dir,SUMMARY_HTML)
       )
+
+      @atom = nil
     end
     
     # Add some custom options to the Liquid data for the page.
@@ -72,10 +74,18 @@ module Jekyll
       begin
         res = orig_render(layouts, site_payload)
         self.output = fix_liquid_escapes(self.output)
+        generate_atom_content(layouts, site_payload)
         res
       rescue
         puts("Error during processing of #{self.full_url}")
         raise
+      end
+    end
+
+    def generate_atom_content(layouts, site_payload)
+      unless @atom
+        self.render(layouts, site_payload) unless self.output
+        @atom = make_atom_content(self.output)
       end
     end
 
@@ -105,6 +115,22 @@ module Jekyll
       s.gsub!('\%', '%')
       s.gsub!("\\\\", "\\")
       s
+    end
+
+    def make_atom_content(full_content)
+      # Remove the leading content, up to just before the "articles-container"
+      # <div>, and after the close of the <div> (which is marked).
+      full_content.split("\n").drop_while do |line|
+        # This will keep <body>, so the drop(1) that follows will have to
+        # get rid of it.
+        line !~ /^\s*<!-- #START ARTICLE/
+      end.drop(1).take_while do |line|
+        line !~ /^\s*<!-- #END ARTICLE/
+      end.map do |line|
+        line.strip
+      end.select do |line|
+        ! line.empty?
+      end.join("\n")
     end
   end
 end
