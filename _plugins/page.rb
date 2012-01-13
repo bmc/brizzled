@@ -1,10 +1,14 @@
 require 'date'
+require 'date/format'
+require File.join(File.dirname(__FILE__), 'datetime_util.rb')
 
 module Jekyll
 
   # Extensions to the Jekyll Page class.
 
   class Page
+
+    include Jekyll::DateTimeUtil
 
     BRIZZLED_URL = "http://brizzled.clapper.org"
     SUMMARY_FILE = "summary.md"
@@ -47,22 +51,29 @@ module Jekyll
     alias orig_to_liquid to_liquid
     def to_liquid
       h = orig_to_liquid
-      h['toc']              = self.data['toc'] || 'no'
-      h['disqus_id']        = self.data['disqus_id'] || "#{BRIZZLED_URL}#{@dir}/"
+      h['toc'] = self.data['toc'] || 'no'
+      h['disqus_id'] = self.data['disqus_id'] || "#{BRIZZLED_URL}#{@dir}/"
       h['disqus_developer'] = self.data['disqus_developer'] || nil
-      h['date']             = self.date
-      h['feed']             = @feed
+
+      date = Date.parse(self.date) if self.date.kind_of? String
+      h['date'] = date
+      if date
+        h["date_rfc822"] = rfc822_datetime(date)
+        h["date_rfc3339"] = rfc3339_datetime(date)
+      end
+
+      h['feed'] = @feed
 
       if @summary
-        h['summary']     = @summary
+        h['summary'] = @summary
         h['has_summary'] = @summary.has_summary?
       else
         h['has_summary'] = false
       end
 
-      h['path']    = File.join(@base, @dir, @name)
-      h['now']     = Date.today
-      h['tags']    = Tag.sort(tags)
+      h['path'] = File.join(@base, @dir, @name)
+      h['now'] = Date.today
+      h['tags'] = Tag.sort(tags)
       h['max_top'] = (self.data['max_top'] || site.config['max_top'] || 15)
       h
     end

@@ -3,7 +3,7 @@
 
   <title>Brizzled: Brian Clapper's Blog</title>
   <link rel="self" href="http://brizzled.clapper.org/feed.atom" type="application/atom+xml"/>
-  <updated>{{ page.now | date: '%Y-%m-%dT%H:%M:%S' }}Z</updated>
+  <updated>{{ site.date_rfc3339 }}</updated>
   <author>
     <name>Brian M. Clapper</name>
     <email>bmc@clapper.org</email>
@@ -16,8 +16,8 @@
     <title>{{ article.title }}</title>
     <link href="http://brizzled.clapper.org{{ article.url }}"/>
     <id>http://brizzled.clapper.org{{ article.url }}</id>
-    <published>{{ article.date | date: '%Y-%m-%dT%H:%M:%S' }}Z</published>
-    <updated>{{ article.date | date: '%Y-%m-%dT%H:%M:%S' }}Z</updated>
+    <published>{{ article.date_rfc3339 }}</published>
+    <updated>{{ article.date_rfc3339 }}</updated>
     <content type="html">
 {{ article.feed | xml_escape }}
     </content>

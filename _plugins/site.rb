@@ -1,9 +1,12 @@
 require 'set'
+require File.join(File.dirname(__FILE__), 'datetime_util.rb')
 
 module Jekyll
 
   # Extensions to the Jekyll Site class.
   class Site
+
+    include Jekyll::DateTimeUtil
 
     # Regular expression by which blog posts are recognized
     POST_PAGE_RE = %r{/id/[0-9]+/index.html}
@@ -23,9 +26,13 @@ module Jekyll
       h = orig_site_payload
       payload = h["site"]
 
+      now = Time.now
       articles = blog_posts.sort.reverse
       payload["articles"]     = articles
       payload["max_recent"] ||= 15
+      payload["date"]         = now
+      payload["date_rfc822"]  = rfc822_datetime(now)
+      payload["date_rfc3339"] = rfc3339_datetime(now)
       h["site"]               = payload
       h
     end
