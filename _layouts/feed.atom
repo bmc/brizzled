@@ -18,9 +18,9 @@
     <id>http://brizzled.clapper.org{{ article.url }}</id>
     <published>{{ article.date | date: '%Y-%m-%dT%H:%M:%S' }}Z</published>
     <updated>{{ article.date | date: '%Y-%m-%dT%H:%M:%S' }}Z</updated>
-    <content type="xhtml">
+    <content type="html">
       <div xmlns="http://www.w3.org/1999/xhtml">
-        {{ article.class }}
+{{ article.atom | xml_escape }}
       </div>
     </content>
     <summary type="xhtml">

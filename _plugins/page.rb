@@ -23,10 +23,10 @@ module Jekyll
       # Allow for a summary.md file that generates the article summary.
       @summary = Summary.new(
         File.join(@base, @dir, SUMMARY_FILE),
-        File.join(site.dest, @dir,SUMMARY_HTML)
+        File.join(site.dest, @dir, SUMMARY_HTML)
       )
 
-      @atom = nil
+      @atom = AtomContent.new(File.join(site.dest, @dir, self.url))
     end
     
     # Add some custom options to the Liquid data for the page.
@@ -51,6 +51,7 @@ module Jekyll
       h['disqus_id']        = self.data['disqus_id'] || "#{BRIZZLED_URL}#{@dir}/"
       h['disqus_developer'] = self.data['disqus_developer'] || nil
       h['date']             = self.date
+      h['atom']             = @atom
 
       if @summary
         h['summary']     = @summary
@@ -74,7 +75,6 @@ module Jekyll
       begin
         res = orig_render(layouts, site_payload)
         self.output = fix_liquid_escapes(self.output)
-        generate_atom_content(layouts, site_payload)
         res
       rescue
         puts("Error during processing of #{self.full_url}")
@@ -83,10 +83,24 @@ module Jekyll
     end
 
     def generate_atom_content(layouts, site_payload)
-      unless @atom
+      if @generated_atom.nil?
         self.render(layouts, site_payload) unless self.output
-        @atom = make_atom_content(self.output)
+
+        # Remove the leading content, up to just before the "articles-container"
+        # <div>, and after the close of the <div> (which is marked).
+        content = self.output.split("\n").drop_while do |line|
+          # This will keep <body>, so the drop(1) that follows will have to
+          # get rid of it.
+          line !~ /^\s*<!-- #START ARTICLE/
+        end.drop(1).take_while do |line|
+          line !~ /^\s*<!-- #END ARTICLE/
+        end.map do |line|
+          line.strip
+        end.select do |line|
+          ! line.empty?
+        end.join("\n")
       end
+      @generated_atom
     end
 
     def <=>(other)
@@ -115,22 +129,6 @@ module Jekyll
       s.gsub!('\%', '%')
       s.gsub!("\\\\", "\\")
       s
-    end
-
-    def make_atom_content(full_content)
-      # Remove the leading content, up to just before the "articles-container"
-      # <div>, and after the close of the <div> (which is marked).
-      full_content.split("\n").drop_while do |line|
-        # This will keep <body>, so the drop(1) that follows will have to
-        # get rid of it.
-        line !~ /^\s*<!-- #START ARTICLE/
-      end.drop(1).take_while do |line|
-        line !~ /^\s*<!-- #END ARTICLE/
-      end.map do |line|
-        line.strip
-      end.select do |line|
-        ! line.empty?
-      end.join("\n")
     end
   end
 end
