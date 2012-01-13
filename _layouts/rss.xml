@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Brizzled: Brian Clapper's Blog</title>
+    <link>http://brizzled.clapper.org/</link>
+    <description>Brian Clapper's blog</description>
+    <pubDate>{{ page.now | date: "%a, %d %b %y %T %z" }}</pubDate>
+    <generator>Jekyll</generator>
+
+{% for article in site.articles %}
+    <item>
+      <title>{{ article.title }}</title>
+      <link>{{ article.headers.url }}</link>
+      <pubDate>{{ article.date | date: "%a, %d %b %y %T %z" }}</pubDate>
+      <guid>{{ article.headers.url }}</guid>
+      <description>
+{{ article.feed | xml_escape }}
+      </description>
+      <author>bmc@clapper.org (Brian Clapper)</author>
+    </item>
+{% endfor %}
+  </channel>
+</rss>

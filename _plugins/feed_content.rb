@@ -5,14 +5,15 @@ require 'fileutils'
 module Jekyll
 
   # Deferred generator
-  class AtomContent
-    def initialize(html_file)
+  class FeedContent
+    def initialize(page_url, html_file)
       @html_file = html_file
+      @page_url = page_url
       @content = nil
     end
 
     def to_liquid
-      @content ||= generate_atom  File.readlines(@html_file).join("")
+      @content ||= generate_feed_content File.readlines(@html_file).join("")
     end
 
     def to_s
@@ -23,10 +24,18 @@ module Jekyll
       self.to_s
     end
 
-    def generate_atom(html)
+    def generate_feed_content(html)
+      prefix = [
+        "<ap><b><i>Note: If you're reading this article directly from the",
+        "RSS or ATOM feed, you're not seeing it as the author intended it to",
+        "be seen. Please visit <a href='#{@page_url}'>#{@page_url}</a>",
+        "for the full experience.</i></b></p>" 
+      ]
+
       # Remove the leading content, up to just before the "articles-container"
       # <div>, and after the close of the <div> (which is marked).
-      html.split("\n").drop_while do |line|
+
+      content = html.split("\n").drop_while do |line|
         # This will keep <body>, so the drop(1) that follows will have to
         # get rid of it.
         line !~ /^\s*<!-- #START ARTICLE/
@@ -36,8 +45,8 @@ module Jekyll
         line.strip
       end.select do |line|
         ! (line.empty? || line.include?('printer-friendly.html'))
-      end.join("\n")
+      end
+      (prefix + content).join("\n")
     end
-
   end
 end
