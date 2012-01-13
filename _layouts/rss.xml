@@ -5,15 +5,15 @@
     <title>Brizzled: Brian Clapper's Blog</title>
     <link>http://brizzled.clapper.org/</link>
     <description>Brian Clapper's blog</description>
-    <pubDate>{{ page.now | date: "%a, %d %b %y %T %z" }}</pubDate>
+    <pubDate>{{ page.now | date: "%a, %d %b %y %T %Z" }}</pubDate>
     <generator>Jekyll</generator>
 
 {% for article in site.articles %}
     <item>
       <title>{{ article.title }}</title>
-      <link>{{ article.headers.url }}</link>
-      <pubDate>{{ article.date | date: "%a, %d %b %y %T %z" }}</pubDate>
-      <guid>{{ article.headers.url }}</guid>
+      <link>http://brizzled.clapper.org{{ article.url }}</link>
+      <pubDate>{{ article.date | date: "%a, %d %b %y %T %Z" }}</pubDate>
+      <guid>http://brizzled.clapper.org{{ article.url }}</guid>
       <description>
 {{ article.feed | xml_escape }}
       </description>

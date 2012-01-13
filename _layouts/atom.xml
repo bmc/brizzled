@@ -14,7 +14,7 @@
 
   <entry>
     <title>{{ article.title }}</title>
-    <link href="{{ article.headers.url }}"/>
+    <link href="http://brizzled.clapper.org{{ article.url }}"/>
     <id>http://brizzled.clapper.org{{ article.url }}</id>
     <published>{{ article.date | date: '%Y-%m-%dT%H:%M:%S' }}Z</published>
     <updated>{{ article.date | date: '%Y-%m-%dT%H:%M:%S' }}Z</updated>
