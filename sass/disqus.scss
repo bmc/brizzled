@@ -7,3 +7,10 @@
 {
     display: none;
 }
+
+// Disable the "dislike" button. If someone doesn't like it, he can
+// go to the trouble of making a comment.
+.dsq-dislike-thread
+{
+    display: none;
+}
