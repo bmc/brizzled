@@ -11,21 +11,21 @@
         <div class="article-title">
           <div class="screen">
             <a href="{{ page.url }}" class="reference">{{ page.title }}</a>
-          </div>
+          </div> <!-- screen title -->
           <div class="print">
             <br clear="all">
             <span class="article-title">{{ page.title }}</span>
-          </div>
-        </div>
+          </div> <!-- print title -->
+        </div> <!-- title -->
 
         <div class="article-timestamp screen">
           <a href="/printer-friendly.html" rel="lyteframe" title="Printer-friendly" rev="width: 400px; height: 300px;">Printer-friendly</a> | {{ page.date | date: '%A, %d %B, %Y' }}
-        </div>
+        </div> <!-- article-timestamp screen -->
 
         <div class="article-timestamp print">
           {{ page.date | date: '%A, %d %B, %Y' }}
-        </div>
-      </div>
+        </div> <!-- article-timestamp print -->
+      </div> <!-- article-header -->
 
       {% if (page.toc == "toc") %}
       <script type="text/javascript" src="/js/toc.js">
@@ -39,11 +39,11 @@
         <div id="tocBlock" class="screen">
         <span id="tocHeading">Table of Contents</span>
         <div id="toc"></div>
-        </div>
+        </div> <!-- tocBlock -->
         {% endif %}
 
         {{ content }}
-      </div>
+      </div> <!-- content -->
 
       <br/>
 
@@ -55,7 +55,7 @@
         <a href="/tags/{{ tag.dir }}/">{{ tag.name }}</a>{% if forloop.last %}{% else %},{% endif %}
         {% endfor %}
         </span>
-      </div>
+      </div> <!-- article-footer -->
       <hr/>
 
       {% if (page.toc == "toc") %}
@@ -71,8 +71,9 @@
         <div id="disqus_thread"></div>
 
         <script type="text/javascript">
-          // Use the base file name (without the ".html") as the Disqus URL. This is
-          // necessary to be consistent with old version of Brizzled on App Engine.
+          // Use the base file name (without the ".html") as the Disqus URL. 
+          // This is necessary to be consistent with old version of 
+          // Brizzled on App Engine.
           {% if (page.disqus_id) %}
           var disqus_identifier = "{{ page.disqus_id }}";
           var disqus_url = "{{ page.disqus_id }}";
@@ -87,18 +88,22 @@
           {% endif %}
 
           (function() {
-           var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-           dsq.src = 'http://brizzled.disqus.com/embed.js';
-           (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = 'http://brizzled.disqus.com/embed.js';
+            var elem = (document.getElementsByTagName('head')[0] ||
+                        document.getElementsByTagName('body')[0])
+            elem.appendChild(dsq);
           })();
         </script>
 
         <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=brizzled">comments powered by Disqus.</a></noscript>
         <a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
-      </div>
+      </div> <!-- screen -->
 
-    </div>
-  </div>
+    </div> <!-- article -->
+  </div> <!-- articles-container -->
   <!-- #END ARTICLE -->
 
   <script type="text/javascript">
@@ -115,8 +120,12 @@
   })();
   //]]>
   </script>
+  <noscript>
+    Please enable JavaScript to view the
+    <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+  </noscript>
 
-</div>
+</div> <!-- articles-box -->
 
 
 {% include bottom.html %}

@@ -11,6 +11,7 @@ $code_background_color: #ffffe0;
 $font_family: Verdana, Arial, Helvetica, sans-serif;
 $pre_font_family: Andale Mono, Lucidatypewriter, Lucida Typewriter, monospace;
 $article_background_color: white;
+$content_box_width: 80%;
 
 @import "pygments.scss";
 
@@ -72,9 +73,9 @@ span.summary-tags
 
 div.page-footer
 {
-    font: 8pt;
+    font-size: 8pt !important;
     font-style: italic;
-    text-align: center;
+    @include centered($content_box_width);
 }
 
 .lytebox-popup
@@ -158,7 +159,7 @@ div.gutter-item
 
 div#content-box
 {
-    width: 80%;
+    width: $content_box_width;
     float: left;
 }
 
