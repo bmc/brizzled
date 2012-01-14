@@ -1,12 +1,12 @@
 require 'set'
-require File.join(File.dirname(__FILE__), 'datetime_util.rb')
+require File.join(File.dirname(__FILE__), 'blog_util.rb')
 
 module Jekyll
 
   # Extensions to the Jekyll Site class.
   class Site
 
-    include Jekyll::DateTimeUtil
+    include Jekyll::BlogUtil
 
     # Regular expression by which blog posts are recognized
     POST_PAGE_RE = %r{/id/[0-9]+/index.html}

@@ -1,13 +1,12 @@
 require 'rubygems'
-require 'maruku'
-require File.join(File.dirname(__FILE__), 'html_util.rb')
+require File.join(File.dirname(__FILE__), 'blog_util.rb')
 require 'fileutils'
 
 module Jekyll
 
   class Summary
 
-    include Jekyll::HTMLUtil
+    include Jekyll::BlogUtil
 
     @@EMPTY = nil
 

@@ -1,14 +1,13 @@
 require 'rubygems'
-require 'maruku'
 require 'fileutils'
-require File.join(File.dirname(__FILE__), 'html_util.rb')
+require File.join(File.dirname(__FILE__), 'blog_util.rb')
 
 module Jekyll
 
   # Deferred generator
   class FeedContent
 
-    include Jekyll::HTMLUtil
+    include Jekyll::BlogUtil
 
     def initialize(site, page)
       @html_file = page.html_file

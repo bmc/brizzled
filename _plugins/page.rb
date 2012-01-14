@@ -1,6 +1,6 @@
 require 'date'
 require 'date/format'
-require File.join(File.dirname(__FILE__), 'datetime_util.rb')
+require File.join(File.dirname(__FILE__), 'blog_util.rb')
 
 module Jekyll
 
@@ -8,7 +8,7 @@ module Jekyll
 
   class Page
 
-    include Jekyll::DateTimeUtil
+    include Jekyll::BlogUtil
 
     BRIZZLED_URL = "http://brizzled.clapper.org"
     SUMMARY_FILE = "summary.md"
