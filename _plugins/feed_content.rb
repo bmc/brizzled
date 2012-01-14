@@ -1,19 +1,33 @@
 require 'rubygems'
 require 'maruku'
 require 'fileutils'
+require File.join(File.dirname(__FILE__), 'html_util.rb')
 
 module Jekyll
 
   # Deferred generator
   class FeedContent
-    def initialize(page_url, html_file)
-      @html_file = html_file
-      @page_url = page_url
-      @content = nil
+
+    include Jekyll::HTMLUtil
+
+    def initialize(site, page)
+      @html_file = page.html_file
+      @page_url  = page.full_url
+      @site      = site
+      @page      = page
+      @content   = nil
     end
 
     def to_liquid
-      @content ||= generate_feed_content File.readlines(@html_file).join("")
+      unless @content
+        unless File.exists? @html_file
+          @page.render(@site.layouts, @site.site_payload)
+        end
+
+        @content = generate_feed_content(@page.content)
+      end
+
+      @content
     end
 
     def to_s
@@ -24,29 +38,15 @@ module Jekyll
       self.to_s
     end
 
-    def generate_feed_content(html)
-      prefix = [
-        "<ap><b><i>Note: If you're reading this article directly from the",
-        "RSS or ATOM feed, you're not seeing it as the author intended it to",
-        "be seen. Please visit <a href='#{@page_url}'>#{@page_url}</a>",
-        "for the full experience.</i></b></p>" 
-      ]
+    def generate_feed_content(raw_content)
+      prefix = <<END_PREFIX
+**Note: If you're reading this article directly from the RSS or ATOM feed,
+you're _not_ seeing it as the author intended it to be seen. Please visit the
+[actual article](#{@page_url}) for the full experience.**
 
-      # Remove the leading content, up to just before the "articles-container"
-      # <div>, and after the close of the <div> (which is marked).
+END_PREFIX
 
-      content = html.split("\n").drop_while do |line|
-        # This will keep <body>, so the drop(1) that follows will have to
-        # get rid of it.
-        line !~ /^\s*<!-- #START ARTICLE/
-      end.drop(1).take_while do |line|
-        line !~ /^\s*<!-- #END ARTICLE/
-      end.map do |line|
-        line.strip
-      end.select do |line|
-        ! (line.empty? || line.include?('printer-friendly.html'))
-      end
-      (prefix + content).join("\n")
+      make_html(prefix + raw_content)
     end
   end
 end

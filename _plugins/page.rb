@@ -16,7 +16,7 @@ module Jekyll
 
     # Additional accessors
 
-    attr_accessor :base, :summary, :feed
+    attr_accessor :base, :summary, :feed, :html_file
 
     # Chained version of constructor, used to generate the location of
     # the "summary" file.
@@ -30,7 +30,8 @@ module Jekyll
         File.join(site.dest, @dir, SUMMARY_HTML)
       )
 
-      @feed = FeedContent.new(self.full_url, File.join(site.dest, @dir, self.url))
+      @html_file = File.join(site.dest, @dir, self.url)
+      @feed = FeedContent.new(site, self)
     end
     
     # Add some custom options to the Liquid data for the page.
