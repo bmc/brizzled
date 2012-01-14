@@ -46,7 +46,6 @@ bash$ ls **/*.log
 ls: cannot access **/*.log: No such file or directory
 bash$ shopt -s globstar
 bash$ ls **/*.log
-bash$ ls **/*.log
 appfirewall.log  kernel.log            secure.log
 fsck_hfs.log     launchd-shutdown.log  system.log
 hdiejectd.log    mail.log              windowserver.log
