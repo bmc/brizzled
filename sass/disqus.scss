@@ -1,0 +1,9 @@
+// -*- Ruby Sass -*-
+//
+// Customization of Disqus styling.
+
+// Disable the comment RSS feed entirely.
+.dsq-subscribe-rss
+{
+    display: none;
+}
