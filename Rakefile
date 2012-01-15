@@ -1,22 +1,35 @@
 #                                                                 -*- ruby -*-
 
 require 'rubygems'
+require 'bundler/setup'
 require 'rake/clean'
+require 'grizzled-rake'
+
+GrizzledRake::TimeFormat::timestamp_format = '[%H:%M:%S.%m]'
 
 CLEAN << ['css', '_site', 'tags']
+JEKYLL_VERSION = '>=0'
 
-version = '>= 0'
-gem 'jekyll', version
+gem 'jekyll', JEKYLL_VERSION
+
+# ---------------------------------------------------------------------------
+# Main tasks
+# ---------------------------------------------------------------------------
+
+def rputs(message)
+  require 'rake'
+  rake_output_message message
+end
 
 task :default => :jekyll
 
 desc "Format the blog."
 task :jekyll => :css do |t|
-  load Gem.bin_path('jekyll', 'jekyll', version)
+  load Gem.bin_path('jekyll', 'jekyll', JEKYLL_VERSION)
 
   # For some reason, Jekyll isn't copying the generated "tags" directory.
   # Do it manually.
-  puts "Copying tags..."
+  rk_puts "Copying tags..."
   cp_r "tags", "_site"
 end
 
@@ -27,6 +40,9 @@ task :run => :css do |t|
   sh "jekyll", "--server"
 end
 
+# ---------------------------------------------------------------------------
+# CSS/SASS
+# ---------------------------------------------------------------------------
 
 # Generate CSS files from SCSS files
 
@@ -48,7 +64,7 @@ end
 rule %r{^#{CSS_DIR}/.*\.css$} => [css_to_scss, 'Rakefile'] + SASS_FILES do |t|
   require 'sass'
   mkdir_p CSS_DIR
-  puts("#{t.source} -> #{t.name}")
+  rk_puts("#{t.source} -> #{t.name}")
   Dir.chdir('sass') do
     sass_input = File.basename(t.source)
     engine = Sass::Engine.new(File.open(sass_input).readlines.join(''),
@@ -63,6 +79,10 @@ end
 
 desc "Run SASS to produce the stylesheets."
 task :css => CSS_OUTPUT_FILES
+
+# ---------------------------------------------------------------------------
+# Create a new, empty blog entry.
+# ---------------------------------------------------------------------------
 
 desc "Make a new entry"
 task :new do
@@ -81,6 +101,6 @@ task :new do
       f.write(template.result)
     end
   end
-  puts "New blog entry is in #{new_dir}"
+  rk_puts "New blog entry is in #{new_dir}"
 end
 
