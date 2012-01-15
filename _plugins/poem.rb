@@ -11,10 +11,13 @@ module Jekyll
     end
 
     def render(context)
-      # Superclass method will get the lines in the block, as an array of
-      # length 1.
+      # Superclass method will get the lines in the block. Older versions of
+      # Jekyll returned an array of length 1. Newer versions seem to return
+      # a string. This method handles either one.
       lines = super
-      emit_lines(lines[0].split("\n"))
+      lines = lines[0] if lines.kind_of? Array
+      lines_array = lines.split("\n").drop_while {|s| s.strip.length == 0}
+      emit_lines(lines_array)
     end
 
     private
