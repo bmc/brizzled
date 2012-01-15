@@ -1,5 +1,5 @@
 # Ignore these.
-exclude: README.md sass
+exclude: README.md sass Gemfile Gemfile.lock brizzled.sublime-project brizzled.sublime-workspace Rakefile
 # Use Pygments
 pygments: true
 # Maximum number of recent articles displayed on the side
