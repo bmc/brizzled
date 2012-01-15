@@ -148,7 +148,7 @@ Once the gem is installed, two lines of code in my Rakefile will enable
 timestamps:
 
 {% highlight ruby %}
-require 'grizzled/rake'
+require 'grizzled-rake'
 
 # Set strftime format to use for timestamps. If this isn't set, then
 # no timestamps are used (i.e., Rake messages look "normal").
