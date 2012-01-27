@@ -16,11 +16,6 @@ gem 'jekyll', JEKYLL_VERSION
 # Main tasks
 # ---------------------------------------------------------------------------
 
-def rputs(message)
-  require 'rake'
-  rake_output_message message
-end
-
 task :default => :jekyll
 
 desc "Format the blog."
