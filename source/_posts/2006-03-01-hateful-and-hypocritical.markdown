@@ -1,0 +1,85 @@
+---
+layout: post
+comments: false
+title: "Hateful and Hypocritical"
+date: 2006-03-01 00:00
+categories: [religious right, intolerance, homosexuality, people]
+---
+
+I was a freshman in college in 1979. The AIDS epidemic was just
+becoming newsworthy at that time. According to at least
+[one timeline][],
+the disease wasn't called "AIDS" until 1982.
+
+Of course, during the same period, the religious right--now a
+potent part of the Republican Party's "base"--was also going
+national. 1979 was the year that Jerry Falwell founded the Moral
+Majority.
+
+At first, in the United States, AIDS only seemed to afflict
+homosexual men. This, of course, led to many a fiery denunciation
+of homosexuals by self-righteous assholes from the religious right.
+One day, during my sophomore year, as I hustled from one end of
+campus to the other so I wouldn't be late for a class, I was
+surprised to see a young, clean-cut man preaching, loudly, right in
+the middle of campus, about how all these queers were going to hell
+and how this new disease was God's punishment for their wickedness.
+Mind you, this was an an [urban university][]
+in Philadelphia, Pennsylvania, one with a highly diverse student
+population. I remember thinking, "What an asshole," as I strode
+past him.
+
+Since then, homosexuality *seems* more acceptable. It's certainly
+more apparent in the media. One of the most talked-about films this
+Oscar season is
+[Brokeback Mountain][], which
+has been discussed to the point of nausea, actually. Gay characters
+are more apparent on mainstream television shows, too (even if
+they're often effectively neutered, so they won't offend middle
+America).
+
+Yet we still have hateful, intolerant jerks running around,
+claiming that (for instance)
+[God hates fags][]. Self-righteous
+attention-seekers like
+[Pat Robertson][]
+use their television shows to warn cities that gay pride parades
+are likely to bring God's wrath down upon them.
+
+What *is* it with these extreme right-wing Christian nutbags,
+anyway? They claim to model their lives after Jesus--a man so
+tolerant that he scandalized the religious right of *his* time by
+spending time with prostitutes, tax collectors and all manner of
+people the "righteous" labeled as scum. Back in August,
+[Andrew Lang][] hit the nail on the
+head when he
+[wrote, about Pat Robertson][]:
+
+> Pat Robertson's god is the military messiah of Armageddon theology.
+> Like some other evangelicals (not all, thank God) Robertson reads
+> the Bible as a fantasy novel about revenge. His Jesus is the
+> muscular action hero of pop culture: a Punisher, Terminator or
+> Darkman who exterminates his enemies with brutal efficiency.
+
+For more than four years now, we've been painfully aware of the
+dangers of Islamic religious extremism. But are people like
+[Fred Phelps][] (the man
+behind [godhatesfags.com][]), or Pat
+Robertson, or other prominent hate-mongering Christian extremists
+all that different?
+
+I have a very young daughter. One of these days, she's going to ask
+me, in all innocence, what makes some people such hateful
+hypocrites.
+
+I honestly have no idea how to answer that one.
+
+[one timeline]: http://www.infoplease.com/spot/aidstimeline1.html
+[urban university]: http://www.temple.edu/
+[Brokeback Mountain]: http://www.imdb.com/title/tt0388795/
+[God hates fags]: http://www.godhatesfags.com/
+[Pat Robertson]: /bmc/blog/people/quotes-from-media-whore-control-freaks#Pat_Robertson
+[Andrew Lang]: http://langohio.blogspot.com/
+[wrote, about Pat Robertson]: http://langohio.blogspot.com/2005/08/tale-of-two-christians.html
+[Fred Phelps]: http://en.wikipedia.org/wiki/Fred_Phelps
+[godhatesfags.com]: http://www.godhatesfags.com/

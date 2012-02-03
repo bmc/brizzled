@@ -1,0 +1,59 @@
+// -*- Ruby Sass -*-
+//
+// This File is imported last, and will override other styles in the cascade
+// Add styles here to make changes without digging in too much
+
+$article_title_color: maroon;
+$article_title_font: $header-subtitle-font-family;
+$blog_title_font: "Rock Salt";
+
+ol {
+    li {
+        margin-left: 2em !important;
+    }
+}
+
+ul {
+    li {
+        margin-left: 2em !important;
+    }
+}
+
+blockquote {
+    font-size: 90%;
+}
+
+h1.entry-title {
+    font-family: $article_title_font;
+    color: $article_title_color;
+}
+
+div.entry-content {
+    h1 {
+
+    }
+}
+
+div#blog-archives {
+    h1 {
+        color: $article_title_color;
+        font-family: $article_title_font;
+    }
+}
+
+h1.blog-title {
+    font-family: $blog_title_font;
+}
+
+h2.blog-subtitle {
+    font-family: $blog_title_font;
+    margin-left: 100px;
+    font-size: 80%;
+}
+
+div.blog-image {
+    float: right;
+    width: 90px;
+    height: 105px;
+    border: 1px solid gray;
+}
