@@ -1,6 +1,6 @@
 ---
 layout: post
-comments: false
+comments: true
 title: "The Macabre World of Disney"
 date: 2005-09-27 00:00
 categories: [disney, polly pockets, macabre, aladdin]

@@ -1,6 +1,6 @@
 ---
 layout: post
-comments: false
+comments: true
 title: "Beginning Scala considered useful"
 date: 2009-08-17 00:00
 categories: [scala, programming, books, programming]

@@ -1,6 +1,6 @@
 ---
 layout: post
-comments: false
+comments: true
 title: "How Not to Design a Database"
 date: 2010-02-03 00:00
 categories: [rdbms, microsoft, access, database]

@@ -1,6 +1,6 @@
 ---
 layout: post
-comments: false
+comments: true
 title: "An open letter to Mike McQueary"
 date: 2011-11-08 00:00
 categories: [penn, state, scandal, cowardice]

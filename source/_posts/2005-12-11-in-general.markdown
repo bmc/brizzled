@@ -1,6 +1,6 @@
 ---
 layout: post
-comments: false
+comments: true
 title: "In General"
 date: 2005-12-11 00:00
 categories: [generalist, perfectionism]

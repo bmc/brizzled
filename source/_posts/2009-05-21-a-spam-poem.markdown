@@ -1,6 +1,6 @@
 ---
 layout: post
-comments: false
+comments: true
 title: "A spam poem"
 date: 2009-05-21 00:00
 categories: [spam, poem, email]

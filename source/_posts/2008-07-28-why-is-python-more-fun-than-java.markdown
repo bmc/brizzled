@@ -1,6 +1,6 @@
 ---
 layout: post
-comments: false
+comments: true
 title: "Why is Python more fun than Java?"
 date: 2008-07-28 00:00
 categories: [java, python, programming]

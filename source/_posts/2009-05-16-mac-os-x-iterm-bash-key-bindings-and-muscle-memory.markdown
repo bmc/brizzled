@@ -1,6 +1,6 @@
 ---
 layout: post
-comments: false
+comments: true
 title: "Mac OS X, iTerm, bash key bindings, and muscle memory"
 date: 2009-05-16 00:00
 categories: [mac os x, unix, bash, iTerm, key bindings, Terminal.app]

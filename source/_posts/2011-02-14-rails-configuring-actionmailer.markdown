@@ -1,6 +1,6 @@
 ---
 layout: post
-comments: false
+comments: true
 title: "Rails: Configuring ActionMailer"
 date: 2011-02-14 00:00
 categories: [ruby, email, mail, rails, programming]

@@ -1,6 +1,6 @@
 ---
 layout: post
-comments: false
+comments: true
 title: "Scala in Philly"
 date: 2010-05-27 00:00
 categories: [scala, enthusiasts, phase, user group, programming]

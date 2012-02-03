@@ -1,6 +1,6 @@
 ---
 layout: post
-comments: false
+comments: true
 title: 'The definition of "Brizzled"'
 date: 2008-07-26 00:00
 categories: [brizzled]

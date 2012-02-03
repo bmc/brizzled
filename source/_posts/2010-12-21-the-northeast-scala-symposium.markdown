@@ -1,6 +1,6 @@
 ---
 layout: post
-comments: false
+comments: true
 title: "The Northeast Scala Symposium"
 date: 2010-12-21 00:00
 categories: [scala, symposium, programming]

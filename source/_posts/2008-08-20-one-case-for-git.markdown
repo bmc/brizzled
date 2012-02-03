@@ -1,6 +1,6 @@
 ---
 layout: post
-comments: false
+comments: true
 title: "One case for git"
 date: 2008-08-20 00:00
 categories: [subversion, git, programming, revision control]

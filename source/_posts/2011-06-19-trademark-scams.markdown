@@ -1,6 +1,6 @@
 ---
 layout: post
-comments: false
+comments: true
 title: "Trademark Scams"
 date: 2011-06-19 00:00
 categories: [business, trademark, scam]

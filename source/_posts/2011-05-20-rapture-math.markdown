@@ -1,6 +1,6 @@
 ---
 layout: post
-comments: false
+comments: true
 title: "Rapture Math"
 date: 2011-05-20 00:00
 categories: [may21, math, religion]

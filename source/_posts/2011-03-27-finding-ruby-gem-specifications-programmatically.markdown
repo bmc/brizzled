@@ -1,6 +1,6 @@
 ---
 layout: post
-comments: false
+comments: true
 title: "Finding Ruby Gem Specifications Programmatically"
 date: 2011-03-27 00:00
 categories: [ruby, rubygems, gems, programming]

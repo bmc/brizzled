@@ -1,6 +1,6 @@
 ---
 layout: post
-comments: false
+comments: true
 title: "R.I.P., Dennis Ritchie"
 date: 2011-10-13 00:00
 categories: [dennis, ritchie, unix]

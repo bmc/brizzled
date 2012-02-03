@@ -1,6 +1,6 @@
 ---
 layout: post
-comments: false
+comments: true
 title: "Mac OS X Lion has ruined my MacBook Pro"
 date: 2011-08-26 00:00
 categories: [hardware, mac os x, apple]

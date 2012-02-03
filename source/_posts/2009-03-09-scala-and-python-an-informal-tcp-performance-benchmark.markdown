@@ -1,6 +1,6 @@
 ---
 layout: post
-comments: false
+comments: true
 title: "Scala and Python: An informal TCP performance benchmark"
 date: 2009-03-09 00:00
 categories: [python, scala, java, jvm, performance, tcp, programming]

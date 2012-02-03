@@ -1,6 +1,6 @@
 ---
 layout: post
-comments: false
+comments: true
 title: "Talking to Fourth Graders about Programming"
 date: 2011-04-15 00:00
 categories: [programming, software, children]

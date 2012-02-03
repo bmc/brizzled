@@ -1,6 +1,6 @@
 ---
 layout: post
-comments: false
+comments: true
 title: "A Scala build tool"
 date: 2009-02-12 00:00
 categories: [scala, ant, rake, make, DSL, programming]

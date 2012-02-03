@@ -1,6 +1,6 @@
 ---
 layout: post
-comments: false
+comments: true
 title: "The Candidates"
 date: 2011-10-23 00:00
 categories: [bachmann, cain, romney, republicans, 2012 election]

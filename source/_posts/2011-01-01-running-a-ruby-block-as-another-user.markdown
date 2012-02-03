@@ -1,6 +1,6 @@
 ---
 layout: post
-comments: false
+comments: true
 title: "Running a Ruby block as another user"
 date: 2011-01-01 00:00
 categories: [ruby, unix, processes, programming]

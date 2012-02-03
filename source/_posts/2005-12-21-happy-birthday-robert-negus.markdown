@@ -1,6 +1,6 @@
 ---
 layout: post
-comments: false
+comments: true
 title: "Happy Birthday, Robert Negus"
 date: 2005-12-21 00:00
 categories: [melanoma, Robert Negus]

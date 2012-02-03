@@ -1,6 +1,6 @@
 ---
 layout: post
-comments: false
+comments: true
 title: "Interpreting Java"
 date: 2009-01-08 00:00
 categories: [java, python, jython, groovy, programming, scala]

@@ -1,6 +1,6 @@
 ---
 layout: post
-comments: false
+comments: true
 title: "R.I.P., Steve Jobs"
 date: 2011-10-06 00:00
 categories: [apple, steve, jobs]

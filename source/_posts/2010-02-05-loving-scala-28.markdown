@@ -1,6 +1,6 @@
 ---
 layout: post
-comments: false
+comments: true
 title: "Loving Scala 2.8"
 date: 2010-02-05 00:00
 categories: [scala, programming]

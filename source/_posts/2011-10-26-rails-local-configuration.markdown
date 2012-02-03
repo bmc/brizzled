@@ -1,6 +1,6 @@
 ---
 layout: post
-comments: false
+comments: true
 title: "Rails Local Configuration"
 date: 2011-10-26 00:00
 categories: [ruby, rails, programming]

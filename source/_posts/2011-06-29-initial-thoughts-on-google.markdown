@@ -1,6 +1,6 @@
 ---
 layout: post
-comments: false
+comments: true
 title: "Initial thoughts on Google+"
 date: 2011-06-29 00:00
 categories: [social, media, Google, Facebook]

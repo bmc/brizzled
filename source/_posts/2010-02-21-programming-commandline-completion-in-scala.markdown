@@ -1,6 +1,6 @@
 ---
 layout: post
-comments: false
+comments: true
 title: "Programming Command-line Completion in Scala"
 date: 2010-02-21 00:00
 categories: [scala, parsing, readline, editline, REPL, completion, programming]

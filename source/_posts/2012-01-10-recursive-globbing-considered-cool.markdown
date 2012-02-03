@@ -1,6 +1,6 @@
 ---
 layout: post
-comments: false
+comments: true
 title: "Recursive Globbing Considered Cool"
 date: 2012-01-10 13:45
 categories: [bash, shell, zsh, globbing, recursion]

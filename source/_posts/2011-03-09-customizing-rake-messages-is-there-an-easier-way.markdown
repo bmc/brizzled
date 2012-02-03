@@ -1,6 +1,6 @@
 ---
 layout: post
-comments: false
+comments: true
 title: "Customizing Rake messages: Is there an easier way?"
 date: 2011-03-09 00:00
 categories: [ruby, rake, programming]

@@ -1,6 +1,6 @@
 ---
 layout: post
-comments: false
+comments: true
 title: "Sanity Clause"
 date: 2005-12-12 00:00
 categories: [photography, digital photography, photo with santa]

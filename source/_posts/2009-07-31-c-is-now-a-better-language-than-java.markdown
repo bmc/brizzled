@@ -1,6 +1,6 @@
 ---
 layout: post
-comments: false
+comments: true
 title: "C# is now a better language than Java"
 date: 2009-07-31 00:00
 categories: [java, c#, scala, programming]

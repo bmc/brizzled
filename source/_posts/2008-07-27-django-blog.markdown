@@ -1,6 +1,6 @@
 ---
 layout: post
-comments: false
+comments: true
 title: "Django blog"
 date: 2008-07-27 00:00
 categories: [django, blogging, vps, python, programming]

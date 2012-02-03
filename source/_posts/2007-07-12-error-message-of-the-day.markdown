@@ -1,6 +1,6 @@
 ---
 layout: post
-comments: false
+comments: true
 title: "Error Message of the Day"
 date: 2007-07-12 00:00
 categories: [software, oracle]

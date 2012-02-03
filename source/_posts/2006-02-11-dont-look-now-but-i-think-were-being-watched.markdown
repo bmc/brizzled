@@ -1,6 +1,6 @@
 ---
 layout: post
-comments: false
+comments: true
 title: "Don't look now, but I think we're being watched..."
 date: 2006-02-11 00:00
 categories: [surveillance, privacy, crime]

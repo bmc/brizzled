@@ -1,6 +1,6 @@
 ---
 layout: post
-comments: false
+comments: true
 title: "GoDaddy has lost my business"
 date: 2011-12-22 00:00
 categories: [sopa, godaddy, internet, registrar]

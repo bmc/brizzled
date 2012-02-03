@@ -1,6 +1,6 @@
 ---
 layout: post
-comments: false
+comments: true
 title: "Unintended Consequences"
 date: 2007-08-11 00:00
 categories: [computers, software, mac os x]

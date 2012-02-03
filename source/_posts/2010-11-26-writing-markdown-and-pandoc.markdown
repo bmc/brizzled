@@ -1,6 +1,6 @@
 ---
 layout: post
-comments: false
+comments: true
 title: "Writing, Markdown and Pandoc"
 date: 2010-11-26 00:00
 categories: [writing, markdown, pandoc]

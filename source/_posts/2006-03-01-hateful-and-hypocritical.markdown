@@ -1,6 +1,6 @@
 ---
 layout: post
-comments: false
+comments: true
 title: "Hateful and Hypocritical"
 date: 2006-03-01 00:00
 categories: [religious right, intolerance, homosexuality, people]

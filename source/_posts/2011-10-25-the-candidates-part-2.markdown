@@ -1,6 +1,6 @@
 ---
 layout: post
-comments: false
+comments: true
 title: "The Candidates, Part 2"
 date: 2011-10-25 00:00
 categories: [perry, paul, santorum, republicans, 2012 election]

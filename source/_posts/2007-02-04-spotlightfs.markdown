@@ -1,6 +1,6 @@
 ---
 layout: post
-comments: false
+comments: true
 title: "SpotlightFS"
 date: 2007-02-04 00:00
 categories: [mac os x, spotlightfs, spotlight, unix, computers]

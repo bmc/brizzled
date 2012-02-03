@@ -1,6 +1,6 @@
 ---
 layout: post
-comments: false
+comments: true
 title: "Jasmine and Coffee"
 date: 2011-10-04 00:00
 categories: [javascript, coffeescript, testing, bdd]

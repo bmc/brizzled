@@ -1,6 +1,6 @@
 ---
 layout: post
-comments: false
+comments: true
 title: "A bash stack"
 date: 2011-10-28 00:00
 categories: [bash, shell, programming]

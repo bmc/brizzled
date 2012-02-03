@@ -1,6 +1,6 @@
 ---
 layout: post
-comments: false
+comments: true
 title: "SBT: A Scala-based Simple Build Tool"
 date: 2009-07-19 00:00
 categories: [scala, ant, rake, make, maven, ivy, gradle, SBT, programming]

@@ -1,6 +1,6 @@
 ---
 layout: post
-comments: false
+comments: true
 title: "Writing Blogging Software for Google App Engine"
 date: 2008-08-07 00:00
 categories: [python, App Engine, blogging, programming]

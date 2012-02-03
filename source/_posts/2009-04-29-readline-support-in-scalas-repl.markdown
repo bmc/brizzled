@@ -1,6 +1,6 @@
 ---
 layout: post
-comments: false
+comments: true
 title: "Readline support in Scala's REPL"
 date: 2009-04-29 00:00
 categories: [scala, repl, readline, programming]

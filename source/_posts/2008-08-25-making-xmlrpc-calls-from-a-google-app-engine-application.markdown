@@ -1,6 +1,6 @@
 ---
 layout: post
-comments: false
+comments: true
 title: "Making XML-RPC calls from a Google App Engine application"
 date: 2008-08-25 00:00
 categories: [python, App Engine, programming, XML RPC]

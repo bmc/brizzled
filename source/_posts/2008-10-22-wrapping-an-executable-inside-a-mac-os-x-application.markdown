@@ -1,6 +1,6 @@
 ---
 layout: post
-comments: false
+comments: true
 title: "Wrapping an executable inside a Mac OS X application"
 date: 2008-10-22 00:00
 categories: [mac os x, unix, software]

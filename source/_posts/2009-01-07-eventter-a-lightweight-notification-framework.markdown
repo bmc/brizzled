@@ -1,6 +1,6 @@
 ---
 layout: post
-comments: false
+comments: true
 title: "eventter: A lightweight notification framework"
 date: 2009-01-07 00:00
 categories: [python, udp, notification, messaging, programming]

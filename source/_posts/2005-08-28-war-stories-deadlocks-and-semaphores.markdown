@@ -1,6 +1,6 @@
 ---
 layout: post
-comments: false
+comments: true
 title: "War Stories: Deadlocks and Semaphores"
 date: 2005-08-28 00:00
 categories: [phlx, deadlock, programming, semaphore]

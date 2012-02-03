@@ -1,6 +1,6 @@
 ---
 layout: post
-comments: false
+comments: true
 title: "Now blogging on App Engine"
 date: 2008-08-04 00:00
 categories: [django, blogging, python, App Engine, programming]

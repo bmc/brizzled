@@ -1,6 +1,6 @@
 ---
 layout: post
-comments: false
+comments: true
 title: "Details, Details"
 date: 2011-11-06 00:00
 categories: [humility, programming, bug]

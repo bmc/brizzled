@@ -1,6 +1,6 @@
 ---
 layout: post
-comments: false
+comments: true
 title: "Getting Delicious bookmarks to Diigo"
 date: 2010-12-17 00:00
 categories: [del.icio.us, diigo, bookmarks]

@@ -1,6 +1,6 @@
 ---
 layout: post
-comments: false
+comments: true
 title: "Where does this thing go?"
 date: 2011-10-31 00:00
 categories: [git, svn, subversion, programming, bzr, bazaar, mercurial, hg]

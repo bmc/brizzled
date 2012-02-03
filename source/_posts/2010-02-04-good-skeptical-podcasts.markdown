@@ -1,6 +1,6 @@
 ---
 layout: post
-comments: false
+comments: true
 title: "Good Skeptical Podcasts"
 date: 2010-02-04 00:00
 categories: [skeptic, science, podcasts]

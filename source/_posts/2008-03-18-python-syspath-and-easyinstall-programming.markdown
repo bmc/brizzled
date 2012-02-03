@@ -1,6 +1,6 @@
 ---
 layout: post
-comments: false
+comments: true
 title: "Python, sys.path and EasyInstall, programming"
 date: 2008-03-18 00:00
 categories: [python, programming]

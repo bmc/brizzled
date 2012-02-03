@@ -1,6 +1,6 @@
 ---
 layout: post
-comments: false
+comments: true
 title: "When the furnace goes out"
 date: 2009-01-21 00:00
 categories: [wifi, furnace, Internet]

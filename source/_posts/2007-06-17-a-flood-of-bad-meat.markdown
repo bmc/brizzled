@@ -1,6 +1,6 @@
 ---
 layout: post
-comments: false
+comments: true
 title: "A flood of bad meat"
 date: 2007-06-17 00:00
 categories: [spam, computers]

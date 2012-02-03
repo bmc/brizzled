@@ -1,6 +1,6 @@
 ---
 layout: post
-comments: false
+comments: true
 title: "Parsing Markdown in Scala"
 date: 2010-02-10 00:00
 categories: [scala, markdown, javascript, rhino, programming]
