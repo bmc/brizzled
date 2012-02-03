@@ -6,6 +6,9 @@ date: 2010-12-20 00:00
 categories: [jekyll, ruby, blogging, liquid, programming, programming]
 ---
 
+**UPDATE: 3 February, 2012** _All this work really isn't necessary, now that
+[Octopress](http://octopress.org/) exists. I've switched to using Octopress._
+
 # Introduction
 
 I use [Jekyll][] to generate this blog (in addition to the
