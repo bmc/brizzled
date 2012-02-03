@@ -1,1 +1,0 @@
-Recursive globbing: Not just a *Zsh* feature.

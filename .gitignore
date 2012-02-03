@@ -3,3 +3,16 @@ sass/.sass-cache
 css
 tags
 *.sublime-*
+.bundle
+.DS_Store
+.sass-cache
+.gist-cache
+.pygments-cache
+_deploy
+public
+sass.old
+source.old
+source/_stash
+source/stylesheets/screen.css
+vendor
+node_modules

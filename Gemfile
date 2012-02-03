@@ -1,11 +1,18 @@
-#                                                    -*- ruby -*-
-#
-# Bundled set of gems necessary to run Rake and format the blog.
-source :rubygems
+source "http://rubygems.org"
 
-gem 'jekyll'
-gem 'kramdown'
-gem 'rake'
-gem 'sass'
-gem 'pry', :require => false
-gem 'grizzled-rake', :git => 'git://github.com/bmc/grizzled-rake.git'
+group :development do
+  gem 'rake'
+  gem 'rack'
+  gem 'jekyll'
+  gem 'rdiscount'
+  gem 'pygments.rb'
+  gem 'RedCloth'
+  gem 'haml', '>= 3.1'
+  gem 'compass', '>= 0.11'
+  gem 'rubypants'
+  gem 'rb-fsevent'
+  gem 'stringex'
+  gem 'liquid', '2.2.2'
+end
+
+gem 'sinatra', '1.2.6'

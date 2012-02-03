@@ -1,3 +1,0 @@
-
-Another rant on spam.
-

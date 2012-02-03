@@ -1,3 +1,0 @@
-
-MacFUSE and SpotlightFS.
-

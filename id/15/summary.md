@@ -1,3 +1,0 @@
-
-Disney lobomotizes a doll.
-
