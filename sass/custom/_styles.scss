@@ -6,6 +6,11 @@
 $article_title_color: maroon;
 $article_title_font: $header-subtitle-font-family;
 $blog_title_font: "Rock Salt";
+$body_font_size: 16px;
+
+body {
+    font-size: $body_font_size;
+}
 
 ol {
     li {
@@ -42,7 +47,10 @@ div#blog-archives {
 }
 
 h1.blog-title {
-    font-family: $blog_title_font;
+    a {
+        color: black !important;
+        font-family: $blog_title_font;
+    }
 }
 
 h2.blog-subtitle {
