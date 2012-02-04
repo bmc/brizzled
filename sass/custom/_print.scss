@@ -10,7 +10,30 @@ body {
     font-family: $serif;
 }
 
+.print {
+    display: auto;
+}
+
+div.author{
+    width: 100%;
+    display: block;
+    text-align: left;
+    margin-bottom: 0;
+    padding-bottom: 0;
+
+    span.author-name {
+    }
+
+    span.author-email {
+        font-style: italic;
+    }
+}
+
 nav {
+    display: none;
+}
+
+aside {
     display: none;
 }
 
@@ -32,8 +55,41 @@ h1.entry-title {
 
 h1.blog-title {
     font-family: $serif;
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+
+h2.blog-subtitle {
+    width: 100%;
+    text-align: right;
+    font-family: $serif;
+    font-style: italic;
+    padding-top: 0;
+    margin-top: 0;
 }
 
 .disqus-script {
     display: none !important;
+}
+
+p.meta {
+    display: none !important;
+}
+
+div.sharing {
+    display: none !important;
+}
+
+#dsq-content {
+    display: none !important;
+}
+
+section {
+    // Disqus puts the "Comments" heading inside an <h1> nested inside a
+    // <section> element. Since there is no "class" or "id" attribute on
+    // either, we have to assume that this particular form of nesting only
+    // appears here.
+    h1 {
+        display: none !important;
+    }
 }
