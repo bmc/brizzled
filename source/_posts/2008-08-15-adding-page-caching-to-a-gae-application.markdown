@@ -4,6 +4,7 @@ comments: true
 title: "Adding Page caching to a GAE application"
 date: 2008-08-15 00:00
 categories: [python, App Engine, blogging, programming]
+toc: true
 ---
 
 # Introduction

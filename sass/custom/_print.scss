@@ -45,7 +45,7 @@ figure.code {
     margin-top: 0;
     margin-bottom: 0;
 
-    padding: 0;
+    padding: 0 !important;
 
     // Opera only
     page-break-inside: avoid;
@@ -106,3 +106,41 @@ section {
         display: none !important;
     }
 }
+
+// -------------------------------------------------------------------------
+// Table of Contents Styling (using jQuery table of contents plugin)
+// -------------------------------------------------------------------------
+
+$toc-incr: 1em;
+
+div#tocBlock {
+    font-size: 10pt;
+    padding-left: 20px;
+    padding-right: 10px;
+    padding-top: 10px;
+    padding-bottom: 0px;
+
+    background: white !important;
+    border: solid 1px #999999;
+    margin: 0 0 10px 15px;
+
+    .tocHeading {
+        font-weight: bold;
+        font-size: 125%;
+    }
+
+    #toc {
+        background: white !important;
+        ul {
+            list-style: disc;
+            li {
+                margin-left: $toc-incr !important;
+                padding: 0 !important;
+            }
+        }
+    }
+}
+
+// -------------------------------------------------------------------------
+// End Table of Contents Styling
+// -------------------------------------------------------------------------

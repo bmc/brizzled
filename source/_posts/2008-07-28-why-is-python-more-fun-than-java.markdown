@@ -4,6 +4,7 @@ comments: true
 title: "Why is Python more fun than Java?"
 date: 2008-07-28 00:00
 categories: [java, python, programming]
+toc: true
 ---
 
 # Intro
@@ -79,16 +80,16 @@ both of which do the same job.
 Java:
 
 {% codeblock lang:java %}
-    public class Test
-    {
-         public static void main(String[] args)
-         {
-             for (String s : args[0].split("\\s+"))
-                 System.out.println(s);
-    
-             System.exit(0);
-         }
-    }
+public class Test
+{
+     public static void main(String[] args)
+     {
+         for (String s : args[0].split("\\s+"))
+             System.out.println(s);
+
+         System.exit(0);
+     }
+}
 {% endcodeblock %}
 
 Granted, the `System.exit(0)` doesn't really need to be there; I got in the
@@ -97,10 +98,10 @@ exit properly without such a call. But even if you remove that line, it's
 still more verbose than the Python version:
 
 {% codeblock lang:python %}
-    import sys
-    
-    for s in sys.argv[1].split():
-        print s
+import sys
+
+for s in sys.argv[1].split():
+    print s
 {% endcodeblock %}
 
 Yes, I could make the Java example shorter by putting the braces on the
@@ -121,26 +122,26 @@ getter and setter methods. Why? Well, consider this scenario. Suppose you
 write a class called `Point` that looks something like this:
 
 {% codeblock lang:java %}
-    public class Point
+public class Point
+{
+    public int x;
+    public int y;
+
+    public Point(int x, int y)
     {
-        public int x;
-        public int y;
-    
-        public Point(int x, int y)
-        {
-            this.x = x;
-            this.y = y;
-        }
+        this.x = x;
+        this.y = y;
     }
+}
 {% endcodeblock %}
 
 Pretty soon, all over the code base, people are writing code like this:
 
 {% codeblock lang:java %}
-    point1 = new Point(...)
-    point2 = new Point(...)
-    point2.x = point1.x - deltaX
-    point2.y = point1.y - deltaY
+point1 = new Point(...)
+point2 = new Point(...)
+point2.x = point1.x - deltaX
+point2.y = point1.y - deltaY
 {% endcodeblock %}
 
 That's actually quite readable, but there's a problem: Suppose your
@@ -153,46 +154,46 @@ Now you realize that you *should* have written your `Point` class like
 this:
 
 {% codeblock lang:java %}
-    public class Point
+public class Point
+{
+    private int x;
+    private int y;
+
+    public Point(int x, int y)
     {
-        private int x;
-        private int y;
-    
-        public Point(int x, int y)
-        {
-            this.x = x;
-            this.y = y;
-        }
-    
-        public int getX()
-        {
-            return this.x;
-        }
-    
-        public int setX(int newX)
-        {
-            this.x = newX;
-        }
-    
-        public int getY()
-        {
-            return this.y;
-        }
-    
-        public int setY(int newY)
-        {
-            this.y = newY;
-        }
+        this.x = x;
+        this.y = y;
     }
+
+    public int getX()
+    {
+        return this.x;
+    }
+
+    public int setX(int newX)
+    {
+        this.x = newX;
+    }
+
+    public int getY()
+    {
+        return this.y;
+    }
+
+    public int setY(int newY)
+    {
+        this.y = newY;
+    }
+}
 {% endcodeblock %}
 
 If you'd written it *that* way, people would've had to use it like this:
 
 {% codeblock lang:java %}
-    point1 = new Point(...)
-    point2 = new Point(...)
-    point2.setX(point1.getX() - deltaX)
-    point2.setY(point1.getY() - deltaY)
+point1 = new Point(...)
+point2 = new Point(...)
+point2.setX(point1.getX() - deltaX)
+point2.setY(point1.getY() - deltaY)
 {% endcodeblock %}
 
 `point2.setX(point1.getX() - deltaX)` isn't anywhere near as intuitive or
@@ -203,13 +204,13 @@ positive, without having to go change a whole bunch of calling code. For
 instance:
 
 {% codeblock lang:java %}
-    public int setX(int newX)
-    {
-        if (newX > 0)
-            throw new IllegalArgumentException("Negative X value.");
-    
-        this.x = newX;
-    }
+public int setX(int newX)
+{
+    if (newX > 0)
+        throw new IllegalArgumentException("Negative X value.");
+
+    this.x = newX;
+}
 {% endcodeblock %}
 
 Okay, why is Python's solution to this problem more readable? Because
@@ -226,11 +227,11 @@ better to the [Uniform Access Principal][]. Let's take our example, above,
 and do it in Python. First, the `Point` class:
 
 {% codeblock lang:python %}
-    class Point(object):
-    
-        def __init__(self, x, y):
-            self.x = x
-            self.y = y
+class Point(object):
+
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
 {% endcodeblock %}
 
 (You'll note that it's a tad shorter than the equivalent Java class, while
@@ -239,10 +240,10 @@ being just as readable.)
 So, as before, people start using your `Point` class:
 
 {% codeblock lang:python %}
-    point1 = Point(...)
-    point2 = Point(...)
-    point2.x = point1.x - delta_x
-    point2.y = point1.y - delta_y
+point1 = Point(...)
+point2 = Point(...)
+point2.x = point1.x - delta_x
+point2.y = point1.y - delta_y
 {% endcodeblock %}
 
 Okay, now along comes that pesky requirement that all coordinates must be
@@ -251,33 +252,33 @@ positive. Instead of going back and changing all the callers to use new
 show below.
 
 {% codeblock lang:python %}
-    class Point(object):
-    
-        def __init__(self, x, y):
-            self.__x = x
-            self.__y = y
-    
-        def getx(self):
-            return self.__x
-    
-        def setx(self, newx)
-            if newx > 0:
-                raise ValueError, 'Negative X value'
-    
-            self.__x = newx
-    
-        x = property(getx, setx, doc='X coordinate')
-    
-        def gety(self):
-            return self.__y
-    
-        def sety(self, newy)
-            if newy > 0:
-                raise ValueError, 'Negative Y value'
-    
-            self.__y = newy
-    
-        y = property(gety, sety, doc='Y coordinate')
+class Point(object):
+
+    def __init__(self, x, y):
+        self.__x = x
+        self.__y = y
+
+    def getx(self):
+        return self.__x
+
+    def setx(self, newx)
+        if newx > 0:
+            raise ValueError, 'Negative X value'
+
+        self.__x = newx
+
+    x = property(getx, setx, doc='X coordinate')
+
+    def gety(self):
+        return self.__y
+
+    def sety(self, newy)
+        if newy > 0:
+            raise ValueError, 'Negative Y value'
+
+        self.__y = newy
+
+    y = property(gety, sety, doc='Y coordinate')
 {% endcodeblock %}
 
 Now, whenever someone writes `point.x`, they're really calling
@@ -307,7 +308,8 @@ just two:
 - Callbacks
 - Factory methods
 
-### Callbacks ### {#callbacks}
+<div id="callbacks"></div>
+### Callbacks
 
 Between interfaces and inner classes, Java can accomplish a lot of
 the things people use callback functions for, but functions are
@@ -324,80 +326,80 @@ allowing the caller to specify the matching function.
 Here's how you might implement that logic in Java, using an interface.
 
 {% codeblock lang:java %}
-    import java.util.Collection;
-    import java.util.ArrayList;
-    
-    public interface Matcher<T>
+import java.util.Collection;
+import java.util.ArrayList;
+
+public interface Matcher<T>
+{
+    boolean matches(T o);
+}
+
+public class MyTree<T>
+{
+    // details omitted
+
+    Collection<T> matches(Matcher matcher)
     {
-        boolean matches(T o);
+        Collection<T> result = new ArrayList<T>();
+
+        for (element : this.treeElements)
+            if (matcher.matches(element))
+                result.add(element);
+
+        return result;
     }
-    
-    public class MyTree<T>
-    {
-        // details omitted
-    
-        Collection<T> matches(Matcher matcher)
-        {
-            Collection<T> result = new ArrayList<T>();
-    
-            for (element : this.treeElements)
-                if (matcher.matches(element))
-                    result.add(element);
-    
-            return result;
-        }
-    }
+}
 {% endcodeblock %}
 
 And here's how a caller might use it, using an anonymous inner class:
 
 {% codeblock lang:java %}
-    MyTree<String> keywords = new MyTree<String>();
-    
-    // Code that fills the tree goes here
-    
-    // Now, get all keywords starting with 'a'. (Yeah, it's contrived...)
-    
-    Collection<String> matches = keywords.matches
-        (new Matcher<String>()
+MyTree<String> keywords = new MyTree<String>();
+
+// Code that fills the tree goes here
+
+// Now, get all keywords starting with 'a'. (Yeah, it's contrived...)
+
+Collection<String> matches = keywords.matches
+    (new Matcher<String>()
+     {
+         public boolean matches(String s)
          {
-             public boolean matches(String s)
-             {
-                 return s.startsWith("a");
-             }
-         });
+             return s.startsWith("a");
+         }
+     });
 {% endcodeblock %}
 
 Now let's look at the same thing in Python. First the class:
 
 {% codeblock lang:python %}
-    class MyTree(object):
-    
-        # details omitted
-    
-        def matches(self, match_func):
-            return [element for element in self.__tree_elements if match_func(element)]
+class MyTree(object):
+
+    # details omitted
+
+    def matches(self, match_func):
+        return [element for element in self.__tree_elements if match_func(element)]
 {% endcodeblock %}
 
 And now the caller:
 
 {% codeblock lang:python %}
-    keywords = MyTree()
-    
-    # Code that fills the tree goes here
+keywords = MyTree()
 
-    # Now, get all keywords starting with 'a'.
-    
-    matches = keywords.matches(lambda element: element.startswith('a'))
+# Code that fills the tree goes here
+
+# Now, get all keywords starting with 'a'.
+
+matches = keywords.matches(lambda element: element.startswith('a'))
 {% endcodeblock %}
 
 It's also possible to use a "real" function, rather than a `lambda`:
 
 {% codeblock lang:python %}
-    def match(element):
-        return element[0] == 'a'
-    
-    matches = keywords.matches(match)
+def match(element):
+    return element[0] == 'a'
+
+matches = keywords.matches(match)
 {% endcodeblock %}
 
 In simple cases like this, however, it's easier and more straightforward to
@@ -423,32 +425,32 @@ implementation is encoded in a concrete class, and all classes adhere to a
 specific interface:
 
 {% codeblock lang:java %}
-    public interface RPC
-    {
-        public Object callRemote(String function, Object ... args);
-    }
-    
-    class XMLRPC implements RPC
-    {
-        // ...
-    
-        public Object callRemote(String function, Object ... args)
-        {
-            // ...
-        }
-    }
-    
-    class JSONRPC implements RPC
+public interface RPC
+{
+    public Object callRemote(String function, Object ... args);
+}
+
+class XMLRPC implements RPC
+{
+    // ...
+
+    public Object callRemote(String function, Object ... args)
     {
         // ...
-    
-        public Object callRemote(String function, Object ... args)
-        {
-            // ...
-        }
     }
-    
-    // etc.
+}
+
+class JSONRPC implements RPC
+{
+    // ...
+
+    public Object callRemote(String function, Object ... args)
+    {
+        // ...
+    }
+}
+
+// etc.
 {% endcodeblock %}
 
 Now, suppose your application is going to support a configuration option
@@ -466,15 +468,15 @@ interface. You have two choices:
    the safest way to go.
 
 {% codeblock lang:java %}
-    public class RPCFactory
+public class RPCFactory
+{
+    public static RPC getRPC(String identifier)
     {
-        public static RPC getRPC(String identifier)
-        {
-            if (identifier.toLowerCase().equals("xmlrpc"))
-                return new XMLRPC()
-            ...
-        }
+        if (identifier.toLowerCase().equals("xmlrpc"))
+            return new XMLRPC()
+        ...
     }
+}
 {% endcodeblock %}
 
 With Python, it's easier: Simply create a factory method right in your
@@ -484,15 +486,15 @@ having to use the Reflection API, which is clumsier than in Python. (See
 *Observation 4: Introspection is easier in Python*, below.)
 
 {% codeblock lang:python %}
-    RPC_CLASSES = {'xmlrpc'  : XMLRPC,
-                   'jsonrpc' : JSONRPC,
-                   ... }
-    
-    def get_rpc(identifier):
-        try:
-            return RPC_CLASSES[identifier]()
-        except KeyError:
-            raise ValueError, '"%s" is an unknown RPC type' % identifier
+RPC_CLASSES = {'xmlrpc'  : XMLRPC,
+               'jsonrpc' : JSONRPC,
+               ... }
+
+def get_rpc(identifier):
+    try:
+        return RPC_CLASSES[identifier]()
+    except KeyError:
+        raise ValueError, '"%s" is an unknown RPC type' % identifier
 {% endcodeblock %}
 
 ## Closures
@@ -531,16 +533,16 @@ The standard pattern for this approach (using Python, in this case) is
 something like:
 
 {% codeblock lang:python %}
-    def increment(key):
-        self.lock.lock()
-        try:
-            value = self.counter_table.get(self, key)
-            if not value:
-                self.counter_table.add(key, 1)
-                value = 1
-            return value
-        finally:
-            lock.unlock()
+def increment(key):
+    self.lock.lock()
+    try:
+        value = self.counter_table.get(self, key)
+        if not value:
+            self.counter_table.add(key, 1)
+            value = 1
+        return value
+    finally:
+        lock.unlock()
 {% endcodeblock %}
 
 There are two problems with that code:
@@ -559,27 +561,27 @@ Closures solve that problem. Using closures, you can augment the locking
 API (or write a local front-end function) that looks like this:
 
 {% codeblock lang:python %}
-    def with_lock(lock, action, *args, **keyword_args):
-        try:
-            lock.lock()
-            action(*args, **keyword_args)
-        finally:
-            lock.unlock()
+def with_lock(lock, action, *args, **keyword_args):
+    try:
+        lock.lock()
+        action(*args, **keyword_args)
+    finally:
+        lock.unlock()
 {% endcodeblock %}
 
 Now our function becomes much simpler:
 
 {% codeblock lang:python %}
-    def increment(key):
-        value = None
-    
-        def do_incr(key):
-            value = self.counter_table.get(key)
-            if not value:
-                self.counter_table.add(key, 1)
-                value = 1
-    
-        with_lock(self.lock, do_incr, key)
+def increment(key):
+    value = None
+
+    def do_incr(key):
+        value = self.counter_table.get(key)
+        if not value:
+            self.counter_table.add(key, 1)
+            value = 1
+
+    with_lock(self.lock, do_incr, key)
 {% endcodeblock %}
 
 Better yet, the locking semantics are enforced in one place: the
@@ -600,27 +602,27 @@ statement (available in the `__future__` module). For complete details, see
 First, the lock API can provide a *context manager* function, like this:
 
 {% codeblock lang:python %}
-    from contextlib import contextmanager
-    
-    @contextmanger
-    def lock(the_lock):
-        the_lock.lock()
-        try:
-            yield the_lock
-        finally:
+from contextlib import contextmanager
+
+@contextmanger
+def lock(the_lock):
+    the_lock.lock()
+    try:
+        yield the_lock
+    finally:
             the_lock.unlock()
 {% endcodeblock %}
 
 Now, the calling code becomes even more straightforward:
 
 {% codeblock lang:python %}
-    from __future__ import with_statement
-    
-    def increment(key):
-        with lock(self.lock):
-            value = self.counter_table.get(key)
-            if not value:
-                self.counter_table.add(key, 1)
+from __future__ import with_statement
+
+def increment(key):
+    with lock(self.lock):
+        value = self.counter_table.get(key)
+        if not value:
+            self.counter_table.add(key, 1)
                 value = 1
 {% endcodeblock %}
 
@@ -630,19 +632,19 @@ Neal Gafter's [Use cases for closures][] goes through his favored closure
 proposal in detail. Using that approach, you'd do something like this:
 
 {% codeblock lang:java %}
-    <E extends Exception>
-    public static void withLock(Lock lock, void()throws E block) throws E 
+<E extends Exception>
+public static void withLock(Lock lock, void()throws E block) throws E 
+{
+    lock.lock();
+    try 
     {
-        lock.lock();
-        try 
-        {
-            block();
-        }
-        finally 
-        {
-            lock.unlock();
-        }
+        block();
     }
+    finally 
+    {
+        lock.unlock();
+    }
+}
 {% endcodeblock %}
 
 That block of code defines the method that will run my code within a lock.
@@ -653,10 +655,10 @@ it can be specified *outside* the argument list's final parenthesis."
 That means you can invoke `withLock()` like this:
 
 {% codeblock lang:java %}
-    withLock(myLock)
-    {
-        // code (closure) that operates within the lock
-    }
+withLock(myLock)
+{
+    // code (closure) that operates within the lock
+}
 {% endcodeblock %}
 
 The code between the curly braces is *really* the last argument to the
@@ -682,21 +684,21 @@ In Java, to get a "slice" out of a string, you have to use methods
 on the `java.lang.String` class, like so:
 
 {% codeblock lang:java %}
-    String s = "foo and bar"
-    
-    s1 = s.substring(4, 7);           // get the word "and"
-    last = s.charAt(s.length() - 1);  // get the last character in the string
-    first = s.charAt(0);              // get the first character in the string
+String s = "foo and bar"
+
+s1 = s.substring(4, 7);           // get the word "and"
+last = s.charAt(s.length() - 1);  // get the last character in the string
+first = s.charAt(0);              // get the first character in the string
 {% endcodeblock %}
 
 The same operations are simpler and more readable in Python:
 
 {% codeblock lang:python %}
-    s = 'foo and bar'
-    
-    s1 = s[4:7]       # get the word 'and'
-    last = s[-1]      # get the last character in the string
-    first = s[0]      # get the first character in the string
+s = 'foo and bar'
+
+s1 = s[4:7]       # get the word 'and'
+last = s[-1]      # get the last character in the string
+first = s[0]      # get the first character in the string
 {% endcodeblock %}
 
 Further, while Java allows strings to be concatenated via the "+"
@@ -710,11 +712,11 @@ it can be inefficient. So, instead of the readable:
 you end up writing:
 
 {% codeblock lang:java %}
-    buf = StringBuffer()
-    buf.append("I don't recognize the command \"");
-    buf.append(s);
-    buf.append("\" Sorry.");
-    message = buf.toString();
+buf = StringBuffer()
+buf.append("I don't recognize the command \"");
+buf.append(s);
+buf.append("\" Sorry.");
+message = buf.toString();
 {% endcodeblock %}
 
 Oh, joy.
@@ -724,8 +726,8 @@ that using "+" for string concatenation isn't really encouraged in Python,
 either. The author of the comment suggests one of the following, instead:
 
 {% codeblock lang:python %}
-    message = 'I don\'t recognize the command "%s". Sorry.' % s
-    message = ' '.join(['I don\'t recognize the command "', s, '". Sorry.'])
+message = 'I don\'t recognize the command "%s". Sorry.' % s
+message = ' '.join(['I don\'t recognize the command "', s, '". Sorry.'])
 {% endcodeblock %}
 
 Fair enough, but my point still holds: Both of those alternatives are more
@@ -735,8 +737,9 @@ Python also permits slicing and concatenation via "+" on arrays and tuples,
 not just strings. (Think of a tuple as a read-only array.) Again, this
 means you write less code to accomplish an array operation, and the code
 you do write tends to be more readable.
-
-## Dictionary Syntax ## {#dictionary_syntax}
+ 
+<div id="dictionary_syntax"></div>
+## Dictionary Syntax
 
 Python has built-in support for dictionaries (also called "associative
 arrays" in some languages and "hash tables" in others). In Java, you have a
@@ -751,43 +754,43 @@ keywords. Let's assume the existence of a `Symbol` class that captures
 information about a symbol (the line where it's defined, its type, etc.).
 
 {% codeblock lang:java %}
-    public class SymbolTable
+public class SymbolTable
+{
+    private Map<String,Symbol> symbols = new HashMap<String,Symbol>();
+
+    // ...
+
+    public Symbol getSymbol(String identifier)
     {
-        private Map<String,Symbol> symbols = new HashMap<String,Symbol>();
-    
-        // ...
-    
-        public Symbol getSymbol(String identifier)
+        // Get or create the symbol
+
+        Symbol sym = symbols.get(identifier);
+        if (sym == null)
         {
-            // Get or create the symbol
-    
-            Symbol sym = symbols.get(identifier);
-            if (sym == null)
-            {
-                sym = Symbol(identifier);
-                symbols.put(identifier);
-            }
-    
-            return sym;
+            sym = Symbol(identifier);
+            symbols.put(identifier);
         }
+
+        return sym;
     }
+}
 {% endcodeblock %}
 
 Here's the equivalent Python code:
 
 {% codeblock lang:python %}
-    class SymbolTable(object):
-    
-        symbols = {}
-    
-        def get_symbol(identifier):
-            try:
-                sym = symbols[identifier]
-            except KeyError:
-                sym = Symbol(identifier)
-                symbols[identifier] = sym
-    
-            return sym
+class SymbolTable(object):
+
+    symbols = {}
+
+    def get_symbol(identifier):
+        try:
+            sym = symbols[identifier]
+        except KeyError:
+            sym = Symbol(identifier)
+            symbols[identifier] = sym
+
+        return sym
 {% endcodeblock %}
 
 It may seem like I'm nit-picking, but the Python approach just seems
@@ -816,39 +819,39 @@ code you have to write to verify that the object has such a method, and
 then to call that method with two strings:
 
 {% codeblock lang:java %}
-    import java.lang.reflect.Method;
-    
-    ...
-    
-        public Object callCompare(Object o, String s1, String s2)
+import java.lang.reflect.Method;
+
+...
+
+    public Object callCompare(Object o, String s1, String s2)
+    {
+        Class cls = o.getClass();
+
+        try
         {
-            Class cls = o.getClass();
-    
-            try
-            {
-                Method method = cls.getMethod("compare", String.class, String.class);
-                return method.invoke(o, s1, s2);
-            }
-    
-            catch (NoSuchMethodException ex)
-            {
-                ...
-            }
-    
-            catch (IllegalAccessException ex)
-            {
-                ...
-            }
-    
-            catch (IllegalArgumentException ex)
-            {
-                ...
-            }
-    
-            catch (InvocationTargetException ex)
-            {
-                ...
-            }
+            Method method = cls.getMethod("compare", String.class, String.class);
+            return method.invoke(o, s1, s2);
+        }
+
+        catch (NoSuchMethodException ex)
+        {
+            ...
+        }
+
+        catch (IllegalAccessException ex)
+        {
+            ...
+        }
+
+        catch (IllegalArgumentException ex)
+        {
+            ...
+        }
+
+        catch (InvocationTargetException ex)
+        {
+            ...
+        }
 {% endcodeblock %}
 
 That code is ugly for a few reasons. (It used to be worse, before Java 5
@@ -864,15 +867,15 @@ introduced variable arguments.)
 Here's how you do the same thing in Python:
 
 {% codeblock lang:python %}
-    o = ...
-    s1 = ...
-    s2 = ...
-    
-    try:
-        result = o.compare(s1, s2)
-    except AttributeError:
-        # Doesn't have that method.
-        ...
+o = ...
+s1 = ...
+s2 = ...
+
+try:
+    result = o.compare(s1, s2)
+except AttributeError:
+    # Doesn't have that method.
+    ...
 {% endcodeblock %}
 
 In addition to being short and to-the-point, the Python code actually
@@ -926,7 +929,7 @@ compiler can find for you, the fewer things you have to root out at run
 time. Oddly enough, though, I haven't found the lack of compile time type
 checking to be a big problem with Python so far. I suspect this is because
 I've been writing well-encapsulated code with lots of automated unit tests.
-A paper called [Why dynamic typing?][] puts it this way:
+A paper called _Why dynamic typing?_ (link now dead) puts it this way:
 
 > Why does dynamic typing (as done with Smalltalk) not negatively
 > affect the stability of large applications?
@@ -968,10 +971,10 @@ the type of a variable and, therefore, cannot help me determine what fields
 and methods that variable provides. Here's a case where it *can* tell:
 
 {% codeblock lang:python %}
-    my_foo = Foo()
-    
-    my_foo.a
-            ^
+my_foo = Foo()
+
+my_foo.a
+        ^
 {% endcodeblock %}
 
 If I invoke auto-completion where the caret is, Wing can show me all
@@ -981,9 +984,9 @@ attributes that start with "a", because the assignment of a `Foo` object to
 However, here's a case where it cannot tell:
 
 {% codeblock lang:python %}
-    def somefunc(foo):
-        foo.a
-             ^
+def somefunc(foo):
+    foo.a
+         ^
 {% endcodeblock %}
 
 At runtime, the argument `foo` can be anything, so the IDE cannot tell what
@@ -1044,20 +1047,20 @@ lieschke.net* pointed out an oversight. My original Python `matches()`
 function (see [Callbacks][], above) was written like this:
 
 {% codeblock lang:python %}
-    def matches(self, match_func):
-        for element in self.__tree_elements:
-            if match_func(element):
-                result.append(element)
-    
-        return result
+def matches(self, match_func):
+    for element in self.__tree_elements:
+        if match_func(element):
+            result.append(element)
+
+    return result
 {% endcodeblock %}
 
 Both Dan and Simon pointed out that the function can be reduced to
 a one-liner:
 
 {% codeblock lang:python %}
-    def matches(self, match_func):
-        return [element for element in self.__tree_elements if match_func(element)]
+def matches(self, match_func):
+    return [element for element in self.__tree_elements if match_func(element)]
 {% endcodeblock %}
 
 One-liner list comprehensions like that are one of the things I like about

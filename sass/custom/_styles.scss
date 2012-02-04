@@ -101,22 +101,22 @@ div.about-text {
 // Table of Contents Styling (using jQuery table of contents plugin)
 // -------------------------------------------------------------------------
 
-span#tocHeading {
-    background-color: #f0f0f0;
-    width: auto;
-    font-weight: bold;
-    font-size: larger;
-}
+$toc-bg: #dfdfdf;
 
-$toc-incr: 10px;
+$toc-incr: 5px;
 
 div#tocBlock {
     @include drop-shadow-right-bottom(5px, #999);
+    @include rounded-border(10px);
     float: right;
     font-size: 10pt;
-    width: 200px;
-    padding: 10px 10px 10px 20px;
-    background: #eeeeee;
+    width: 300px;
+    padding-left: 20px;
+    padding-right: 10px;
+    padding-top: 10px;
+    padding-bottom: 0px;
+
+    background: $toc-bg;
     border: solid 1px #999999;
     margin: 0 0 10px 15px;
 
@@ -126,28 +126,12 @@ div#tocBlock {
     }
 
     #toc {
-
-        a {
-            display: block;
-
-            &.toc-depth-1 {
-                margin-left: 0;
-            }
-
-            &.toc-depth-2 {
-                margin-left: $toc_incr;
-            }
-
-            &.toc-depth-3 {
-                margin-left: $toc-incr * 2;
-            }
-
-            &.toc-depth-4 {
-                margin-left: $toc-incr * 3;
-            }
-
-            &.toc-depth-5 {
-                margin-left: $toc-incr * 4;
+        background: $toc-bg;
+        ul {
+            list-style: disc;
+            li {
+                margin-left: $toc-incr !important;
+                padding: 0 !important;
             }
         }
     }

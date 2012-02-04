@@ -4,6 +4,7 @@ comments: true
 title: "Why I dislike Maven"
 date: 2011-09-17 00:00
 categories: [maven, java, buildr, xml, programming]
+toc: true
 ---
 
 # Introduction

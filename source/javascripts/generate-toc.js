@@ -9,7 +9,7 @@
 
 function generateTOC(insertBefore, heading) {
   var container = $("<div id='tocBlock'></div>");
-  var div = $("<div id='toc'></div>");
+  var div = $("<ul id='toc'></ul>");
   var content = $(insertBefore).first();
 
   if (heading != undefined && heading != null) {

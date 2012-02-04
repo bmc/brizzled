@@ -4,6 +4,7 @@ comments: true
 title: "SBT and Your Own Maven Repository"
 date: 2010-05-07 00:00
 categories: [scala, sbt, maven, programming]
+toc: true
 ---
 
 # Introduction
