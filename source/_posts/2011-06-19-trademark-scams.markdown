@@ -16,7 +16,7 @@ electronically, as of this writing), and wait. Then wait some more.
 If you're willing to spend some time, you don't need to hire a lawyer; you
 can do the job yourself. (I did.)
 
-<a href="trademark-scam-letter.html" title="Click for larger version"><img src="trademark-scam-letter-sm.png" width="400" height="518" class="image-right" style="border: 1px solid black !important"></a>
+<a href="/attachments/2011-06-19-trademark-scams/trademark-scam-letter.html" title="Click for larger version"><img src="/images/2011-06-19-trademark-scams/trademark-scam-letter-sm.png" width="400" height="518" class="image-right" style="border: 1px solid black !important"></a>
 
 A few months later, the USPTO will get around to reviewing your application
 and, if it's kosher, they'll publish it in a huge document of proposed
