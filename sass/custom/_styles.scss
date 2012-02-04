@@ -8,6 +8,9 @@ $article_title_font: $header-subtitle-font-family;
 $blog_title_font: "Rock Salt";
 $body_font_size: 16px;
 
+@import "mixins";
+@import "lytebox";
+
 body {
     font-size: $body_font_size;
 }
@@ -35,7 +38,6 @@ h1.entry-title {
 
 div.entry-content {
     h1 {
-
     }
 }
 
@@ -65,3 +67,4 @@ div.blog-image {
     height: 105px;
     border: 1px solid gray;
 }
+

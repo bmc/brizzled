@@ -1,0 +1,45 @@
+// -*- Ruby Sass -*-
+//
+// Local Lytebox customizations.
+
+@import "mixins";
+@import "fonts";
+
+$lightbox_width: 200px;
+
+body.lytebox-body {
+
+    background: white !important;
+
+    .lytebox-popup {
+        // For vertical centering
+        min-height: 10em;
+        display: table-cell;
+        vertical-align: middle;
+
+        padding: 1em 1em 1em 1em;
+        font-family: $sans !important;
+
+        border-right: gray;
+        border-right-width: 2px;
+        border-top: gray;
+        border-top-width: 2px;
+        border-bottom: black;
+        border-bottom-width: 1px;
+        border-left: black;
+        border-left-width: 1px;
+    }
+
+}
+
+#lbMain {
+    // @include centered($lightbox_width);
+    // max-width: $lightbox_width;
+    background: transparent;
+    border: none !important;
+    color: white;
+}
+
+#lbOuterContainer {
+    border: none !important;
+}

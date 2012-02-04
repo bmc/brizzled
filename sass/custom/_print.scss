@@ -1,0 +1,39 @@
+// -*- Ruby Sass -*-
+//
+// Print style sheet
+
+@import "mixins";
+
+$serif: Georgia, Times, "Times New Roman", serif;
+
+body {
+    font-family: $serif;
+}
+
+nav {
+    display: none;
+}
+
+figure.code {
+    @include rounded-border;
+    border: 1px solid black;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+h1.entry-title {
+    border-top: 1px solid black !important;
+    margin-top: 1em;
+    padding-top: 1em;
+}
+
+h1.blog-title {
+    font-family: $serif;
+}
+
+.disqus-script {
+    display: none !important;
+}

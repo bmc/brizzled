@@ -1,0 +1,13 @@
+// -*- Ruby Sass -*-
+
+@mixin rounded-border($radius: 10px) {
+    border-radius: $radius;
+    -moz-border-radius: $radius;
+   padding: $radius;
+}
+
+@mixin centered($width: auto) {
+    width: $width;
+    margin-left: auto;
+    margin-right: auto;
+}
