@@ -44,7 +44,7 @@ Disney's Macabre Solution? Take the doll's head off--which *does*
 make it easier to dress the doll--then replace the head when the
 doll is dressed.
 
-![Aladdin doll](/images/aladdin.jpg)
+{% img /images/2005-09-27-the-macabre-world-of-disney/aladdin.jpg Aladdin doll %}
 
 Explain *that* one to your three-year-old.
 
