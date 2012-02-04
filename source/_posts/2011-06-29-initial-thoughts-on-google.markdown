@@ -37,7 +37,7 @@ Google+ will feel pretty comfortable, for any Facebook user. The layout is
 similar, with the news feed down the center, and controls to either side.
 However, there are also a number of differences, many of them quite useful.
 
-<a href="screenshot1.png"><img class="image-right" width="415" src="screenshot1.png"></a>
+<a href="/images/2011-06-29-initial-thoughts-on-google/screenshot1.png"><img class="image-right" width="415" src="/images/2011-06-29-initial-thoughts-on-google/screenshot1.png"></a>
 
 Your Google+ profile is your general Google profile, so you don't have to
 enter information multiple places.
@@ -48,14 +48,9 @@ enter information multiple places.
 feature in Facebook. However, Circles is more powerful. Google describes Circles
 as follow:
 
-> Google+ Circles helps you organize everyone according to your real-life
-> social connections--say, "family," "work friends," "music buddies," and
-> "alumni". Then, you can share relevant content with the right people, and
-> follow content posted by people you find interesting. For example, you
-> might post an announcement about your engagement and show it only to
-> people in your friends and family circles, or maybe you see a post from
-> the circle you created for your book club that there's a recent article
-> on your favorite author.
+{% blockquote %}
+Google+ Circles helps you organize everyone according to your real-life social connections--say, "family," "work friends," "music buddies," and "alumni". Then, you can share relevant content with the right people, and follow content posted by people you find interesting. For example, you might post an announcement about your engagement and show it only to people in your friends and family circles, or maybe you see a post from the circle you created for your book club that there's a recent article on your favorite author.
+{% endblockquote %}
 
 In a nutshell, with Google+, you have *far* more granular control over how
 you share information. In addition, you can easily change your news feed so
@@ -79,7 +74,7 @@ I find this feature to be *highly* compelling.
 
 # Sparks
 
-<img class="image-left" src="screenshot2.png">
+{% img image-left /images/2011-06-29-initial-thoughts-on-google/screenshot2.png Sparks %}
 
 *Sparks*, in Google's words, "brings you stories on the things you love
 from all across the Web, so it's easy to strike up meaningful conversations
@@ -134,12 +129,9 @@ Facebook provides.
 
 The +1 feature is Google's equivalent to Facebook's *Like*.
 
-> Use the +1 button to publicly show what you like, agree with, or
-> recommend on the web. The +1 button can appear in a variety of places,
-> both on Google and on sites across the web. For example, you might see a
-> +1 button for a Google search result, Google ad, or next to an article
-> you're reading on your favorite news site. Your +1’s and your social
-> connections also help improve the content you see in Google Search.
+{% blockquote %}
+Use the +1 button to publicly show what you like, agree with, or recommend on the web. The +1 button can appear in a variety of places, both on Google and on sites across the web. For example, you might see a +1 button for a Google search result, Google ad, or next to an article you're reading on your favorite news site. Your +1’s and your social connections also help improve the content you see in Google Search.
+{% endblockquote %}
 
 As with Facebook, you can +1 stuff on the web, as well as in Google+;
 Google acts as an intermediary, so when you +1 a non-Google site, the site
@@ -154,13 +146,13 @@ As with comments, you can control who can see your +1's.
 
 Google describes hangouts like this:
 
-> Hangouts are the best way for you to say, “I’m online and want to
->  hangout!” Hangouts lets you:
->
+> Hangouts are the best way for you to say, “I’m online and want to hangout!”  > Hangouts lets you:
+> 
 > * Chill with friends that are scrolling through the web, just like you!
 > * Use live video chat that puts you in the same room together!
 > * Coordinate plans, whether it's working on a project or meeting up for coffee.
 > * Maybe you’re bored. Start a hangout, invite your circles, see who’s around!
+> 
 
 Hangouts support video, as well as chat, and Hangouts integrates with
 YouTube, so, as odd as this sounds at first, you can get together,
