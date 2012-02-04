@@ -4,6 +4,7 @@ comments: true
 title: "Curry"
 date: 2010-06-07 00:00
 categories: [scala, currying, functional, programming]
+toc: true
 ---
 
 # Abstract
@@ -231,28 +232,28 @@ invocations--for instance, translate:
 to
 
 {% codeblock lang:scala %}
-    emitLiteral("[")          // [
-    formatDate("HH", now)     // %H
-    emitLiteral(":")          // :
-    formatDate("mm", now)     // %m
-    emitLiteral(":")          // :
-    formatDate("ss", now)     // %s
-    emitLiteral(".")          // :
-    formatDate("SSS", now)    // %S
-    emitLiteral("] level=")   // ] level=
-    emitLevel(logMessage)     // %l
-    emitLiteral(": ")         // :<blank>
-    emitMessage(logMessage)   // %t
+emitLiteral("[")          // [
+formatDate("HH", now)     // %H
+emitLiteral(":")          // :
+formatDate("mm", now)     // %m
+emitLiteral(":")          // :
+formatDate("ss", now)     // %s
+emitLiteral(".")          // :
+formatDate("SSS", now)    // %S
+emitLiteral("] level=")   // ] level=
+emitLevel(logMessage)     // %l
+emitLiteral(": ")         // :<blank>
+emitMessage(logMessage)   // %t
 {% endcodeblock %}
 
 If that function chain can be stored somehow, then when a log message comes
 in, the code can simply do something like this:
 
 {% codeblock lang:scala %}
-    logMessage = new LogMessage(...)
-    now = new Date
+logMessage = new LogMessage(...)
+now = new Date
 
-    for (f <- patternFuncs) <call function>
+for (f <- patternFuncs) <call function>
 {% endcodeblock %}
 
 ### The implementation
@@ -262,29 +263,28 @@ With currying, the implementation turns out to be straightforward.
 First, I created a small set of curry-able functions:
 
 {% codeblock lang:scala %}
-    def insertThreadName(logMessage: LogMessage): String =
-        Thread.currentThread.getName
+def insertThreadName(logMessage: LogMessage): String =
+  Thread.currentThread.getName
 
-    def insertLevelValue(logMessage: LogMessage): String =
-        logMessage.level.value.toString
+def insertLevelValue(logMessage: LogMessage): String =
+  logMessage.level.value.toString
 
-    def insertLevelName(logMessage: LogMessage): String =
-        logMessage.level.label
+def insertLevelName(logMessage: LogMessage): String =
+  logMessage.level.label
 
-    def insertMessage(logMessage: LogMessage): String =
-        logMessage.message.toString
+def insertMessage(logMessage: LogMessage): String =
+  logMessage.message.toString
 
-    def insertName(short: Boolean)(logMessage: LogMessage): String =
-        if (short) logMessage.name.split("""\.""").last else logMessage.name
+def insertName(short: Boolean)(logMessage: LogMessage): String =
+  if (short) logMessage.name.split("""\.""").last else logMessage.name
 
-    def insertDateChunk(format: DateFormat)(logMessage: LogMessage): String =
-    {
-        val cal = Calendar.getInstance
-        cal.setTimeInMillis(logMessage.date.getTime)
-        format.format(cal.getTime)
-    }
+def insertDateChunk(format: DateFormat)(logMessage: LogMessage): String = {
+  val cal = Calendar.getInstance
+  cal.setTimeInMillis(logMessage.date.getTime)
+  format.format(cal.getTime)
+}
 
-    def copyLiteral(s: String)(logMessage: LogMessage): String = s
+def copyLiteral(s: String)(logMessage: LogMessage): String = s
 {% endcodeblock %}
 
 Each function takes, as its last argument, a `LogMessage` object, which will
@@ -293,32 +293,34 @@ be supplied when a message is actually logged.
 Then, I put together a mapping table. Each entry in the table maps a
 percent-escape into a partial function.
 
-    lazy val Mappings = Map[Char, LogMessage => String] (
-        'a' -> insertDateChunk(new SimpleDateFormat("E")) _,
-        'A' -> insertDateChunk(new SimpleDateFormat("EEEE")) _,
-        'b' -> insertDateChunk(new SimpleDateFormat("MMM")) _,
-        'B' -> insertDateChunk(new SimpleDateFormat("MMMM")) _,
-        'd' -> insertDateChunk(new SimpleDateFormat("dd")) _,
-        'D' -> insertDateChunk(new SimpleDateFormat("MM/dd/yy")) _,
-        'F' -> insertDateChunk(new SimpleDateFormat("yyyy-MM-dd")) _,
-        'h' -> insertDateChunk(new SimpleDateFormat("hh")) _,
-        'H' -> insertDateChunk(new SimpleDateFormat("HH")) _,
-        'j' -> insertDateChunk(new SimpleDateFormat("D")) _,
-        'l' -> insertLevelName _,
-        'L' -> insertLevelValue _,
-        'M' -> insertDateChunk(new SimpleDateFormat("mm")) _,
-        'm' -> insertDateChunk(new SimpleDateFormat("MM")) _,
-        'n' -> insertName(true) _,
-        'N' -> insertName(false) _,
-        's' -> insertDateChunk(new SimpleDateFormat("ss")) _,
-        'S' -> insertDateChunk(new SimpleDateFormat("SSS")) _,
-        't' -> insertMessage _,
-        'T' -> insertThreadName _,
-        'y' -> insertDateChunk(new SimpleDateFormat("yy")) _,
-        'Y' -> insertDateChunk(new SimpleDateFormat("yyyy")) _,
-        'z' -> insertDateChunk(new SimpleDateFormat("z")) _,
-        '%' -> copyLiteral("%") _
-    )
+{% codeblock lang:scala %}
+lazy val Mappings = Map[Char, LogMessage => String] (
+  'a' -> insertDateChunk(new SimpleDateFormat("E")) _,
+  'A' -> insertDateChunk(new SimpleDateFormat("EEEE")) _,
+  'b' -> insertDateChunk(new SimpleDateFormat("MMM")) _,
+  'B' -> insertDateChunk(new SimpleDateFormat("MMMM")) _,
+  'd' -> insertDateChunk(new SimpleDateFormat("dd")) _,
+  'D' -> insertDateChunk(new SimpleDateFormat("MM/dd/yy")) _,
+  'F' -> insertDateChunk(new SimpleDateFormat("yyyy-MM-dd")) _,
+  'h' -> insertDateChunk(new SimpleDateFormat("hh")) _,
+  'H' -> insertDateChunk(new SimpleDateFormat("HH")) _,
+  'j' -> insertDateChunk(new SimpleDateFormat("D")) _,
+  'l' -> insertLevelName _,
+  'L' -> insertLevelValue _,
+  'M' -> insertDateChunk(new SimpleDateFormat("mm")) _,
+  'm' -> insertDateChunk(new SimpleDateFormat("MM")) _,
+  'n' -> insertName(true) _,
+  'N' -> insertName(false) _,
+  's' -> insertDateChunk(new SimpleDateFormat("ss")) _,
+  'S' -> insertDateChunk(new SimpleDateFormat("SSS")) _,
+  't' -> insertMessage _,
+  'T' -> insertThreadName _,
+  'y' -> insertDateChunk(new SimpleDateFormat("yy")) _,
+  'Y' -> insertDateChunk(new SimpleDateFormat("yyyy")) _,
+  'z' -> insertDateChunk(new SimpleDateFormat("z")) _,
+  '%' -> copyLiteral("%") _
+)
+{% endcodeblock %}
 
 Using this table, the parsing logic can quickly map a percent-escape into a
 partial function taking a `LogMessage` object.
@@ -326,33 +328,30 @@ partial function taking a `LogMessage` object.
 The parser itself is simple:
 
 {% codeblock lang:scala %}
-    def parsePattern(stream: List[Char], gathered: String = ""):
-        List[LogMessage => String] =
-    {
-        def escape(ch: Char): List[LogMessage => String] =
-            List(Mappings.getOrElse(ch, copyLiteral("'%" + ch + "'") _))
+def parsePattern(stream: List[Char], gathered: String = ""): List[LogMessage => String] = {
+  def escape(ch: Char): List[LogMessage => String] =
+    List(Mappings.getOrElse(ch, copyLiteral("'%" + ch + "'") _))
 
-        def gatheredFuncList = 
-            if (gathered == "") Nil else List(copyLiteral(gathered) _)
+  def gatheredFuncList = 
+    if (gathered == "") Nil else List(copyLiteral(gathered) _)
 
-        stream match
-        {
-            case Nil if (gathered != "") =>
-                List(copyLiteral(gathered) _)
+  stream match {
+    case Nil if (gathered != "") =>
+      List(copyLiteral(gathered) _)
 
-            case Nil =>
-                Nil
+    case Nil =>
+      Nil
 
-            case '%' :: Nil =>
-                gatheredFuncList ::: List(copyLiteral("%") _)
+    case '%' :: Nil =>
+      gatheredFuncList ::: List(copyLiteral("%") _)
 
-            case '%' :: tail =>
-                gatheredFuncList ::: escape(tail(0)) ::: parse(tail drop 1)
+    case '%' :: tail =>
+      gatheredFuncList ::: escape(tail(0)) ::: parse(tail drop 1)
 
-            case c :: tail =>
-                parse(tail, gathered + c)
-        }
-    }
+    case c :: tail =>
+      parse(tail, gathered + c)
+  }
+}
 {% endcodeblock %}
 
 It takes a list of characters representing the pattern and:
@@ -369,26 +368,27 @@ It takes a list of characters representing the pattern and:
 The logic, above, is wrapped in:
 
 {% codeblock lang:scala %}
-    class ParsedPattern(originalPattern: String)
-    {
-        val parsedPattern: List[(LogMessage) => String] =
-            parse(originalPattern.toList)
+class ParsedPattern(originalPattern: String) {
+  val parsedPattern: List[(LogMessage) => String] =
+    parse(originalPattern.toList)
 
-        def format(logMessage: LogMessage): String =
-            parsedPattern.map(_(logMessage)).mkString("")
+  def format(logMessage: LogMessage): String =
+    parsedPattern.map(_(logMessage)).mkString("")
 
-        override def toString = originalPattern
-    
-        // Code above
-    }
+  override def toString = originalPattern
+
+  // Code above
+}
 {% endcodeblock %}
 
 The entire class is available [here](ParsedPattern.scala).
 
 For testing, let's also create simple logging classes:
 
-    class LogLevel(val value: Int, val label: String)
-    class LogMessage(val level: LogLevel, val message: Any, val name: String, val date: Date)
+{% codeblock lang:scala %}
+class LogLevel(val value: Int, val label: String)
+class LogMessage(val level: LogLevel, val message: Any, val name: String, val date: Date)
+{% endcodeblock %}
 
 And now, a test:
 
@@ -406,8 +406,8 @@ a log message by passing it into each function in turn, concatenating the
 results. Here's the `format` method again:
 
 {% codeblock lang:scala %}
-    def format(logMessage: LogMessage): String =
-        parsedPattern.map(_(logMessage)).mkString("")
+  def format(logMessage: LogMessage): String =
+    parsedPattern.map(_(logMessage)).mkString("")
 {% endcodeblock %}
 
 Let's try it:
@@ -450,10 +450,8 @@ There are several advantages to this curried approach:
   table is created. Thus, each log message doesn't result in the creation
   and destruction of a `SimpleDateFormat` object, as would have been the
   case with my first approach.
-
 * Parsing the format string and mapping into curried functions is dirt-simple,
   and dirt-simple parsers are far easier to maintain.
-
 * Adding new formatting characters (new percent escapes) is trivial.
 
 # And, in conclusion
