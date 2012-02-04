@@ -1,5 +1,32 @@
 <ul class="main-navigation">
   <li><a href="{{ root_url }}/">Blog</a></li>
   <li><a href="{{ root_url }}/blog/archives">Archives</a></li>
-  <li><a href="{{ root_url }}/about.html" rel="lyteframe" title="Brian M. Clapper">About</a></li>
+  <li><a id="about-link" href="#">About</a></li>
 </ul>
+
+<div id="about-dialog">
+{% render_partial about.html %}
+</div>
+
+<script type="text/javascript">
+
+$(document).ready(function() {
+
+    $("#about-dialog").hide();
+    $("#about-dialog").dialog({
+        autoOpen:  false,
+        modal:     true,
+        draggable: false,
+        minWidth:  400,
+        maxWidth:  400,
+        minHeight: 400,
+        maxHeight: 400
+
+    });
+
+    $("#about-link").click(function() {
+        $("#about-dialog").dialog('open');
+    });
+});
+
+</script>
