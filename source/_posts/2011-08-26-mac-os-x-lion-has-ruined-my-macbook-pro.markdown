@@ -6,7 +6,7 @@ date: 2011-08-26 00:00
 categories: [hardware, mac os x, apple]
 ---
 
-<div style="float: right"><img src="beachball.png"></div>
+{% img image-right /images/2011-08-26-mac-os-x-lion-has-ruined-my-macbook-pro/beachball.png %}
 
 *Updated: It's all about the RAM. See [below](#update).*
 
@@ -24,7 +24,7 @@ the point of unusability.
 As _htop_(1) shows, below, the system has very little free memory
 available.
 
-![htop output](htop.png "htop")
+{% img /images/2011-08-26-mac-os-x-lion-has-ruined-my-macbook-pro/htop.png htop %}
 
 _htop_ is not to be believed, when it comes to virtual memory, but output
 from both _top_(1) and *vm_stat*(1) shows significant swap in use:
