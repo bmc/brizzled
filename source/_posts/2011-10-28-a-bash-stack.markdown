@@ -20,31 +20,17 @@ solution, not a quick-and-dirty, one-use hack.
 The specification for my stack implementation is simple and straightforward.
 I wanted the following functions:
 
-`stack_new name`
-
-> Create a stack with the specified name. The name is akin to a variable
-> name and follows the same naming conventions.
-
-`stack_push name value ...`
-
-> Push one or more values onto the stack called *name*.
-
-`stack_pop name variable`
-
-> Pop the top value from the stack called *name*, storing the result in the
-> named variable.
-
-`stack_destroy name`
-
-> Destroy the stack called *name*
-
-`stack_size name variable`
-
-> Store the size of the stack called *name* in the specified variable.
-
-`stack_print name`
-
-> Display the contents of the stack called *name* on stdout.
+* `stack_new name`: Create a stack with the specified name. The name is akin 
+  to variable name and follows the same naming conventions.
+* `stack_push name value ...`: Push one or more values onto the stack called
+  *name*.
+* `stack_pop name variable`: Pop the top value from the stack called *name*, 
+  storing the result in the named variable.
+* `stack_destroy name`: Destroy the stack called *name*
+* `stack_size name variable`: Store the size of the stack called *name* in 
+   the specified variable.
+* `stack_print name`: Display the contents of the stack called *name* on
+  stdout.
 
 I didn't bother with `stack_clear`, since `stack_destroy` followed by
 `stack_create` is good enough. It'd be simple enough to add a `stack_clear`
@@ -52,10 +38,12 @@ function, though.
 
 # Example
 
-    stack_new foo
-    stack_push foo 10 20 30
-    stack_print foo          # prints: ( 30 20 10 )
-    stack_pop foo i          # i is now 30. Stack is now ( 30 20 )
+{% codeblock lang:bash %}
+stack_new foo
+stack_push foo 10 20 30
+stack_print foo          # prints: ( 30 20 10 )
+stack_pop foo i          # i is now 30. Stack is now ( 30 20 )
+{% endcodeblock %}
 
 # The implementation
 
