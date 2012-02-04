@@ -38,8 +38,21 @@ aside {
 }
 
 figure.code {
-    @include rounded-border;
-    border: 1px solid black;
+    color: black;
+    padding: 5px;
+    margin-left: 2em;
+    margin-right: 2em;
+    margin-top: 0;
+    margin-bottom: 0;
+
+    padding: 0;
+
+    // Opera only
+    page-break-inside: avoid;
+
+    td.gutter {
+        display: none;
+    }
 }
 
 a {
