@@ -13,6 +13,7 @@ $body_font_size: 16px;
 
 body {
     font-size: $body_font_size;
+    min-width: $min-width;
 }
 
 ol {
