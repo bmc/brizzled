@@ -122,29 +122,29 @@ Create a directory called `picoblog` in which to do your work. In
 that directory, create a file called `app.yaml`:
 
 {% codeblock lang:yaml %}
-    application: picoblog
-    version: 1
-    runtime: python
-    api_version: 1
+application: picoblog
+version: 1
+runtime: python
+api_version: 1
 
-    handlers:
-    - url: /static
-      static_dir: static
+handlers:
+- url: /static
+  static_dir: static
 
-    - url: /favicon.ico
-      static_files: static/favicon.ico
-      upload: static/favicon.ico
+- url: /favicon.ico
+  static_files: static/favicon.ico
+  upload: static/favicon.ico
 
-    - url: /admin
-      script: admin.py
-      login: admin
+- url: /admin
+  script: admin.py
+  login: admin
 
-    - url: /admin/.*
-      script: admin.py
-      login: admin
+- url: /admin/.*
+  script: admin.py
+  login: admin
 
-    - url: /.*
-      script: blog.py
+- url: /.*
+  script: blog.py
 {% endcodeblock %}
 
 This file configures your application. You can treat most of the
@@ -204,37 +204,41 @@ An item in the datastore *does* have a unique key, accessible via the
 unique name or number (depending on how the key was assigned) by calling
 `key().id()`. For instance:
 
-    article = Article(title='Test title')
-    article.put()
-    print article.key().id()
+{% codeblock lang:python %}
+article = Article(title='Test title')
+article.put()
+print article.key().id()
+{% endcodeblock %}
 
 However, you cannot use this ID in a query. Quoting from the
 [Keys and Entity Groups][] section of the GAE documentation:
 
-> Key names and IDs cannot be used like property values in queries.
-> However, you can use a named key, then store the name as a
-> property. You could do something similar with numeric IDs by
-> storing the object to assign the ID, getting the ID value using
-> obj.key().id(), setting the property with the ID, then storing the
-> object again.
+{% blockquote %}
+Key names and IDs cannot be used like property values in queries.
+However, you can use a named key, then store the name as a
+property. You could do something similar with numeric IDs by
+storing the object to assign the ID, getting the ID value using
+obj.key().id(), setting the property with the ID, then storing the
+object again.
+{% endblockquote %}
 
 So, that's what we're going to do.
 
 The data model for our `Article` class looks like this:
 
 {% codeblock lang:python %}
-    import datetime
-    import sys
+import datetime
+import sys
 
-    from google.appengine.ext import db
+from google.appengine.ext import db
 
-    class Article(db.Model):
-        title = db.StringProperty(required=True)
-        body = db.TextProperty()
-        published_when = db.DateTimeProperty(auto_now_add=True)
-        tags = db.ListProperty(db.Category)
-        id = db.StringProperty()
-        draft = db.BooleanProperty(required=True, default=False)
+class Article(db.Model):
+    title = db.StringProperty(required=True)
+    body = db.TextProperty()
+    published_when = db.DateTimeProperty(auto_now_add=True)
+    tags = db.ListProperty(db.Category)
+    id = db.StringProperty()
+    draft = db.BooleanProperty(required=True, default=False)
 {% endcodeblock %}
 
 If you're familiar with Django, you'll notice that it's similar to
@@ -248,33 +252,33 @@ be separated into two methods, so the query itself can be shared. More on
 that later.)
 
 {% codeblock lang:python %}
-    @classmethod
-    def get_all(cls):
-        q = db.Query(Article)
-        q.order('-published_when')
-        return q.fetch(FETCH_THEM_ALL)
+@classmethod
+def get_all(cls):
+    q = db.Query(Article)
+    q.order('-published_when')
+    return q.fetch(FETCH_THEM_ALL)
 {% endcodeblock %}
 
 {% codeblock lang:python %}
-    @classmethod
-    def get(cls, id):
-        q = db.Query(Article)
-        q.filter('id = ', id)
-        return q.get()
+@classmethod
+def get(cls, id):
+    q = db.Query(Article)
+    q.filter('id = ', id)
+    return q.get()
 {% endcodeblock %}
 
 {% codeblock lang:python %}
-    @classmethod
-    def published_query(cls):
-        q = db.Query(Article)
-        q.filter('draft = ', False)
-        return q
+@classmethod
+def published_query(cls):
+    q = db.Query(Article)
+    q.filter('draft = ', False)
+    return q
 {% endcodeblock %}
 
 {% codeblock lang:python %}
-    @classmethod
-    def published(cls):
-        return Article.published_query().order('-published_when').fetch(FETCH_THEM_ALL)
+@classmethod
+def published(cls):
+    return Article.published_query().order('-published_when').fetch(FETCH_THEM_ALL)
 {% endcodeblock %}
 
 `FETCH_THEM_ALL` is an integer constant with a large value, defined
@@ -283,7 +287,9 @@ at the top of the module.
 **NOTE**: In the original version of the code, and in the zip files posted
 to the [web site][], `FETCH_THEM_ALL` is defined as follows:
 
-    FETCH_THEM_ALL = sys.maxint - 1
+{% codeblock lang:python %}
+FETCH_THEM_ALL = sys.maxint - 1
+{% endcodeblock %}
 
 On a 64-bit local machine, `sys.maxint` will evaluate to a 64-bit number.
 But GAE is a 32-bit environment, so the code may fail on certain machines.
@@ -301,32 +307,32 @@ Finally, let's add a `save()` method that does two important things:
   published status.
 
 {% codeblock lang:python %}
-    def save(self):
-        previous_version = Article.get(self.id)
-        try:
-            draft = previous_version.draft
-        except AttributeError:
-            draft = False
+def save(self):
+    previous_version = Article.get(self.id)
+    try:
+        draft = previous_version.draft
+    except AttributeError:
+        draft = False
 
-        if draft and (not self.draft):
-            # Going from draft to published. Update the timestamp.
-            self.published_when = datetime.datetime.now()
+    if draft and (not self.draft):
+        # Going from draft to published. Update the timestamp.
+        self.published_when = datetime.datetime.now()
 
-        try:
-            obj_id = self.key().id()
-            resave = False
-        except db.NotSavedError:
-            # No key, hence no ID yet. This one hasn't been saved.
-            # We'll save it once without the ID field; this first
-            # save will cause GAE to assign it a key. Then, we can
-            # extract the ID, put it in our ID field, and resave
-            # the object.
-            resave = True
+    try:
+        obj_id = self.key().id()
+        resave = False
+    except db.NotSavedError:
+        # No key, hence no ID yet. This one hasn't been saved.
+        # We'll save it once without the ID field; this first
+        # save will cause GAE to assign it a key. Then, we can
+        # extract the ID, put it in our ID field, and resave
+        # the object.
+        resave = True
 
+    self.put()
+    if resave:
+        self.id = self.key().id()
         self.put()
-        if resave:
-            self.id = self.key().id()
-            self.put()
 {% endcodeblock %}
 
 Okay, that's the model. (See the source code for the complete file.)
@@ -386,6 +392,7 @@ You can see the
 It consists of a link to the style sheet, some Javascript, some
 standard HTML layout, and this block of template logic:
 
+{% showliquid %}
     <ul>
     {\% for article in articles \%}
       {\% if article.draft \%}
@@ -397,6 +404,7 @@ standard HTML layout, and this block of template logic:
       <a href="/admin/article/edit/?id=\{\{ article.id \}\}">\{\{ article.title \}\}</a>
     {\% endfor \%}
     </ul>
+{% endshowliquid %}
 
 This template code assumes that the variables passed to the template will
 include a Python list called `articles`, each element of which is an
@@ -404,7 +412,9 @@ include a Python list called `articles`, each element of which is an
 
 The style sheet link looks like this:
 
-    <link href="/static/style.css" rel="stylesheet" type="text/css"/>
+{% showliquid %}
+<link href="/static/style.css" rel="stylesheet" type="text/css"/>
+{% endshowliquid %}
 
 Rather than use a template `{% include "style.css" %}` directive to
 pull the style sheet file inline at rendering time, we're telling
@@ -437,21 +447,21 @@ files we're using to consolidate common logic.
 `defs.py` just contains some common constants:
 
 {% codeblock lang:python %}
-    BLOG_NAME = 'PicoBlog'
-    BLOG_OWNER = 'Joe Example'
+BLOG_NAME = 'PicoBlog'
+BLOG_OWNER = 'Joe Example'
 
-    TEMPLATE_SUBDIR = 'templates'
+TEMPLATE_SUBDIR = 'templates'
 
-    TAG_URL_PATH = 'tag'
-    DATE_URL_PATH = 'date'
-    ARTICLE_URL_PATH = 'id'
-    MEDIA_URL_PATH = 'static'
-    ATOM_URL_PATH = 'atom'
-    RSS2_URL_PATH = 'rss2'
-    ARCHIVE_URL_PATH = 'archive'
+TAG_URL_PATH = 'tag'
+DATE_URL_PATH = 'date'
+ARTICLE_URL_PATH = 'id'
+MEDIA_URL_PATH = 'static'
+ATOM_URL_PATH = 'atom'
+RSS2_URL_PATH = 'rss2'
+ARCHIVE_URL_PATH = 'archive'
 
-    MAX_ARTICLES_PER_PAGE = 5
-    TOTAL_RECENT = 10
+MAX_ARTICLES_PER_PAGE = 5
+TOTAL_RECENT = 10
 {% endcodeblock %}
 
 We'll see how they're used as we get further into this tutorial.
@@ -461,49 +471,49 @@ We'll see how they're used as we get further into this tutorial.
 `request.py` contains our base request handler class:
 
 {% codeblock lang:python %}
-    import os
+import os
 
-    from google.appengine.ext import webapp
-    from google.appengine.ext.webapp import template
+from google.appengine.ext import webapp
+from google.appengine.ext.webapp import template
 
-    import defs
+import defs
 
-    class BlogRequestHandler(webapp.RequestHandler):
+class BlogRequestHandler(webapp.RequestHandler):
+    """
+    Base class for all request handlers in this application. This class
+    serves primarily to isolate common logic.
+    """
+
+    def get_template(self, template_name):
         """
-        Base class for all request handlers in this application. This class
-        serves primarily to isolate common logic.
+        Return the full path of the template.
+
+        :Parameters:
+            template_name : str
+                Simple name of the template
+
+        :rtype: str
+        :return: the full path to the template. Does *not* ensure that the
+                 template exists.
         """
+        return os.path.join(os.path.dirname(__file__),
+                            defs.TEMPLATE_SUBDIR,
+                            template_name)
 
-        def get_template(self, template_name):
-            """
-            Return the full path of the template.
+    def render_template(self, template_name, template_vars):
+        """
+        Render a template and write the output to ``self.response.out``.
 
-            :Parameters:
-                template_name : str
-                    Simple name of the template
+        :Parameters:
+            template_name : str
+                Simple name of the template
 
-            :rtype: str
-            :return: the full path to the template. Does *not* ensure that the
-                     template exists.
-            """
-            return os.path.join(os.path.dirname(__file__),
-                                defs.TEMPLATE_SUBDIR,
-                                template_name)
-
-        def render_template(self, template_name, template_vars):
-            """
-            Render a template and write the output to ``self.response.out``.
-
-            :Parameters:
-                template_name : str
-                    Simple name of the template
-
-                template_vars : dict
-                    Dictionary of variables to make available to the template.
-                    Can be empty.
-            """
-            template_path = self.get_template(template_name)
-            template.render(template_path, template_vars)
+            template_vars : dict
+                Dictionary of variables to make available to the template.
+                Can be empty.
+        """
+        template_path = self.get_template(template_name)
+        template.render(template_path, template_vars)
 {% endcodeblock %}
 
 As you can see, it just contains some methods to make rendering templates a
@@ -515,120 +525,120 @@ little simpler.
 we have some imports:
 
 {% codeblock lang:python %}
-    import cgi
+import cgi
 
-    from google.appengine.api import users
-    from google.appengine.ext import webapp
-    from google.appengine.ext.webapp import util
+from google.appengine.api import users
+from google.appengine.ext import webapp
+from google.appengine.ext.webapp import util
 
-    from models import *
-    import request
+from models import *
+import request
 {% endcodeblock %}
 
 These are followed by the request handler classes:
 
 {% codeblock lang:python %}
-    class ShowArticlesHandler(request.BlogRequestHandler):
-        def get(self):
-            articles = Article.get_all()
-            template_vars = {'articles' : articles}
-            self.response.out.write(self.render_template('admin-main.html', 
-                                                         template_vars))
+class ShowArticlesHandler(request.BlogRequestHandler):
+    def get(self):
+        articles = Article.get_all()
+        template_vars = {'articles' : articles}
+        self.response.out.write(self.render_template('admin-main.html', 
+                                                     template_vars))
 
-    class NewArticleHandler(request.BlogRequestHandler):
-        def get(self):
-            article = Article(title='New article',
-                              body='Content goes here',
-                              draft=True)
-            template_vars = {'article' : article}
-            self.response.out.write(self.render_template('admin-edit.html',
-                                                         template_vars))
+class NewArticleHandler(request.BlogRequestHandler):
+    def get(self):
+        article = Article(title='New article',
+                          body='Content goes here',
+                          draft=True)
+        template_vars = {'article' : article}
+        self.response.out.write(self.render_template('admin-edit.html',
+                                                     template_vars))
 
-    class SaveArticleHandler(request.BlogRequestHandler):
-        def post(self):
-            title = cgi.escape(self.request.get('title'))
-            body = cgi.escape(self.request.get('content'))
-            id = int(cgi.escape(self.request.get('id')))
-            tags = cgi.escape(self.request.get('tags'))
-            published_when = cgi.escape(self.request.get('published_when'))
-            draft = cgi.escape(self.request.get('draft'))
-            if tags:
-                tags = [t.strip() for t in tags.split(',')]
-            else:
-                tags = []
-            tags = Article.convert_string_tags(tags)
+class SaveArticleHandler(request.BlogRequestHandler):
+    def post(self):
+        title = cgi.escape(self.request.get('title'))
+        body = cgi.escape(self.request.get('content'))
+        id = int(cgi.escape(self.request.get('id')))
+        tags = cgi.escape(self.request.get('tags'))
+        published_when = cgi.escape(self.request.get('published_when'))
+        draft = cgi.escape(self.request.get('draft'))
+        if tags:
+            tags = [t.strip() for t in tags.split(',')]
+        else:
+            tags = []
+        tags = Article.convert_string_tags(tags)
 
-            if not draft:
-                draft = False
-            else:
-                draft = (draft.lower() == 'on')
+        if not draft:
+            draft = False
+        else:
+            draft = (draft.lower() == 'on')
 
-            article = Article.get(id)
-            if article:
-                # It's an edit of an existing item.
-                article.title = title
-                article.body = body
-                article.tags = tags
+        article = Article.get(id)
+        if article:
+            # It's an edit of an existing item.
+            article.title = title
+            article.body = body
+            article.tags = tags
 
-                article.draft = draft
-            else:
-                # It's new.
-                article = Article(title=title,
-                                  body=body,
-                                  tags=tags,
-                                  id=id,
-                                  draft=draft)
+            article.draft = draft
+        else:
+            # It's new.
+            article = Article(title=title,
+                              body=body,
+                              tags=tags,
+                              id=id,
+                              draft=draft)
 
-            article.save()
+        article.save()
 
-            edit_again = cgi.escape(self.request.get('edit_again'))
-            edit_again = edit_again and (edit_again.lower() == 'true')
+        edit_again = cgi.escape(self.request.get('edit_again'))
+        edit_again = edit_again and (edit_again.lower() == 'true')
 
-            if edit_again:
-                self.redirect('/admin/article/edit/?id=%s' % id)
-            else:
-                self.redirect('/admin/')
-
-    class EditArticleHandler(request.BlogRequestHandler):
-        def get(self):
-            id = int(self.request.get('id'))
-            article = Article.get(id)
-            if not article:
-                raise ValueError, 'Article with ID %d does not exist.' % id
-
-            article.tag_string = ', '.join(article.tags)
-            template_vars = {'article'  : article}
-            self.response.out.write(self.render_template('admin-edit.html',
-                                    template_vars))
-
-    class DeleteArticleHandler(request.BlogRequestHandler):
-        def get(self):
-            id = int(self.request.get('id'))
-            article = Article.get(id)
-            if article:
-                article.delete()
-
+        if edit_again:
+            self.redirect('/admin/article/edit/?id=%s' % id)
+        else:
             self.redirect('/admin/')
+
+class EditArticleHandler(request.BlogRequestHandler):
+    def get(self):
+        id = int(self.request.get('id'))
+        article = Article.get(id)
+        if not article:
+            raise ValueError, 'Article with ID %d does not exist.' % id
+
+        article.tag_string = ', '.join(article.tags)
+        template_vars = {'article'  : article}
+        self.response.out.write(self.render_template('admin-edit.html',
+                                template_vars))
+
+class DeleteArticleHandler(request.BlogRequestHandler):
+    def get(self):
+        id = int(self.request.get('id'))
+        article = Article.get(id)
+        if article:
+            article.delete()
+
+        self.redirect('/admin/')
 {% endcodeblock %}
 
 The file ends with some initialization logic and the main program:
 
 {% codeblock lang:python %}
-    application = webapp.WSGIApplication(
-        [('/admin/?', ShowArticlesHandler),
-         ('/admin/article/new/?', NewArticleHandler),
-         ('/admin/article/delete/?', DeleteArticleHandler),
-         ('/admin/article/save/?', SaveArticleHandler),
-         ('/admin/article/edit/?', EditArticleHandler),
-         ],
+application = webapp.WSGIApplication(
+    [('/admin/?', ShowArticlesHandler),
+     ('/admin/article/new/?', NewArticleHandler),
+     ('/admin/article/delete/?', DeleteArticleHandler),
+     ('/admin/article/save/?', SaveArticleHandler),
+     ('/admin/article/edit/?', EditArticleHandler),
+     ],
 
-        debug=True)
+    debug=True)
 
-    def main():
-        util.run_wsgi_app(application)
+def main():
+    util.run_wsgi_app(application)
 
-    if __name__ == "__main__":
-        main()
+if __name__ == "__main__":
+    main()
 {% endcodeblock %}
 
 Let's break this down a bit. First, the initialization logic at the bottom
@@ -659,11 +669,11 @@ example of handlers that simply display a page. Here's the
 `ShowArticlesHandler` class again:
 
 {% codeblock lang:python %}
-    class ShowArticlesHandler(request.BlogRequestHandler):
-        def get(self):
-            articles = Article.get_all()
-            template_vars = {'articles' : articles}
-            self.render_template('admin-main.html', template_vars)
+class ShowArticlesHandler(request.BlogRequestHandler):
+    def get(self):
+        articles = Article.get_all()
+        template_vars = {'articles' : articles}
+        self.render_template('admin-main.html', template_vars)
 {% endcodeblock %}
 
 First, because it defines only the `get()` method, it supports just the
@@ -678,16 +688,16 @@ The `EditArticleHandler` is a little more complicated, only because it has
 to handle a few additional things:
 
 {% codeblock lang:python %}
-    class EditArticleHandler(request.BlogRequestHandler):
-        def get(self):
-            id = int(self.request.get('id'))
-            article = Article.get(id)
-            if not article:
-                raise ValueError, 'Article with ID %d does not exist.' % id
+class EditArticleHandler(request.BlogRequestHandler):
+    def get(self):
+        id = int(self.request.get('id'))
+        article = Article.get(id)
+        if not article:
+            raise ValueError, 'Article with ID %d does not exist.' % id
 
-            article.tag_string = ', '.join(article.tags)
-            template_vars = {'article'  : article}
-            self.render_template('admin-edit.html', template_vars)
+        article.tag_string = ', '.join(article.tags)
+        template_vars = {'article'  : article}
+        self.render_template('admin-edit.html', template_vars)
 {% endcodeblock %}
 
 First, it determines whether the article being edited is in the database or
@@ -703,48 +713,48 @@ The most complicated handler is the `SaveArticleHandler` class.
 Let's look at that one again:
 
 {% codeblock lang:python %}
-    class SaveArticleHandler(request.BlogRequestHandler):
-        def post(self):
-            title = cgi.escape(self.request.get('title'))
-            body = cgi.escape(self.request.get('content'))
-            id = int(cgi.escape(self.request.get('id')))
-            tags = cgi.escape(self.request.get('tags'))
-            timestamp = cgi.escape(self.request.get('timestamp'))
-            draft = cgi.escape(self.request.get('draft'))
-            if tags:
-                tags = [t.strip() for t in tags.split(',')]
-            else:
-                tags = []
-            tags = Article.convert_string_tags(tags)
+class SaveArticleHandler(request.BlogRequestHandler):
+    def post(self):
+        title = cgi.escape(self.request.get('title'))
+        body = cgi.escape(self.request.get('content'))
+        id = int(cgi.escape(self.request.get('id')))
+        tags = cgi.escape(self.request.get('tags'))
+        timestamp = cgi.escape(self.request.get('timestamp'))
+        draft = cgi.escape(self.request.get('draft'))
+        if tags:
+            tags = [t.strip() for t in tags.split(',')]
+        else:
+            tags = []
+        tags = Article.convert_string_tags(tags)
 
-            if not draft:
-                draft = False
-            else:
-                draft = (draft.lower() == 'on')
+        if not draft:
+            draft = False
+        else:
+            draft = (draft.lower() == 'on')
 
-            article = Article.get(id)
-            if article:
-                # It's an edit of an existing item.
-                article.title = title
-                article.body = body
-                article.tags = tags
-                article.draft = draft
-            else:
-                # It's new.
-                article = Article(title=title,
-                                  body=body,
-                                  tags=tags,
-                                  id=id,
-                                  draft=draft)
+        article = Article.get(id)
+        if article:
+            # It's an edit of an existing item.
+            article.title = title
+            article.body = body
+            article.tags = tags
+            article.draft = draft
+        else:
+            # It's new.
+            article = Article(title=title,
+                              body=body,
+                              tags=tags,
+                              id=id,
+                              draft=draft)
 
-            article.save()
+        article.save()
 
-            edit_again = cgi.escape(self.request.get('edit_again'))
-            edit_again = edit_again and (edit_again.lower() == 'true')
-            if edit_again:
-                self.redirect('/admin/article/edit/?id=%s' % id)
-            else:
-                self.redirect('/admin/')
+        edit_again = cgi.escape(self.request.get('edit_again'))
+        edit_again = edit_again and (edit_again.lower() == 'true')
+        if edit_again:
+            self.redirect('/admin/article/edit/?id=%s' % id)
+        else:
+            self.redirect('/admin/')
 {% endcodeblock %}
 
 That one's a little longer, but what it does is simple enough:
@@ -785,15 +795,15 @@ You can now surf to `http://localhost:8080/admin/` using your browser.
 Here's a screen shot of the main screen, showing several articles. The
 top-most article is a draft; the rest are published.
 
-![Admin screen](admin-main-small.png)
+{% img /images/2008-08-07-writing-blogging-software-for-google-app-engine/admin-main-small.png Main admin screen %}
 
-The [full-size main page image is here](admin-main.png)
+The [full-size main page image is here](/images/2008-08-07-writing-blogging-software-for-google-app-engine/admin-main.png)
 
 And here's the edit screen for the draft article:
 
-![Edit Screen](admin-edit-small.png)
+{% img /images/2008-08-07-writing-blogging-software-for-google-app-engine/admin-edit-small.png Edit Screen %}
 
-The [full-size edit page image is here](admin-edit.png).
+The [full-size edit page image is here](/images/2008-08-07-writing-blogging-software-for-google-app-engine/admin-edit.png).
 
 From a stylistic viewpoint, these screens are really simple. However,
 making them look fancier and slicker is simply a matter of fiddling with
@@ -833,20 +843,20 @@ from there into the top directory of the blog.
 The code that actually translates RST to HTML is rather simple:
 
 {% codeblock lang:python %}
-    import os
+import os
 
-    from docutils.core import publish_parts
+from docutils.core import publish_parts
 
-    def rst2html(s):
-        settings = {'config' : None}
+def rst2html(s):
+    settings = {'config' : None}
 
-        # Necessary, because otherwise docutils attempts to read a config file
-        # via the codecs module, which doesn't work with AppEngine.
-        os.environ['DOCUTILSCONFIG'] = ""
-        parts = publish_parts(source=s,
-                              writer_name='html4css1',
-                              settings_overrides=settings)
-        return parts['fragment']
+    # Necessary, because otherwise docutils attempts to read a config file
+    # via the codecs module, which doesn't work with AppEngine.
+    os.environ['DOCUTILSCONFIG'] = ""
+    parts = publish_parts(source=s,
+                          writer_name='html4css1',
+                          settings_overrides=settings)
+    return parts['fragment']
 {% endcodeblock %}
 
 The only wrinkle is the setting of the `DOCUTILSCONFIG` environment
@@ -888,21 +898,25 @@ substitutions like `\{\{blog_name\}\}` and `\{\{blog_owner\}\}`.
 However, the base template also contains template code like the
 following:
 
-    <div id="articles_container">
-    {\% for article in articles \%}
+{% showliquid %}
+<div id="articles_container">
+{\% for article in articles \%}
 
-      {\% block main \%}
-      {\% endblock \%}
-    </div>
+  {\% block main \%}
+  {\% endblock \%}
+</div>
+{% endshowliquid %}
 
 and this:
 
-    <div id="right-margin">
-      {\% block recent_list \%}
-      {\% endblock \%}
-      {\% block date_list \%}
-      {\% endblock \%}
-    </div>
+{% showliquid %}
+<div id="right-margin">
+  {\% block recent_list \%}
+  {\% endblock \%}
+  {\% block date_list \%}
+  {\% endblock \%}
+</div>
+{% endshowliquid %}
 
 The blocks can be filled in by other templates that inherit from
 this one.
@@ -914,17 +928,17 @@ initialization section at the bottom that sets up the URL-to-handler
 mappings. Let look at that first:
 
 {% codeblock lang:python %}
-    application = webapp.WSGIApplication([('/', FrontPageHandler),
-                                          ('/tag/([^/]+)/*$', ArticlesByTagHandler),
-                                          ('/date/(\d\d\d\d)-(\d\d)/?$', ArticlesForMonthHandler),
-                                          ('/id/(\d+)/?$', SingleArticleHandler),
-                                          ('/archive/?$', ArchivePageHandler),
-                                          ('/rss2/?$', RSSFeedHandler),
-                                          ('/atom/?$', AtomFeedHandler),
-                                          ('/.*$', NotFoundPageHandler),
-                                         ],
+application = webapp.WSGIApplication([('/', FrontPageHandler),
+                                      ('/tag/([^/]+)/*$', ArticlesByTagHandler),
+                                      ('/date/(\d\d\d\d)-(\d\d)/?$', ArticlesForMonthHandler),
+                                      ('/id/(\d+)/?$', SingleArticleHandler),
+                                      ('/archive/?$', ArchivePageHandler),
+                                      ('/rss2/?$', RSSFeedHandler),
+                                      ('/atom/?$', AtomFeedHandler),
+                                      ('/.*$', NotFoundPageHandler),
+                                     ],
 
-                                         debug=True)
+                                     debug=True)
 {% endcodeblock %}
 
 ## `AbstractPageHandler`
@@ -933,57 +947,57 @@ At the top of the file, there's a base class that consolidates a lot of the
 common logic. The most important method it contains is `render_articles()`:
 
 {% codeblock lang:python %}
-    class AbstractPageHandler(request.BlogRequestHandler):
+class AbstractPageHandler(request.BlogRequestHandler):
 
-        def render_articles(self,
-                            articles,
-                            request,
-                            recent,
-                            template_name='show-articles.html'):
-            url_prefix = 'http://' + request.environ['SERVER_NAME']
-            port = request.environ['SERVER_PORT']
-            if port:
-                url_prefix += ':%s' % port
+    def render_articles(self,
+                        articles,
+                        request,
+                        recent,
+                        template_name='show-articles.html'):
+        url_prefix = 'http://' + request.environ['SERVER_NAME']
+        port = request.environ['SERVER_PORT']
+        if port:
+            url_prefix += ':%s' % port
 
-            self.augment_articles(articles, url_prefix)
-            self.augment_articles(recent, url_prefix)
+        self.augment_articles(articles, url_prefix)
+        self.augment_articles(recent, url_prefix)
 
-            last_updated = datetime.datetime.now()
-            if articles:
-                last_updated = articles[0].published_when
+        last_updated = datetime.datetime.now()
+        if articles:
+            last_updated = articles[0].published_when
 
-            self.adjust_timestamps(articles)
-            last_updated = self.adjust_timestamp(last_updated)
+        self.adjust_timestamps(articles)
+        last_updated = self.adjust_timestamp(last_updated)
 
-            blog_url = url_prefix
-            tag_path = '/' + defs.TAG_URL_PATH
-            tag_url = url_prefix + tag_path
-            date_path = '/' + defs.DATE_URL_PATH
-            date_url = url_prefix + date_path
-            media_path = '/' + defs.MEDIA_URL_PATH
-            media_url = url_prefix + media_path
+        blog_url = url_prefix
+        tag_path = '/' + defs.TAG_URL_PATH
+        tag_url = url_prefix + tag_path
+        date_path = '/' + defs.DATE_URL_PATH
+        date_url = url_prefix + date_path
+        media_path = '/' + defs.MEDIA_URL_PATH
+        media_url = url_prefix + media_path
 
-            template_variables = {'blog_name'    : defs.BLOG_NAME,
-                                  'blog_owner'   : defs.BLOG_OWNER,
-                                  'articles'     : articles,
-                                  'tag_list'     : self.get_tag_counts(),
-                                  'date_list'    : self.get_month_counts(),
-                                  'version'      : '0.3',
-                                  'last_updated' : last_updated,
-                                  'blog_path'    : '/',
-                                  'blog_url'     : blog_url,
-                                  'archive_path' : '/' + defs.ARCHIVE_URL_PATH,
-                                  'tag_path'     : tag_path,
-                                  'tag_url'      : tag_url,
-                                  'date_path'    : date_path,
-                                  'date_url'     : date_url,
-                                  'atom_path'    : '/' + defs.ATOM_URL_PATH,
-                                  'rss2_path'    : '/' + defs.RSS2_URL_PATH,
-                                  'media_path'   : media_path,
-                                  'media_url'    : media_url,
-                                  'recent'       : recent}
+        template_variables = {'blog_name'    : defs.BLOG_NAME,
+                              'blog_owner'   : defs.BLOG_OWNER,
+                              'articles'     : articles,
+                              'tag_list'     : self.get_tag_counts(),
+                              'date_list'    : self.get_month_counts(),
+                              'version'      : '0.3',
+                              'last_updated' : last_updated,
+                              'blog_path'    : '/',
+                              'blog_url'     : blog_url,
+                              'archive_path' : '/' + defs.ARCHIVE_URL_PATH,
+                              'tag_path'     : tag_path,
+                              'tag_url'      : tag_url,
+                              'date_path'    : date_path,
+                              'date_url'     : date_url,
+                              'atom_path'    : '/' + defs.ATOM_URL_PATH,
+                              'rss2_path'    : '/' + defs.RSS2_URL_PATH,
+                              'media_path'   : media_path,
+                              'media_url'    : media_url,
+                              'recent'       : recent}
 
-            return self.render_template(template_name, template_variables)
+        return self.render_template(template_name, template_variables)
 {% endcodeblock %}
 
 This method takes:
@@ -1003,15 +1017,15 @@ Another method we should examine is `augment_articles()`, also in the
 `AbstractPageHandler` class:
 
 {% codeblock lang:python %}
-    def augment_articles(self, articles, url_prefix, html=True):
-        for article in articles:
-            if html:
-                try:
-                    article.html = rst2html(article.body)
-                except AttributeError:
-                    article.html = ''
-            article.path = '/' + defs.ARTICLE_URL_PATH + '/%s' % article.id
-            article.url = url_prefix + article.path
+def augment_articles(self, articles, url_prefix, html=True):
+    for article in articles:
+        if html:
+            try:
+                article.html = rst2html(article.body)
+            except AttributeError:
+                article.html = ''
+        article.path = '/' + defs.ARTICLE_URL_PATH + '/%s' % article.id
+        article.url = url_prefix + article.path
 {% endcodeblock %}
 
 This method renders the HTML for each article to be displayed (if
@@ -1038,12 +1052,14 @@ The base class also contains a few other methods used by
 Next, let's get the *Not Found* page out of the way. The template
 is very simple:
 
-    {\% extends "base.html" \%}
+{% showliquid %}
+{\% extends "base.html" \%}
 
-    {\% block main \%}
-      <p class="article_title">Not Found</p>
-      <p>Sorry, but there's no such page here.</p>
-    {\% endblock \%}
+{\% block main \%}
+  <p class="article_title">Not Found</p>
+  <p>Sorry, but there's no such page here.</p>
+{\% endblock \%}
+{% endshowliquid %}
 
 It extends the base template and fills in the `main` block with a
 simple static message. We'll use this template in a couple places.
@@ -1051,12 +1067,12 @@ simple static message. We'll use this template in a couple places.
 The `NotFoundHandler` class is also simple:
 
 {% codeblock lang:python %}
-    class NotFoundPageHandler(AbstractPageHandler):
-        def get(self):
-            self.response.out.write(self.render_articles([],
-                                                         self.request,
-                                                         [],
-                                                         'not-found.html'))
+class NotFoundPageHandler(AbstractPageHandler):
+    def get(self):
+        self.response.out.write(self.render_articles([],
+                                                     self.request,
+                                                     [],
+                                                     'not-found.html'))
 {% endcodeblock %}
 
 Recall that this handler is the last, catch-all handler in the list of URLs
@@ -1071,58 +1087,62 @@ The main screen requires a template and a handler. With the base template
 and the `AbstractPageHandler` class in place, both are pretty simple.
 Here's the template, which resides in `show-articles.html`:
 
-    {\% extends "base.html" \%}
+{% showliquid %}
+{\% extends "base.html" \%}
 
-    {\% block main \%}
-      {\% for article in articles \%}
-        {\% include "article.html" \%}
-        </td></tr></table>
-      {\% endfor \%}
-    {\% endblock \%}
+{\% block main \%}
+  {\% for article in articles \%}
+    {\% include "article.html" \%}
+    </td></tr></table>
+  {\% endfor \%}
+{\% endblock \%}
 
-    {\% block recent_list \%}
-      {\% if recent \%}
-        <b>Recent:</b>
-        <ul>
-        {\% for article in recent \%}
-          <li><a href="\{\{ article.path \}\}">\{\{ article.title \}\}</a>
-        {\% endfor \%}
-        </ul>
-      {\% endif \%}
-    {\% endblock \%}
+{\% block recent_list \%}
+  {\% if recent \%}
+    <b>Recent:</b>
+    <ul>
+    {\% for article in recent \%}
+      <li><a href="\{\{ article.path \}\}">\{\{ article.title \}\}</a>
+    {\% endfor \%}
+    </ul>
+  {\% endif \%}
+{\% endblock \%}
 
-    {\% block date_list \%}
-      {\% if date_list \%}
-        <b>By month:</b>
-        <ul>
-        {\% for date_count in date_list \%}
-          <li><a href="\{\{ date_path \}\}/\{\{ date_count.date|date:"Y-m" \}\}/">
-              \{\{ date_count.date|date:"F, Y" \}\}</a> (\{\{ date_count.count \}\})
-        {\% endfor \%}
-        </ul>
-      {\% endif \%}
-    {\% endblock \%}
+{\% block date_list \%}
+  {\% if date_list \%}
+    <b>By month:</b>
+    <ul>
+    {\% for date_count in date_list \%}
+      <li><a href="\{\{ date_path \}\}/\{\{ date_count.date|date:"Y-m" \}\}/">
+          \{\{ date_count.date|date:"F, Y" \}\}</a> (\{\{ date_count.count \}\})
+    {\% endfor \%}
+    </ul>
+  {\% endif \%}
+{\% endblock \%}
 
-    {\% block tag_list \%}
-      {\% if tag_list \%}
-        <div id="tag-cloud">
-        {\% for tag_count in tag_list \%}
-          <a class="\{\{ tag_count.css_class \}\}"
-             href="\{\{ tag_path \}\}/\{\{ tag_count.tag \}\}/">
-             \{\{ tag_count.tag \}\}(\{\{ tag_count.count \}\})</a>
-             {\% if not forloop.last \%},{\% endif \%}
-        {\% endfor \%}
-        </div>
-      {\% endif \%}
-    {\% endblock \%}
+{\% block tag_list \%}
+  {\% if tag_list \%}
+    <div id="tag-cloud">
+    {\% for tag_count in tag_list \%}
+      <a class="\{\{ tag_count.css_class \}\}"
+         href="\{\{ tag_path \}\}/\{\{ tag_count.tag \}\}/">
+         \{\{ tag_count.tag \}\}(\{\{ tag_count.count \}\})</a>
+         {\% if not forloop.last \%},{\% endif \%}
+    {\% endfor \%}
+    </div>
+  {\% endif \%}
+{\% endblock \%}
+{% endshowliquid %}
 
 The template extends the base template, and then just fills in the
 HTML for each block that's defined in the base template. Note, in
 particular, this block:
 
-    {\% for article in articles \%}
-      {\% include "article.html" \%}
-    {\% endfor \%}
+{% showliquid %}
+{\% for article in articles \%}
+  {\% include "article.html" \%}
+{\% endfor \%}
+{% endshowliquid %}
 
 The actual template that displays an article resides in yet another
 file, so it can be re-used in different templates.
@@ -1131,28 +1151,30 @@ traverses the list of articles to be displayed.
 
 The `article.html` template looks like this:
 
-    <table width="100%" border="0" cellspacing="0" cellpadding="0">
-      <tr class="article_title_line">
-        <td class="article_title">\{\{ article.title \}\}</td>
-        <td class="timestamp">
-           \{\{ article.published_when|date:"j F, Y \a\t g:i A" \}\}
-        </td>
-      </tr>
-      <tr>
-        {\% if article.draft \%}
-        <td colspan="2" class="article-body-draft">
-        {\% else \%}
-        <td colspan="2" class="article-body">
-        {\% endif \%}
-        \{\{ article.html \}\}
-        </td>
-      </tr>
-      <tr>
-        <td colspan="2" class="article-footer">
-          <a href="\{\{ article.path \}\}" class="reference">Permalink</a>|
-          Tags: \{\{ article.tags|join:", " \}\}</td>
-      </tr>
-    </table>
+{% showliquid %}
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr class="article_title_line">
+    <td class="article_title">\{\{ article.title \}\}</td>
+    <td class="timestamp">
+       \{\{ article.published_when|date:"j F, Y \a\t g:i A" \}\}
+    </td>
+  </tr>
+  <tr>
+    {\% if article.draft \%}
+    <td colspan="2" class="article-body-draft">
+    {\% else \%}
+    <td colspan="2" class="article-body">
+    {\% endif \%}
+    \{\{ article.html \}\}
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="article-footer">
+      <a href="\{\{ article.path \}\}" class="reference">Permalink</a>|
+      Tags: \{\{ article.tags|join:", " \}\}</td>
+  </tr>
+</table>
+{% endshowliquid %}
 
 It's relatively easy to understand: It assumes the existence of a
 variable called `article` that contains the article to be
@@ -1161,15 +1183,15 @@ displayed.
 The handler for the main page is even simpler:
 
 {% codeblock lang:python %}
-    class FrontPageHandler(AbstractPageHandler):
-        def get(self):
-            articles = Article.published()
-            if len(articles) > defs.MAX_ARTICLES_PER_PAGE:
-                articles = articles[:defs.MAX_ARTICLES_PER_PAGE]
+class FrontPageHandler(AbstractPageHandler):
+    def get(self):
+        articles = Article.published()
+        if len(articles) > defs.MAX_ARTICLES_PER_PAGE:
+            articles = articles[:defs.MAX_ARTICLES_PER_PAGE]
 
-            self.response.out.write(self.render_articles(articles,
-                                                         self.request,
-                                                         self.get_recent()))
+        self.response.out.write(self.render_articles(articles,
+                                                     self.request,
+                                                     self.get_recent()))
 {% endcodeblock %}
 
 It gets the list of published articles, trims it down to the
@@ -1181,9 +1203,9 @@ If you did not leave the `dev_appserver` running, bring it up
 again. Then, connect to `http://localhost:8080/`, and check out
 your main page. It should look something like this:
 
-![Main screen](main-small.png)
+{% img /images/2008-08-07-writing-blogging-software-for-google-app-engine/main-small.png 'Main screen' %}
 
-The [full main page image is here](main.png).
+The [full main page image is here](/images/2008-08-07-writing-blogging-software-for-google-app-engine/main.png).
 
 ## Show One Article
 
@@ -1194,22 +1216,22 @@ It re-uses the same `show-articles.html` template, but with just
 one article in the list. The handler looks like this:
 
 {% codeblock lang:python %}
-    class SingleArticleHandler(AbstractPageHandler):
+class SingleArticleHandler(AbstractPageHandler):
 
-        def get(self, id):
-            article = Article.get(int(id))
-            if article:
-                template = 'show-articles.html'
-                articles = [article]
-                more = None
-            else:
-                template = 'not-found.html'
-                articles = []
+    def get(self, id):
+        article = Article.get(int(id))
+        if article:
+            template = 'show-articles.html'
+            articles = [article]
+            more = None
+        else:
+            template = 'not-found.html'
+            articles = []
 
-            self.response.out.write(self.render_articles(articles=articles,
-                                                         request=self.request,
-                                                         recent=self.get_recent(),
-                                                         template_name=template))
+        self.response.out.write(self.render_articles(articles=articles,
+                                                     request=self.request,
+                                                     recent=self.get_recent(),
+                                                     template_name=template))
 {% endcodeblock %}
 
 It attempts to retrieve the article with the specified ID. If the
@@ -1227,13 +1249,13 @@ this handler in the `WSGIApplication` object at the bottom of the
 script:
 
 {% codeblock lang:python %}
-    application = webapp.WSGIApplication(
-        [ ...
+application = webapp.WSGIApplication(
+    [ ...
 
-         ('/id/(\d+)/?$', SingleArticleHandler),
+     ('/id/(\d+)/?$', SingleArticleHandler),
 
-         ...
-         ],
+     ...
+     ],
 {% endcodeblock %}
 
 Note that the regular expression, `'/id/(\d+)/?$` contains a group,
@@ -1248,12 +1270,12 @@ The `ArticlesByTagHandler` class again re-uses the `show-articles.html`
 template:
 
 {% codeblock lang:python %}
-    class ArticlesByTagHandler(AbstractPageHandler):
-        def get(self, tag):
-            articles = Article.all_for_tag(tag)
-            self.response.out.write(self.render_articles(articles,
-                                                         self.request,
-                                                         self.get_recent()))
+class ArticlesByTagHandler(AbstractPageHandler):
+    def get(self, tag):
+        articles = Article.all_for_tag(tag)
+        self.response.out.write(self.render_articles(articles,
+                                                     self.request,
+                                                     self.get_recent()))
 {% endcodeblock %}
 
 Note, however, that it's calling a class method called
@@ -1261,12 +1283,12 @@ Note, however, that it's calling a class method called
 to support this query method. That method turns out to be trivial:
 
 {% codeblock lang:python %}
-    @classmethod
-    def all_for_tag(cls, tag):
-        return Article.published_query()\
-                      .filter('tags = ', tag)\
-                      .order('-published_when')\
-                      .fetch(FETCH_THEM_ALL)
+@classmethod
+def all_for_tag(cls, tag):
+    return Article.published_query()\
+                  .filter('tags = ', tag)\
+                  .order('-published_when')\
+                  .fetch(FETCH_THEM_ALL)
 {% endcodeblock %}
 
 My original version of this method loaded all published articles and
@@ -1274,9 +1296,11 @@ manually searched through their tags. However, in an
 [email to the Google App Engine mailing list, Bill Katz][] pointed me to
 [something I missed in the GAE docs][]:
 
-> In a query, comparing a list property to a value performs the test
-> against the list members: `list_property = value` tests if the value
-> appears anywhere in the list.
+{% blockquote %}
+In a query, comparing a list property to a value performs the test
+against the list members: `list_property = value` tests if the value
+appears anywhere in the list.
+{% endblockquote %}
 
 This is convenient and more efficient than my original solution.
 
@@ -1288,32 +1312,32 @@ Next, we have to write a handler that'll produce a page of posts for a
 given month. As with the tag handler, the month handler is trivial:
 
 {% codeblock lang:python %}
-    class ArticlesForMonthHandler(AbstractPageHandler):
-        def get(self, year, month):
-            articles = Article.all_for_month(int(year), int(month))
-            self.response.out.write(self.render_articles(articles,
-                                                         self.request,
-                                                         self.get_recent()))
+class ArticlesForMonthHandler(AbstractPageHandler):
+    def get(self, year, month):
+        articles = Article.all_for_month(int(year), int(month))
+        self.response.out.write(self.render_articles(articles,
+                                                     self.request,
+                                                     self.get_recent()))
 {% endcodeblock %}
 
 Again, though, it calls an `Article` class method we have yet to write:
 
 {% codeblock lang:python %}
-    @classmethod
-    def all_for_month(cls, year, month):
-        start_date = datetime.date(year, month, 1)
-        if start_date.month == 12:
-            next_year = start_date.year + 1
-            next_month = 1
-        else:
-            next_year = start_date.year
-            next_month = start_date.month + 1
-        end_date = datetime.date(next_year, next_month, 1)
-        query = Article.published_query()\\
-                       .filter('published_when >=', start_date)\\
-                       .filter('published_when <', end_date)\\
-                       .order('-published_when')
-        return query.fetch(FETCH_THEM_ALL)
+@classmethod
+def all_for_month(cls, year, month):
+    start_date = datetime.date(year, month, 1)
+    if start_date.month == 12:
+        next_year = start_date.year + 1
+        next_month = 1
+    else:
+        next_year = start_date.year
+        next_month = start_date.month + 1
+    end_date = datetime.date(next_year, next_month, 1)
+    query = Article.published_query()\\
+                   .filter('published_when >=', start_date)\\
+                   .filter('published_when <', end_date)\\
+                   .order('-published_when')
+    return query.fetch(FETCH_THEM_ALL)
 {% endcodeblock %}
 
 This method chains query filters to the query returned by
@@ -1327,32 +1351,34 @@ chronological order. I chose to make this page even simpler than the other
 pages: It lacks the tag cloud, recent posts, and posts-by-month sections in
 the margin. The template is trivial:
 
-    {\% extends "base.html" \%}
+{% showliquid %}
+{\% extends "base.html" \%}
 
-    {\% block main \%}
-      <span class="heading">Complete Archive:</span>
-      {\% if articles \%}
-        <ul>
-        {\% for article in articles \%}
-          <li><a href="\{\{ article.path \}\}">\{\{ article.title \}\}</a>
-              (\{\{ article.timestamp|date:"j F, Y" \}\})
-        {\% endfor \%}
-        </ul>
-      {\% else \%}
-      <p>This blog is empty. (Someone want to fix that?)
-      {\% endif \%}
-    {\% endblock \%}
+{\% block main \%}
+  <span class="heading">Complete Archive:</span>
+  {\% if articles \%}
+    <ul>
+    {\% for article in articles \%}
+      <li><a href="\{\{ article.path \}\}">\{\{ article.title \}\}</a>
+          (\{\{ article.timestamp|date:"j F, Y" \}\})
+    {\% endfor \%}
+    </ul>
+  {\% else \%}
+  <p>This blog is empty. (Someone want to fix that?)
+  {\% endif \%}
+{\% endblock \%}
+{% endshowliquid %}
 
 And the handler is, once again, trivial:
 
 {% codeblock lang:python %}
-    class ArchivePageHandler(AbstractPageHandler):
-        def get(self):
-            articles = Article.published()
-            self.response.out.write(self.render_articles(articles,
-                                                         self.request,
-                                                         [],
-                                                         'archive.html'))
+class ArchivePageHandler(AbstractPageHandler):
+    def get(self):
+        articles = Article.published()
+        self.response.out.write(self.render_articles(articles,
+                                                     self.request,
+                                                     [],
+                                                     'archive.html'))
 {% endcodeblock %}
 
 Note that `ArchivePageHandler` passes an empty list for the "recent" posts
@@ -1361,9 +1387,9 @@ Note that `ArchivePageHandler` passes an empty list for the "recent" posts
 Here's what the archive page looks like with our two articles in
 the archive:
 
-![Archive screen](archive-small.png)
+{% img /images/2008-08-07-writing-blogging-software-for-google-app-engine/archive-small.png 'Archive screen' %}
 
-The [full archive page image is here](archive.png).
+The [full archive page image is here](/images/2008-08-07-writing-blogging-software-for-google-app-engine/archive.png).
 
 ## RSS Feed
 
@@ -1372,39 +1398,41 @@ course, that's simply a matter of writing a template and a small
 handler. By now, the handler should look pretty familiar:
 
 {% codeblock lang:python %}
-    class RSSFeedHandler(AbstractPageHandler):
-        def get(self):
-            articles = Article.published()
-            self.response.headers['Content-Type'] = 'text/xml'
-            self.response.out.write(self.render_articles(articles,
-                                                         self.request,
-                                                         [],
-                                                         'rss2.xml'))
+class RSSFeedHandler(AbstractPageHandler):
+    def get(self):
+        articles = Article.published()
+        self.response.headers['Content-Type'] = 'text/xml'
+        self.response.out.write(self.render_articles(articles,
+                                                     self.request,
+                                                     [],
+                                                     'rss2.xml'))
 {% endcodeblock %}
 
 The template is simple, too:
 
-    <?xml version="1.0" encoding="utf-8" ?>
-    <rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/">
-      <channel>
-        <title>\{\{ blog_name \}\}</title>
-        <link>\{\{ blog_url \}\}</link>
-        <description>\{\{ blog_name \}\}</description>
-        <pubDate>\{\{ last_updated|date:"D, d M Y H:i:s T" \}\}</pubDate>
-        {\% for article in articles \%}
-        <item>
-          <title>\{\{ article.title \}\}</title>
-          <link>\{\{ article.url \}\}</link>
-          <guid>\{\{ article.url \}\}</guid>
-          <pubDate>\{\{ article.timestamp|date:"D, d M Y H:i:s T" \}\}</pubDate>
-          <description>
-            \{\{ article.html|escape \}\}
-          </description>
-          <author>\{\{ blog_author \}\}</author>
-        </item>
-        {\% endfor \%}
-      </channel>
-    </rss>
+{% showliquid %}
+<?xml version="1.0" encoding="utf-8" ?>
+<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>\{\{ blog_name \}\}</title>
+    <link>\{\{ blog_url \}\}</link>
+    <description>\{\{ blog_name \}\}</description>
+    <pubDate>\{\{ last_updated|date:"D, d M Y H:i:s T" \}\}</pubDate>
+    {\% for article in articles \%}
+    <item>
+      <title>\{\{ article.title \}\}</title>
+      <link>\{\{ article.url \}\}</link>
+      <guid>\{\{ article.url \}\}</guid>
+      <pubDate>\{\{ article.timestamp|date:"D, d M Y H:i:s T" \}\}</pubDate>
+      <description>
+        \{\{ article.html|escape \}\}
+      </description>
+      <author>\{\{ blog_author \}\}</author>
+    </item>
+    {\% endfor \%}
+  </channel>
+</rss>
+{% endshowliquid %}
 
 # Deploy the Application
 
@@ -1431,9 +1459,9 @@ For instance, assume you have a picture call `foo.png` that you
 want to use in a blog article. Here's how you might deploy it:
 
 {% codeblock lang:bash %}
-    $ cd picoblog
-    $ cp ~/foo.png static
-    $ appcfg.py update .
+$ cd picoblog
+$ cp ~/foo.png static
+$ appcfg.py update .
 {% endcodeblock %}
 
 Then, you can use the reStructuredText `.. image` directive to pull
@@ -1459,11 +1487,12 @@ where you're doing your editing. That turns out to be trivial to
 implement: Merely go back to \`The Edit Screen Template\`\_, and
 add these lines right after the end of the form:
 
-    <h1 class="admin-page-title">Preview:</h1>
-    <div style="border-top: 1px solid black">
-    <iframe src="/id/\{\{ article.id \}\}" width="97%" scrolling="auto" height="750"
-            frameborder="0">
-    </iframe>
+{% showliquid %}
+<h1 class="admin-page-title">Preview:</h1>
+<div style="border-top: 1px solid black">
+<iframe src="/id/\{\{ article.id \}\}" width="97%" scrolling="auto" height="750" frameborder="0">
+</iframe>
+{% endshowliquid %}
 
 Now, you'll always have a preview frame underneath the edit
 controls.
