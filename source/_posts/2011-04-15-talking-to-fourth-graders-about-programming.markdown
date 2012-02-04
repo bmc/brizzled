@@ -29,7 +29,7 @@ First, I talked about computers, of course:
 
 [ginormous]: http://www.merriam-webster.com/dictionary/ginormous
 
-<a href="http://www.cbi.umn.edu/graphics/cdc02b.jpg"><img src="cdc02b.jpg" width="289" height="230" border="0" class="image-right"></a>
+<a href="http://www.cbi.umn.edu/graphics/cdc02b.jpg"><img src="/images/2011-04-15-talking-to-fourth-graders-about-programming/cdc02b.jpg" width="289" height="230" border="0" class="image-right"></a>
 
 I pointed out that, because they were big and expensive, computers had more
 limited uses then, unlike today. I said that, today, computers are
@@ -125,7 +125,7 @@ This was a perfect segu&eacute; into the next part: A demo. I had found
 [Scratch][], a free, cross-platform programming environment that obviously
 has roots in [Logo][]. But, Scratch is like Logo on steroids.
 
-<a href="scratch.png"><img src="scratch-small.png" width="559" height="398" border="0"></a>
+<a href="/images/2011-04-15-talking-to-fourth-graders-about-programming/scratch.png"><img src="/images/2011-04-15-talking-to-fourth-graders-about-programming/scratch-small.png" width="559" height="398" border="0"></a>
 
 [Scratch]: http://scratch.mit.edu/
 [Logo]: http://en.wikipedia.org/wiki/Logo_(programming_language)
