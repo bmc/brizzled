@@ -12,7 +12,7 @@ Well, amusing to _me_, anyway...
 **Update:** I posted a follow-up cartoon [here](/id/121/).
 
 <div markdown="1" style="float: center; width: 673px !important" class="image-container">
-<img src="candidates-2012.png" width="673" height="525"><br clear="all"/>
+<img src="/images/2011-10-23-the-candidates/candidates-2012.png" width="673" height="525"><br clear="all"/>
 </div>
 
 The comic book typeface is called *Unmasked*, and it's available, free for

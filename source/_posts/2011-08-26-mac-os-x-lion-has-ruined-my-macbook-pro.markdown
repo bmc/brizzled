@@ -6,7 +6,7 @@ date: 2011-08-26 00:00
 categories: [hardware, mac os x, apple]
 ---
 
-{% img image-right /images/2011-08-26-mac-os-x-lion-has-ruined-my-macbook-pro/beachball.png %}
+{% img image-right blend-in /images/2011-08-26-mac-os-x-lion-has-ruined-my-macbook-pro/beachball.png %}
 
 *Updated: It's all about the RAM. See [below](#update).*
 
