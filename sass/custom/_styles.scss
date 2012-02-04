@@ -9,7 +9,6 @@ $blog_title_font: "Rock Salt";
 $body_font_size: 16px;
 
 @import "mixins";
-@import "lytebox";
 
 body {
     font-size: $body_font_size;
@@ -77,7 +76,6 @@ img.image-left {
     float: left;
 }
 
-img.blend-in {
-    background: transparent !important;
-    border: none !important;
+div.about-text {
+    font-family: $serif;
 }
