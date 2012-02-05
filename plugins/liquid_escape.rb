@@ -1,7 +1,7 @@
 # Plugin to handle escaped Liquid tags (for when you want to put Liquid tags
 # in your blog, but have them render verbatim).
 #
-# Copyright (c) 2011 Brian M. Clapper <bmc@clapper.org>
+# Copyright (c) 2012 Brian M. Clapper <bmc@clapper.org>
 #
 # Released under a standard BSD license.
 

@@ -1,6 +1,6 @@
 # Plugin to format something verbatim, without highlighting. Supports a title.
 #
-# Copyright (c) 2011 Brian M. Clapper <bmc@clapper.org>
+# Copyright (c) 2012 Brian M. Clapper <bmc@clapper.org>
 #
 # Released under a standard BSD license.
 
