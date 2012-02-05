@@ -7,20 +7,30 @@
 # This plugin is useful when you have to display an image that's too wide for
 # the blog.
 #
-# Usage:
+# USAGE:
 #
-# imgpopup /relative/path/to/image nn% [title]
+#     imgpopup /relative/path/to/image nn% [title]
 #
-# The image path is relative to "source". The second parameter is the scale
-# percentage. The third parameter is a title for the popup.
+#     The image path is relative to "source". The second parameter is the scale
+#     percentage. The third parameter is a title for the popup.
 #
-# Example:
+# PREREQUISITES:
 #
-# {% imgpopup /images/my-big-image.png 50% Check this out %}
+# To use this plugin, you'll need:
 #
-# You can see this plugin in use here:
+# - the mini_magick gem (in the Gemfile)
+# - the Image Magick tool kit's mogrify(1) command installed on your system
+#   and in the PATH
+# - jQuery (in source/javascripts and in your head.html)
+# - jQuery UI (in source/javascripts and in your head.html)
 #
-# http://brizzled.clapper.org/blog/2011/10/23/the-candidates/
+# EXAMPLE:
+#
+#     {% imgpopup /images/my-big-image.png 50% Check this out %}
+#
+#     You can see this plugin in use here:
+#
+#     http://brizzled.clapper.org/blog/2011/10/23/the-candidates/
 #
 # Copyright (c) 2012 Brian M. Clapper <bmc@clapper.org>
 #
