@@ -157,23 +157,23 @@ top of the file as magic. For now, the parts we care about are:
   against incoming URL requests; on a match, it'll run the
   associated script. In this case, we're saying:
 
-    * Any path starting with `/static` is resolved via the built-in static
-      file handler. This is where we'll put our images. So go ahead and
-      create a `static` directory under `picoblog`.
+* Any path starting with `/static` is resolved via the built-in static
+  file handler. This is where we'll put our images. So go ahead and
+  create a `static` directory under `picoblog`.
 
-    * Since browsers always look for `/favicon.ico`, and I get tired
-      of seeing all the "not found" messages in the logs, there's an
-      entry for an icon. It's stored in the `static` directory.
+* Since browsers always look for `/favicon.ico`, and I get tired
+  of seeing all the "not found" messages in the logs, there's an
+  entry for an icon. It's stored in the `static` directory.
 
-    * The administrative screens (for creating and editing blog
-      articles) live under '/admin' and are secured: Only a Google
-      account with administrative privileges on the project is allowed to
-      get to them. They're handled by the `admin.py` script. We'll be
-      creating that script in the `picoblog` directory.
+* The administrative screens (for creating and editing blog
+  articles) live under '/admin' and are secured: Only a Google
+  account with administrative privileges on the project is allowed to
+  get to them. They're handled by the `admin.py` script. We'll be
+  creating that script in the `picoblog` directory.
 
-    * Finally, the published blog itself matches everything else, and
-      it's handled by the `blog.py` script. That script, too, will end up
-      in the `picoblog` directory.
+* Finally, the published blog itself matches everything else, and
+  it's handled by the `blog.py` script. That script, too, will end up
+  in the `picoblog` directory.
 
 Once you've created `app.yaml`, you can pretty much forget about it
 for awhile.
@@ -393,19 +393,21 @@ You can see the
 It consists of a link to the style sheet, some Javascript, some
 standard HTML layout, and this block of template logic:
 
-{% showliquid %}
-    <ul>
-    {\% for article in articles \%}
-      {\% if article.draft \%}
-      <li class="admin-draft">
-      {\% else \%}
-      <li class="admin-published">
-      {\% endif \%}
-      \{\{ article.published_when|date:"j F, Y" \}\}
-      <a href="/admin/article/edit/?id=\{\{ article.id \}\}">\{\{ article.title \}\}</a>
-    {\% endfor \%}
-    </ul>
-{% endshowliquid %}
+{% codeblock Admin Template Logic lang:html %}
+{% raw %}
+<ul>
+{% for article in articles %}
+  {% if article.draft %}
+  <li class="admin-draft">
+  {% else %}
+  <li class="admin-published">
+  {% endif %}
+  {{ article.published_when|date:"j F, Y" }}
+  <a href="/admin/article/edit/?id={{ article.id }}">{{ article.title \}}</a>
+{% endfor %}
+</ul>
+{% endraw %}
+{% endcodeblock %}
 
 This template code assumes that the variables passed to the template will
 include a Python list called `articles`, each element of which is an
@@ -413,9 +415,11 @@ include a Python list called `articles`, each element of which is an
 
 The style sheet link looks like this:
 
-{% showliquid %}
+{% codeblock lang:html %}
+{% raw %}
 <link href="/static/style.css" rel="stylesheet" type="text/css"/>
-{% endshowliquid %}
+{% endraw %}
+{% endcodeblock %}
 
 Rather than use a template `{% include "style.css" %}` directive to
 pull the style sheet file inline at rendering time, we're telling
@@ -894,30 +898,35 @@ The simplest way to build these screens is to use Django template
 inheritance, which has the additional benefit of ensuring a consistent
 look. Most of the HTML goes into a [base template][]. That template defines
 the basic look and feel of the display pages, with various template
-substitutions like `\{\{blog_name\}\}` and `\{\{blog_owner\}\}`.
+substitutions like `{{blog_name}}` and `{{blog_owner}}`.
 
 However, the base template also contains template code like the
 following:
 
-{% showliquid %}
+{% codeblock %}
+{% raw %}
 <div id="articles_container">
-{\% for article in articles \%}
+{% for article in articles %}
 
-  {\% block main \%}
-  {\% endblock \%}
+  {% block main %}
+  {% endblock %}
+{% endfor %}
 </div>
-{% endshowliquid %}
+{% endraw %}
+{% endcodeblock %}
 
 and this:
 
-{% showliquid %}
+{% codeblock %}
+{% raw %}
 <div id="right-margin">
-  {\% block recent_list \%}
-  {\% endblock \%}
-  {\% block date_list \%}
-  {\% endblock \%}
+  {% block recent_list %}
+  {% endblock %}
+  {% block date_list %}
+  {% endblock %}
 </div>
-{% endshowliquid %}
+{% endraw %}
+{% endcodeblock %}
 
 The blocks can be filled in by other templates that inherit from
 this one.
@@ -1053,14 +1062,16 @@ The base class also contains a few other methods used by
 Next, let's get the *Not Found* page out of the way. The template
 is very simple:
 
-{% showliquid %}
-{\% extends "base.html" \%}
+{% codeblock %}
+{% raw %}
+{% extends "base.html" %}
 
-{\% block main \%}
+{% block main %}
   <p class="article_title">Not Found</p>
   <p>Sorry, but there's no such page here.</p>
-{\% endblock \%}
-{% endshowliquid %}
+{% endblock %}
+{% endraw %}
+{% endcodeblock %}
 
 It extends the base template and fills in the `main` block with a
 simple static message. We'll use this template in a couple places.
@@ -1088,62 +1099,66 @@ The main screen requires a template and a handler. With the base template
 and the `AbstractPageHandler` class in place, both are pretty simple.
 Here's the template, which resides in `show-articles.html`:
 
-{% showliquid %}
-{\% extends "base.html" \%}
+{% codeblock lang:django %}
+{% raw %}
+{% extends "base.html" %}
 
-{\% block main \%}
-  {\% for article in articles \%}
-    {\% include "article.html" \%}
+{% block main %}
+  {% for article in articles %}
+    {% include "article.html" %}
     </td></tr></table>
-  {\% endfor \%}
-{\% endblock \%}
+  {% endfor %}
+{% endblock %}
 
-{\% block recent_list \%}
-  {\% if recent \%}
+{% block recent_list %}
+  {% if recent %}
     <b>Recent:</b>
     <ul>
-    {\% for article in recent \%}
-      <li><a href="\{\{ article.path \}\}">\{\{ article.title \}\}</a>
-    {\% endfor \%}
+    {% for article in recent %}
+      <li><a href="{{ article.path }}">{{ article.title }}</a>
+    {% endfor %}
     </ul>
-  {\% endif \%}
-{\% endblock \%}
+  {% endif %}
+{% endblock %}
 
-{\% block date_list \%}
-  {\% if date_list \%}
+{% block date_list %}
+  {% if date_list %}
     <b>By month:</b>
     <ul>
-    {\% for date_count in date_list \%}
-      <li><a href="\{\{ date_path \}\}/\{\{ date_count.date|date:"Y-m" \}\}/">
-          \{\{ date_count.date|date:"F, Y" \}\}</a> (\{\{ date_count.count \}\})
-    {\% endfor \%}
+    {% for date_count in date_list %}
+      <li><a href="{{ date_path }}/{{ date_count.date|date:"Y-m" }}/">
+          {{ date_count.date|date:"F, Y" }}</a> ({{ date_count.count }})
+    {% endfor %}
     </ul>
-  {\% endif \%}
-{\% endblock \%}
+  {% endif %}
+{% endblock %}
 
-{\% block tag_list \%}
-  {\% if tag_list \%}
+{% block tag_list %}
+  {% if tag_list %}
     <div id="tag-cloud">
-    {\% for tag_count in tag_list \%}
-      <a class="\{\{ tag_count.css_class \}\}"
-         href="\{\{ tag_path \}\}/\{\{ tag_count.tag \}\}/">
-         \{\{ tag_count.tag \}\}(\{\{ tag_count.count \}\})</a>
-         {\% if not forloop.last \%},{\% endif \%}
-    {\% endfor \%}
+    {% for tag_count in tag_list %}
+      <a class="{{ tag_count.css_class }}"
+         href="{{ tag_path }}/{{ tag_count.tag }}/">
+         {{ tag_count.tag }}({{ tag_count.count }})</a>
+         {% if not forloop.last %},{% endif %}
+    {% endfor %}
     </div>
-  {\% endif \%}
-{\% endblock \%}
-{% endshowliquid %}
+  {% endif %}
+{% endblock %}
+{% endraw}
+{% endcodeblock %}
 
 The template extends the base template, and then just fills in the
 HTML for each block that's defined in the base template. Note, in
 particular, this block:
 
-{% showliquid %}
-{\% for article in articles \%}
-  {\% include "article.html" \%}
-{\% endfor \%}
-{% endshowliquid %}
+{% codeblock %}
+{% raw %}
+{% for article in articles %}
+  {% include "article.html" %}
+{% endfor %}
+{% endraw %}
+{% endcodeblock %}
 
 The actual template that displays an article resides in yet another
 file, so it can be re-used in different templates.
@@ -1152,30 +1167,32 @@ traverses the list of articles to be displayed.
 
 The `article.html` template looks like this:
 
-{% showliquid %}
+{% codeblock article.html %}
+{% raw %}
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
   <tr class="article_title_line">
-    <td class="article_title">\{\{ article.title \}\}</td>
+    <td class="article_title">{{ article.title }}</td>
     <td class="timestamp">
-       \{\{ article.published_when|date:"j F, Y \a\t g:i A" \}\}
+       {{ article.published_when|date:"j F, Y \a\t g:i A" }}
     </td>
   </tr>
   <tr>
-    {\% if article.draft \%}
+    {% if article.draft %}
     <td colspan="2" class="article-body-draft">
-    {\% else \%}
+    {% else %}
     <td colspan="2" class="article-body">
-    {\% endif \%}
-    \{\{ article.html \}\}
+    {% endif %}
+    {{ article.html }}
     </td>
   </tr>
   <tr>
     <td colspan="2" class="article-footer">
-      <a href="\{\{ article.path \}\}" class="reference">Permalink</a>|
-      Tags: \{\{ article.tags|join:", " \}\}</td>
+      <a href="{{ article.path }}" class="reference">Permalink</a>|
+      Tags: {{ article.tags|join:", " }}</td>
   </tr>
 </table>
-{% endshowliquid %}
+{% endraw %}
+{% endcodeblock %}
 
 It's relatively easy to understand: It assumes the existence of a
 variable called `article` that contains the article to be
@@ -1297,11 +1314,9 @@ manually searched through their tags. However, in an
 [email to the Google App Engine mailing list, Bill Katz][] pointed me to
 [something I missed in the GAE docs][]:
 
-{% blockquote %}
-In a query, comparing a list property to a value performs the test
-against the list members: `list_property = value` tests if the value
-appears anywhere in the list.
-{% endblockquote %}
+> In a query, comparing a list property to a value performs the test
+> against the list members: `list_property = value` tests if the value
+> appears anywhere in the list.
 
 This is convenient and more efficient than my original solution.
 
@@ -1352,23 +1367,25 @@ chronological order. I chose to make this page even simpler than the other
 pages: It lacks the tag cloud, recent posts, and posts-by-month sections in
 the margin. The template is trivial:
 
-{% showliquid %}
-{\% extends "base.html" \%}
+{% codeblock lang:django %}
+{% raw %}
+{% extends "base.html" %}
 
-{\% block main \%}
+{% block main %}
   <span class="heading">Complete Archive:</span>
-  {\% if articles \%}
+  {% if articles %}
     <ul>
-    {\% for article in articles \%}
-      <li><a href="\{\{ article.path \}\}">\{\{ article.title \}\}</a>
-          (\{\{ article.timestamp|date:"j F, Y" \}\})
-    {\% endfor \%}
+    {% for article in articles %}
+      <li><a href="{{ article.path }}">{{ article.title }}</a>
+          ({{ article.timestamp|date:"j F, Y" }})
+    {% endfor %}
     </ul>
-  {\% else \%}
+  {% else %}
   <p>This blog is empty. (Someone want to fix that?)
-  {\% endif \%}
-{\% endblock \%}
-{% endshowliquid %}
+  {% endif %}
+{% endblock %}
+{% endraw %}
+{% endcodeblock %}
 
 And the handler is, once again, trivial:
 
@@ -1411,29 +1428,31 @@ class RSSFeedHandler(AbstractPageHandler):
 
 The template is simple, too:
 
-{% showliquid %}
+{% codeblock lang:xml %}
+{% raw %}
 <?xml version="1.0" encoding="utf-8" ?>
 <rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/">
   <channel>
-    <title>\{\{ blog_name \}\}</title>
-    <link>\{\{ blog_url \}\}</link>
-    <description>\{\{ blog_name \}\}</description>
-    <pubDate>\{\{ last_updated|date:"D, d M Y H:i:s T" \}\}</pubDate>
-    {\% for article in articles \%}
+    <title>{{ blog_name }}</title>
+    <link>{{ blog_url }}</link>
+    <description>{{ blog_name }}</description>
+    <pubDate>{{ last_updated|date:"D, d M Y H:i:s T" }}</pubDate>
+    {% for article in articles %}
     <item>
-      <title>\{\{ article.title \}\}</title>
-      <link>\{\{ article.url \}\}</link>
-      <guid>\{\{ article.url \}\}</guid>
-      <pubDate>\{\{ article.timestamp|date:"D, d M Y H:i:s T" \}\}</pubDate>
+      <title>{{ article.title }}</title>
+      <link>{{ article.url }}</link>
+      <guid>{{ article.url }}</guid>
+      <pubDate>{{ article.timestamp|date:"D, d M Y H:i:s T" }}</pubDate>
       <description>
-        \{\{ article.html|escape \}\}
+        {{ article.html|escape }}
       </description>
-      <author>\{\{ blog_author \}\}</author>
+      <author>{{ blog_author }}</author>
     </item>
-    {\% endfor \%}
+    {% endfor %}
   </channel>
 </rss>
-{% endshowliquid %}
+{% endraw %}
+{% endcodeblock %}
 
 # Deploy the Application
 
@@ -1488,12 +1507,14 @@ where you're doing your editing. That turns out to be trivial to
 implement: Merely go back to \`The Edit Screen Template\`\_, and
 add these lines right after the end of the form:
 
-{% showliquid %}
+{% codeblock lang:html %}
+{% raw %}
 <h1 class="admin-page-title">Preview:</h1>
 <div style="border-top: 1px solid black">
-<iframe src="/id/\{\{ article.id \}\}" width="97%" scrolling="auto" height="750" frameborder="0">
+<iframe src="/id/{{ article.id }}" width="97%" scrolling="auto" height="750" frameborder="0">
 </iframe>
-{% endshowliquid %}
+{% endraw %}
+{% endcodeblock %}
 
 Now, you'll always have a preview frame underneath the edit
 controls.

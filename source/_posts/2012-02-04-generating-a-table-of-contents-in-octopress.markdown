@@ -43,9 +43,11 @@ Ideally, since Octopress generates static HTML, I'd like to have a
 [Liquid][] tag to embed in the appropriate place inside one of my templates.
 Something like this would be ideal:
 
-{% showliquid What I would like %}
-{\% table-of-contents \%}
-{% endshowliquid %}
+{% codeblock What I would like %}
+{% raw %}
+{% table-of-contents %}
+{% endraw %}
+{% endcodeblock %}
 
 Unfortunately, that's a bit of a pain to implement. Instead, I elected to
 use Doug Neiner's [jQuery table of contents plugin][] to generate the table
@@ -65,15 +67,19 @@ file (e.g., `jquery-1.7.1.min.js`) to your blog's `source/javascripts/`directory
 Next, modify `source/_includes/custom/head.html` to include a `&lt;script&gt;`
 tag for jQuery. For a local install, use this line:
 
-{% showliquid Add this to source/_includes/custom/head.html %}
-<script src="\{\{ root_url \}\}/javascripts/jquery-1.7.1.min.js" type="text/javascript"></script>
-{% endshowliquid %}
+{% codeblock Add this to source/_includes/custom/head.html lang:html %}
+{% raw %}
+<script src="{{ root_url }}/javascripts/jquery-1.7.1.min.js" type="text/javascript"></script>
+{% endraw %}
+{% endcodeblock %}
 
 To use the version of jQuery hosted on Google, use this line:
 
-{% verbatim jQuery on the Google CDN %}
+{% codeblock jQuery on the Google CDN lang:html %}
+{% raw %}
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
-{% endverbatim %}
+{% endraw %}
+{% endcodeblock %}
 
 ## Generating the Table of Contents
 
@@ -93,7 +99,7 @@ of the logic into a separate function, in a separate Javascript file called
 [blog's GitHub repo](https://github.com/bmc/brizzled/blob/master/source/javascripts/generate-toc.js). I've
 also reproduced it, below.
 
-{% verbatim generate-toc.js %}
+{% codeblock generate-toc.js %}
 function generateTOC(insertBefore, heading) {
   var container = $("<div id='tocBlock'></div>");
   var div = $("<ul id='toc'></ul>");
@@ -107,7 +113,7 @@ function generateTOC(insertBefore, heading) {
   container.append(div);
   container.insertBefore(insertBefore);
 }
-{% endverbatim %}
+{% endcodeblock %}
 
 The `insertBefore` parameter is a jQuery string selector for the element to
 search for the table of content headings. The optional `heading` parameter
@@ -116,30 +122,34 @@ specifies the heading to preced the table of contents.
 Copy `generate-toc.js` to `source/javascripts` and put the following line in
 `source/_includes/custom/head.html`:
 
-{% showliquid Add this to source/_includes/custom/head.html %}
-<script src="\{\{ root_url \}\}/javascripts/generate-toc.js" type="text/javascript"></script>
-{% endshowliquid %}
+{% codeblock Add this to source/_includes/custom/head.html lang:html %}
+{% raw %}
+<script src="{{ root_url }}/javascripts/generate-toc.js" type="text/javascript"></script>
+{% endraw %}
+{% endcodeblock %}
 
 ### Hooking the Javascript In
 
 The next step is to call `generateTOC()` at the right time. The following hunk
 of code goes at the bottom of `source/_includes/custom/after_article.html`:
 
-{% showliquid source/_includes/custom/after_article.html %}
-{\% if index \%}
-  {\% comment \%}
+{% codeblock source/_includes/custom/after_article.html %}
+{% raw %}
+{% if index %}
+  {% comment %}
   No table of contents on the index page.
-  {\% endcomment \%}
+  {% endcomment %}
 
-{\% elsif page.toc == true \%}
+{% elsif page.toc == true %}
   <script type="text/javascript">
   $(document).ready(function() {
     // Put a TOC right before the entry content.
     generateTOC('.entry-content', 'Table of Contents');
   });
   </script>
-{\% endif \%}
-{% endshowliquid %}
+{% endif %}
+{% endraw %}
+{% endcodeblock %}
 
 **Things to note:**
 
@@ -150,7 +160,7 @@ Note, too, that the code only generates the table of contents if the `page.toc`
 variable is set to "true". `page.toc` will be true only if the following line
 is in the [YAML front matter][] of an article. For example:
 
-{% verbatim Article Front Matter %}
+{% codeblock Article Front Matter %}
 ---
 layout: post
 title: "Generating a Table of Contents in Octopress"
@@ -159,7 +169,7 @@ comments: true
 categories: [blogging, jekyll, octopress]
 toc: true
 ---
-{% endverbatim %}
+{% endcodeblock %}
 
 If the `toc` line is missing or set to something other than "true", the 
 table of contents is skipped.
@@ -186,21 +196,16 @@ screen-specific stylings in a custom file. So, I created
 `sass/custom/_screen.scss` for my screen-specific rules, and added this line to
 `sass/screen.scss`:
 
-{% comment %}
-Liquid is barfing on syntax highlight here, for some reason. Skip it.
-{% endcomment %}
-
-{% verbatim sass/screen.scss %}
+{% codeblock sass/screen.scss lang:sass %}
+{% raw %}
 @import "custom/screen";
-{% endverbatim %}
+{% endraw %}
+{% endcodeblock %}
 
 Then, in `sass/custom/_screen.scss`, I put the following rules:
 
-{% comment %}
-Liquid is barfing on syntax highlight here, for some reason. Skip it.
-{% endcomment %}
-
-{% verbatim sass/custom/_screen.scss %}
+{% codeblock sass/custom/_screen.scss lang:sass %}
+{% raw %}
 $toc-bg: #dfdfdf;
 
 $toc-incr: 5px;
@@ -236,7 +241,8 @@ div#tocBlock {
         }
     }
 }
-{% endverbatim %}
+{% endraw %}
+{% endcodeblock %}
 
 That styling:
 
@@ -252,17 +258,16 @@ For consistency with the screen styling (and the rest of the SASS files), that
 file just includes a custom `sass/custom/_print.scss` file. Here's
 `sass/print.scss`:
 
-{% verbatim sass/screen.scss %}
+{% codeblock sass/screen.scss lang:sass %}
+{% raw %}
 @import "custom/print";
-{% endverbatim %}
+{% endraw %}
+{% endcodeblock %}
 
 Then, in `sass/custom/_screen.scss`, I put the following rules:
 
-{% comment %}
-Liquid is barfing on syntax highlight here, for some reason. Skip it.
-{% endcomment %}
-
-{% verbatim sass/custom/_print.scss %}
+{% codeblock sass/custom/_print.scss lang:sass %}
+{% raw %}
 $toc-incr: 1em;
 
 div#tocBlock {
@@ -292,7 +297,8 @@ div#tocBlock {
         }
     }
 }
-{% endverbatim %}
+{% endraw %}
+{% endcodeblock %}
 
 # Voil&agrave;!
 

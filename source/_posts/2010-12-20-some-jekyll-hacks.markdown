@@ -4,6 +4,7 @@ comments: true
 title: "Some Jekyll Hacks"
 date: 2010-12-20 00:00
 categories: [jekyll, ruby, blogging, liquid, programming, programming]
+toc: true
 ---
 
 **UPDATE: 3 February, 2012** _All this work really isn't necessary, now that
@@ -33,7 +34,7 @@ Jekyll expects to find its [plugins][], which must be [Ruby][] code. Within
 that directory, I created a `site.rb` file, containing code that augments
 the stock Jekyll `Site` class:
 
-{% codeblock lang:ruby %}
+{% codeblock site.rb %}
 module Jekyll
 
   # Extensions to the Jekyll Site class.
@@ -77,7 +78,7 @@ That code does two things:
 There's another piece of code that's required, in a file called
 `_plugins/page.rb`:
 
-{% codeblock lang:ruby %}
+{% codeblock page.rb %}
 module Jekyll
 
   # Extensions to the Jekyll Page class.
@@ -129,15 +130,17 @@ custom version of `to_liquid` adds the following values:
 With those two monkeypatched hacks in place, I can now use code like the
 following in my layouts:
 
-{% showliquid %}
-{\% for article in site.articles limit:page.max_top \%}
+{% codeblock lang:django %}
+{% raw %}
+{% for article in site.articles limit:page.max_top %}
 
-    <h1>\{\{ article.title \}\}</h1>
+    <h1>{{ article.title }}</h1>
 
     ...
 
-{\% endfor \%}
-{% endshowliquid %}
+{% endfor %}
+{% endraw %}
+{% endcodeblock %}
 
 # Liquid and Django
 
@@ -147,17 +150,21 @@ contains [App Engine template][] markup (which is based on
 template engine Jekyll uses, because they look similar to Liquid's template
 language. For example, the occurrence of a block of markup like this:
 
-{% showliquid %}
-{\% block main \%}
-{\% endblock \%}
-{% endshowliquid %}
+{% codeblock lang:django %}
+{% raw %}
+{% block main %}
+{% endblock %}
+{% endraw %}
+{% endcodeblock %}
     
 can cause Liquid to throw an exception about a bad tag ("block"). Similarly,
 something like this:
 
-{% showliquid %}
-\{\{ blog.name \}\}
-{% endshowliquid %}
+{% codeblock lang:django %}
+{% raw %}
+{{ blog.name }}
+{% endraw %}
+{% endcodeblock %}
 
 can result in an empty line, because Liquid will attempt to substitute the
 value of `blog.name`, only to find it *has* no value.
@@ -166,7 +173,7 @@ I needed to add a means of escaping those tags, so that Liquid would ignore
 them. The solution is straightforward and involves some more monkeypatching
 to Jekyll's `Page` class:
 
-{% codeblock lang:ruby %}
+{% codeblock page.rb %}
 module Jekyll
 
   # Extensions to the Jekyll Page class.
@@ -202,12 +209,14 @@ tags.
 This hack allows me to represent Liquid (or [Django][]) template markup
 within my Markdown blog articles like this:
 
-{% showliquid %}
-{\% block main \%}
-{\% endblock \%}
+{% codeblock lang:django %}
+{% raw %}
+{% block main %}
+{% endblock %}
     
-\{\{ article.path \}\}
-{% endshowliquid %}
+{{ article.path }}
+{% endraw %}
+{% endcodeblock %}
 
 The backslash escapes cause Liquid to ignore the tags when it renders my
 articles. The `fix_liquid_escapes` hack then converts the escaped sequences
@@ -230,18 +239,20 @@ I had several goals in mind:
 Addressing the first goal was simple: I just specify a comma-separated list of
 tags in an article's [YAML front matter][]. For instance:
 
-    ---
-    layout: article
-    title: Some Jekyll Hacks
-    tags: jekyll, ruby, blogging, liquid
-    ---
+{% codeblock lang:yaml %}
+---
+layout: article
+title: Some Jekyll Hacks
+tags: jekyll, ruby, blogging, liquid
+---
+{% endcodeblock %}
 
 ## Goal 2: Allow the layout for a page to be able to see the page's tags
 
 To make the tags available to the page, I first modified my `_plugins/page.rb`
 file, to monkeypatch a `tags` method into the `Page` class:
 
-{% codeblock lang:ruby %}
+{% codeblock page.rb %}
 module Jekyll
   class Page
 
@@ -257,7 +268,7 @@ end
 This `tags` method returns a list of `Tag` objects, one for each tag. The
 `Tag` class looks like this:
 
-{% codeblock lang:ruby %}
+{% codeblock tag.rb %}
 module Jekyll
 
   TAG_NAME_MAP = {
@@ -350,7 +361,7 @@ A `Tag` object serves several purposes:
 To accomplish this goal, I monkeypatched the following method into the Jekyll
 `Site` class, via my `_plugins/site.rb` file:
 
-{% codeblock lang:ruby %}
+{% codeblock site.rb %}
 module Jekyll
   class Site
 
@@ -380,7 +391,7 @@ A Jekyll generator plugin (see the Jekyll [plugins][] page) solved this
 problem for me. Using the code at <https://gist.github.com/524748> as a
 model, I wrote the following code, which I placed in `_plugins/tags.rb`:
 
-{% codeblock lang:ruby %}
+{% codeblock tags.rb %}
 # _plugins/tags.rb
 
 module Jekyll
@@ -435,29 +446,31 @@ tag appear in the `page.articles` template variable.
 
 My version of `tag_index.html` looks a lot like the [top-level page template][]:
 
-{% showliquid %}
-{\% include top.html \%}
+{% codeblock tag_index.html lang:html %}
+{% raw %}
+{% include top.html %}
 
 <div id="articles-box">
   <div id="articles-container">
 
-  {\% assign sep = false \%}
-  {\% for article in page.articles \%}
+  {% assign sep = false %}
+  {% for article in page.articles %}
 
-  {\% if sep \%}
+  {% if sep %}
     <hr/>
-  {\% endif \%}
+  {% endif %}
 
-  \% include summary-entry.html \%}
+  {% include summary-entry.html %}
 
-  \% assign sep = true \%}
-  {\% endfor \%}
+  {% assign sep = true %}
+  {% endfor %}
 
-  {\% include bottom.html \%}
+  {% include bottom.html %}
 
   </div>
 </div>
-{% endshowliquid %}
+{% endraw %}
+{% endcodeblock %}
 
 
 # Printer-friendly Pages
@@ -483,7 +496,7 @@ The first piece of code is a new `PrintablePage` class, stored in
 [delegates][Ruby delegates] most of its work to an existing `Page` object,
 but it overrides a few things:
 
-{% codeblock lang:ruby %}
+{% codeblock printable_page.rb %}
 require 'delegate'
 
 module Jekyll
@@ -542,7 +555,7 @@ function. This version of `write()` is identical to the one in Jekyll's
 source, except for the addition of this line of code:
 
 {% codeblock lang:ruby %}
-    path.sub!('index.html', @printable_html)
+path.sub!('index.html', @printable_html)
 {% endcodeblock %}
 
 Because the standard `Page.write()` method doesn't provide any way to
@@ -556,7 +569,7 @@ representing a printable version for a page, but some piece of code has to
 cause `PrintablePage` objects to be created. A little more monkeypatching
 of the Jekyll `Site` class accomplishes that goal:
 
-{% codeblock lang:ruby %}
+{% codeblock site.rb %}
 module Jekyll
   class Site
 
@@ -600,7 +613,7 @@ You can see the entire class
 [here](https://github.com/bmc/brizzled/blob/935ef1d0a4ba0015760aa1933977e4157a2ce8cc/_plugins/summary.rb).
 The most important parts are:
 
-{% codeblock lang:ruby %}
+{% codeblock summary.rb %}
 module Jekyll
 
   class Summary
@@ -651,7 +664,7 @@ is referenced within a Liquid template.
 
 Another monkeypatch to `Page` ensures that the summary is set in the article:
 
-{% codeblock lang:ruby %}
+{% codeblock page.rb %}
 module Jekyll
   class Page
 
@@ -675,11 +688,13 @@ end
 With that small bit of code in place, a layout can force generation of a
 summary merely be referencing it:
 
-{% showliquid %}
-{\% if article.has_summary \%}
-\{\{ article.summary \}\}
-{\% endif \%}
-{% endshowliquid %}
+{% codeblock %}
+{% raw %}
+{% if article.has_summary %}
+{{ article.summary }}
+{% endif %}
+{% endraw %}
+{% endcodeblock %}
     
 In addition, referring to the summary via `article.summary` substitutes its
 rendered content into the document.
