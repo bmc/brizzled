@@ -19,6 +19,8 @@ of about a day, but I already have some initial impressions.
 </a>
 </div>
 
+<!-- more -->
+
 # General impressions
 
 Overall, Google+ is slicker and much better thought-out than Facebook. Of

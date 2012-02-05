@@ -15,6 +15,8 @@ Now, stack implementations aren't difficult, and *bash* does have arrays.
 But *bash* does *not* have classes or objects, and I wanted a general-purpose
 solution, not a quick-and-dirty, one-use hack.
 
+<!-- more -->
+
 # The specification
 
 The specification for my stack implementation is simple and straightforward.

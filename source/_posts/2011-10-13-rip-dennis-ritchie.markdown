@@ -15,6 +15,8 @@ well-established. But, unlike Jobs, Ritchie was largely unknown outside our
 industry. More's the pity, since his impact on this industry cannot
 possibly be overstated.
 
+<!-- more -->
+
 Dennis Ritchie's list of accomplishments is impressive. Just to skim the
 surface, he was co-creator of [Unix][]; co-inventor of the [C][]
 programming language; co-author of the classic--and still relevant and

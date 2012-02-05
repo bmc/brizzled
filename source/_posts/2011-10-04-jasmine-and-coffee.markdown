@@ -22,6 +22,8 @@ There are loads of other ways to use this excellent tool; this is just what
 Jasmine also supports integration with [Ruby][], [Rails][], [Django][],
 and Java, among others.
 
+<!-- more -->
+
 # Preparation
 
 ## Node.js and npm

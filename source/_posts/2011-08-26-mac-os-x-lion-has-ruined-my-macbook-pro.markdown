@@ -21,6 +21,8 @@ memory pig. After moving from Snow Leopard to Lion, I see far more
 [spinning beach balls of death][] than before, and my laptop is sluggish to
 the point of unusability.
 
+<!-- more -->
+
 As _htop_(1) shows, below, the system has very little free memory
 available.
 
