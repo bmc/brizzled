@@ -19,6 +19,7 @@ group :development do
   gem 'rb-inotify'
   gem 'pry'
   gem 'erubis'
+  gem 'grizzled-ruby'
 end
 
 gem 'sinatra', '1.2.6'

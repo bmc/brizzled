@@ -46,7 +46,6 @@
 require 'mini_magick'
 require 'rubygems'
 require 'erubis'
-require 'fileutils'
 require './plugins/raw'
 
 module Jekyll
