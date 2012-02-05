@@ -14,6 +14,13 @@
 #     The image path is relative to "source". The second parameter is the scale
 #     percentage. The third parameter is a title for the popup.
 #
+# CSS:
+#
+# To control what's shown on the screen versus what's shown when the article
+# is printed, this plugin generates HTML with two classes: "screen" and "print".
+# If your CSS rules use those classes appropriately, you can hide the printable
+# view on the browser and vice versa.
+#
 # PREREQUISITES:
 #
 # To use this plugin, you'll need:
@@ -65,6 +72,7 @@ module Jekyll
     </div>
     <script type="text/javascript">
       $(document).ready(function() {
+        $("#image-dialog-<%= id %>").hide();
         $("#image-dialog-<%= id %>").dialog({
           autoOpen:  false,
           modal:     true,
@@ -81,9 +89,10 @@ module Jekyll
         $("#image-<%= id %>").click(function() {
           $("#image-dialog-<%= id %>").dialog('open');
         });
+
       });
     </script>
-    <div class="illustration" print">
+    <div class="illustration print">
       <img src="<%= image %>" width="<%= full_width %>" height="<%= full_height %>"/>
     </div>
     }
