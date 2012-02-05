@@ -22,6 +22,8 @@ described in this
 However, I didn't want to hack the port for *everyone*; I wanted a solution
 that would be specific to a `RAILS_ENV` setting.
 
+<!-- more -->
+
 # A simple solution
 
 The simplest solution (to me) was to provide for a `config/config-local.yml`
