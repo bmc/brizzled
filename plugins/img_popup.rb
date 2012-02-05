@@ -58,8 +58,9 @@ module Jekyll
         $("#image-dialog-<%= id %>").dialog({
           autoOpen:  false,
           modal:     true,
-          minWidth:  <%= full_width + 20 %>,
-          minHeight: <%= full_height + 20 %>,
+          draggable: false,
+          minWidth:  <%= full_width + 40 %>,
+          minHeight: <%= full_height + 40 %>,
           <% if title -%>
           title:     "<%= title %>",
           <% end -%>
