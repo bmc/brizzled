@@ -321,7 +321,7 @@ For some examples of this plugin in actual use, see these two blog articles:
 * [The Candidates](http://brizzled.clapper.org/blog/2011/10/23/the-candidates/)
 * [The Candidates, Part 2](http://brizzled.clapper.org/blog/2011/10/25/the-candidates-part-2/)
 
-The code, running code is located in this blog's GitHub repo, here:
+The actual, running code is located in this blog's GitHub repo, here:
 
 <https://github.com/bmc/brizzled/blob/master/plugins/img_popup.rb>. 
 
