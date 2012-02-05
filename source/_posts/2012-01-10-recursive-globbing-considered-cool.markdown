@@ -27,6 +27,8 @@ directory with one simple command:
 zsh$ rm -f **/*.log
 {% endcodeblock %}
 
+<!-- more -->
+
 That command is equivalent to the more traditional (and arcane):
 
 {% codeblock lang:bash %}

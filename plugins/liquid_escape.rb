@@ -5,11 +5,18 @@
 #
 # Released under a standard BSD license.
 
+require './plugins/pygments_code'
+require './plugins/code_figure'
+
 module Jekyll
 
   class LiquidEscape < Liquid::Block
+    include HighlightCode
+    include CodeFigure
 
     def initialize(tag_name, markup, tokens)
+      @title = markup.strip
+      @title = nil if @title.length == 0
       super
     end
 
@@ -17,21 +24,18 @@ module Jekyll
       # Superclass method will get the lines in the block. Older versions of
       # Jekyll returned an array of length 1. Newer versions seem to return
       # a string. This method handles either one.
-      lines = super
-      lines = lines[0] if lines.kind_of? Array
-      lines_array = lines.split("\n").drop_while {|s| s.strip.length == 0}
+      content = super
+      content = content[0] if content.kind_of? Array
+      lines_array = content.lines.drop_while {|s| s.strip.length == 0}
 
       content = lines_array.map do |line|
-        line.gsub('{\\%', '{%').
-             gsub('\\%}', '%}').
-             gsub('\{\{', '{{').
-             gsub('\}\}', '}}').
-             gsub('&', '&amp;').
-             gsub('<', '&lt;').
-             gsub('>', '&gt;')
+        escape_html(line.gsub('{\\%', '{%').
+                         gsub('\\%}', '%}').
+                         gsub('\{\{', '{{').
+                         gsub('\}\}', '}}'))
       end
 
-      "<pre class='liquid-escape'>#{content.join("\n")}</pre>"
+      figurize(tableize_code(content.join("")), @title)
     end
   end
 end

@@ -7,4 +7,10 @@ module CodeFigure
     res += str
     res += "</figure>"
   end
+
+  def escape_html(str)
+    str.gsub('&', '&amp;').
+        gsub('<', '&lt;').
+        gsub('>', '&gt;')
+  end
 end

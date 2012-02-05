@@ -25,7 +25,11 @@ module Jekyll
       # a string. This method handles either one.
       content = super
       content = content[0] if content.kind_of? Array
-      lines = content.lines.drop_while {|s| s.strip.length == 0}.join("")
+      lines = content.lines.drop_while do |s|
+        s.strip.length == 0
+      end.map do |s|
+        escape_html(s)
+      end.join("")
 
       figurize(tableize_code(lines), @title)
     end
