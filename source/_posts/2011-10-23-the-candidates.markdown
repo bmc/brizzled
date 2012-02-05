@@ -9,11 +9,9 @@ categories: [bachmann, cain, romney, republicans, 2012 election, cartoons]
 A temporary departure from technical topics, for an amusing cartoon.
 Well, amusing to _me_, anyway...
 
-**Update:** I posted a follow-up cartoon [here](/id/121/).
+**Update:** I posted a follow-up cartoon [here](/blog/2011/10/25/the-candidates-part-2/).
 
-<div markdown="1" style="float: center; width: 673px !important" class="image-container">
-<img src="/images/2011-10-23-the-candidates/candidates-2012.png" width="673" height="525"><br clear="all"/>
-</div>
+{% imgpopup /images/2011-10-23-the-candidates/candidates-2012.png 50% The Candidates %}
 
 The comic book typeface is called *Unmasked*, and it's available, free for
 non-commercial use, from [Blambot](http://www.blambot.com/).

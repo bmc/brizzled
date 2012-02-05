@@ -7,9 +7,9 @@
 }
 
 @mixin centered($width: auto) {
-    width: $width;
-    margin-left: auto;
-    margin-right: auto;
+    width: $width !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
 }
 
 @mixin drop-shadow-right-bottom($width: 5px, $color: #999) {

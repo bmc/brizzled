@@ -13,6 +13,12 @@ group :development do
   gem 'rb-fsevent'
   gem 'stringex'
   gem 'liquid', '2.2.2'
+
+  # Local stuff (bmc@clapper.org)
+  gem 'mini_magick'
+  gem 'rb-inotify'
+  gem 'pry'
+  gem 'erubis'
 end
 
 gem 'sinatra', '1.2.6'
