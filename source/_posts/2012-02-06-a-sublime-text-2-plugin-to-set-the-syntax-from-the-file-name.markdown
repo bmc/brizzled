@@ -3,7 +3,7 @@ layout: post
 title: "A Sublime Text 2 Plugin to Set the Syntax from the File Name"
 date: 2012-02-06 14:35
 comments: true
-categories: ['Sublime Text 2', syntax, editing, programming]
+categories: ['Sublime Text 2', syntax highlighting, editing, programming]
 ---
 
 A few months ago, I switched from [GNU Emacs][], which I've used for more than
@@ -29,11 +29,12 @@ In other words, I wanted the equivalent of this Emacs Lisp capability:
 <!-- more -->
 
 There are various existing plugins that almost do what I want, kind of. For
-example, Phillip Koebbe's [DetectSyntax][] plugin is, basically, a rules engine
-that figures out the appropriate syntax based on a _lot_ of files, including
-the file name regular expression. It's even customizable via callbacks. But,
-while DetectSyntax would surely do what I need, I _want_ something a little
-simpler.
+example, Phillip Koebbe's [DetectSyntax][] plugin is, basically, an extensible
+rules engine that can determine the syntax based on a file name, the contents
+of the file, and many other conditions. It's even customizable via callbacks.
+But, while DetectSyntax would surely do what I need, I _wanted_ something a
+little simpler. (However, by all means, take a look at DetectSyntax. It's good
+work.)
 
 So I wrote one. Called [Sublime Text 2 Syntax from File Name][]
 (ST2SyntaxFromFileName, for short), it simply maps a file name regular

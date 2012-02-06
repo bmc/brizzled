@@ -3,7 +3,7 @@ layout: post
 comments: true
 title: "Some Jekyll Hacks"
 date: 2010-12-20 00:00
-categories: [jekyll, ruby, blogging, liquid, programming, programming]
+categories: [jekyll, ruby, blogging, liquid, programming]
 toc: true
 ---
 
