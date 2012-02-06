@@ -120,6 +120,8 @@ div.about-text {
 p, li {
     code {
         border: none !important;
+        background: transparent;
+        padding: 2px;
     }
 }
 
