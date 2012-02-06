@@ -60,7 +60,7 @@ default_asides: [asides/recent_posts.html, asides/twitter.html, asides/googleplu
 
 # Github repositories
 github_user: bmc
-github_repo_count: 5
+github_repo_count: 10
 github_show_profile_link: true
 github_skip_forks: true
 
@@ -84,6 +84,18 @@ googleplus_hidden: false
 # Disqus Comments
 disqus_short_name: brizzled
 disqus_show_comment_count: true
+
+# Pinboard
+pinboard_user:
+pinboard_count: 3
+
+# Delicious
+delicious_user:
+delicious_count: 3
+
+# Disqus Comments
+disqus_short_name:
+disqus_show_comment_count: false
 
 # Google Analytics
 google_analytics_tracking_id:
