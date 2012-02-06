@@ -55,46 +55,7 @@ module Jekyll
 
     @@id = 0
 
-    TEMPLATE = %{
-    <div class="imgpopup screen">
-      <div class="caption">Click the image for a larger view.</div>
-      <a href='#' style="text-decoration: none" id="image-<%= id %>">
-        <img src="<%= image %>"
-             width="<%= scaled_width %>" height="<%= scaled_height %>"
-             alt="Click me."/>
-      </a>
-      <div id="image-dialog-<%= id %>" style="display:none">
-        <img src="<%= image %>"
-             width="<%= full_width %>" height="<%= full_height %>"/>
-        <br clear="all"/>
-      </div>
-    </div>
-    <script type="text/javascript">
-      $(document).ready(function() {
-        $("#image-dialog-<%= id %>").hide();
-        $("#image-dialog-<%= id %>").dialog({
-          autoOpen:  false,
-          modal:     true,
-          draggable: false,
-          minWidth:  <%= full_width + 40 %>,
-          minHeight: <%= full_height + 40 %>,
-          <% if title -%>
-          title:     "<%= title %>",
-          <% end -%>
-          show:      'scale',
-          hide:      'scale'
-        });
-
-        $("#image-<%= id %>").click(function() {
-          $("#image-dialog-<%= id %>").dialog('open');
-        });
-
-      });
-    </script>
-    <div class="illustration print">
-      <img src="<%= image %>" width="<%= full_width %>" height="<%= full_height %>"/>
-    </div>
-    }
+    TEMPLATE_NAME = 'img_popup.html.erb'
 
     def initialize(tag_name, markup, tokens)
       args = markup.strip.split(/\s+/, 3)
@@ -106,7 +67,9 @@ module Jekyll
       else
         raise "Percent #{args[1]} is not of the form 'nn%'"
       end
-      @template = Erubis::Eruby.new(TEMPLATE)
+      here = Pathname.new(__FILE__).dirname
+      template_file = here + TEMPLATE_NAME
+      @template = Erubis::Eruby.new(File.open(template_file).read)
       @title = args[2]
       super
     end
