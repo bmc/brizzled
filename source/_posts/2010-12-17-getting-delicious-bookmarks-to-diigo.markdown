@@ -40,6 +40,8 @@ to hack together a quick program to do it manually. Starting with the
 [diigo.py][] file at [slumpy.org](http://slumpy.org), I hacked together a
 quick [Python][] script, [delicious2diigo.py][].
 
+<!-- more -->
+
 [diigo.py]: http://slumpy.org/files/diigo.py_.txt
 [delicious2diigo.py]: delicious2diigo.py
 [Python]: http://www.python.org/
