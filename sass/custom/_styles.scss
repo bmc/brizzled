@@ -65,6 +65,13 @@ div.entry-content {
     }
 }
 
+#content .blog-index {
+    a[rel=full-article] {
+        // Change the "read more" link, slightly, from the default.
+        border: 1px solid #aaaaaa !important;
+    }
+}
+
 div#blog-archives {
     h1 {
         color: $article_title_color;
@@ -115,3 +122,4 @@ p, li {
         border: none !important;
     }
 }
+
