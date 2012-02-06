@@ -39,7 +39,7 @@ Since I am already using [jQuery][] and [jQuery UI][] elsewhere in my blog,
 I elected to use them to solve this problem, as well. Here's the full set
 of extra software necessary to write the plugin:
 
-* jQuery UI: We'll use [jQuery UI Dialog][] to generate the popup containing
+* jQuery UI: I use [jQuery UI Dialog][] to generate the popup containing
   the full size image.
 * jQuery: Necessary for jQuery UI.
 * The [mini_magick][] Ruby Gem, used to query the image file to get its
@@ -47,8 +47,8 @@ of extra software necessary to write the plugin:
   but it's just as easy to let the browser do the scaling.
 * Either [ImageMagick][] or [GraphicsMagick][], because mini_magick uses
   the *mogrify*(1) command to do its work.
-* [Erubis][], for fast ERB template processing. (You can just use ERB, if
-  want.)
+* [Erubis][], for fast [ERB][] template processing. (You can just use ERB,
+  itself, if you want.)
 
 I _could_ have used the [RMagick][] gem, instead of mini_magick and
 *mogrify*(1), but RMagick uses a _lot_ of memory on my machine.
@@ -87,10 +87,14 @@ The plugin, itself, is not large at all. It consists three distinct parts:
 
 ### The Plugin Code
 
-Here's the code. It's also available in my
-[GitHub repository](https://github.com/bmc/brizzled/blob/master/plugins/img_popup.rb).
+Two files comprise the plugin: The Ruby source code and an accompanying ERB
+template.
 
-{% codeblock Plugin Source lang:ruby %}
+Here's the Ruby code, which belongs in the `plugins` directory. It's also
+available in my GitHub repository, at
+<https://github.com/bmc/brizzled/blob/master/plugins/img_popup.rb>.
+
+{% codeblock img_popup.rb lang:ruby %}
 require 'mini_magick'
 require 'rubygems'
 require 'erubis'
@@ -103,46 +107,7 @@ module Jekyll
 
     @@id = 0
 
-    TEMPLATE = %{
-    <div class="imgpopup screen">
-      <div class="caption">Click the image for a larger view.</div>
-      <a href='#' style="text-decoration: none" id="image-<%= id %>">
-        <img src="<%= image %>"
-             width="<%= scaled_width %>" height="<%= scaled_height %>"
-             alt="Click me."/>
-      </a>
-      <div id="image-dialog-<%= id %>" style="display:none">
-        <img src="<%= image %>"
-             width="<%= full_width %>" height="<%= full_height %>"/>
-        <br clear="all"/>
-      </div>
-    </div>
-    <script type="text/javascript">
-      $(document).ready(function() {
-        $("#image-dialog-<%= id %>").hide();
-        $("#image-dialog-<%= id %>").dialog({
-          autoOpen:  false,
-          modal:     true,
-          draggable: false,
-          minWidth:  <%= full_width + 40 %>,
-          minHeight: <%= full_height + 40 %>,
-          <% if title -%>
-          title:     "<%= title %>",
-          <% end -%>
-          show:      'scale',
-          hide:      'scale'
-        });
-
-        $("#image-<%= id %>").click(function() {
-          $("#image-dialog-<%= id %>").dialog('open');
-        });
-
-      });
-    </script>
-    <div class="illustration print">
-      <img src="<%= image %>" width="<%= full_width %>" height="<%= full_height %>"/>
-    </div>
-    }
+    TEMPLATE_NAME = 'img_popup.html.erb'
 
     def initialize(tag_name, markup, tokens)
       args = markup.strip.split(/\s+/, 3)
@@ -154,7 +119,9 @@ module Jekyll
       else
         raise "Percent #{args[1]} is not of the form 'nn%'"
       end
-      @template = Erubis::Eruby.new(TEMPLATE)
+
+      template_file = Pathname.new(__FILE__).dirname + TEMPLATE_NAME
+      @template = Erubis::Eruby.new(File.open(template_file).read)
       @title = args[2]
       super
     end
@@ -188,13 +155,12 @@ end
 Liquid::Template.register_tag('imgpopup', Jekyll::ImgPopup)
 {% endcodeblock %}
 
-#### A Quick Walkthrough
+Here's the ERB template, stored in file `img_popup.html.erb`, also in the
+`plugins` directory. The template could, of course, be _in_ the Ruby file, but
+I put it in a separate file, because I find it easier to maintain that way.
 
-##### The ERB Template
-
-The ERB template is fairly straightforward.
-
-{% codeblock ERB template lang:html %}
+{% codeblock img_popup.html.erb lang:html %}
+{% raw %}
 <div class="imgpopup screen">
   <div class="caption">Click the image for a larger view.</div>
   <a href='#' style="text-decoration: none" id="image-<%= id %>">
@@ -233,7 +199,14 @@ The ERB template is fairly straightforward.
 <div class="illustration print">
   <img src="<%= image %>" width="<%= full_width %>" height="<%= full_height %>"/>
 </div>
+{% endraw %}
 {% endcodeblock %}
+
+#### A Quick Walkthrough
+
+##### The ERB Template
+
+The ERB template is fairly straightforward.
 
 The template generates HTML that does several things. The initial `<div>`
 displays the scaled-down version of the image. The scaled width and height are
@@ -273,6 +246,18 @@ The renderer is also fairly straightforward:
 * It generates the resulting HTML, wrapping it with `safe_wrap` so that
   Jekyll doesn't attempt to parse and transform it.
 
+### jQuery
+
+Be sure to add the following two lines to `source/_includes/custom.head.html`,
+to make jQuery and jQuery UI available:
+
+{% codeblock lang:html %}
+{% raw %}
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js" type="text/javascript"></script>
+{% endraw %}
+{% endcodeblock %}
+
 ### The CSS
 
 The only thing missing is the CSS. In my Sass rules for the screen, I added
@@ -289,6 +274,7 @@ these rules:
 div.imgpopup {
     border: 1px solid #cccccc;
     @include rounded-border(10px);
+    margin: 10px;
     @include centered(80%);
     text-align: center;
 
@@ -335,6 +321,7 @@ Feel free to use the code, adapt it to your needs, or send me suggestions.
 [jQuery UI Dialog]: http://jqueryui.com/demos/dialog/
 [modal popup]: http://en.wikipedia.org/wiki/Modal_window
 [Erubis]: http://www.kuwata-lab.com/erubis/
+[ERB]: http://ruby-doc.org/stdlib-1.9.3/libdoc/erb/rdoc/ERB.html
 [mini_magick]: https://github.com/probablycorey/mini_magick
 [RMagick]: http://rmagick.rubyforge.org/
 [ImageMagick]: http://www.imagemagick.org/
