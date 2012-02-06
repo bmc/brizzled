@@ -9,9 +9,10 @@ toc: true
 
 # Introduction
 
-[Octopress][] does a good job of generating a blog that scales nicely for
-large computer screens _and_ smaller devices (such as my iPad). However, it's
-possible to thwart Octopress's best intentions, as I did.
+[Octopress][] does a good job of generating a blog that scales nicely for large
+computer screens _and_ smaller devices (such as my iPad). However, it's
+possible to thwart Octopress's best intentions, as I inadvertently managed to
+do.
 
 I occasionally post [cartoons](http://brizzled.clapper.org/blog/tags/cartoons/)
 to my blog, and the images tend to be large enough that they flow outside the
@@ -57,7 +58,7 @@ I _could_ have used the [RMagick][] gem, instead of mini_magick and
 
 ## Usage
 
-The plugin will implement a [Liquid][] template tag. The tag syntax is
+The plugin implements a [Liquid][] template tag. The tag syntax is
 straighforward:
 
 {% codeblock %}
@@ -66,10 +67,9 @@ straighforward:
 {% endraw %}
 {% endcodeblock %}
 
-The image path will be relative to the `source` directory. The percent
-argument is the amount to scale the image down for the clickable preview.
-The optional title is put in the title bar of the modal popup. Here's a
-real example:
+The image path is relative to the `source` directory. The percent argument is
+the amount to scale the image down for the clickable preview. The optional
+title is put in the title bar of the modal popup. Here's a real example:
 
 {% codeblock %}
 {% raw %}
@@ -311,7 +311,8 @@ The actual, running code is located in this blog's GitHub repo, here:
 
 <https://github.com/bmc/brizzled/blob/master/plugins/img_popup.rb>. 
 
-Feel free to use the code, adapt it to your needs, or send me suggestions.
+Feel free to use the code, adapt it to your needs, or send me suggestions. It's
+released under a [BSD License](http://opensource.org/licenses/BSD-3-Clause).
 
 [Jekyll]: http://jekyllrb.com/
 [Octopress]: http://octopress.org/
