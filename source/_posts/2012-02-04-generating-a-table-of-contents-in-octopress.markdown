@@ -64,7 +64,7 @@ Google. See <http://docs.jquery.com/Downloading_jQuery> for a list of CDNs.
 If you elect to download it and install it locally, copy the appropriate
 file (e.g., `jquery-1.7.1.min.js`) to your blog's `source/javascripts/`directory.
 
-Next, modify `source/_includes/custom/head.html` to include a `&lt;script&gt;`
+Next, modify `source/_includes/custom/head.html` to include a `<script>`
 tag for jQuery. For a local install, use this line:
 
 {% codeblock Add this to source/_includes/custom/head.html lang:html %}

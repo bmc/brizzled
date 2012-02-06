@@ -45,46 +45,33 @@ Markdown (presumed *not* to have a trailing newline) and returns the HTML
 markup produced by the Markdown processor.
 
 {% codeblock lang:scala %}
-private def markdown(markdownSource: Iterator[String]): String =
-{
-    import org.mozilla.javascript.{Context, Function}
-    import java.io.InputStreamReader
-
-    // Initialize the Javascript environment
-    val ctx = Context.enter
-    try
-    {
-        val scope = ctx.initStandardObjects
-
-        // Open the Showdown script and evaluate it in the Javascript
-        // context.
-
-        val showdownURL = getClass.getClassLoader.getResource("showdown.js")
-        val stream = new InputStreamReader(showdownURL.openStream)
-        ctx.evaluateReader(scope, stream, "showdown", 1, null)
-
-        // Instantiate a new Showdown converter.
-
-        val converterCtor = ctx.evaluateString(scope, "Showdown.converter", "converter", 1, null)
-                            .asInstanceOf[Function]
-        val converter = converterCtor.construct(ctx, scope, null)
-
-        // Get the function to call.
-
-        val makeHTML = converter.get("makeHtml", converter).asInstanceOf[Function]
-
-        // Load the markdown source into a string, and convert it to HTML.
-
-        val markdownSourceString = markdownSource mkString "\n"
-        val htmlBody = makeHTML.call(ctx, scope, converter,
-                                     Array[Object][](markdownSourceString))
-        htmlBody.toString
-    }
-
-    finally
-    {
-        Context.exit
-    }
+private def markdown(markdownSource: Iterator[String]): String = {
+  import org.mozilla.javascript.{Context, Function}
+  import java.io.InputStreamReader
+  
+  // Initialize the Javascript environment
+  val ctx = Context.enter
+  try {
+    val scope = ctx.initStandardObject  
+    // Open the Showdown script and evaluate it in the Javascript
+    // context.  
+    val showdownURL = getClass.getClassLoader.getResource("showdown.js")
+    val stream = new InputStreamReader(showdownURL.openStream)
+    ctx.evaluateReader(scope, stream, "showdown", 1, null)  
+    // Instantiate a new Showdown converter.  
+    val converterCtor = ctx.evaluateString(scope, "Showdow  converter",     "converter", 1, null).asInstanceOf[Function]
+    val converter = converterCtor.construct(ctx, scope, null)  
+    // Get the function to call.  
+    val makeHTML = converter.get("makeHtml", converter).asInstanceO  Function  ]  
+    // Load the markdown source into a string, and convert it to HTML.  
+    val markdownSourceString = markdownSource mkString "\n"
+    val htmlBody = makeHTML.call(ctx, scope, converter,Array[Object][](markdownSourceString))
+      htmlBody.toString
+  }
+  
+  finally {
+    Context.exit
+  }
 }
 {% endcodeblock %}
 
@@ -95,31 +82,24 @@ function takes an iterator over lines of Markdown and optional
 [Cascading Style Sheet][] content, and produces a complete HTML document.
 
 {% codeblock lang:scala %}
-def markdownToDocument(markdownSource: Iterator[String], css: String = null): String =
-{
-    import java.text.SimpleDateFormat
-    import java.util.Date
-    import scala.xml.parsing.XhtmlParser
-    import scala.io.Source
-
-    val Encoding = "ISO-8859-1"
-
-    val markdownSourceLines = markdownSource.toList
-    val htmlBody = markdown(markdownSourceLines.iterator)
-
-    // Prepare the final HTML.
-
-    val cssString = if (css != null) css else ""
-
-    // Title is first line.
-    val title = markdownSourceLines.head
-    val sHTML = "&lt;body&gt;" + htmlBody + "&lt;/body&gt;"
-
-    // Parse the HTML from the Markdown parser. We'll insert it into
-    // the template.
-    val body = XhtmlParser(Source.fromString(sHTML))
-    val contentType = "text/html; charset=" + Encoding
-    val htmlDocument = 
+def markdownToDocument(markdownSource: Iterator[String], css: String = null): String = {
+   import java.text.SimpleDateFormat
+   import java.util.Date
+   import scala.xml.parsing.XhtmlParser
+   import scala.io.Source
+   val Encoding = "ISO-8859-1"
+   val markdownSourceLines = markdownSource.toList
+   val htmlBody = markdown(markdownSourceLines.iterator)
+   // Prepare the final HTML.
+   val cssString = if (css != null) css else ""
+   // Title is first line.
+   val title = markdownSourceLines.head
+   val sHTML = "<body>" + htmlBody + "<body>"
+   // Parse the HTML from the Markdown parser. We'll insert it into
+   // the template.
+   val body = XhtmlParser(Source.fromString(sHTML))
+   val contentType = "text/html; charset=" + Encoding
+   val htmlDocument = 
 <html>
 <head>
 <title>{title}</title>
