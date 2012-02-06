@@ -14,7 +14,7 @@ large computer screens _and_ smaller devices (such as my iPad). However, it's
 possible to thwart Octopress's best intentions, as I did.
 
 I occasionally post [cartoons](http://brizzled.clapper.org/blog/tags/cartoons/)
-to my blog, and the images tend to me large enough that they flow outside the
+to my blog, and the images tend to be large enough that they flow outside the
 boundaries of the blog's text area, which looks like crap. My first attempt
 at solving the problem was to use CSS to set a minimum size for the text
 region. That solution, however, ruins the blog layout for _smaller_ devices,
