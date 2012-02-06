@@ -67,9 +67,10 @@ module Jekyll
       else
         raise "Percent #{args[1]} is not of the form 'nn%'"
       end
-      here = Pathname.new(__FILE__).dirname
-      template_file = here + TEMPLATE_NAME
+
+      template_file = Pathname.new(__FILE__).dirname + TEMPLATE_NAME
       @template = Erubis::Eruby.new(File.open(template_file).read)
+
       @title = args[2]
       super
     end
