@@ -3,16 +3,17 @@
 // This File is imported last, and will override other styles in the cascade
 // Add styles here to make changes without digging in too much
 
+@import "fonts";
+
 $article_title_color: maroon;
 $article_title_font: $header-subtitle-font-family;
-$blog_title_font: "Rock Salt";
-$body_font_size: 16px;
 
 @import "mixins";
 
 body {
     font-size: $body_font_size;
     min-width: $min-width;
+    line-height: $line_height;
 }
 
 ol {
@@ -25,6 +26,11 @@ ul {
     li {
         margin-left: 2em !important;
     }
+}
+
+p {
+    margin-top: $paragraph_margin_top;
+    margin-bottom: $paragraph_margin_bottom;
 }
 
 blockquote {
@@ -95,7 +101,12 @@ img.image-left {
 }
 
 div.about-text {
-    font-family: $serif;
+    font-family: $sans !important;
+    font-size: $body_font_size - 2px;
+
+    a {
+        color: blue;
+    }
 }
 
 // Nullify border around <code> blocks. (Octopress puts one there.)

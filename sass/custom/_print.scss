@@ -119,10 +119,10 @@ section {
 // Table of Contents Styling (using jQuery table of contents plugin)
 // -------------------------------------------------------------------------
 
-$toc-incr: 1em;
+$print-toc-incr: 1em;
 
 div#tocBlock {
-    font-size: 10pt;
+    font-size: 12pt;
     padding-left: 20px;
     padding-right: 10px;
     padding-top: 10px;
@@ -141,10 +141,11 @@ div#tocBlock {
         background: white !important;
         ul {
             list-style: disc;
-            li {
-                margin-left: $toc-incr !important;
-                padding: 0 !important;
-            }
+        }
+
+        li {
+            margin-left: $print-toc-incr !important;
+            padding-left: -30px;
         }
     }
 }
