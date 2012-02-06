@@ -17,6 +17,7 @@ div.imgpopup {
     border: 1px solid #cccccc;
     @include rounded-border(10px);
     @include centered(80%);
+    margin: 10px;
     text-align: center;
 
     .caption {
