@@ -53,8 +53,9 @@ div.entry-content {
         font-size: 125%;
     }
 
-    h4 {
-        font-size: 150%;
+    h5 {
+        font-size: 110%;
+        font-style: italic;
     }
 }
 
@@ -95,4 +96,11 @@ img.image-left {
 
 div.about-text {
     font-family: $serif;
+}
+
+// Nullify border around <code> blocks. (Octopress puts one there.)
+p, li {
+    code {
+        border: none !important;
+    }
 }
