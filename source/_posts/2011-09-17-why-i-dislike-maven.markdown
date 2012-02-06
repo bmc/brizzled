@@ -25,6 +25,8 @@ incredible time saver.
 Nevertheless, one day after making the Maven switch, I ditched Maven for
 Apache [Buildr][].
 
+<!-- more -->
+
 # Why I dislike Maven
 
 The title of this article is *Why I dislike Maven*, but that title is worth

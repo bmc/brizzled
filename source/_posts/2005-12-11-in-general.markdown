@@ -11,6 +11,8 @@ that's very freeing.
 
 That sounds like heresy, coming from an American. Let me explain.
 
+<!-- more -->
+
 There are people who must, at all costs, be the best at whatever
 they do. If they're not going to be the best, they don't bother
 trying.

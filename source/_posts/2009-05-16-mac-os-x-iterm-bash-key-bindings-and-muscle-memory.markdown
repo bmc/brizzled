@@ -15,6 +15,8 @@ Naturally, as befits someone who's been using Unix systems for
 nearly a quarter century, I spend time a lot of time at the command
 line, even on a Mac. But there, my muscle memory betrays me.
 
+<!-- more -->
+
 Instead of using the Mac's Terminal.app for my command-line adventures, I
 use [iTerm][], an enhanced terminal emulator I like better. The problem is,
 though, that iTerm intercepts many of the keys my fingers want to use with

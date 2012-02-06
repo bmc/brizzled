@@ -19,6 +19,8 @@ have used the existing [DocUtils][] package with [Jython][], but that
 seemed like a lot of extra overhead, just to generate HTML from a simple
 text markup file.
 
+<!-- more -->
+
 Eventually, I settled on [Markdown][]. Initially, I chose the Java-based
 [MarkdownJ][] parser. Unfortunately, I ran into some problems, chief among
 them that I kept getting exceptions when running MarkdownJ under Java 6. It

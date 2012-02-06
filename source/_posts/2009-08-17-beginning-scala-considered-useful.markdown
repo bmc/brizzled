@@ -17,6 +17,8 @@ wrote:
 
 He's wrong, though, at least for me.
 
+<!-- more -->
+
 I find, when I'm learning a new language, that different approaches fire
 different synapses. *Programming in Scala* (sometimes called "the staircase
 book", for its front cover) is an in-depth book that covers [Scala][] in

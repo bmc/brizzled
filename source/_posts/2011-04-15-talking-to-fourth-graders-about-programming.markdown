@@ -13,6 +13,8 @@ them. As it happens, the three 25-minute sessions I did went very well. I
 thought I'd share my experiences, in case other geek parents find
 themselves in this situation.
 
+<!-- more -->
+
 Some of the kids signed up for my session, because they thought I was going
 to talk about programming video games. I told them that very few working
 computer programmers are actually video game programmers, just like very

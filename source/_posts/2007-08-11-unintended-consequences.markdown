@@ -10,6 +10,8 @@ This is the story of an unintended interference between two
 UI-aware applications. This kind of unexpected interaction happens
 a lot with software.
 
+<!-- more -->
+
 The computer I use at home is a 17" [MacBook Pro][]. The machine's less
 than a year old, and yesterday, the display started [acting funny][]. The
 display began to look more and more harsh and washed out. By the end of the

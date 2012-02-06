@@ -35,6 +35,8 @@ technique.
 In this article, I'll be using the [Scala][] programming language, but the
 concepts are not specific to Scala.
 
+<!-- more -->
+
 # Those Examples
 
 Most currying examples are clear enough. For instance, [A Tour of Scala][]

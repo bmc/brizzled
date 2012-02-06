@@ -35,6 +35,8 @@ other languages. [Scala][], my current favorite language on the Java VM,
 incorporates many newer (and some not so new) ideas that have yet to find
 their way into Java.
 
+<!-- more -->
+
 Worse, though, for Java enthusiasts: Java has fallen behind C#. I'm boning
 up on C# using O'Reilly's *C# in a Nutshell* book. (See
 <http://oreilly.com/catalog/9780596001810/>. As an aside, the "Nutshell"

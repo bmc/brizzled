@@ -26,6 +26,8 @@ Apparently, there's some divine math behind Camping's certainty about the
 exact date of The Rapture. Camping puts forth his mad math formula which
 explains it all. Let's take a look at the math, shall we? Bear with me,
 now. This is [complificated][].
+
+<!-- more -->
  
 *(ahem)*
 

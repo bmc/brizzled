@@ -18,6 +18,8 @@ App Engine.
 In this article, I recreate the steps necessary to build a blogging
 engine that runs under GAE.
 
+<!-- more -->
+
 # Acknowledgments
 
 I'm grateful to the following people for reviewing and commenting

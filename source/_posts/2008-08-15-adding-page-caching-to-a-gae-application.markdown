@@ -13,6 +13,8 @@ In a [previous article][], I discussed blogging software that runs on
 Google's [App Engine][]. I use similar software to run this blog; in this
 article, I discuss one scheme for adding page caching to the software.
 
+<!-- more -->
+
 # The Problem: Using Too Much CPU
 
 If you read my [previous article][], you may recall that I chose to use

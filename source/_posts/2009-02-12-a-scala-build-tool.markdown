@@ -17,6 +17,8 @@ for Java. Ant (and [Maven][]) use XML build files, which means you're often
 standing on your head to get around limitations imposed by the choice of
 XML as a syntax.
 
+<!-- more -->
+
 I dislike the whole trend of using XML as a configuration file format. Yes,
 XML is human-readable. But it isn't always human-*friendly*. I agree with
 [Terence Parr][], author of [ANTLR][] and [StringTemplate][], who wrote, in

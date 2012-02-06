@@ -16,27 +16,31 @@ this article. What *is* germane is that the installation script
 must use the `virtualenv` package, but it cannot assume that the
 `virtualenv` package has been installed.
 
+<!-- more -->
+
 This [chicken and egg][] problem is easily managed by adding a "bootstrap"
 phase to the installation module. It works something like this:
 
-    # create a temporary directory
-    
-    import tempfile
-    bootstrapDir = tempfile.mkdtemp()
-    
-    # Get and create the 'site-packages' directory
-    versionInfo = sys.version_info
-    sitePackagesDir = os.path.join(dir,
-                                   'lib',
-                                   'python%d.%d' % (versionInfo[0], versionInfo[1]),
-                                   'site-packages')
-    os.makedirs(path, 0755)
-    
-    installBootstrapPackages(bootstrapDir) # left as exercise to reader
-    
-    # Make sure Python can find the newly installed package
-    
-    sys.path += [sitePackagesDir]
+{%codeblock lang:python %}
+# create a temporary directory
+
+import tempfile
+bootstrapDir = tempfile.mkdtemp()
+
+# Get and create the 'site-packages' directory
+versionInfo = sys.version_info
+sitePackagesDir = os.path.join(dir,
+                               'lib',
+                               'python%d.%d' % (versionInfo[0], versionInfo[1]),
+                               'site-packages')
+os.makedirs(path, 0755)
+
+installBootstrapPackages(bootstrapDir) # left as exercise to reader
+
+# Make sure Python can find the newly installed package
+
+sys.path += [sitePackagesDir]
+{% endcodeblock %}
 
 In theory, this should work. In fact, if the dynamically installed
 software resides in standard Python packages or modules, it *will*

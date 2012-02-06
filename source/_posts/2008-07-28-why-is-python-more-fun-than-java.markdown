@@ -22,6 +22,8 @@ I've been mulling over why I find programming in Python to be so
 much more fun . In this article, I am going to capture and explore
 some of those thoughts.
 
+<!-- more -->
+
 But first, a few caveats and disclaimers:
 
 * These comments are *entirely* subjective. I am not attempting a rational,

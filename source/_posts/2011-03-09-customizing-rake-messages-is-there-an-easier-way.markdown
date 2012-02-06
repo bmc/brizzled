@@ -21,6 +21,8 @@ command line option.
 
 I figured these goals should be easily satisfied.
 
+<!-- more -->
+
 * Rake already emits some messages only if `-v` is specified, so I assumed
   a function already existed that I could use; I'd merely have to find it.
 * The Rakefile is, essentially, an instance of a `Rake::Application` object

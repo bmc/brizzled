@@ -33,6 +33,8 @@ publish to a well-known one.
 This brief article describes one way to get SBT to publish to a personal
 Maven repository.
 
+<!-- more -->
+
 # Assumptions
 
 I make the following simplifying assumptions in this article. (They

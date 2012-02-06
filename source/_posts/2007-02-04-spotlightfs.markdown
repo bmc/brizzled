@@ -14,6 +14,8 @@ systems (or file system-like views of other things) in Linux, and loads of
 people have written file systems implemented on top of FUSE. FUSE has also
 been ported to FreeBSD.
 
+<!-- more -->
+
 Anyway, I installed it awhile ago. It's pretty cool. The SSH FUSE file
 system is useful; I now routinely mount my home directory from our
 development machine in the corporate office to my Mac, via sshfs. (This

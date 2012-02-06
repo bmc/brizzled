@@ -18,6 +18,8 @@ Naturally, I wanted to support tab completion. But, as it happens, most
 completion APIs are a little clunky. They give a bare minimum of
 information, leaving a fair amount of work to the caller.
 
+<!-- more -->
+
 For example, the [Python][] `readline` module provides for tab completion;
 the completion function, according to the module's documentation, "is
 called as *function(text, state)*, for *state* in 0, 1, 2, ..., until it

@@ -15,6 +15,8 @@ go with WPA. It's a bit more secure, anyway.
 
 Of course, this immediately led to more work.
 
+<!-- more -->
+
 One of the four WAPs here (yes, four WAPs--it's funny what an
 [old farm house][] will do to high-frequency radio signals) is a router,
 one of those wireless routers that thinks it's connecting to the Internet

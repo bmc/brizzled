@@ -32,6 +32,8 @@ written in Python and [Scala][]. I chose Scala, rather than Java, because:
 These test programs are deliberately simple-minded. They accept
 incoming socket connections and send back canned HTTP results.
 
+<!-- more -->
+
 # The Programs
 
 I wrote six programs:

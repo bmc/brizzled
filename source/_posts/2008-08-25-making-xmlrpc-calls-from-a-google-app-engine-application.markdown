@@ -22,6 +22,8 @@ how to enhance [picoblog][], the sample GAE blogging engine I developed for
 my [Writing Blogging Software for Google App Engine][] article, so that it
 can send a "ping" to [Technorati][] when a new article is published.
 
+<!-- more -->
+
 # Getting XML-RPC to work with GAE
 
 ## A Quick Overview of `xmlrpclib`

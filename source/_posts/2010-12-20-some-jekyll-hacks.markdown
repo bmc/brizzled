@@ -19,6 +19,8 @@ a few challenges, which I was able to address with some simple, if
 [plugins][] and [monkeypatching][], and they work with Jekyll 0.8.0. (I
 haven't tested them with other versions.)
 
+<!-- more -->
+
 # Non-standard Blog Layout
 
 For [historical reasons][], this blog uses a layout that doesn't match

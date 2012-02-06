@@ -10,6 +10,8 @@ Awhile ago, I embarked on an effort to build [yet another build tool][],
 this one in [Scala][]. I shelved that effort, and I've switched to [SBT][],
 instead.
 
+<!-- more -->
+
 I've had it with [Ant][], for all the reasons outlined in my
 [previous build tool discussion][], and then some.
 
