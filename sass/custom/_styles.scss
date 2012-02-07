@@ -80,7 +80,7 @@ div#blog-archives {
 
 h1.blog-title {
     a {
-        color: black !important;
+        color: $title-color !important;
         font-family: $blog_title_font;
     }
 }
@@ -145,6 +145,10 @@ p, li {
             display: block;
             font-size: $body_font_size - 4px;
             font-style: italic;
+
+            a {
+                text-decoration: none;
+            }
         }
     }
 }
