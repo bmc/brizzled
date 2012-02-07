@@ -10,10 +10,10 @@
 
 <script type="text/javascript">
 
-$(document).ready(function() {
+jQuery(document).ready(function() {
 
-    $("#about-dialog").hide();
-    $("#about-dialog").dialog({
+    jQuery("#about-dialog").hide();
+    jQuery("#about-dialog").dialog({
         autoOpen:    false,
         modal:       true,
         draggable:   false,
@@ -24,8 +24,8 @@ $(document).ready(function() {
         title:       "About Me",
     });
 
-    $("#about-link").click(function() {
-        $("#about-dialog").dialog('open');
+    jQuery("#about-link").click(function() {
+        jQuery("#about-dialog").dialog('open');
     });
 });
 

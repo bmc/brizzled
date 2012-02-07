@@ -81,6 +81,21 @@ To use the version of jQuery hosted on Google, use this line:
 {% endraw %}
 {% endcodeblock %}
 
+You also have to use `jQuery.noConflict()`, to prevent conflicts between
+jQuery's use of the '$' alias and the '$' used in `ender.js`, which is
+automatically included by Octopress. So, regardless of where you source
+jQuery, add this code, right after the `<script>` tag that pulls jQuery in:
+
+{% codeblock jQuery on the Google CDN lang:html %}
+{% raw %}
+<script type="text/javascript">
+  // Revert jQuery's '$' alias, to avoid clashes with ender.js. NOTE: Use
+  // jQuery(...), instead of $(...) from here on.
+  jQuery.noConflict();
+</script>
+{% endraw %}
+{% endcodeblock %}
+
 ## Generating the Table of Contents
 
 To generate the table of contents, you'll need to add some Javascript that
@@ -101,8 +116,8 @@ also reproduced it, below.
 
 {% codeblock generate-toc.js %}
 function generateTOC(insertBefore, heading) {
-  var container = $("<div id='tocBlock'></div>");
-  var div = $("<ul id='toc'></ul>");
+  var container = jQuery("<div id='tocBlock'></div>");
+  var div = jQuery("<ul id='toc'></ul>");
   var content = $(insertBefore).first();
 
   if (heading != undefined && heading != null) {
@@ -131,7 +146,7 @@ Copy `generate-toc.js` to `source/javascripts` and put the following line in
 ### Hooking the Javascript In
 
 The next step is to call `generateTOC()` at the right time. The following hunk
-of code goes at the bottom of `source/_includes/custom/after_article.html`:
+of code goes at the bottom of `source/_includes/custom/after_footer.html`:
 
 {% codeblock source/_includes/custom/after_article.html %}
 {% raw %}
@@ -142,7 +157,7 @@ of code goes at the bottom of `source/_includes/custom/after_article.html`:
 
 {% elsif page.toc == true %}
   <script type="text/javascript">
-  $(document).ready(function() {
+  jQuery(document).ready(function() {
     // Put a TOC right before the entry content.
     generateTOC('.entry-content', 'Table of Contents');
   });
@@ -175,8 +190,8 @@ If the `toc` line is missing or set to something other than "true", the
 table of contents is skipped.
 
 The Javascript fires when the document has finished loading, using jQuery's
-`$(document).ready()` hook. Octopress assigns the `.entry-hook` class to the
-`<div>` element that contains the generated article content. Passing that
+`jQuery(document).ready()` hook. Octopress assigns the `.entry-hook` class to
+the `<div>` element that contains the generated article content. Passing that
 selector string to `generateTOC()` ensures that we don't pick up any heading
 elements that happen to live somewhere else in the HTML. The second parameter,
 the string "Table of Contents", puts a heading above the generated table of
