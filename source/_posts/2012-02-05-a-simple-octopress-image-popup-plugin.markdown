@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "A Simple Octopress Image Popup Plugin"
-date: 2012-02-05 09:44
+date: 2012-02-05 19:44
 comments: true
 categories: [blogging, jekyll, octopress, javascript, css, ruby]
 toc: true

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Generating a Table of Contents in Octopress"
-date: 2012-02-04 16:28
+date: 2012-02-05 16:28
 comments: true
 categories: [blogging, jekyll, octopress, javascript, css, programming]
 toc: true
