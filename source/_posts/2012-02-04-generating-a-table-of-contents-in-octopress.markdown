@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Generating a Table of Contents in Octopress"
-date: 2012-02-05 16:28
+date: 2012-02-04 19:28
 comments: true
 categories: [blogging, jekyll, octopress, javascript, css, programming]
 toc: true
@@ -319,7 +319,7 @@ div#tocBlock {
 
 The result of all that work is a table of contents that looks like this:
 
-{% img /images/2012-02-04-generating-a-table-of-contents-in-octopress/screenshot1.png %}
+{% imgpopup /images/2012-02-04-generating-a-table-of-contents-in-octopress/screenshot1.png 50% Screenshot with Table of Contents %}
 
 [Jekyll]: http://jekyllrb.com/
 [Octopress]: http://octopress.org/

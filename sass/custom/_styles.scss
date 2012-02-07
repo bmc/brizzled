@@ -91,13 +91,6 @@ h2.blog-subtitle {
     font-size: 80%;
 }
 
-div.blog-image {
-    float: right;
-    width: 90px;
-    height: 105px;
-    border: 1px solid gray;
-}
-
 img.image-right {
     float: right;
 }
@@ -124,3 +117,34 @@ p, li {
     }
 }
 
+#about-me {
+
+    margin-top: 1em;
+    margin-bottom: 5em;
+    width: 100%;
+
+    div.author-image {
+        width: 100%;
+
+        img {
+            float: right;
+            width: 90px;
+            height: 105px;
+            border: 1px solid #bbbbbb;
+        }
+    }
+
+    div.author {
+
+        span.author-name {
+            display: block;
+            font-size: $body_font_size;
+        }
+
+        span.author-email, span.author-twitter-id {
+            display: block;
+            font-size: $body_font_size - 4px;
+            font-style: italic;
+        }
+    }
+}
