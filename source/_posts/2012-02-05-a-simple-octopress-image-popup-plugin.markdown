@@ -175,9 +175,9 @@ I put it in a separate file, because I find it easier to maintain that way.
   </div>
 </div>
 <script type="text/javascript">
-  $(document).ready(function() {
-    $("#image-dialog-<%= id %>").hide();
-    $("#image-dialog-<%= id %>").dialog({
+  jQuery(document).ready(function() {
+    jQuery("#image-dialog-<%= id %>").hide();
+    jQuery("#image-dialog-<%= id %>").dialog({
       autoOpen:  false,
       modal:     true,
       draggable: false,
@@ -190,8 +190,8 @@ I put it in a separate file, because I find it easier to maintain that way.
       hide:      'scale'
     });
 
-    $("#image-<%= id %>").click(function() {
-      $("#image-dialog-<%= id %>").dialog('open');
+    jQuery("#image-<%= id %>").click(function() {
+      jQuery("#image-dialog-<%= id %>").dialog('open');
     });
 
   });
