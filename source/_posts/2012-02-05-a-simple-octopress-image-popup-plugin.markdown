@@ -314,6 +314,12 @@ The actual, running code is located in this blog's GitHub repo, here:
 Feel free to use the code, adapt it to your needs, or send me suggestions. It's
 released under a [BSD License](http://opensource.org/licenses/BSD-3-Clause).
 
+# References
+
+* [Jekyll Plugins](https://github.com/mojombo/jekyll/wiki/Plugins)
+* [The Mini_Magick Gem][mini_magick]
+* [jQuery UI Dialog][]
+
 [Jekyll]: http://jekyllrb.com/
 [Octopress]: http://octopress.org/
 [Liquid]: https://github.com/Shopify/liquid

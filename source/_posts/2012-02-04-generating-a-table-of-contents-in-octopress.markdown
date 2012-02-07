@@ -111,8 +111,7 @@ fires when each page loads. There are two conditions, however:
 First, let's take a look at the Javascript itself. I chose to put the bulk
 of the logic into a separate function, in a separate Javascript file called
 `generate-toc.js`. (You can see the source for that file in my
-[blog's GitHub repo](https://github.com/bmc/brizzled/blob/master/source/javascripts/generate-toc.js). I've
-also reproduced it, below.
+[blog's GitHub repo][generate-toc]. I've also reproduced it, below.
 
 {% codeblock generate-toc.js %}
 function generateTOC(insertBefore, heading) {
@@ -321,8 +320,15 @@ The result of all that work is a table of contents that looks like this:
 
 {% imgpopup /images/2012-02-04-generating-a-table-of-contents-in-octopress/screenshot1.png 50% Screenshot with Table of Contents %}
 
+# References
+
+* [`jQuery.noConflict()`](http://api.jquery.com/jQuery.noConflict/)
+* [jQuery Table of Contents Plugin](http://fuelyourcoding.com/table-of-contents-jquery-plugin/)
+* [The source for the generateTOC() function][generate-toc]
+
 [Jekyll]: http://jekyllrb.com/
 [Octopress]: http://octopress.org/
 [Liquid]: https://github.com/Shopify/liquid
 [jQuery table of contents plugin]: http://fuelyourcoding.com/scripts/toc/
 [YAML front matter]: https://github.com/mojombo/jekyll/wiki/yaml-front-matter
+[generate-toc]: https://github.com/bmc/brizzled/blob/master/source/javascripts/generate-toc.js
