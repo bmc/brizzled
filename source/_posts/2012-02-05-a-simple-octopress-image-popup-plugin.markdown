@@ -163,7 +163,7 @@ I put it in a separate file, because I find it easier to maintain that way.
 {% raw %}
 <div class="imgpopup screen">
   <div class="caption">Click the image for a larger view.</div>
-  <a href='#' style="text-decoration: none" id="image-<%= id %>">
+  <a href='javascript:void(0)' style="text-decoration: none" id="image-<%= id %>">
     <img src="<%= image %>"
          width="<%= scaled_width %>" height="<%= scaled_height %>"
          alt="Click me."/>
