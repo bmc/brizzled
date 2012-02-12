@@ -302,12 +302,11 @@ For the printer-friendly Sass rules, I use:
 
 # Wrap-up
 
-For some examples of this plugin in actual use, see these two blog articles:
+Finally, here's an example of the plugin, using one of my photographs:
 
-* [The Candidates](http://brizzled.clapper.org/blog/2011/10/23/the-candidates/)
-* [The Candidates, Part 2](http://brizzled.clapper.org/blog/2011/10/25/the-candidates-part-2/)
+{% imgpopup /images/2012-02-05-a-simple-octopress-image-popup-plugin/six-twenty-six.jpg 30% Six Twenty Six %}
 
-The actual, running code is located in this blog's GitHub repo, here:
+The actual, working code is located in this blog's GitHub repo, here:
 
 <https://github.com/bmc/brizzled/blob/master/plugins/img_popup.rb>. 
 
