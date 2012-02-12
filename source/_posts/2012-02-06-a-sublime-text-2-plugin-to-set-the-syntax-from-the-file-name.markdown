@@ -3,7 +3,7 @@ layout: post
 title: "A Sublime Text 2 Plugin to Set the Syntax from the File Name"
 date: 2012-02-06 14:35
 comments: true
-categories: ['Sublime Text 2', syntax highlighting, editing, programming]
+categories: [Sublime Text 2, syntax highlighting, editing, programming]
 ---
 
 A few months ago, I switched from [GNU Emacs][], which I've used for more than
@@ -43,7 +43,7 @@ expression into a syntax name.
 The plugin is configured via the `filename_syntax_settings` value in the user
 settings (accessible via the "Preferences &#8594; Settings - User" menu). That
 value is an array of arrays, and each inner array element defines a mapping
-from a regular expression to a syntax name. For instance, here’s a portion of
+from a regular expression to a syntax name. For instance, here's a portion of
 my settings file:
 
 {% codeblock Preferences.sublime-settings lang:javascript %}
@@ -58,14 +58,14 @@ my settings file:
 }
 {% endcodeblock %}
 
-Those settings map files ending in `.scss` and `.sass` to the “Ruby Sass”
+Those settings map files ending in `.scss` and `.sass` to the "Ruby Sass"
 syntax value.
 
 Each entry has two or three fields. The first two are mandatory. They are:
 
 1. A regular expression pattern against which to match the filename. Note that backslashes must be double-escaped, because of the way the JSON parser works.
-2. The syntax value to apply to matching files. The name must match the name of a `.tmLanguage` file somewhere underneath the Sublime Text 2 `Packages`irectory. The name is matched in a case-blind manner; thus, “Ruby” and “ruby” mean the same thing.
-3. Optional flags for the regular expression parser. Currently, only “i”, for case-blind comparison, is honored. Anything else is ignored.
+2. The syntax value to apply to matching files. The name must match the name of a `.tmLanguage` file somewhere underneath the Sublime Text 2 `Packages`irectory. The name is matched in a case-blind manner; thus, "Ruby" and "ruby" mean the same thing.
+3. Optional flags for the regular expression parser. Currently, only "i", for case-blind comparison, is honored. Anything else is ignored.
 
 The settings examined applied in order, and the first match wins.
 

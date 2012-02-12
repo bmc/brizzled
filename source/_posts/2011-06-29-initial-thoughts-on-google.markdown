@@ -132,7 +132,7 @@ Facebook provides.
 The +1 feature is Google's equivalent to Facebook's *Like*.
 
 {% blockquote %}
-Use the +1 button to publicly show what you like, agree with, or recommend on the web. The +1 button can appear in a variety of places, both on Google and on sites across the web. For example, you might see a +1 button for a Google search result, Google ad, or next to an article you're reading on your favorite news site. Your +1’s and your social connections also help improve the content you see in Google Search.
+Use the +1 button to publicly show what you like, agree with, or recommend on the web. The +1 button can appear in a variety of places, both on Google and on sites across the web. For example, you might see a +1 button for a Google search result, Google ad, or next to an article you're reading on your favorite news site. Your +1's and your social connections also help improve the content you see in Google Search.
 {% endblockquote %}
 
 As with Facebook, you can +1 stuff on the web, as well as in Google+;
@@ -148,12 +148,12 @@ As with comments, you can control who can see your +1's.
 
 Google describes hangouts like this:
 
-> Hangouts are the best way for you to say, “I’m online and want to hangout!”  > Hangouts lets you:
+> Hangouts are the best way for you to say, "I'm online and want to hangout!"  > Hangouts lets you:
 > 
 > * Chill with friends that are scrolling through the web, just like you!
 > * Use live video chat that puts you in the same room together!
 > * Coordinate plans, whether it's working on a project or meeting up for coffee.
-> * Maybe you’re bored. Start a hangout, invite your circles, see who’s around!
+> * Maybe you're bored. Start a hangout, invite your circles, see wh's around!
 > 
 
 Hangouts support video, as well as chat, and Hangouts integrates with
