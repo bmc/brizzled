@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Address Standardization in Ruby"
+title: "Simple Address Standardization"
 date: 2012-02-14 17:58
 comments: true
 categories: [programming, address standardization, geocoding, ruby]
@@ -118,81 +118,104 @@ def normalize_street_address(raw_address_string):
 
 # Google Maps Implementation
 
-First, let's take a look at Ruby and Python implementations of the above API
-specification, using Google Maps.
+## Implementation Issues
 
-## Ruby
+Before diving into the implementations, themselves, there are several problems
+we have to address (pun intended).
 
-The Ruby Geocoder gem already handles all the heavy lifting for us, but there's
-one wrinkle: If you give the gem a bad address, you'll still get data back, but
-it'll be "zoomed out". For instance, here's the result of a search for a valid
-address. (It happens to be Google's headquarters.)
+### The Maps API doesn't truly standardize addresses
 
-. It returns an
-array of matches; we'll just take the first one, and then extract its `data`
-component, which contains the information we want.
+The implementation, above, does not _really_ standardize addresses properly--at
+least, not for the United States. In the U.S., many different towns often share
+post offices. For instance, consider the address of a coffee shop near me:
 
-Be sure to install the `geocoder` gem, or put it in your `Gemfile` if you're
-using [Bundler](http://gembundler.com/).
+296 West Ridge Pike, Limerick, PA
 
-{% codeblock Geocoder and Google Maps with Good Address lang:ruby %}
+The post office serving this address is actually Royersford, PA. The
+standardized address is:
+
+296 W. Ridge Pike, Royersford, PA 19468
+
+Let's use the Ruby `geocoder` gem to see what Google returns for the first
+address:
+
+{% codeblock lang:ruby %}
+$ pry
 [1] pry(main)> require 'geocoder'
 => true
-[2] pry(main)> result = Geocoder.search('1600 Amphitheatre Parkway, Mountain View, CA')
-=> [#<Geocoder::Result::Google:0x00000002448868
+[2] pry(main) results = Geocoder.search('1400 Liberty Ridge Drive, Chesterbrook, PA')
+=> [#<Geocoder::Result::Google:0x00000000cfa788
   @data=
-   {"address_components"=>
-     [{"long_name"=>"1600", "short_name"=>"1600", "types"=>["street_number"]},
-      {"long_name"=>"Amphitheatre Pkwy",
-       "short_name"=>"Amphitheatre Pkwy",
-       "types"=>["route"]},
-      {"long_name"=>"Mountain View",
-       "short_name"=>"Mountain View",
-       "types"=>["locality", "political"]},
-      {"long_name"=>"Santa Clara",
-       "short_name"=>"Santa Clara",
-       "types"=>["administrative_area_level_2", "political"]},
-      {"long_name"=>"California",
-       "short_name"=>"CA",
-       "types"=>["administrative_area_level_1", "political"]},
-      {"long_name"=>"United States",
-       "short_name"=>"US",
-       "types"=>["country", "political"]},
-      {"long_name"=>"94043", "short_name"=>"94043", "types"=>["postal_code"]}],
-    "formatted_address"=>
-     "1600 Amphitheatre Pkwy, Mountain View, CA 94043, USA",
-    "geometry"=>
-     {"location"=>{"lat"=>37.4211444, "lng"=>-122.0853032},
-      "location_type"=>"ROOFTOP",
-      "viewport"=>
-       {"northeast"=>{"lat"=>37.4224933802915, "lng"=>-122.0839542197085},
-        "southwest"=>{"lat"=>37.4197954197085, "lng"=>-122.0866521802915}}},
-    "types"=>["street_address"]}>]
+...
+    "formatted_address"=>"296 W Ridge Pike, Limerick, PA 19468, USA"
+...
 {% endcodeblock %}
 
-Here's the result of searching for a nonexistent California address:
+Note that the town name has not been standardized to the correct post office
+name. The Yahoo! Maps API exhibits similar behavior.
 
-{% codeblock Geocoder and Google Maps with Bad Address lang:ruby %}
-[3] pry(main)> result = Geocoder.search('1600 Curley Howard Parkway, Anytown, CA')
-=> [#<Geocoder::Result::Google:0x00000002720680
+If you're comparing many different addresses, you might need to ensure that
+they all use the canonical post office name. Fortunately, if you're willing to
+make another connection to Google, this problem is easily corrected: Simply
+take the returned latitude and longitude values and _reverse geocode_ that
+location:
+
+{% codeblock lang:ruby %}
+[3] pry(main) latitude = results[0].data["geometry"]["location"]["lat"]
+=> 40.228934
+[4] pry(main) longitude = results[0].data["geometry"]["location"]["lng"]
+=> -75.517588
+[5] 
+
+Geocoder.search('1400 Liberty Ridge Drive, Chesterbrook, PA')
+=> [#<Geocoder::Result::Google:0x00000000cfa788
+  @data=
+...
+    "formatted_address"=>"296 W Ridge Pike, Royersford, PA 19468, USA"
+...
+{% endcodeblock %}
+
+This solution doesn't work with _every_ address, but it's still worth doing.
+
+
+### The Maps API can "zoom out" if the address isn't valid
+
+
+If you give the Google Maps API a bad address, you can either get no data or "zoomed out" data. For instance, here's what you get for nonsense address:
+
+100 My Place, Foobar, XY
+
+{% codeblock lang:ruby %}
+[1] pry(main)> require 'geocoder'
+=> true
+[2] pry(main) results = Geocoder.search('100 My Place, Foobar, XY')
+=> []
+{% endcodeblock %}
+
+Bad address = no results. Good. But, if I give the API a bad address _with_
+a valid state, I get "zoomed out" results:
+
+{% codeblock lang:ruby %}
+[2] pry(main) results = Geocoder.search('100 My Place, Foobar, PA')
+=> [#<Geocoder::Result::Google:0x00000001083468
   @data=
    {"address_components"=>
-     [{"long_name"=>"California",
-       "short_name"=>"CA",
+     [{"long_name"=>"Pennsylvania",
+       "short_name"=>"PA",
        "types"=>["administrative_area_level_1", "political"]},
       {"long_name"=>"United States",
        "short_name"=>"US",
        "types"=>["country", "political"]}],
-    "formatted_address"=>"California, USA",
+    "formatted_address"=>"Pennsylvania, USA",
     "geometry"=>
      {"bounds"=>
-       {"northeast"=>{"lat"=>42.0095169, "lng"=>-114.131211},
-        "southwest"=>{"lat"=>32.5342071, "lng"=>-124.4096195}},
-      "location"=>{"lat"=>36.778261, "lng"=>-119.4179324},
+       {"northeast"=>{"lat"=>42.26936509999999, "lng"=>-74.6895019},
+        "southwest"=>{"lat"=>39.7197989, "lng"=>-80.5198949}},
+      "location"=>{"lat"=>41.2033216, "lng"=>-77.1945247},
       "location_type"=>"APPROXIMATE",
       "viewport"=>
-       {"northeast"=>{"lat"=>41.2156363, "lng"=>-111.2221314},
-        "southwest"=>{"lat"=>32.0683661, "lng"=>-127.6137334}}},
+       {"northeast"=>{"lat"=>42.2690472, "lng"=>-75.1455745},
+        "southwest"=>{"lat"=>40.11995350000001, "lng"=>-79.2434749}}},
     "types"=>["administrative_area_level_1", "political"]}>]
 {% endcodeblock %}
 
@@ -200,14 +223,18 @@ Note that with the valid address, we get back a "types" array (specifically,
 `result[0].data["types"]`) that contains the string "street_address", meaning
 that the result is granular to the street address. But with the second example,
 we get "administrative_area_level_1", which is Google Maps-speak for "state",
-in the U.S. In other words, the *geocoder* gem "zoomed out". This behavior
-makes sense for geolocation, but it isn't very useful in an address normalizer.
+in the U.S. In other words, the Maps API zoomed out to the nearest geographical
+designation it could identify--which, in this case, was the state of
+Pennsylvania. 
+
+This behavior makes sense for geolocation, but it isn't very useful in an
+address normalizer.
 
 Fortunately, it's relatively easy to correct this problem. The various "types"
 values returned by the Google Maps API are documented at
 <http://code.google.com/apis/maps/documentation/geocoding/#Types>. For our
 purposes, if the top-level "types" value doesn't contain one of the following
-values, then we can assume the address wasn't found.
+values, then we can assume the address wasn't found:
 
 * `street_address` indicates a precise street address, e.g., a house
 * `subpremise` is a "first-order entity below a named location, usually a
@@ -215,12 +242,22 @@ values, then we can assume the address wasn't found.
   practice, this is what Google Maps returns for addresses that contain, say,
   a suite number.
 
-With that understanding, we can write our Ruby implementation:
+## The Code
+
+Now we're ready to write some code.
+
+### Ruby
+
+The Ruby Geocoder gem handles connecting to the Google Maps REST service,
+retrieving the JSON results, and decoding the JSON. So, let's use it and save
+ourselves a little work. Note, however, that we still have to decode the
+results, mapping the Google Maps-specific data encoding into our more
+generic `NormalizedAddress` object.
 
 {% include_code 2012-02-14-simple-address-standardization/normalize-google.rb %}
 
-And here's a sample console run, with the valid and invalid addresses from
-above.
+Here's a sample console run, with a valid address (Google headquarters) and
+invalid addresses (the Foobar, Pennsylvania, example from above):
 
 {% codeblock Test Run lang:ruby %}
 [1] pry(main)> require 'normalize-google'
@@ -231,74 +268,178 @@ above.
 => #<AddressNormalizer::NormalizedAddress:0xd8e320>
 [4] pry(main)> a.to_s
 => "1600 Amphitheatre Pkwy, Mountain View, CA 94043, USA"
-[5] pry(main)> a = normalize_street_address '1600 Curley Howard Parkway, Anytown, CA'
+[5] pry(main)> a = normalize_street_address '100 My Place, Foobar, PA'
 => nil
 {% endcodeblock %}
 
 ## Python
 
-For our Python implementation, we'll use the API directly, for maximum
-flexibility. For example:
+For our Python implementation, we'll use the [py-googlemaps][] API. The
+results are somewhat different from the Ruby `geocoder` gem. For example:
+
+[py-googlemaps]: http://py-googlemaps.sourceforge.net/
 
 {% codeblock Python Google Maps with Good Address lang:python %}
 $ ipython               
 Python 2.7.1 (r271:86832, Mar 27 2011, 20:51:04) 
 ...
-In [1]: import urllib
+In [1]: from googlemaps import GoogleMaps
 
-In [2]: s = '1600 Amphitheatre Parkway, Mountain View, CA'
+In [2]: g = GoogleMaps()
 
-In [3]: url = 'https://maps.googleapis.com/maps/api/geocode/json?address=%s&sensor=false' % urllib.quote(s)
+In [3]: d = g.geocode('1600 Amphitheatre Parkway, Mountain View, CA')
 
-In [4]: j = urllib.urlopen(url).read()
-
-In [5]: import json
-
-In [6]: h = json.loads(j)
-
-In [7]: h
-Out[7]: 
-{u'results': [{u'address_components': [{u'long_name': u'California',
-                                        u'short_name': u'CA',
-                                        u'types': [u'administrative_area_level_1',
-                                                   u'political']},
-                                       {u'long_name': u'United States',
-                                        u'short_name': u'US',
-                                        u'types': [u'country',
-                                                   u'political']}],
-               u'formatted_address': u'California, USA',
-               u'geometry': {u'bounds': {u'northeast': {u'lat': 42.0095169,
-                                                        u'lng': -114.131211},
-                                         u'southwest': {u'lat': 32.5342071,
-                                                        u'lng': -124.4096195}},
-                             u'location': {u'lat': 36.778261,
-                                           u'lng': -119.4179324},
-                             u'location_type': u'APPROXIMATE',
-                             u'viewport': {u'northeast': {u'lat': 41.2156363,
-                                                          u'lng': -111.2221314},
-                                           u'southwest': {u'lat': 32.0683661,
-                                                          u'lng': -127.6137334}}},
-               u'types': [u'administrative_area_level_1', u'political']}],
- u'status': u'OK'}
+In [4]: d  # reformatted slightly, for readability
+Out [4]:
+{
+  u'Status': {
+      u'code': 200,
+      u'request': u'geocode'
+  },
+  u'Placemark': [{
+    u'Point': {
+      u'coordinates': [-122.0853032, 37.4211444, 0]
+    }, 
+    u'ExtendedData': {
+      u'LatLonBox': {
+        u'west': -122.0866522,
+        u'east': -122.0839542,
+        u'north': 37.4224934,
+        u'south': 37.4197954}
+      },
+      u'AddressDetails': {
+        u'Country': {
+          u'CountryName': u'USA',
+          u'AdministrativeArea': {
+            u'AdministrativeAreaName': u'CA',
+            u'Locality': {
+              u'PostalCode': {u'PostalCodeNumber': u'94043'},
+              u'Thoroughfare': {
+                u'ThoroughfareName': u'1600 Amphitheatre Pkwy'
+              }, 
+              u'LocalityName': u'Mountain View'
+            }
+          },
+          u'CountryNameCode': u'US'
+        },
+        u'Accuracy': 8
+      },  
+      u'id': u'p1',
+      u'address': u'1600 Amphitheatre Pkwy, Mountain View, CA 94043, USA'
+  }], 
+  u'name': u'1600 Amphitheatre Parkway, Mountain View, CA'
+}
 {% endcodeblock %}
 
-Note that the output is similar to what the Ruby `geocoder` gem produces. So,
-the Python implementation is also similar.
+For a non-existent address that zooms out ("100 My Place, Foobar, PA"),
+here's the result:
+
+{% codeblock lang:python %}
+In [5]: d = g.geocode('100 My Place, Foobar, PA')
+
+In [6]: d  # reformatted slightly, for readability
+Out [6]:
+{
+  u'Status': {u'code': 200, u'request': u'geocode'}, 
+  u'Placemark': [{
+    u'Point': {
+      u'coordinates': [-77.1945247, 41.2033216, 0]
+    },
+    u'ExtendedData': {
+      u'LatLonBox': {
+        u'west': -79.2434749, 
+        u'east': -75.1455745,
+        u'north': 42.2690472,
+        u'south': 40.1199535
+      }
+    },
+    u'AddressDetails': {
+      u'Country': {
+        u'CountryName': u'USA',
+        u'AdministrativeArea': {
+          u'AdministrativeAreaName': u'PA'
+        },
+        u'CountryNameCode': u'US'
+      },
+      u'Accuracy': 2
+    },
+    u'id': u'p1',
+    u'address': u'Pennsylvania, USA'
+  }],
+  u'name': u'100 My Place, Foobar, PA'
+}
+{% endcodeblock %}
+
+For a completely nonexistent address ("100 My Place, Foobar, XY"), the API
+raises an exception:
+{% codeblock lang:python %}
+In [7]: d = g.geocode('100 My Place, Foobar, PA')
+GoogleMapsError                           Traceback (most recent call last)
+
+/home/bmc/<ipython console> in <module>()
+
+/home/bmc/.pythonbrew/pythons/Python-2.7.1/lib/python2.7/site-packages/googlemaps.pyc in geocode(self, query, sensor, oe, ll, spn, gl)
+    260         status_code = response['Status']['code']
+    261         if status_code != STATUS_OK:
+--> 262             raise GoogleMapsError(status_code, url, response)
+    263         return response
+    264 
+
+GoogleMapsError: Error 602: G_GEO_UNKNOWN_ADDRESS
+{% endcodeblock %}
+
+The documentation for the API shows this example:
+
+{% codeblock lang:python %}
+gmaps = GoogleMaps(api_key)
+address = '350 Fifth Avenue New York, NY'
+result = gmaps.geocode(address)
+placemark = result['Placemark'][0]
+lng, lat = placemark['Point']['coordinates'][0:2]    # Note these are backkwards from usual
+print lat, lng
+6721118 -73.9838823
+details = placemark['AddressDetails']['Country']['AdministrativeArea']
+street = details['Locality']['Thoroughfare']['ThoroughfareName']
+city = details['Locality']['LocalityName']
+state = details['AdministrativeAreaName']
+zipcode = details['Locality']['PostalCode']['PostalCodeNumber']
+print ', '.join((street, city, state, zipcode))
+350 5th Ave, Brooklyn, NY, 11215
+{% endcodeblock %}
+
+It seems reasonable to adopt this strategy:
+
+* If we get an exception, we have a bad address.
+* If we can't find `details['Locality']['PostalCode']['PostalCodeNumber']`
+  in the results, then the address isn't granular enough, so treat it as a
+  bad address.
+
+Unfortunately, reverse-geocoding, with this Python API, doesn't always return
+useful information, so that step is omitted here.
 
 {% include_code 2012-02-14-simple-address-standardization/normalize_google.py %}
 
-Here's a sample console run, with the valid and invalid addresses from above.
+Here's a sample console run, with the same addresses as above:
 
 {% codeblock Test Run lang:python %}
 In [1]: from normalize_google import *
 
+
 In [2]: a = normalize_street_address('1600 Amphitheatre Parkway, Mountain View, CA')
 
-In [3]: str(a)
-Out[3]: '1600 Amphitheatre Pkwy, Mountain View, CA 94043, USA'
+In [3]: a
+Out[3]: {'address_line2': None, 'city': u'Mountain View', 'address_line1': u'1600 Amphitheatre Pkwy', 'state_province': u'CA', 'longitude': -122.0853032, 'postal_code': u'94043', 'country': u'USA', 'latitude': 37.4211444, 'formatted_address': u'1600 Amphitheatre Pkwy Mountain View CA 94043 USA'}
 
-In [4]: a = normalize_street_address('1600 Curley Howard Parkway, Anytown, CA')
+In [4]: str(a)
+Out[4]: '1600 Amphitheatre Pkwy Mountain View CA 94043 USA'
 
-In [5]: print(a)
+In [5]: a = normalize_street_address('100 My Place, Foobar, PA')
+
+In [6]: print(a)
+None
+
+In [7]: a = normalize_street_address('100 My Place, Foobar, ZZ')
+
+In [8]: print(a)
 None
 {% endcodeblock %}
