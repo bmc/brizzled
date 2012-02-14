@@ -1,6 +1,6 @@
-// -*- Ruby Sass -*-
-//
 // Screen-only styles.
+
+@import "fonts";
 
 .print {
     display: none;
@@ -24,6 +24,21 @@ div.imgpopup {
         margin: 0 !important;
     }
 }
+
+figure.code {
+    pre.line-numbers {
+        font-size: $code_font_size;
+    }
+
+    td.code {
+        pre {
+            code {
+                font-size: $code_font_size;
+            }
+        }
+    }
+}
+
 
 // -------------------------------------------------------------------------
 // Table of Contents Styling (using jQuery table of contents plugin)

@@ -272,7 +272,7 @@ invalid addresses (the Foobar, Pennsylvania, example from above):
 => nil
 {% endcodeblock %}
 
-## Python
+### Python
 
 For our Python implementation, we'll use the [py-googlemaps][] API. The
 results are somewhat different from the Ruby `geocoder` gem. For example:
@@ -423,7 +423,6 @@ Here's a sample console run, with the same addresses as above:
 
 {% codeblock Test Run lang:python %}
 In [1]: from normalize_google import *
-
 
 In [2]: a = normalize_street_address('1600 Amphitheatre Parkway, Mountain View, CA')
 
