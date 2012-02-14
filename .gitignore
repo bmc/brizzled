@@ -17,3 +17,4 @@ source/stylesheets
 source/stylesheets/screen.css
 vendor
 node_modules
+*.pyc
