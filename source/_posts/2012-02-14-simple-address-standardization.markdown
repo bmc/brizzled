@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Address Standardization in Ruby"
-date: 2012-02-13 17:58
+date: 2012-02-14 17:58
 comments: true
 categories: [programming, address standardization, geocoding, ruby]
 toc: true
@@ -217,7 +217,7 @@ values, then we can assume the address wasn't found.
 
 With that understanding, we can write our Ruby implementation:
 
-{% include_code 2012-02-13-simple-address-standardization/normalize-google.rb %}
+{% include_code 2012-02-14-simple-address-standardization/normalize-google.rb %}
 
 And here's a sample console run, with the valid and invalid addresses from
 above.
@@ -285,7 +285,7 @@ Out[7]:
 Note that the output is similar to what the Ruby `geocoder` gem produces. So,
 the Python implementation is also similar.
 
-{% include_code 2012-02-13-simple-address-standardization/normalize_google.py %}
+{% include_code 2012-02-14-simple-address-standardization/normalize_google.py %}
 
 Here's a sample console run, with the valid and invalid addresses from above.
 
