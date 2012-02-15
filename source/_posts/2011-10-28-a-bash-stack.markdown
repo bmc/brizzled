@@ -58,11 +58,11 @@ So, without further ado, here's the code:
 
 {% gist 1323553 %}
 
-The code is also checked into my GitHub [bashlib][] repository, as `stack.sh`.
+The code is also checked into my GitHub [lib-sh][] repository, as `stack.sh`.
 
 [Ruby]: http://ruby-lang.org/
 [Rails]: http://rubyonrails.org/
 [rvm]: https://rvm.beginrescueend.com/
 [Python]: http://www.python.org/
 [pythonbrew]: https://github.com/utahta/pythonbrew
-[bashlib]: https://github.com/bmc/bashlib
+[lib-sh]: https://github.com/bmc/lib-sh
