@@ -22,6 +22,8 @@ standardize them.
 This article explores one way to solve that problem. I'll be showing examples
 of Ruby and Python, but the same general approach works for other languages.
 
+<!-- more -->
+
 # The Approach
 
 The simplest way to get started is to use REST-based mapping APIs already on
@@ -245,7 +247,7 @@ values, then we can assume the address wasn't found:
 
 Now we're ready to write some code.
 
-### Ruby
+### Ruby Google Maps Implementation
 
 The Ruby Geocoder gem handles connecting to the Google Maps REST service,
 retrieving the JSON results, and decoding the JSON. So, let's use it and save
@@ -271,7 +273,7 @@ invalid addresses (the Foobar, Pennsylvania, example from above):
 => nil
 {% endcodeblock %}
 
-### Python
+### Python Google Maps Implementation
 
 For our Python implementation, we'll use the [py-googlemaps][] API. The
 results are somewhat different from the Ruby `geocoder` gem. For example:
@@ -465,6 +467,13 @@ Here are three examples:
   [GitHub repository][SmartyStreets-Github] that contains sample code 
   for Java, Python, C#, Ruby and Javascript.
 
+Another option is [Gisgraphy][]. Gisgraphy is an open source geocoding
+product, which you can download and run locally. If you want to use the
+REST API on their server, they have a premium service; however, hosting the
+data locally, providing your own REST service, appears to be free. Of course,
+if you use this solution, you're responsible for keeping the software and the
+data up-to-date, as well as providing a local server to run the software.
+
 Let's reimplement our service in terms of SmartyStreets. There are a few
 caveats to note:
 
@@ -476,7 +485,7 @@ caveats to note:
    ourselves.
 3. The resulting changes will be US-specific.
 
-## Ruby
+## Ruby SmartyStreets Implementation
 
 Let's start with Ruby. Parsing the address is not a big deal in Ruby, because
 we can use the [StreetAddress][] gem. The gem is fully documented at
@@ -518,7 +527,7 @@ Here's a sample console run.
 => nil
 {% endcodeblock %}
 
-## Python
+## Python SmartyStreets Implementation
 
 The reimplementation in Python is similar. However, there isn't a handy Python
 library for parsing a single-string address. I've put together a quick hack,
@@ -536,7 +545,7 @@ With that warning out of the way, here's the address parsing code:
 Now that we have an address parser, however brittle, we can write the Python
 version of the SmartyStreets implementation.
 
-{% include_code Normalize Address via SmartyStreets, in Ruby 2012-02-14-simple-address-standardization/normalize_smartystreets.rb %}
+{% include_code Normalize Address via SmartyStreets, in Ruby 2012-02-14-simple-address-standardization/normalize_smartystreets.py %}
 
 And here's the obligatory console test run:
 
@@ -588,3 +597,4 @@ a difficult enhancement, it's left as an exercise for the reader.
 [StreetAddress]: http://streetaddress.rubyforge.com
 [Ruby Geocoder]: http://www.rubygeocoder.com/
 [geocoder-java]: http://code.google.com/p/geocoder-java/
+[Gisgraphy]: http://www.gisgraphy.com/
