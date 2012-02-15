@@ -41,9 +41,20 @@ h1.entry-title {
     font-size: 200%;
 }
 
+article {
+    h2 {
+        background: none !important;
+    }
+}
+
 div.entry-content {
+    ul, ol {
+        margin-bottom: 1em !important;
+    }
+
     h1 {
         font-size: 175%;
+        margin-bottom: 0.5em;
     }
 
     h2 {
