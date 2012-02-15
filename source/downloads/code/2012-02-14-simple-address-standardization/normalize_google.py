@@ -6,7 +6,7 @@ __all__ = ['NormalizedAddress', 'normalize_street_address']
 class NormalizedAddress(object):
 
     def __init__(self, data):
-        self.address_line1 = None
+        self.address_line1  = None
         self.address_line2  = None
         self.city           = None
         self.postal_code    = None
