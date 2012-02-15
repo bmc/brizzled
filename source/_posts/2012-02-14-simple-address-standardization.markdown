@@ -19,8 +19,8 @@ standardize them.
 * Standardizing an address also makes it more likely that you can send a
   physical piece of mail to the address and have it actually arrive.
 
-This article explores one way to solve that problem. I'll be using Ruby,
-but the same approach works for other languages.
+This article explores one way to solve that problem. I'll be showing examples
+of Ruby and Python, but the same general approach works for other languages.
 
 # The Approach
 
@@ -29,9 +29,9 @@ the Internet, such as Google Maps, Yahoo! Maps, Bing, and others. There are a
 number of language-specific APIs available to make this task easier. For
 example:
 
-* Ruby: the [Ruby Geocoder gem](http://www.rubygeocoder.com/)
-* Python: [googlemaps](http://pypi.python.org/pypi/googlemaps/)
-* Java (and other JVM languages): [geocoder-java](http://code.google.com/p/geocoder-java/)
+* Ruby: the [Ruby Geocoder][] gem
+* Python: [py-googlemaps][]
+* Java (and other JVM languages): [geocoder-java][]
 
 **Note**: The Internet-based mapping APIs all have restrictions. The Google
 Maps API, for instance, contains this clause in its
@@ -181,9 +181,8 @@ This solution doesn't work with _every_ address, but it's still worth doing.
 ### The Maps API can "zoom out" if the address isn't valid
 
 
-If you give the Google Maps API a bad address, you can either get no data or "zoomed out" data. For instance, here's what you get for nonsense address:
-
-100 My Place, Foobar, XY
+If you give the Google Maps API a bad address, you can either get no data or "zoomed out" data. For instance, here's what you get for the nonsense address
+"100 My Place, Foobar, XY".
 
 {% codeblock lang:ruby %}
 [1] pry(main)> require 'geocoder'
@@ -254,13 +253,13 @@ ourselves a little work. Note, however, that we still have to decode the
 results, mapping the Google Maps-specific data encoding into our more
 generic `NormalizedAddress` object.
 
-{% include_code 2012-02-14-simple-address-standardization/normalize-google.rb %}
+{% include_code Normalize Address via Google Maps, in Ruby 2012-02-14-simple-address-standardization/normalize_google.rb %}
 
 Here's a sample console run, with a valid address (Google headquarters) and
 invalid addresses (the Foobar, Pennsylvania, example from above):
 
 {% codeblock Test Run lang:ruby %}
-[1] pry(main)> require 'normalize-google'
+[1] pry(main)> require 'normalize_google'
 => true
 [2] pry(main)> include AddressNormalizer
 => Object
@@ -276,8 +275,6 @@ invalid addresses (the Foobar, Pennsylvania, example from above):
 
 For our Python implementation, we'll use the [py-googlemaps][] API. The
 results are somewhat different from the Ruby `geocoder` gem. For example:
-
-[py-googlemaps]: http://py-googlemaps.sourceforge.net/
 
 {% codeblock Python Google Maps with Good Address lang:python %}
 $ ipython               
@@ -417,7 +414,7 @@ It seems reasonable to adopt this strategy:
 Unfortunately, reverse-geocoding, with this Python API, doesn't always return
 useful information, so that step is omitted here.
 
-{% include_code 2012-02-14-simple-address-standardization/normalize_google.py %}
+{% include_code Normalize Address via Google Maps, in Python 2012-02-14-simple-address-standardization/normalize_google.py %}
 
 Here's a sample console run, with the same addresses as above:
 
@@ -442,3 +439,152 @@ In [7]: a = normalize_street_address('100 My Place, Foobar, ZZ')
 In [8]: print(a)
 None
 {% endcodeblock %}
+
+# Using a Commercial Service
+
+You've completed your initial development, and you're ready to launch. But,
+your slick new service will not be displaying maps, and your lawyer has
+told you, in no uncertain terms, that you cannot risk using Google Maps (or
+Yahoo! Maps) in violation of the terms of service. So, it's time to switch
+to a commercial service.
+
+Fortunately, the API is designed to hide its reliance on Google Maps from the
+outside world, so reimplementing it should be easy. There are a number of
+commercial solutions that provide REST APIs, and many are reasonably priced.
+Here are three examples:
+
+* [Melissa Data][] provides both address verification and geocoding solutions.
+  Its [Address Verifier][] service provides a REST API and supports U.S,
+  Canadian, and international addresses. Their subscription plans are based on
+  yearly volume.
+* [AddressDoctor][] provides a SOAP API for scrubbing addresses. Their plans
+  are also based on yearly volume.
+* [SmartyStreets][] provides a REST API, and with monthly or yearly 
+  volume-based subscription plans. In addition, they have a free plan that
+  allows 250 addresses to be scrubbed a month, and they have a
+  [GitHub repository][SmartyStreets-Github] that contains sample code 
+  for Java, Python, C#, Ruby and Javascript.
+
+Let's reimplement our service in terms of SmartyStreets. There are a few
+caveats to note:
+
+1. The SmartyStreets LiveAddress API does not do geocoding, so we won't
+   get latitude and longitude out of our queries. We'll leave those fields
+   empty in our API.
+2. The API requires pre-parsed addresses; it does not handle a single address
+   string. That means we'll have to figure out how to parse the address string
+   ourselves.
+3. The resulting changes will be US-specific.
+
+## Ruby
+
+Let's start with Ruby. Parsing the address is not a big deal in Ruby, because
+we can use the [StreetAddress][] gem. The gem is fully documented at
+<http://streetaddress.rubyforge.com>.
+
+{% codeblock lang:bash %}
+$ gem install StreetAddress
+{% endcodeblock %}
+
+The SmartyStreets JSON REST API is documented at
+<http://wiki.smartystreets.com/liveaddress_api_users_guide#section-4rest-json-endpoint>, though several fields are missing from the documentation. Like many
+such APIs, it'll return multiple possible choices for an address. In this
+implementation, we're just going to take the first one. However, for
+interactive services, where you're scrubbing a user-supplied address, if there
+are several possible hits, you may want to display them and allow the user to
+choose which one seems like the right address.
+
+The Ruby reimplementation of our address normalizer API is fairly
+straightforward:
+
+{% include_code Normalize Address via SmartyStreets, in Ruby 2012-02-14-simple-address-standardization/normalize_smartystreets.rb %}
+
+Before you can actually use that software, you have to register with
+SmartyStreets, get an API key, and plug it into the code by setting the
+`API_KEY` constant.
+
+Here's a sample console run.
+
+{% codeblock Test Run lang:ruby %}
+[1] pry(main)> require 'normalize_smartypants'
+=> true
+[2] pry(main)> include AddressNormalizer
+=> Object
+[3] pry(main)> a = normalize_street_address '1600 Amphitheatre Parkway, Mountain View, CA'
+=> #<AddressNormalizer::NormalizedAddress:0xd8e320>
+[4] pry(main)> a.to_s
+=> "1600 Amphitheatre Pkwy, Mountain View, CA 94043-1351"
+[5] pry(main)> a = normalize_street_address '100 My Place, Foobar, PA'
+=> nil
+{% endcodeblock %}
+
+## Python
+
+The reimplementation in Python is similar. However, there isn't a handy Python
+library for parsing a single-string address. I've put together a quick hack,
+for the purposes of this blog post. 
+
+**WARNING:** This hack is _not_ suitable for production use! It is far from
+robust and will fail on some addresses. It exists here solely for demonstration
+purposes. A better solution would be to port the Ruby [StreetAddress][] gem to
+Python.
+
+With that warning out of the way, here's the address parsing code:
+
+{% include_code Quick and Dirty Address Parser, in Python 2012-02-14-simple-address-standardization/parse_addr.py %}
+
+Now that we have an address parser, however brittle, we can write the Python
+version of the SmartyStreets implementation.
+
+{% include_code Normalize Address via SmartyStreets, in Ruby 2012-02-14-simple-address-standardization/normalize_smartystreets.rb %}
+
+And here's the obligatory console test run:
+
+{% codeblock Test Run lang:python %}
+In [1]: from normalize_google import *
+
+In [2]: a = normalize_street_address('1600 Amphitheatre Parkway, Mountain View, CA')
+
+In [3]: a
+Out[3]: {'address_line2': '', 'city': u'Mountain View', 'address_line1': u'1600 Amphitheatre Pkwy', 'state_province': u'CA', 'longitude': None, 'postal_code': u'94043 1351', 'country': 'US', 'latitude': None, 'formatted_address': u'1600 Amphitheatre Pkwy, Mountain View, CA 94043 1351'}
+
+In [4]: str(a)
+Out[4]: '1600 Amphitheatre Pkwy, Mountain View, CA 94043 1351'
+
+In [5]: a = normalize_street_address('100 My Place, Foobar, PA')
+
+In [6]: print(a)
+None
+
+In [7]: a = normalize_street_address('100 My Place, Foobar, ZZ')
+
+In [8]: print(a)
+None
+{% endcodeblock %}
+
+# Further Enhancements
+
+An even better implementation would be to keep both the SmartyStreets _and_
+Google implementations, allowing either one to be selected by a constant,
+a configuration parameter, or an environment variable. Since this task isn't
+a difficult enhancement, it's left as an exercise for the reader.
+
+# References
+
+* [Melissa Data][]'s [Address Verifier][]
+* [AddressDoctor][]
+* [SmartyStreets][]
+* [Python Googlemaps API][py-googlemaps]
+* [Ruby StreetAddress][StreetAddress] gem
+* [Ruby Geocoder][] gem
+* [geocoder-java][] library
+
+[Melissa Data]: http://www.melissadata.com/
+[Address Verifier]: http://www.melissadata.com/address-verification/index.htm
+[AddressDoctor]: http://www.addressdoctor.com/
+[SmartyStreets]: http://www.smartystreets.com/
+[SmartyStreets-Github]: https://github.com/smartystreets/LiveAddressSamples
+[py-googlemaps]: http://py-googlemaps.sourceforge.net/
+[StreetAddress]: http://streetaddress.rubyforge.com
+[Ruby Geocoder]: http://www.rubygeocoder.com/
+[geocoder-java]: http://code.google.com/p/geocoder-java/
