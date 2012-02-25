@@ -298,7 +298,7 @@ colorized (not shown here).
 [CoffeeScript]: http://jashkenas.github.com/coffee-script/
 [test framework]: http://en.wikipedia.org/wiki/Test_automation_framework
 [Rake]: http://rake.rubyforge.org/
-[make]: http://www.gnu.org/software/make/
+[*make*]: http://www.gnu.org/software/make/
 [Ruby]: http://www.ruby-lang.org/
 [Rails]: http://www.rubyonrails.org/
 [Django]: http://www.djangoproject.com/
