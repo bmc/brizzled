@@ -39,6 +39,11 @@ figure.code {
     }
 }
 
+#about-link {
+    &:hover {
+        cursor: pointer;
+    }
+}
 
 // -------------------------------------------------------------------------
 // Table of Contents Styling (using jQuery table of contents plugin)
