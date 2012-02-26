@@ -29,11 +29,11 @@ I wanted the generated table of contents to meet the following requirements:
   on the screen and printer-friendly versions of a page.
 * It should be implemented as an HTML unnumbered list (i.e., a &lt;ul&gt;),
   for maximum styling flexibility.
-* It should be automatic: That is, the code should automatically generate the
-  table of contents from the headings (&lt;H1&gt;, &lt;H2&gt;, etc.) in the
-  document.
-* It should be optional. That is, I should be able to enable or disable it
-  on a per-article basis.
+* It should be automatic: The code should generate the table of contents from
+  the headings (&lt;H1&gt;, &lt;H2&gt;, etc.) in the document, without my
+  having to mark the headings in some way.
+* It should be optional: I should be able to enable or disable it, on a
+  per-article basis.
 * If I accidentally enable it on an article that has no heading elements,
   I don't want to see an empty table of contents in the document.
 
@@ -41,7 +41,7 @@ I wanted the generated table of contents to meet the following requirements:
 
 Ideally, since Octopress generates static HTML, I'd like to have a 
 [Liquid][] tag to embed in the appropriate place inside one of my templates.
-Something like this would be ideal:
+Something like this would be perfect:
 
 {% codeblock What I would like %}
 {% raw %}
@@ -109,9 +109,9 @@ fires when each page loads. There are two conditions, however:
 ### The Javascript
 
 First, let's take a look at the Javascript itself. I chose to put the bulk
-of the logic into a separate function, in a separate Javascript file called
+of the logic into its own function, in a separate Javascript file called
 `generate-toc.js`. (You can see the source for that file in my
-[blog's GitHub repo][generate-toc]. I've also reproduced it, below.
+[blog's GitHub repo][generate-toc]. I've also reproduced it, below.)
 
 {% codeblock generate-toc.js %}
 function generateTOC(insertBefore, heading) {
