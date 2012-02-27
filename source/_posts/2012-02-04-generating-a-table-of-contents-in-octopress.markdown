@@ -262,7 +262,7 @@ That styling:
 
 * causes the table of contents to float to the right of the text
 * gives it a light gray background
-* ensures that the nested lists are without too much indentation
+* ensures that the nested lists don't have too much indentation
 * forces all lists to use disc bullets, regardless of nesting level.
 
 ### Printer-friendly Styling
@@ -278,7 +278,7 @@ file just includes a custom `sass/custom/_print.scss` file. Here's
 {% endraw %}
 {% endcodeblock %}
 
-Then, in `sass/custom/_screen.scss`, I put the following rules:
+Then, in `sass/custom/_print.scss`, I put the following rules:
 
 {% codeblock sass/custom/_print.scss lang:sass %}
 {% raw %}
