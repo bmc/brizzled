@@ -408,6 +408,10 @@ Building site: /home/bmc/src/websites/reallycoolsoftware.com -> /home/bmc/src/we
 Successfully generated site: /home/bmc/src/websites/reallycoolsoftware.com -> /home/bmc/src/websites/reallycoolsoftware.com/_site
 {% endcodeblock %}
 
+# Example
+
+I used this approach on my corporate web site, [www.ardentex.com](http://www.ardentex.com/). My use of Twitter Bootstrap barely scratches the surface of what's available.
+
 # Other approaches
 
 * Jason Gritman has a [Jekyll-Bootstrap-Template][] that can help you get

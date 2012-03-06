@@ -131,7 +131,7 @@ function generateTOC(insertBefore, heading) {
 
 The `insertBefore` parameter is a jQuery string selector for the element to
 search for the table of content headings. The optional `heading` parameter
-specifies the heading to preced the table of contents.
+specifies the heading to precede the table of contents.
 
 Copy `generate-toc.js` to `source/javascripts` and put the following line in
 `source/_includes/custom/head.html`:
