@@ -64,20 +64,26 @@ Google. See <http://docs.jquery.com/Downloading_jQuery> for a list of CDNs.
 If you elect to download it and install it locally, copy the appropriate
 file (e.g., `jquery-1.7.1.min.js`) to your blog's `source/javascripts/`directory.
 
-Next, modify `source/_includes/custom/head.html` to include a `<script>`
-tag for jQuery. For a local install, use this line:
+You'll also need the [jQuery table of contents plugin][]. Download it and
+put it somewhere within your blog's source. I stored it in
+`source/javascripts/jquery.tableofcontents.min.js`.
+
+Next, modify `source/_includes/custom/head.html` to include `<script>` tags for
+jQuery and the table of contents plugin.  For a local install, use this code:
 
 {% codeblock Add this to source/_includes/custom/head.html lang:html %}
 {% raw %}
 <script src="{{ root_url }}/javascripts/jquery-1.7.1.min.js" type="text/javascript"></script>
+<script src="{{ root_url }}/javascripts/jquery.tableofcontents.min.js" type="text/javascript"></script>
 {% endraw %}
 {% endcodeblock %}
 
-To use the version of jQuery hosted on Google, use this line:
+If you're using the version of jQuery hosted on Google, use this code:
 
 {% codeblock jQuery on the Google CDN lang:html %}
 {% raw %}
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+<script src="{{ root_url }}/javascripts/jquery.tableofcontents.min.js" type="text/javascript"></script>
 {% endraw %}
 {% endcodeblock %}
 
@@ -95,6 +101,7 @@ jQuery, add this code, right after the `<script>` tag that pulls jQuery in:
 </script>
 {% endraw %}
 {% endcodeblock %}
+
 
 ## Generating the Table of Contents
 
@@ -198,12 +205,54 @@ contents.
 
 ## Styling
 
+I'm using a few locally-defined mixins within my Sass files. You may wish to
+use something like [Bourbon][], instead, since it provides these capabilities,
+and more. (I may switch to Bourbon myself, at some point.) However, for  this
+article, let's assume you're using locally-defined ones.
+
+Store the following definitions in `sass/custom/_mixins.scss`. (The source
+is available at
+<https://github.com/bmc/brizzled/blob/master/sass/custom/_mixins.scss>.)
+
+{% codeblock sass/custom/mixins.scss lang:sass %}
+{% raw %}
+@mixin rounded-border($radius: 10px) {
+    border-radius: $radius;
+    -moz-border-radius: $radius;
+   padding: $radius;
+}
+
+@mixin centered($width: auto) {
+    width: $width !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+@mixin drop-shadow-right-bottom($width: 5px, $color: #999) {
+    box-shadow: $width $width $width $color;
+    -moz-box-shadow: $width $width $width $color;
+    -webkit-box-shadow: $width $width $width $color;
+}
+{% endraw %}
+{% endcodeblock %}
+
+Then, modify `sass/custom/_styles.scss` to import the mixins:
+
+{% codeblock sass/custom/_styles.scss lang:sass %}
+{% raw %}
+@import "mixins";
+{% endraw %}
+{% endcodeblock %}
+
+
+### Screen versus Print
+
 `generateTOC()` puts the table of contents inside a `<ul>` element, which tells
 the jQuery Table of Contents plugin to generate a nested list. I chose to
 style that list one way for the screen and another way for the printed page.
 (You can see the difference by printing this article.)
 
-### Screen Styling
+#### Screen Styling
 
 Octopress already has a `sass/screen.scss` file, but I want to keep my local
 screen-specific stylings in a custom file. So, I created
@@ -265,7 +314,7 @@ That styling:
 * ensures that the nested lists don't have too much indentation
 * forces all lists to use disc bullets, regardless of nesting level.
 
-### Printer-friendly Styling
+#### Printer-friendly Styling
 
 Octopress does not (yet) ship with a `sass/print.scss` file, so I created one.
 For consistency with the screen styling (and the rest of the SASS files), that
@@ -282,6 +331,8 @@ Then, in `sass/custom/_print.scss`, I put the following rules:
 
 {% codeblock sass/custom/_print.scss lang:sass %}
 {% raw %}
+@import "mixins";
+
 $toc-incr: 1em;
 
 div#tocBlock {
@@ -332,3 +383,4 @@ The result of all that work is a table of contents that looks like this:
 [jQuery table of contents plugin]: http://fuelyourcoding.com/scripts/toc/
 [YAML front matter]: https://github.com/mojombo/jekyll/wiki/yaml-front-matter
 [generate-toc]: https://github.com/bmc/brizzled/blob/master/source/javascripts/generate-toc.js
+[Bourbon]: http://thoughtbot.com/bourbon/
