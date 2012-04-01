@@ -3,7 +3,7 @@ layout: post
 title: "Hacking Buildr's POM Generation"
 date: 2012-03-31 19:41
 comments: true
-categories: ruby, buildr, java, maven
+categories: [ruby, buildr, java, maven]
 ---
 
 Awhile ago, I finally decided to bring the build process for one my open source
@@ -26,11 +26,10 @@ easier requested than accomplished.
 
 <!-- more -->
 
-After digging through numerous search
-results, as well as the Buildr source code, I finally came up with a solution.
-It's a hack, requiring some local metaprogramming of Buildr's Ruby code--a
-solution that is subject to breakage, when subsequent versions of Buildr
-are released.
+After digging through numerous search results, as well as the Buildr source
+code, I finally came up with a solution. It's a hack, requiring some local
+metaprogramming of Buildr's Ruby code--a solution that is subject to breakage,
+when subsequent versions of Buildr are released.
 
 But, for now, it gets the job done.
 
