@@ -133,6 +133,9 @@ module Buildr
 end
 {% endcodeblock %}
 
+The complete `Buildfile` for the project is
+[here](https://github.com/bmc/javautil/blob/master/Buildfile).
+
 If there's a cleaner, more reasonable way to get Buildr to produce a POM
 that contains dependencies, I'd love to hear about it. In the meantime,
 at least I was able to close the [bug][].
