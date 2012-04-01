@@ -22,7 +22,11 @@ Maybe they should be added to the POM, so my build system (I use Gradle) will be
 {% endblockquote %}
 
 That, of course, is a perfectly reasonable request. As it happens, it was 
-easier requested than accomplished. After digging through numerous search
+easier requested than accomplished.
+
+<!-- more -->
+
+After digging through numerous search
 results, as well as the Buildr source code, I finally came up with a solution.
 It's a hack, requiring some local metaprogramming of Buildr's Ruby code--a
 solution that is subject to breakage, when subsequent versions of Buildr
