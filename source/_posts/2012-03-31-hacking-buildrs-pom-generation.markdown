@@ -6,7 +6,7 @@ comments: true
 categories: [ruby, buildr, java, maven]
 ---
 
-Awhile ago, I finally decided to bring the build process for one my open source
+Awhile ago, I finally decided to bring the build process for one of my open source
 Java projects [into the 21st century][]. Since I find Maven irritating, I
 converted the project to use [Buildr][], a [Rake][]-based build tool that
 contains, among other things, Maven-style dependency management.
