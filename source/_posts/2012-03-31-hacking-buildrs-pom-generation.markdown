@@ -12,7 +12,7 @@ converted the project to use [Buildr][], a [Rake][]-based build tool that
 contains, among other things, Maven-style dependency management.
 
 Life was good. I had a nice, simple build, with all the power of Ruby at my
-disposable, and without any need to edit XML, which [sucks][].
+disposal, and without any need to edit XML, which [sucks][].
 
 Then, someone reported a [bug][]: The Buildr-generated POM did not contain
 dependencies. As the author of the bug report wrote:
