@@ -248,7 +248,7 @@ The renderer is also fairly straightforward:
 
 ### jQuery
 
-Be sure to add the following two lines to `source/_includes/custom.head.html`,
+Be sure to add the following two lines to `source/_includes/custom/head.html`,
 to make jQuery and jQuery UI available:
 
 {% codeblock lang:html %}
