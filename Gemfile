@@ -21,6 +21,7 @@ group :development do
   gem 'erubis'
   gem 'grizzled-ruby'
   gem 'bourbon'
+  gem 'octokit'
 end
 
 gem 'sinatra', '1.2.6'
