@@ -16,10 +16,10 @@ When I used Emacs' [VM] to read mail, I merely had to hack together a tiny
 bit of [Elisp](https://github.com/bmc/elisp/blob/master/fortune.el) and wire
 it into a VM hook.
 
-When I moved to Thunderbird, I simple wrote a small shell script that to
-concatenate a signature prefix file with a random fortune; I then told
-*cron*(8) to run that shell script once a minute, to create a new `.signature`
-file. I pointed Thunderbird at that generated `.signature` file.
+When I moved to Thunderbird, I simply wrote a small shell script to concatenate
+a signature prefix file with a random fortune; I then told *cron*(8) to run
+that shell script once a minute, to create a new `.signature` file. I pointed
+Thunderbird at that generated `.signature` file.
 
 But, as it turns out, you can't point Mail.app at an external `.signature`
 file, so the Thunderbird solution won't work.
@@ -27,7 +27,7 @@ file, so the Thunderbird solution won't work.
 The answer is to write a small bit of AppleScript (one of the stranger
 programming languages I've ever used). The AppleScript script:
 
-* Uses the same signature prefix that the Thunderbird shell script uses.
+* Uses the same signature prefix file that the Thunderbird shell script uses.
 * Concatenates the contents of that prefix file with the output from my
   `fortune` program.
 * Tells Mail.app to replace the named signature. (I have more than one
