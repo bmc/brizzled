@@ -485,6 +485,11 @@ caveats to note:
    ourselves.
 3. The resulting changes will be US-specific.
 
+{% update %}
+**Update (4 August, 2012)** Per a comment (see below), SmartyStreets now
+provides both geocoding and single-string address parsing, so caveat #1, above, no longer applies.
+{% endupdate %}
+
 ## Ruby SmartyStreets Implementation
 
 Let's start with Ruby. Parsing the address is not a big deal in Ruby, because
