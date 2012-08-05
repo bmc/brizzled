@@ -75,6 +75,12 @@ div.entry-content {
     }
 }
 
+div.update {
+    border-radius: 5px 5px 5px 5px;
+    border: 1px solid gray;
+    padding: 5px;
+}
+
 #content .blog-index {
     a[rel=full-article] {
         // Change the "read more" link, slightly, from the default.
