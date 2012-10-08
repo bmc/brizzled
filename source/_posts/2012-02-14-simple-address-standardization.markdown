@@ -127,16 +127,17 @@ we have to address (pun intended).
 
 ### The Maps API doesn't truly standardize addresses
 
-The implementation, above, does not _really_ standardize addresses properly--at
-least, not for the United States. In the U.S., many different towns often share
-post offices. For instance, consider the address of a coffee shop near me:
+The free services do not always standardize U.S. addresses properly--at least,
+not from the United States Postal Service's standpoint. In the U.S., many towns
+often share post offices. For instance, consider the address of an office
+where I used to work:
 
-296 West Ridge Pike, Limerick, PA
+1400 Liberty Ridge Drive, Chesterbrook, PA
 
-The post office serving this address is actually Royersford, PA. The
+The post office serving this address is actually Wayne, PA. The
 standardized address is:
 
-296 W. Ridge Pike, Royersford, PA 19468
+1400 Liberty Ridge Dr, Wayne, PA 19087
 
 Let's use the Ruby `geocoder` gem to see what Google returns for the first
 address:
@@ -145,43 +146,41 @@ address:
 $ pry
 [1] pry(main)> require 'geocoder'
 => true
-[2] pry(main) results = Geocoder.search('1400 Liberty Ridge Drive, Chesterbrook, PA')
+[2] pry(main) res = Geocoder.search('1400 Liberty Ridge Drive, Chesterbrook, PA')
 => [#<Geocoder::Result::Google:0x00000000cfa788
   @data=
 ...
-    "formatted_address"=>"296 W Ridge Pike, Limerick, PA 19468, USA"
-...
+[3] res[0].formatted_address
+=> "1400 Liberty Ridge Dr, Chesterbrook, PA 19087, USA"
 {% endcodeblock %}
 
 Note that the town name has not been standardized to the correct post office
 name. The Yahoo! Maps API exhibits similar behavior.
 
 If you're comparing many different addresses, you might need to ensure that
-they all use the canonical post office name. Fortunately, if you're willing to
-make another connection to Google, this problem is easily corrected: Simply
-take the returned latitude and longitude values and _reverse geocode_ that
-location:
+they all use the canonical post office name. If you're willing to
+make another connection to Google, you can try to correct this problem by
+taking the returned latitude and longitude values and _reverse geocoding_
+them:
 
 {% codeblock lang:ruby %}
 [3] pry(main) latitude = results[0].data["geometry"]["location"]["lat"]
 => 40.228934
 [4] pry(main) longitude = results[0].data["geometry"]["location"]["lng"]
 => -75.517588
-[5] 
-
-Geocoder.search('1400 Liberty Ridge Drive, Chesterbrook, PA')
+[5] res = Geocoder.search(latitude=latitude, longitude=longitude)
 => [#<Geocoder::Result::Google:0x00000000cfa788
   @data=
-...
-    "formatted_address"=>"296 W Ridge Pike, Royersford, PA 19468, USA"
-...
+  ...
+
+[6] res[0].foramtted_address
+=> "1400 Liberty Ridge Dr, Wayne, PA 19087, USA"
 {% endcodeblock %}
 
-This solution doesn't work with _every_ address, but it's still worth doing.
-
+This solution doesn't work with _every_ address. (It doesn't work with my home
+address, for instance). However, it's still worth trying.
 
 ### The Maps API can "zoom out" if the address isn't valid
-
 
 If you give the Google Maps API a bad address, you can either get no data or "zoomed out" data. For instance, here's what you get for the nonsense address
 "100 My Place, Foobar, XY".
@@ -193,8 +192,9 @@ If you give the Google Maps API a bad address, you can either get no data or "zo
 => []
 {% endcodeblock %}
 
-Bad address = no results. Good. But, if I give the API a bad address _with_
-a valid state, I get "zoomed out" results:
+Bad address = no results. That makes sense: There's no such state as "XY". But,
+if I give the API a bad address _with_ a valid state, I get "zoomed out"
+results:
 
 {% codeblock lang:ruby %}
 [2] pry(main) results = Geocoder.search('100 My Place, Foobar, PA')
@@ -484,6 +484,11 @@ caveats to note:
    string. That means we'll have to figure out how to parse the address string
    ourselves.
 3. The resulting changes will be US-specific.
+
+{% update %}
+**Update (4 August, 2012)** Per a comment (see below), SmartyStreets now
+provides both geocoding and single-string address parsing, so caveat #1, above, no longer applies.
+{% endupdate %}
 
 ## Ruby SmartyStreets Implementation
 

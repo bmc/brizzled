@@ -52,7 +52,7 @@ module AddressNormalizer
         end
       end
 
-      @line1 = "#{@house_number} #{@street}"
+      @address_line1 = "#{@house_number} #{@street}"
 
       if data["formatted_address"]
         @formatted_address = data["formatted_address"]

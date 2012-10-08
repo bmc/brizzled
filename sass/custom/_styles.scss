@@ -32,7 +32,7 @@ p {
 }
 
 blockquote {
-    font-size: 95%;
+    font-size: 100%;
 }
 
 h1.entry-title {
@@ -73,6 +73,12 @@ div.entry-content {
         font-size: 110%;
         font-style: italic;
     }
+}
+
+div.update {
+    border-radius: 5px 5px 5px 5px;
+    border: 1px solid gray;
+    padding: 5px;
 }
 
 #content .blog-index {
@@ -138,6 +144,7 @@ p, li {
         width: 100%;
 
         img {
+            @include box-shadow(3px 3px 5px 1px gray);
             float: right;
             width: 90px;
             height: 105px;

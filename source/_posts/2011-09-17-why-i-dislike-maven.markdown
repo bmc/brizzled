@@ -44,14 +44,16 @@ XML is a decent enough syntax for data, but XML is a crappy configuration
 language. For one thing, XML is verbose. Take a look at this Maven XML
 fragment:
 
-    <project xmlns="http://maven.apache.org/POM/4.0.0"
-             xmlns:xsi="http://www.w3. org/2001/XMLSchema-instance"
-             xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+{% codeblock lang:xml %}
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3. org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-      <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-      </properties>
-      ...
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  ...
+{% endcodeblock %}
 
 You have to wade through a lot of extraneous characters to get to the meat
 of that configuration item, which is: **the build source encoding is
@@ -63,9 +65,11 @@ Imagine the same thing in a more typical configuration syntax:
 
 [YAML][] would also be a better choice than XML:
 
-    project:
-      properties:
-        build.sourceEncoding: UTF-8
+{% codeblock lang:yaml %}
+project:
+  properties:
+    build.sourceEncoding: UTF-8
+{% endcodeblock %}
 
 Those latter two formats are more readable, with less visual noise, than
 the Maven XML version.
