@@ -76,7 +76,7 @@ Text 2][].
 
 [GNU Emacs]: http://www.gnu.org/s/emacs
 [Sublime Text 2]: http://www.sublimetext.com/2
-[add features I miss]: http://software.clapper.org/ST2EmacsMiscellanea/
+[add features I miss]: http://grundprinzip.github.com/sublemacspro/
 [Sass]: http://sass-lang.com/
 [DetectSyntax]: https://github.com/phillipkoebbe/DetectSyntax
 [Sublime Text 2 Syntax from File Name]: http://software.clapper.org/ST2SyntaxFromFileName/
