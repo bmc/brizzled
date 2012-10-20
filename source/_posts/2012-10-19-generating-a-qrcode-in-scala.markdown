@@ -181,3 +181,4 @@ and go directly to the [ZXing][] API. But QRGen is so easy, why bother?
 [giter8]: https://github.com/n8han/giter8
 [scala-sbt.g8]: https://github.com/typesafehub/scala-sbt.g8
 [SBT full build definition]: http://www.scala-sbt.org/release/docs/Getting-Started/Full-Def.html
+[Grizzled Scala]: http://software.clapper.org/grizzled-scala/
