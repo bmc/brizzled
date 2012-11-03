@@ -197,7 +197,7 @@ $ cd
 $ npm install less
 $ ls node_modules/less/bin
 lessc*
-$ export PATH=$HOME/node_modules/.bin/lessc:$PATH  # add to .bashrc or .zshrc
+$ export PATH=$HOME/node_modules/.bin:$PATH  # add to .bashrc or .zshrc
 {% endcodeblock %}
 
 Next, install the [Uglifier][] gem and Rake (if you haven't already installed
