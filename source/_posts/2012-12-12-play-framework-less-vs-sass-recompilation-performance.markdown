@@ -172,9 +172,10 @@ succeed, before the JVM crapped out, presenting me with one of those
 * **Standard Deviation**: 1.45
 
 You read that correctly: The mean and median times to recompile my LESS files
-are both just shy of *20 seconds*.
+are both just shy of *20 seconds*. And those figures are fairly consistent,
+as the standard deviation and the [graph](#graph-of-results) illustrate.
 
-No wonder I've been shying away from making minor CSS edits.
+No wonder I've been avoiding making minor CSS edits.
 
 Here are some of the JVM errors, when Play barfed during the tests:
 
@@ -234,11 +235,12 @@ Running this test required a bit more up-front work, including:
   Sass equivalents
 * installing the `sass` gem in a separate [rvm][] [gemset][]
 * spending about an hour converting my LESS files to Sass, and
-* verifying that the application still worked after I was done all that.
+* verifying that the application still worked after I was finished with all the
+  painstaking conversions.
 
-Having completed the above, I ran the first script again. Like the first one,
-script "warmed up" the server, touched one of my Sass files, and then issued a
-query for a page, forcing Play to recompile the Sass files.
+Having completed the above, I ran the first script again. Like the original
+LESS test, the Sass test "warmed up" the server, touched one of my Sass files,
+and then issued a query for a page, forcing Play to recompile the Sass files.
 
 ### Resulting data:
 
@@ -272,20 +274,6 @@ Worse than `lessc`, but still far better than Play's built-in LESS compiler.
 I should also point out that this issue hasn't discouraged me from using Play.
 The framework is still evolving, and this stuff will get better. Plus, courtesy
 of these test, I now have some feasible work-arounds.
-
-[rvm]: http://rvm.io/
-[gemset]: https://rvm.io/gemsets/basics/
-[sass-twitter-bootrap]: https://github.com/jlong/sass-twitter-bootstrap
-[SBT]: http://scala-sbt.org
-[Play-Sass]: https://github.com/jlitola/play-sass
-[Twitter Bootstrap]: http://twitter.github.com/bootstrap/
-[Rhino]: https://developer.mozilla.org/en-US/docs/Rhino
-[Play Framework]: http://playframework.org/
-[Django]: http://www.djangoproject.com/
-[Ruby on Rails]: http://rubyonrails.org/
-[Play LESS]: http://www.playframework.org/documentation/2.0/AssetsLess
-[LESS]: http://lesscss.org/
-[Sass]: http://sasslang.org/
 
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <script type="text/javascript">
@@ -345,3 +333,18 @@ of these test, I now have some feasible work-arounds.
     chart.draw(googleData, options);
   }
 </script>
+
+
+[rvm]: http://rvm.io/
+[gemset]: https://rvm.io/gemsets/basics/
+[sass-twitter-bootrap]: https://github.com/jlong/sass-twitter-bootstrap
+[SBT]: http://scala-sbt.org
+[Play-Sass]: https://github.com/jlitola/play-sass
+[Twitter Bootstrap]: http://twitter.github.com/bootstrap/
+[Rhino]: https://developer.mozilla.org/en-US/docs/Rhino
+[Play Framework]: http://playframework.org/
+[Django]: http://www.djangoproject.com/
+[Ruby on Rails]: http://rubyonrails.org/
+[Play LESS]: http://www.playframework.org/documentation/2.0/AssetsLess
+[LESS]: http://lesscss.org/
+[Sass]: http://sass-lang.com/
