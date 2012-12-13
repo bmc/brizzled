@@ -271,6 +271,17 @@ Worse than `lessc`, but still far better than Play's built-in LESS compiler.
    It comes at a big cost in convenience for me, though, so it's not my first
    choice.
 
+{% update %}
+**UPDATE**: In a separate thread, James Roper pointed out that Play's
+internal LESS compiler can be disabled, by specifying the following build
+setting:
+
+    lessEntryPoints := Nil
+
+Creating a *Play-lessc* plugin that works like the *Play-Sass* plugin
+should be a fairly simple undertaking.
+{% endupdate %}
+
 I should also point out that this issue hasn't discouraged me from using Play.
 The framework is still evolving, and this stuff will get better. Plus, courtesy
 of these tests, I now have some feasible work-arounds.

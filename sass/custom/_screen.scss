@@ -39,6 +39,18 @@ figure.code {
     }
 }
 
+.update {
+
+    @include drop-shadow-right-bottom(3px, #999);
+    @include rounded-border(10px);
+
+    pre {
+        width: 80%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
 #about-link {
     &:hover {
         cursor: pointer;
