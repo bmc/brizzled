@@ -49,13 +49,17 @@ dependency management. The **Managed assets** section of
 
 > By default play compiles all managed assets that are kept in the app/assets
 > older. The compilation process will clean and recompile all managed
-> assetsregardless of the change. This is the safest strategy since tracking
+> assets regardless of the change. This is the safest strategy since tracking
 > dependencies can be very tricky with front end technologies.
 
 That documentation also states:
 
 > Note if you are dealing with a lot of managed assets this strategy can be
-> very slow. For this reason there is a way to recompile only the change file
+> very slow.
+
+(No kidding.)
+
+> For this reason there is a way to recompile only the change file
 > and its supposed dependencies. You can turn on this experimental feature by
 > adding the following to your settings:
 >
@@ -155,13 +159,18 @@ I ran this test with 50 iterations.
 Aside: This test was surprisingly difficult to complete, because the Java 7 VM
 on my Linux system kept dumping core. Sometimes, I'd only get two requests to
 succeed, before the JVM crapped out, presenting me with one of those
-`hs_err_pidXXXX.log` files. Some of the errors are listed, below.
+`hs_err_pidXXXX.log` files. Some of the errors are listed below.
 
 ### Resulting data:
 
 * **Mean**: 19.63 seconds
 * **Median**: 19.48 seconds
 * **Standard Deviation**: 1.45
+
+You read that correctly: The mean and median times to recompile my LESS files
+are both just shy of *20 seconds*.
+
+No wonder I've been shying away from making minor CSS edits.
 
 Here are some of the JVM errors, when Play barfed during the tests:
 
@@ -182,7 +191,7 @@ Here are some of the JVM errors, when Play barfed during the tests:
 
 I didn't see core dumps like these with the other tests, and I saw plenty of
 them with the embedded Rhino-based LESS conversion. Clearly, there are problems
-with Play's use of Rhino.
+with Play's use of Rhino, beyond just being severely slow.
 
 ## Test 2: Less recompilation via `lessc`
 
@@ -206,52 +215,58 @@ and a compressed version of the CSS output, since that's what Play does.
 * **Median**: 5.1 seconds
 * **Standard Deviation**: 0.91
 
+That's more reasonable.
 
 ## Test 3: Sass, via Play
 
 For this test, I installed the [Play-Sass][] plugin, which is implemented as
 an [SBT][] plugin. This plugin implements automatic recompilation of Sass
-assets, via the `sass` command that's installed with the Ruby `sass` gem.
+assets using the `sass` command that's installed with the Ruby `sass` gem.
 
-I then:
+Running this test required a bit more up-front work, including:
 
-* pulled down John W. Long's [sass-twitter-bootrap][] repository
-* removed the Bootstrap LESS files, replacing them with Long's Bootstrap
+* pulling down John W. Long's [sass-twitter-bootrap][] repository
+* removing the Bootstrap LESS files and replacing them with Long's Bootstrap
   Sass equivalents
-* installed the `sass` gem in a separate [rvm][] [gemset][]
-* spent about an hour converting my LESS files to Sass.
+* installing the `sass` gem in a separate [rvm][] [gemset][]
+* spending about an hour converting my LESS files to Sass, and
+* verifying that the application still worked after I was done all that.
 
-Once I'd finished and verified that the web application still worked, I ran
-the first script again. Like the first one, script "warmed up" the
-server, touched one of my Sass files, and then issued a query for a page,
-forcing Play to recompile the Sass files.
+Having completed the above, I ran the first script again. Like the first one,
+script "warmed up" the server, touched one of my Sass files, and then issued a
+query for a page, forcing Play to recompile the Sass files.
 
 ### Resulting data:
 
-* **Mean**: 8.34 secondsb
+* **Mean**: 8.34 seconds
 * **Median**: 8.27 seconds
 * **Standard Deviation**: 0.39
 
+Worse than `lessc`, but still far better than Play's built-in LESS compiler.
+
 # Graph of Results
 
-{% img /images/2012-12-12-graph.png %}
+<div id="chart_div" style="width: 700px; height: 500px;"></div>
 
 # Conclusions
 
 1. I should write a [LESS][] compilation SBT plugin that compiles the LESS
-   files via the `lessc` command. (This is what the [Play-Sass][] plugin does.)
+   files via the `lessc` command. (This is how the [Play-Sass][] plugin works.)
    If I were to do so, and assuming I could easily disable Play's default
    LESS compilation, the plugin should be significantly faster, based on these
    test results.
 
-2. Before such a plugin exists, switching from [LESS][] to [Sass][] provides
-   a significant increase in CSS compilation speed.
+2. In the absence of such a plugin, switching from [LESS][] to [Sass][]
+   provides a significant increase in CSS compilation speed. It can be a pain
+   to convert all the stylesheets, but once it's done, it's done.
 
 3. Using a precompiled version of Bootstrap might provide the best improvement,
    since it's a huge chunk of the LESS code that gets compiled each time.
+   It comes at a big cost in convenience for me, though, so it's not my first
+   choice.
 
 [rvm]: http://rvm.io/
-[rvm gemset]: https://rvm.io/gemsets/basics/
+[gemset]: https://rvm.io/gemsets/basics/
 [sass-twitter-bootrap]: https://github.com/jlong/sass-twitter-bootstrap
 [SBT]: http://scala-sbt.org
 [Play-Sass]: https://github.com/jlitola/play-sass
@@ -263,3 +278,62 @@ forcing Play to recompile the Sass files.
 [Play LESS]: http://www.playframework.org/documentation/2.0/AssetsLess
 [LESS]: http://lesscss.org/
 [Sass]: http://sasslang.org/
+
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript">
+  google.load("visualization", "1", {packages:["corechart"]});
+  google.setOnLoadCallback(drawChart);
+  var scss = [
+     8.52, 8.00, 8.05, 8.15, 8.39,
+    10.87, 8.20, 8.29, 8.36, 8.18,
+     8.25, 8.11, 8.61, 8.16, 8.26,
+     8.16, 8.48, 8.16, 8.32, 8.14,
+     8.33, 8.70, 8.30, 8.30, 8.21,
+     8.34, 8.47, 8.22, 8.18, 8.16,
+     8.05, 8.11, 8.07, 8.27, 8.15,
+     8.34, 8.10, 8.33, 8.37, 8.43,
+     8.18, 8.29, 8.28, 8.11, 8.41,
+     8.14, 8.39, 8.27, 8.81, 8.35
+  ];
+  var less = [
+    20.16, 19.10, 18.81, 18.21, 18.03,
+    17.99, 17.94, 18.25, 17.94, 26.43,
+    19.21, 19.48, 18.60, 20.00, 19.33,
+    20.34, 18.68, 19.98, 18.68, 19.53,
+    21.42, 20.93, 20.56, 20.15, 20.04,
+    22.17, 21.02, 20.22, 20.75, 20.51,
+    20.86, 19.96, 19.88, 20.05, 19.71,
+    19.73, 18.76, 18.46, 18.38, 18.71,
+    18.99, 19.10, 18.69, 18.80, 18.82,
+    20.76, 20.39, 20.14, 19.97, 19.87
+  ];
+  var lessc = [
+    4.94, 5.30, 4.63, 4.17, 4.75,
+    5.95, 4.32, 4.36, 4.31, 4.40,
+    6.03, 5.94, 5.10, 5.89, 4.32,
+    6.86, 5.06, 4.81, 6.39, 4.20,
+    6.74, 5.10, 4.39, 6.71, 7.19,
+    4.23, 5.60, 6.59, 4.24, 6.98,
+    5.03, 5.72, 4.74, 5.57, 5.29,
+    4.73, 5.57, 4.79, 4.81, 5.09,
+    5.23, 5.33, 7.18, 4.25, 7.33,
+    4.95, 5.86, 4.96, 5.26, 6.01
+  ];
+  function drawChart() {
+    var data = [];
+    data[data.length] = ["Run#", "Play LESS compiler", "lessc command", "Play-Sass Plugin"];
+    for (var i = 0; i < scss.length; i++) {
+      data[data.length] = [i + 1, less[i], lessc[i], scss[i]];
+    }
+    var googleData = google.visualization.arrayToDataTable(data)
+
+    var options = {
+      title: 'Play: Sass vs. Less Autorecompile Performance',
+      hAxis: {title: "Run #"},
+      vAxis: {title: "Seconds"}
+    };
+
+    var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+    chart.draw(googleData, options);
+  }
+</script>
