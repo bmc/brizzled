@@ -269,6 +269,10 @@ Worse than `lessc`, but still far better than Play's built-in LESS compiler.
    It comes at a big cost in convenience for me, though, so it's not my first
    choice.
 
+I should also point out that this issue hasn't discouraged me from using Play.
+The framework is still evolving, and this stuff will get better. Plus, courtesy
+of these test, I now have some feasible work-arounds.
+
 [rvm]: http://rvm.io/
 [gemset]: https://rvm.io/gemsets/basics/
 [sass-twitter-bootrap]: https://github.com/jlong/sass-twitter-bootstrap
