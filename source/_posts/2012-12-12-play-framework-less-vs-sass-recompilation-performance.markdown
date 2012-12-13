@@ -273,7 +273,7 @@ Worse than `lessc`, but still far better than Play's built-in LESS compiler.
 
 I should also point out that this issue hasn't discouraged me from using Play.
 The framework is still evolving, and this stuff will get better. Plus, courtesy
-of these test, I now have some feasible work-arounds.
+of these tests, I now have some feasible work-arounds.
 
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <script type="text/javascript">
