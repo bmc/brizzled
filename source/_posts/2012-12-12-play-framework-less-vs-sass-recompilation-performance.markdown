@@ -28,13 +28,13 @@ stylesheets compile down to standard CSS stylesheets. Rails uses [Sass][] to
 provide a similar capability. Indeed, there are more similarities than
 differences between the Sass and LESS languages.
 
-Both frameworks allow you to edit a CSS source (LESS or Sass) while the
-framework is running in development mode. When you reload your web site,
+Rails and Play both allow you to edit a CSS source (LESS or Sass) while
+the framework is running in development mode. When you reload your web site,
 from a browser, the framework automatically recompiles the LESS or Sass source,
 producing the CSS files that must be served to the browser.
 
 In Play, LESS compilation is *slow*. Extremely slow. It's also buggy,
-frequently producing JVM core dumps on my Linux machine.
+frequently producing JVM core dumps on my Linux machine. More on that, below.
 
 # Background
 
@@ -43,7 +43,11 @@ uses Mozilla [Rhino][], a Javascript interpreter that's written in Java, to run
 the Javascript translator directly within the Java VM, to produce both a
 regular CSS file and a minified CSS file.
 
-In addition, Play's LESS compilation strategy doesn't do any form of
+I haven't measured Rhino's performance in running the LESS compiler outside
+of Play, so I don't know whether Rhino is slower or faster than, say,
+Node.js. (It would be cool if someone *would* do that.)
+
+Play's LESS compilation strategy doesn't do any form of
 dependency management. The **Managed assets** section of
 <http://www.playframework.org/documentation/2.0.4/Assets> reads:
 
