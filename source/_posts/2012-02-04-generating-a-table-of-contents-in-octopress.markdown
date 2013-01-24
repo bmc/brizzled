@@ -269,6 +269,8 @@ Then, in `sass/custom/_screen.scss`, I put the following rules:
 
 {% codeblock sass/custom/_screen.scss lang:sass %}
 {% raw %}
+@import "mixins";
+
 $toc-bg: #dfdfdf;
 
 $toc-incr: 5px;
