@@ -179,7 +179,13 @@ variable is set, we don't want to generate a table of contents.
 
 Note, too, that the code only generates the table of contents if the `page.toc`
 variable is set to "true". `page.toc` will be true only if the following line
-is in the [YAML front matter][] of an article. For example:
+is in the [YAML front matter][] of an article:
+
+{% codeblock Front Matter Directive to Enable Table of Contents %}
+toc: true
+{% endcodeblock %}
+
+For example:
 
 {% codeblock Article Front Matter %}
 ---
