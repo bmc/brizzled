@@ -75,9 +75,9 @@ be converted to Kindle books using [KindleGen][].)"
 > There's no general way to force page breaks, by the way.  If you just
 > want page breaks in PDF (via latex), you can insert a raw latex
 > command,
-> 
+>
 >     \newpage
-> 
+>
 > This should be ignored in HTML and ODT output, so it will only affect
 > latex and PDF via latex.
 
@@ -94,7 +94,11 @@ Here's a list of Markdown-related tools I have found to be helpful:
 * [Jekyll][], the Ruby-based static site generator I use to generate this
   blog and my other web sites. ([GitHub][] also uses Jekyll, as the engine
   behind [GitHub Pages][].)
-* [Lanyon][], a Python-based static site generator, similar to Jekyll.
+* [Pelican][], a Python-based static site generator, similar to Jekyll.
+  (**Added to this article** 28 January, 2013.)
+* [Lanyon][], another Python-based static site generator, similar to Jekyll.
+  (**Update** (28 January, 2013): Lanyon is no longer under active development.
+  The author has replaced it with [Pyll][].)
 * John MacFarlane's [yst][] static site generator.
 * Some APIs for parsing Markdown. (I use these APIs in some of my software
   development.)
@@ -105,7 +109,9 @@ Here's a list of Markdown-related tools I have found to be helpful:
 
 [yst]: https://github.com/jgm/yst
 [Markdown]: http://daringfireball.net/projects/markdown/
-[Lanyon]: http://bitbucket.org/arthurk/lanyon/wiki/Home
+[Lanyon]: https://github.com/arthurk/lanyon
+[Pyll]: https://github.com/arthurk/pyll
+[Pelican]: http://blog.getpelican.com/
 [Textile]: http://textile.thresholdstate.com/
 [Knockoff]: http://tristanhunt.com/projects/knockoff/
 [MarkWrap]: http://software.clapper.org/markwrap/
