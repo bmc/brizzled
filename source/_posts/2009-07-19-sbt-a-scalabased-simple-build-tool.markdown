@@ -57,23 +57,22 @@ were one) would, of course, be smaller than that. But the configuration
 file for SBT is trivial, and far more readable than a `pom.xml` file:
 
     import sbt._
+ 
+    class SQLShellProject(info: ProjectInfo) extends DefaultProject(info) {
+      override def compileOptions = Unchecked :: super.compileOptions.toList
     
-    class SQLShellProject(info: ProjectInfo) extends DefaultProject(info)
-    {
-        override def compileOptions = Unchecked :: super.compileOptions.toList
+      // External dependencies
     
-        // External dependencies
+      val scalaToolsRepo = "Scala-Tools Maven Repository" at 
+          "http://scala-tools.org/repo-releases/org/scala-tools/testing/scalatest/0.9.5/"
     
-        val scalaToolsRepo = "Scala-Tools Maven Repository" at 
-            "http://scala-tools.org/repo-releases/org/scala-tools/testing/scalatest/0.9.5/"
+      val scalatest = "org.scala-tools.testing" % "scalatest" % "0.9.5"
+      val joptSimple = "net.sf.jopt-simple" % "jopt-simple" % "3.1"
+      val jodaTime = "joda-time" % "joda-time" % "1.6"
     
-        val scalatest = "org.scala-tools.testing" % "scalatest" % "0.9.5"
-        val joptSimple = "net.sf.jopt-simple" % "jopt-simple" % "3.1"
-        val jodaTime = "joda-time" % "joda-time" % "1.6"
-    
-        // Grizzled comes from local machine for now
-        val grizzled = "grizzled-scala-library" % "grizzled-scala-library" % "0.1" from 
-            "http://internal-repo/~bmc/code/grizzled-scala-library-0.1.jar"
+      // Grizzled comes from local machine for now
+      val grizzled = "grizzled-scala-library" % "grizzled-scala-library" % "0.1" from 
+          "http://internal-repo/~bmc/code/grizzled-scala-library-0.1.jar"
     }
 
 I'm sold.

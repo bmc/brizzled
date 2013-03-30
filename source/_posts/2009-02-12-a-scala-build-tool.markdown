@@ -130,9 +130,8 @@ syntax:
 {% codeblock lang:scala %}
     target("foo") -> ("foo.o", "lib.a")
     
-        target("bar") -> ("bar.o", "lib.a") ===
-        {
-            // Scala logic goes here
+        target("bar") -> ("bar.o", "lib.a") === {
+          // Scala logic goes here
         }
 {% endcodeblock %}
 
@@ -143,9 +142,8 @@ syntax is equivalent to the above:
 {% codeblock lang:scala %}
     "foo" -> ("foo.o", "lib.a")
     
-        "bar" -> ("bar.o", "lib.a") ===
-        {
-            // Scala logic goes here
+        "bar" -> ("bar.o", "lib.a") === {
+          // Scala logic goes here
         }
 {% endcodeblock %}
 

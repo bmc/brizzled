@@ -38,9 +38,9 @@ the API for the information about the current line; you get back a
 {% codeblock lang:c %}
     typedef struct lineinfo
     {
-        const char *buffer;
-        const char *cursor;
-        const char *lastchar;
+      const char *buffer;
+      const char *cursor;
+      const char *lastchar;
     }
     LineInfo;
 {% endcodeblock %}
@@ -217,42 +217,40 @@ With that approach, writing a completion handler is pretty
 straightforward:
 
 {% codeblock lang:scala %}
-    override def complete(token: String, allTokens: List[CompletionToken], line: String): List[String] =
-    {
-        allTokens match
-        {
-            case Nil =>
-                // Should not be called on an empty line.
-                Nil
+    override def complete(token: String, allTokens: List[CompletionToken], line: String): List[String] = {
+      allTokens match {
+        case Nil =>
+          // Should not be called on an empty line.
+          Nil
     
-            case LineToken(cmd) :: Delim :: Cursor :: Nil =>
-                // Command filled in (obviously, or we wouldn't be in here),
-                // but first argument not. subCommandCompleter completes
-                // for subcommands.
-                subCommandCompleter.complete(token, allTokens, line)
+        case LineToken(cmd) :: Delim :: Cursor :: Nil =>
+          // Command filled in (obviously, or we wouldn't be in here),
+          // but first argument not. subCommandCompleter completes
+          // for subcommands.
+          subCommandCompleter.complete(token, allTokens, line)
     
-            case LineToken(cmd) :: Delim :: LineToken("database") :: Cursor :: Nil =>
-                // Nothing more after ".desc database"
-                Nil
+        case LineToken(cmd) :: Delim :: LineToken("database") :: Cursor :: Nil =>
+          // Nothing more after ".desc database"
+          Nil
     
-            case LineToken(cmd) :: Delim :: LineToken(table) :: Delim :: Cursor :: Nil =>
-                // Cursor is after a table name (and white space). Only
-                // "full" can be completed here.
-                List("full")
+        case LineToken(cmd) :: Delim :: LineToken(table) :: Delim :: Cursor :: Nil =>
+          // Cursor is after a table name (and white space). Only
+          // "full" can be completed here.
+          List("full")
     
-            case LineToken(cmd) :: Delim :: LineToken(table) :: Delim :: LineToken(arg) :: Cursor :: Nil =>
-                // If it can't complete "full", return nothing.
-                if ("full".startsWith(arg))
-                    List("full")
-                else
-                    Nil
+        case LineToken(cmd) :: Delim :: LineToken(table) :: Delim :: LineToken(arg) :: Cursor :: Nil =>
+          // If it can't complete "full", return nothing.
+          if ("full".startsWith(arg))
+            List("full")
+          else
+            Nil
     
-            case LineToken(cmd) :: Delim :: LineToken(arg) :: Cursor :: Nil =>
-                subCommandCompleter.complete(token, allTokens, line)
+        case LineToken(cmd) :: Delim :: LineToken(arg) :: Cursor :: Nil =>
+          subCommandCompleter.complete(token, allTokens, line)
     
-            case _ =>
-                Nil
-        }
+        case _ =>
+          Nil
+      }
     }
 {% endcodeblock %}
 
