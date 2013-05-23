@@ -262,14 +262,23 @@ Worse than `lessc`, but still far better than Play's built-in LESS compiler.
    LESS compilation, the plugin should be significantly faster, based on these
    test results.
 
-2. In the absence of such a plugin, switching from [LESS][] to [Sass][]
-   provides a significant increase in CSS compilation speed. It can be a pain
-   to convert all the stylesheets, but once it's done, it's done.
+   **UPDATE** (22 May, 2013) [Jonathan Parsons](https://github.com/jmparsons)
+   has put together a `play-lessc` plugin that uses the `lessc` command to
+   compile LESS files. It can dramatically decrease LESS compilation times in a
+   Play project. See <https://github.com/jmparsons/play-lessc>.
+
+2. switching from [LESS][] to [Sass][] also provides a significant increase in
+   CSS compilation speed. It can be a pain to convert all the stylesheets, but
+   once it's done, it's done.
 
 3. Using a precompiled version of Bootstrap might provide the best improvement,
    since it's a huge chunk of the LESS code that gets compiled each time.
    It comes at a big cost in convenience for me, though, so it's not my first
    choice.
+
+I should also point out that this issue hasn't discouraged me from using Play.
+The framework is still evolving, and this stuff will get better. Plus, courtesy
+of these tests, I now have some feasible work-arounds.
 
 {% update %}
 **UPDATE**: In a separate thread, James Roper pointed out that Play's
@@ -278,13 +287,9 @@ setting:
 
     lessEntryPoints := Nil
 
-Creating a *Play-lessc* plugin that works like the *Play-Sass* plugin
-should be a fairly simple undertaking.
+Since I want to use *some* kind of CSS preprocessor, this isn't an option
+for me.
 {% endupdate %}
-
-I should also point out that this issue hasn't discouraged me from using Play.
-The framework is still evolving, and this stuff will get better. Plus, courtesy
-of these tests, I now have some feasible work-arounds.
 
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <script type="text/javascript">
