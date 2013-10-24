@@ -53,7 +53,7 @@ Let's assume, however, that you've determined (by discussing it with your
 lawyer or by calling Google or Yahoo!) that it's safe to use one of the
 Internet mapping services, but you also want to be able to move to a commercial
 service down the road. (See below for some possible commercial services.) The
-easiest way to do that is to hide write a very simple API of your own that
+easiest way to do that is to write a very simple API of your own that
 hides the underlying address normalization API you're using.
 
 # API Specification
