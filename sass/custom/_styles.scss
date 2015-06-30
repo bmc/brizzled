@@ -9,6 +9,7 @@ $article_title_font: $header-subtitle-font-family;
 @import "mixins";
 
 body {
+    font-family: $sans;
     font-size: $body_font_size;
     min-width: $min-width;
     line-height: $line_height;
@@ -114,6 +115,12 @@ img.image-right {
 
 img.image-left {
     float: left;
+}
+
+img.image-center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 div.about-text {
