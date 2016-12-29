@@ -1,0 +1,30 @@
+---
+layout: post
+title: "Tammy"
+date: 2016-12-29 13:30
+comments: true
+categories: [celebrities,data]
+---
+
+[Debbie Reynolds][] starred in
+[_Tammy and the Bachelor_][] in 1957. The song she
+sang in the film, "Tammy", reached #1 on the music charts.
+
+For years, I'd heard a story that the popularity of the song caused a spike in
+the number of children named "Tammy". I was curious whether that was true.
+
+<!-- more -->
+
+I happen to have 
+[first name popularity data from the Social Security Administration](https://www.ssa.gov/OACT/babynames/limits.html)
+lying around. My copy of the data covers the years 1880 through 2014.
+
+I ran a quick analysis on "Tammy". Some years are missing in the data, at least
+for "Tammy". But, the following graph confirms a spike in the name "Tammy",
+coincident with the movie and the song. Of course, that's not proof that the
+movie and song *caused* the spike, but it seems likely.
+
+{% imgpopup /images/tammy.png 50% Tammy %}
+
+[Debbie Reynolds]: https://en.wikipedia.org/wiki/Debbie_Reynolds
+[_Tammy and the Bachelor_]: http://www.imdb.com/title/tt0051051/
