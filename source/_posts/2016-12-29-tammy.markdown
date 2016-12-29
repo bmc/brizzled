@@ -8,7 +8,7 @@ categories: [celebrities,data]
 
 [Debbie Reynolds][] starred in
 [_Tammy and the Bachelor_][] in 1957. The song she
-sang in the film, "Tammy", reached #1 on the music charts.
+sang in the film, "[Tammy][]", reached #1 on the music charts.
 
 For years, I'd heard a story that the popularity of the song caused a spike in
 the number of children named "Tammy". I was curious whether that was true.
@@ -28,3 +28,4 @@ movie and song *caused* the spike, but it seems likely.
 
 [Debbie Reynolds]: https://en.wikipedia.org/wiki/Debbie_Reynolds
 [_Tammy and the Bachelor_]: http://www.imdb.com/title/tt0051051/
+[Tammy]: https://en.wikipedia.org/wiki/Tammy_(song)
