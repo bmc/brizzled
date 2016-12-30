@@ -26,7 +26,7 @@ movie and song *caused* the spike, but it seems likely.
 
 {% imgpopup /images/tammy.png 50% Tammy %}
 
-**Update (29 Dec, 2016):** I performed this analysis using
+**Update (29 December, 2016):** I performed this analysis using
 [Apache Spark 2.1](https://spark.apache.org), on
 [Databricks Community Edition](https://community.cloud.databricks.com/).
 You can create your own _free_ Community Edition account at
@@ -41,7 +41,7 @@ A more readable HTML version, which shows the output from a run
 (and which can also be directly imported into Databricks) is
 [here](/attachments/2016-12-29/SSA-Names-ETL.html).
 
-**Update (30 Dec, 2016):** As a friend pointed out elsewhere, in the film,
+**Update (30 December, 2016):** As a friend pointed out elsewhere, in the film,
 the character's actual name is "Tambrey", though "Tammy" is used throughout
 the movie. There are very few people named "Tambrey" in the Social Security
 data (32 total), and they were all born between 1957 and 1963.
