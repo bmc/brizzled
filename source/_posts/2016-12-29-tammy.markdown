@@ -37,6 +37,9 @@ massage it, and save it as a Parquet file, for easy analysis with Apache
 Spark. You can import the notebook directly into Databricks,
 as described [here](https://docs.databricks.com/user-guide/notebooks/index.html#importing-notebooks). You'll want this
 [notebook link](/attachments/2016-12-29/SSA-Names-ETL.scala).
+A more readable HTML version, which shows the output from a run
+(and can also be directly imported into Databricks) is
+[here](/attachments/2016-12-29/SSA-Names-ETL.html).
 
 **Update (30 Dec, 2016):** As a friend pointed out elsewhere, in the film,
 the character's actual name is "Tambrey", though "Tammy" is used throughout
