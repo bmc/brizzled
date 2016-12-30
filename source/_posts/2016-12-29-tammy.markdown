@@ -26,7 +26,7 @@ movie and song *caused* the spike, but it seems likely.
 
 {% imgpopup /images/tammy.png 50% Tammy %}
 
-**Update:** I performed this analysis using
+**Update (29 Dec, 2016):** I performed this analysis using
 [Apache Spark 2.1](https://spark.apache.org), on
 [Databricks Community Edition](https://community.cloud.databricks.com/).
 You can create your own _free_ Community Edition account at
@@ -37,6 +37,13 @@ massage it, and save it as a Parquet file, for easy analysis with Apache
 Spark. You can import the notebook directly into Databricks,
 as described [here](https://docs.databricks.com/user-guide/notebooks/index.html#importing-notebooks). You'll want this
 [notebook link](/attachments/2016-12-29/SSA-Names-ETL.scala).
+
+**Update (30 Dec, 2016):** As a friend pointed out elsewhere, in the film,
+the character's actual name is "Tambrey", though "Tammy" is used throughout
+the movie. There are very few people named "Tambrey" in the Social Security
+data (32 total), and they were all born between 1957 and 1963.
+
+{% imgpopup /images/tambrey.png 50% Tambrey %}
 
 [Debbie Reynolds]: https://en.wikipedia.org/wiki/Debbie_Reynolds
 [_Tammy and the Bachelor_]: http://www.imdb.com/title/tt0051051/
