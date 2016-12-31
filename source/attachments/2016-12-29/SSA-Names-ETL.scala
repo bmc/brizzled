@@ -104,7 +104,7 @@ display(dbutils.fs.ls(DBFSTmpDir))
 // MAGIC %md 
 // MAGIC ## ETL
 // MAGIC 
-// MAGIC This part's tricky. The year is part of each file name, but it's _not_ part of the data. That means we need to reach each file, one at a time, extract the year from the file name, and merge it into the data.
+// MAGIC This part's tricky. The year is part of each file name, but it's _not_ part of the data. That means we need to read each file, one at a time, extract the year from the file name, and merge it into the data.
 
 // COMMAND ----------
 
@@ -112,9 +112,11 @@ println(dbutils.fs.head(DBFSTmpDir + "/" + files(0)))
 
 // COMMAND ----------
 
-// MAGIC %md The following code creates a single DataFrame from all the files in a directory (by progressively combining individual DataFrames with `union`), ensuring that the year is pulled from the file name and added to each DataFrame. The final DataFrame is a union of a lot of different DataFrames.
+// MAGIC %md The following code creates a single DataFrame from all the files in the directory. To extract the year, it:
 // MAGIC 
-// MAGIC Read the code carefully, if you want to understand how it works. Otherwise, just accept that it does.
+// MAGIC * uses the `input_file_name()` function (available in `org.apache.spark.sql.functions`) to create a column containing the file name,
+// MAGIC * uses the `regexp_extract()` function (also available in `org.apache.spark.sql.functions`) to parse the year out of the file name, and
+// MAGIC * casts the year to an integer.
 
 // COMMAND ----------
 
@@ -123,58 +125,26 @@ import org.apache.spark.sql._
 import org.apache.spark.sql.functions._
 import org.apache.spark.sql.types._
 
-val ExtractYear = """^.*yob(\d{4})\.txt""".r
-val InputSchemaFields = List(StructField("firstName", StringType, true),
-                             StructField("gender", StringType, true),
-                             StructField("total", IntegerType, true))
-val InputSchema = StructType(InputSchemaFields)
-val FinalSchema = StructType(InputSchemaFields :+ StructField("year", IntegerType, true))
+val ExtractYear = """^.*yob(\d{4})\.txt"""
+val InputSchema = StructType(
+  List(StructField("firstName", StringType, true),
+       StructField("gender", StringType, true),
+       StructField("total", IntegerType, true))
+)
 
-/** Load a sequence of SSA name files into one DataFrame, ensuring that the
-  * year is extracted from the file name and contained (as data) in the resulting
-  * DataFrame.
-  *
-  * @param dir    the directory (presumably on DBFS)
-  * @param files  the sequence of file names
-  *
-  * @return a DataFrame that will concatenate the data from all the files
-  */
-def loadFiles(dir: String, files: Seq[String]): DataFrame = {
-  
-  @tailrec def loadNext(dir: String, files: List[String], currentDF: DataFrame): DataFrame = {
-    files match {
-      case Nil => 
-        // End of the list of files. We're done.
-        currentDF
-      
-      case (f @ ExtractYear(year)) :: rest =>
-        // File matches regular expression. Load it, add the "year" column, and union it with the
-        // current DataFrame.
-        val dfTemp = spark.read.schema(InputSchema).csv(s"$dir/$f").select($"*", lit(year).as("year"))
-        val newDF = currentDF.union(dfTemp)
-        // Move on to the next file.
-        loadNext(dir, rest, newDF)
-
-      case f :: rest =>
-        // File doesn't match. Skip it and move it.
-        println(s"WARNING: Skipping $f")
-        loadNext(dir, rest, currentDF)
-    }
-  }
-  
-  loadNext(dir, files.toList, spark.createDataFrame(sc.emptyRDD[Row], FinalSchema))
-}
+val df = spark.read
+              .option("header", "false")
+              .schema(InputSchema)
+              .csv(DBFSTmpDir)
+              .select($"*", regexp_extract(input_file_name(), ExtractYear, 1).cast("integer").as("year"))
 
 // COMMAND ----------
 
-// MAGIC %md Load 'em up. 
+df.printSchema()
 
 // COMMAND ----------
 
-val files = dbutils.fs.ls("dbfs:/tmp/names").map(_.name)
-val df = loadFiles("dbfs:/tmp/names", files)
-println(s"Loaded ${df.count} records.")
-println()
+df.count
 
 // COMMAND ----------
 
@@ -226,3 +196,7 @@ display(df.describe())
 
 s"rm -rf $LocalTmpFile $LocalTmpDir".!!
 dbutils.fs.rm(DBFSTmpDir, recurse=true)
+
+// COMMAND ----------
+
+
