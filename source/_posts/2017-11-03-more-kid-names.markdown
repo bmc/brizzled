@@ -106,7 +106,8 @@ That left Nain, Fili and Thorin.
 {% imgpopup /images/2017-11-03-more-kid-names/hobbit-2.png 50% Dwarves %}
 
 There were 5 boys named **Thorin** born in 1968; they'd be just shy of 50 now.
-Meanwhile, 112 of them were born in 2014.
+Meanwhile, 112 Thorins were born in 2014. (I guarantee at least one joker
+gave an oaken shield as a first birthday present.)
 
 ## Conclusion
 
