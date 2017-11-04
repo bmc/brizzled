@@ -34,10 +34,12 @@ So, without further ado, let's start with:
 ## The Fellowship
 
 There are no **Frodos**, **Boromirs**, **Gimlis**, or **Meriadocs** at all.
-There _are_ some **Pippins**, but they're all girls; it's probably fair to
-assume they're _not_ named after Master Peregrine Took.
 
-But, there _are_ some **Aragorns**. _(Seriously?)_
+There _are_ some **Pippins**, but, until 2016 they're all girls; it's probably
+fair to assume the girls are _not_ named after Master Peregrine Took. However,
+5 boys named Pippin were born in 2016.
+
+There are more than a few **Aragorns**. _(Seriously?)_
 
 {% imgpopup /images/2017-11-03-more-kid-names/aragorn.png 75% Aragorn %}
 
