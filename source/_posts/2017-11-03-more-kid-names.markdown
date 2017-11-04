@@ -64,7 +64,7 @@ And, of course, there's **Gandalf**. No one would name his son Gandalf,
 right? 
 
 _Wrong_. The parents of 5 boys born in 1970 chose Gandalf as the perfect name
-for their little boys.
+for their little boys. At least no one chose **Mithrandir**.
 
 ## Bilbo
 
