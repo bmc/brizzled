@@ -35,7 +35,7 @@ There are no **Frodos**, **Boromirs**, **Gimlis**, or **Meriadocs** at all.
 There _are_ some **Pippins**, but they're all girls; it's probably fair to
 assume they're _not_ named after Master Peregrine Took.
 
-But, there _are_ some **Aragorns**. (_Seriously?_)
+But, there _are_ some **Aragorns**. _(Seriously?)_
 
 {% imgpopup /images/2017-11-03-more-kid-names/aragorn.png 75% Aragorn %}
 
@@ -50,7 +50,7 @@ adolescence okay.
 And, of course, there's **Gandalf**. No one would name his son Gandalf,
 right? 
 
-(_Cough!_) **Wrong**. The parents of 5 boys born in 1970 chose Gandalf as the
+_(Cough!)_ **Wrong**. The parents of 5 boys born in 1970 chose Gandalf as the
 perfect name for their little boys.
 
 ## Bilbo
