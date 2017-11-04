@@ -75,14 +75,27 @@ was published.
 Unsurprisingly, no one opted for **Celeborn**. (Or, if they did, the kid never
 got a Social Security card.)
 
+## Rohan and Gondor
+
+I found no people named **Eomer**. But **Eowyn** rivals Galadriel and Arwen:
+
+{% imgpopup /images/2017-11-03-more-kid-names/eowyn.png 75% Eowyn %}
+
+And there are a few young boys in the United States named **Théoden**:
+
+{% imgpopup /images/2017-11-03-more-kid-names/theoden.png 75% Théoden %}
+
+(Is "Ted" a legitimate nickname for Théoden?)
+
+**Faramir** seems like a nice honorable name, doesn't it? No one chose that
+one, either. **Denethor** is also missing, which is probably a good thing.
+
 ## Anyone else?
 
 Before you ask, no, no one who got a Social Security card was cursed with the
 name **Sauron** or **Saruman**, at least not up to 2014. And there are no
 **Radagasts**, **Gollums** or **Smeagols**, either.
 
-**Faramir** seems like a nice honorable name, doesn't it? No one chose that
-one, either.
 
 For the hell of it, I threw in the Dwarves from _The Hobbit_, **Fili**,
 **Kili**, **Oin**, **Gloin**, **Bifur**, **Bofur**, **Bombur**, **Dori**,
