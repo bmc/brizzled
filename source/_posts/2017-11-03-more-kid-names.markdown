@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "More kid names"
+title: 'Seriously, who names their kid "Aragorn?"'
 date: 2017-11-03 19:45
 comments: true
 categories: [data,naming]
