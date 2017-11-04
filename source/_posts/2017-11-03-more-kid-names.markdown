@@ -79,7 +79,7 @@ got a Social Security card.)
 
 I found no people named **Éomer**. But **Éowyn** rivals Galadriel and Arwen:
 
-{% imgpopup /images/2017-11-03-more-kid-names/eowyn.png 75% Eowyn %}
+{% imgpopup /images/2017-11-03-more-kid-names/eowyn.png 75% Éowyn %}
 
 And there are a few young boys in the United States named **Théoden**:
 
