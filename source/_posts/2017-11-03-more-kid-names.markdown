@@ -19,7 +19,7 @@ specifically, names from J.R.R. Tolkien's _Lord of the Rings_.
 Was anyone _so_ enamored with the books, and the Peter Jackson movies, that
 they chose to name their kids after Middle Earth characters?
 
-I think you already know the answer to that.
+I think you already know the answer to that question.
 
 <!-- more -->
 
