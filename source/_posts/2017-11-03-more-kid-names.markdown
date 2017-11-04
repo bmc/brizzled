@@ -148,3 +148,21 @@ even better, a log—as a first birthday present.
 I really cannot think of a conclusion to this silly exercise, other than to
 make a humble request: If you're one of the 47-year-old Gandalfs born in 1970,
 send a photo, man.
+
+## Notes
+
+I performed this analysis using
+[Apache Spark 2.2](https://spark.apache.org), on
+[Databricks Community Edition](https://community.cloud.databricks.com/).
+You can create your own _free_ Community Edition account at
+<https://databricks.com/ce>.
+
+If you want to play with this data yourself, I have a Databricks notebook that
+will download the Social Security Data, massage it, and save it as a Parquet
+file, for easy analysis with Apache Spark. You can import the notebook
+directly into Databricks, as described
+[here](https://docs.databricks.com/user-guide/notebooks/index.html#importing-notebooks).
+You'll want this [notebook link](/attachments/2016-12-29/SSA-Names-ETL.scala).
+A more readable HTML version, which shows the output from a run (and which can
+also be directly imported into Databricks) is
+[here](/attachments/2016-12-29/SSA-Names-ETL.html).

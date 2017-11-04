@@ -17,10 +17,10 @@
 
 // COMMAND ----------
 
-val LocalTmpFile = "/tmp/names.zip"           // Where to save the downloaded zip file
-val LocalTmpDir  = "/tmp/names"               // Directory into which to unpack the zip file temporarily
-val DBFSTmpDir   = "dbfs:/tmp/names"          // Where to copy the unzipped contents, so they'll be accessible to Spark
-val DBFSParquet  = "dbfs:/tmp/names.parquet"  // Where to write the final Parquet file. You'll probably want to change this.
+val LocalTmpFile = "/tmp/names.zip"               // Where to save the downloaded zip file
+val LocalTmpDir  = "/tmp/names"                   // Directory into which to unpack the zip file temporarily
+val DBFSTmpDir   = "dbfs:/tmp/names"              // Where to copy the unzipped contents, so they'll be accessible to Spark
+val DBFSParquet  = "dbfs:/mnt/bmc/names.parquet"  // Where to write the final Parquet file. You'll probably want to change this.
 
 // COMMAND ----------
 
@@ -179,7 +179,12 @@ df.count
 
 // COMMAND ----------
 
-df.select($"year").distinct.orderBy($"year").show()
+display(df.select($"year").distinct.orderBy($"year"))
+
+// COMMAND ----------
+
+import org.apache.spark.sql.functions._
+display(df.select(min($"year"), max($"year")))
 
 // COMMAND ----------
 
