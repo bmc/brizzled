@@ -112,5 +112,5 @@ gave an oaken shield as a first birthday present.)
 ## Conclusion
 
 I really cannot think of a conclusion to this silly exercise, other than to
-ask: If you're one of the 47-year-old Gandalfs born in 1970, send a photo,
-man.
+make a humble request: If you're one of the 47-year-old Gandalfs born in 1970,
+send a photo, man.
