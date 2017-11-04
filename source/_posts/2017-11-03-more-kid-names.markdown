@@ -25,7 +25,9 @@ I think you already know the answer to that question.
 
 The data includes first names and the number of people with that first name,
 divided by year, as recorded by the United States Social Security
-Administration. It covers the years 1880 through 2014.
+Administration (SSA). It covers the years 1880 through 2016. For privacy
+reasons, The SSA only includes first names that occur at least five times in a
+year.
 
 So, without further ado, let's start with:
 
@@ -43,15 +45,19 @@ And, a few parents saw fit to name their sons **Samwise**.
 
 {% imgpopup /images/2017-11-03-more-kid-names/samwise.png 75% Samwise %}
 
-Perhaps more surprising is that there were 7 boys born in 2003 whose parents
-chose to name them **Legolas**. They'd be 14 now. I hope they're surviving
+Perhaps more surprising is that there were 7 boys born in 2003 and 6 boys born
+in 2015 whose parents chose to name them **Legolas**.
+
+{% imgpopup /images/2017-11-03-more-kid-names/legolas.png 75% Legolas %}
+
+The boys born in 2003 would be about 14 now. I hope they're surviving
 adolescence okay.
 
 And, of course, there's **Gandalf**. No one would name his son Gandalf,
 right? 
 
-_(Cough!)_ **Wrong**. The parents of 5 boys born in 1970 chose Gandalf as the
-perfect name for their little boys.
+_Wrong_. The parents of 5 boys born in 1970 chose Gandalf as the perfect name
+for their little boys.
 
 ## Bilbo
 
@@ -97,6 +103,7 @@ Before you ask, no, no one who got a Social Security card was cursed with the
 name **Sauron** or **Saruman**, at least not up to 2014. And there are no
 **Radagasts**, **Gollums** or **Smeagols**, either.
 
+## _The Hobbit_
 
 For the hell of it, I threw in the Dwarves from _The Hobbit_, **Fili**,
 **Kili**, **Oin**, **Gloin**, **Bifur**, **Bofur**, **Bombur**, **Dori**,
@@ -106,23 +113,32 @@ reasons.
 
 {% imgpopup /images/2017-11-03-more-kid-names/hobbit-1.png 50% Dwarves %}
 
-I got hits for Dain, Nain, Nori, Fili, Balin and Thorin.
+I got hits for Dain, Nain, Nori, Fili, Kili, Balin and Thorin.
 
-Finally, I dropped out the names that are legitimate first names in cultures
-outside the United States:
+I dropped out the names that are legitimate first names in cultures outside
+the United States:
 
 * Dain (Latvia and Lithuania)
 * Balin (India, from Hindi)
 * Nori (Japan)
 
-That left Nain, Fili and Thorin.
+That left Nain, Fili, Kili and Thorin.
 
 {% imgpopup /images/2017-11-03-more-kid-names/hobbit-2.png 50% Dwarves %}
 
-There were 5 boys named **Thorin** born in 1968; they'd be just shy of 50 now.
-Meanwhile, 112 Thorins were born in 2014. 112! (I guarantee at least one joker
-gave some young Thorin oaken shield—or, even better, a log—as a first birthday
-present.)
+I found graphing **Fili** and **Kili** together to be... well, a little
+strange, frankly.
+
+{% imgpopup /images/2017-11-03-more-kid-names/fili-kili.png 50% Fili-Kili %}
+
+But, check it out: There were 5 boys named **Thorin** born in 1968; they'd be
+just shy of 50 now. Meanwhile, 114 Thorins were born in 2014, 156 were born in
+2015, and 136 were born in 2016. That's 406 Thorins in just three years. (I
+guarantee at least one joker gave some young Thorin oaken shield—or, even
+better, a log—as a first birthday present.)
+
+{% imgpopup /images/2017-11-03-more-kid-names/thorin.png 50% Thorin %}
+
 
 ## Conclusion
 
