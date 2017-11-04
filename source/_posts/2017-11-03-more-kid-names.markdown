@@ -101,7 +101,8 @@ one, either. **Denethor** is also missing, which is probably a good thing.
 
 Before you ask, no, no one who got a Social Security card was cursed with the
 name **Sauron** or **Saruman**, at least not up to 2014. And there are no
-**Radagasts**, **Gollums** or **Smeagols**, either.
+**Radagasts**, **Gollums** or **Smeagols**, either. (I was _really_ hoping to
+find a few Radagasts.)
 
 ## _The Hobbit_
 
@@ -126,16 +127,18 @@ That left Nain, Fili, Kili and Thorin.
 
 {% imgpopup /images/2017-11-03-more-kid-names/hobbit-2.png 50% Dwarves %}
 
-I found graphing **Fili** and **Kili** together to be... well, a little
-strange, frankly.
+I found graphing Fili and Kili together to be... well, a little strange,
+frankly.
 
 {% imgpopup /images/2017-11-03-more-kid-names/fili-kili.png 50% Fili-Kili %}
 
-But, check it out: There were 5 boys named **Thorin** born in 1968; they'd be
-just shy of 50 now. Meanwhile, 114 Thorins were born in 2014, 156 were born in
-2015, and 136 were born in 2016. That's 406 Thorins in just three years. (I
-guarantee at least one joker gave some young Thorin oaken shield—or, even
-better, a log—as a first birthday present.)
+But, check out all the Thorins! There were 5 boys named Thorin born in 1968;
+they'd be just shy of 50 now. Meanwhile, 114 Thorins were born in 2014, 156
+were born in 2015, and 136 were born in 2016. That's 406 Thorins in just three
+years. Who _does_ this?
+
+I guarantee at least one joker gave some young Thorin an oaken shield—or,
+even better, a log—as a first birthday present.
 
 {% imgpopup /images/2017-11-03-more-kid-names/thorin.png 50% Thorin %}
 
