@@ -79,7 +79,7 @@ got a Social Security card.)
 
 Before you ask, no, no one who got a Social Security card was cursed with the
 name **Sauron** or **Saruman**, at least not up to 2014. And there are no
-**Radagasts**, either.
+**Radagasts**, **Gollums** or **Smeagols**, either.
 
 **Faramir** seems like a nice honorable name, doesn't it? No one chose that
 one, either.
