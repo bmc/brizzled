@@ -77,7 +77,7 @@ got a Social Security card.)
 
 ## Rohan and Gondor
 
-I found no people named **Eomer**. But **Eowyn** rivals Galadriel and Arwen:
+I found no people named **Éomer**. But **Éowyn** rivals Galadriel and Arwen:
 
 {% imgpopup /images/2017-11-03-more-kid-names/eowyn.png 75% Eowyn %}
 
