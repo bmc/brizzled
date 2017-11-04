@@ -36,8 +36,13 @@ So, without further ado, let's start with:
 There are no **Frodos**, **Boromirs**, **Gimlis**, or **Meriadocs** at all.
 
 There _are_ some **Pippins**, but, until 2016 they're all girls; it's probably
-fair to assume the girls are _not_ named after Master Peregrine Took. However,
-5 boys named Pippin were born in 2016.
+fair to assume the girls are _not_ named after
+[Master Peregrin Took](https://en.wikipedia.org/wiki/Peregrin_Took). However,
+5 boys named Pippin were born in 2016. I also found more than a few boys named
+**Peregrin**, not to be confused with the differently-spelled 
+[Peregrine falcon](https://en.wikipedia.org/wiki/Peregrine_falcon).
+
+{% imgpopup /images/2017-11-03-more-kid-names/peregrin.png 75% Peregrin-Pippin %}
 
 There are more than a few **Aragorns**. _(Seriously?)_
 
