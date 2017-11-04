@@ -88,6 +88,9 @@ was published.
 Unsurprisingly, no one opted for **Celeborn**. (Or, if they did, the kid never
 got a Social Security card.)
 
+I half-expected at least a _few_ people to name their boys **Elrond**, but
+that name didn't show up, either.
+
 ## Rohan and Gondor
 
 I found no people named **Éomer**, and none called **Gríma**. But **Éowyn**
