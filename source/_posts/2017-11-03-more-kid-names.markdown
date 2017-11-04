@@ -138,7 +138,7 @@ But, check out all the Thorins!
 
 There were 5 boys named Thorin born in 1968; they'd be just shy of 50 now.
 Meanwhile, 114 Thorins were born in 2014, 156 were born in 2015, and 136 were
-born in 2016. That's 406 Thorins in just three years. Who _does_ this?
+born in 2016. **That's 406 Thorins in just three years.** Who _does_ this?
 
 I guarantee at least one joker gave some young Thorin an oaken shield—or,
 even better, a log—as a first birthday present.
