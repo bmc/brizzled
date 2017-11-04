@@ -3,7 +3,7 @@ layout: post
 title: "Tammy"
 date: 2016-12-29 13:30
 comments: true
-categories: [celebrities,data]
+categories: [celebrities,data,naming]
 ---
 
 [Debbie Reynolds][] starred in
