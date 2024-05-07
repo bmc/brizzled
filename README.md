@@ -1,3 +1,6 @@
+**NOTE**: Currently broken, and I don't have the time or interest
+to re-work it.
+
 Source for my [Brizzled][] blog.  Must be formatted with [Octopress][].
 
 Conventions, beyond those dictated by Octopress:

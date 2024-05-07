@@ -30,11 +30,12 @@ root: /
 permalink: /blog/:year/:month/:day/:title/
 source: source
 destination: public
-plugins: plugins
+plugins:
+  - ./plugins
 code_dir: downloads/code
 category_dir: blog/tags
 category_title_prefix: "Tag: "
-markdown: rdiscount
+markdown: kramdown
 pygments: false # default python pygments have been replaced by pygments.rb
 
 paginate: 10          # Posts per page on the blog index
